@@ -48,9 +48,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -60,6 +60,74 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-Hexo-GitHub搭建属于自己的博客" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/19/Hexo-GitHub搭建属于自己的博客/" class="article-date">
+  <time datetime="2016-11-19T04:47:41.000Z" itemprop="datePublished">2016-11-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/19/Hexo-GitHub搭建属于自己的博客/">Hexo+GitHub搭建属于自己的博客</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>hexo是一款基于Node.js的静态博客框架.<br>需要配置的环境:</p>
+<ol>
+<li>Node</li>
+<li>Git</li>
+<li>GitHub账号</li>
+<li>Hexo</li>
+</ol>
+<p>###安装Hexo###<br>使用一下命令安装Hexo<br><code>npm install -g hexo</code></p>
+<p><code>hexo init</code>初始化hexo</p>
+<p><code>hexo generate</code>或者<code>hexo g</code>生成静态页面</p>
+<p><code>hexo server</code>启动本地服务, 在浏览器中输入<code>http://localhost:4000</code>查看</p>
+<p>###配置GitHub###<br>在GitHub创建一个新的Respository, 仓库名必须是</p>
+<p>修改_config.xml文件, 建立与GitHub仓库的关联<br>在_config.xml文件的最后, 修改deploy下的内容<br>deploy:<br>  type: git<br>  repo: GitHub仓库地址<br>  branch: master</p>
+<p>安装hexo-deployer-git<br><code>npm install hexo-deployer-git --save</code></p>
+<p>执行<code>hexo deploy</code>命令将项目部署到GitHub上<br>在浏览器中输入: <code>https://GitHub仓库名</code></p>
+<p>###部署三部曲###</p>
+<ol>
+<li><code>hexo clean</code></li>
+<li><code>hexo generate</code></li>
+<li><code>hexo deploy</code></li>
+</ol>
+<p>###Hexo 常用命令###</p>
+<ol>
+<li><code>hexo new &quot;postName&quot;</code>– 新建文章</li>
+<li>`hexo new page “pageName” – 新建页面</li>
+<li><code>hexo generate</code> – 生成静态页面到public目录下</li>
+<li><code>hexo server</code> – 开启本地预览</li>
+<li><code>hexo deploy</code> – 将.deploy目录部署到GitHub</li>
+<li><code>hexo help</code> – 查看帮助</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/11/19/Hexo-GitHub搭建属于自己的博客/" data-id="civordoue0000nbq73w6f87u0" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo-GitHub/">Hexo, GitHub</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-My-New-Post" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -88,7 +156,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/11/19/My-New-Post/" data-id="civopuw2m00003wq71vnd0son" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/11/19/My-New-Post/" data-id="civordoui0001nbq7hmers6sb" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -133,7 +201,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/11/19/hello-world/" data-id="civopuw2r00013wq7xkjt61xm" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/11/19/hello-world/" data-id="civordouy0004nbq7idve2d1u" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -152,9 +220,23 @@
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Mot-clés</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo-GitHub/">Hexo, GitHub</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Hexo-GitHub/" style="font-size: 10px;">Hexo, GitHub</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
@@ -168,9 +250,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/11/19/Hexo-GitHub搭建属于自己的博客/">Hexo+GitHub搭建属于自己的博客</a>
+          </li>
         
           <li>
             <a href="/2016/11/19/My-New-Post/">My New Post</a>
@@ -193,7 +279,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 John Doe<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

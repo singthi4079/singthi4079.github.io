@@ -5,12 +5,29 @@
   
   <title>Blue的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+  <meta name="description" content="什么是面向切面编程切面能帮助我们模块化横切关注点。横切关注点可以背描述为影响应用多处的功能。 
+图4.1 展现了一个被划分为模块的典型应用。每个核心功能都是为特定业务领域提供服务，但是这些模块斗需要类似的辅助功能，例如安全和事务管理。
+切面提供了取代继承和委托的另一种可选方案。在使用面向切面编程时，我们仍可以在一个地方定义通用的功能，但是可以通过声明的方式定义这个功能要以何种方式在何处一个何处应用">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Blue的博客">
-<meta property="og:url" content="https://singthi4079.github.io/index.html">
+<meta property="og:url" content="https://singthi4079.github.io/2016/11/12/什么是面向切面编程/index.html">
 <meta property="og:site_name" content="Blue的博客">
+<meta property="og:description" content="什么是面向切面编程切面能帮助我们模块化横切关注点。横切关注点可以背描述为影响应用多处的功能。 
+图4.1 展现了一个被划分为模块的典型应用。每个核心功能都是为特定业务领域提供服务，但是这些模块斗需要类似的辅助功能，例如安全和事务管理。
+切面提供了取代继承和委托的另一种可选方案。在使用面向切面编程时，我们仍可以在一个地方定义通用的功能，但是可以通过声明的方式定义这个功能要以何种方式在何处一个何处应用">
+<meta property="og:image" content="https://singthi4079.github.io/面向切面编程图1.png">
+<meta property="og:image" content="https://singthi4079.github.io/AOP术语.png">
+<meta property="og:image" content="https://singthi4079.github.io/调用方法时执行切面逻辑.png">
+<meta property="og:image" content="https://singthi4079.github.io/切点表达式.png">
+<meta property="og:image" content="https://singthi4079.github.io/使用within(">
+<meta property="og:image" content="https://singthi4079.github.io/带参数的切点.png">
+<meta property="og:updated_time" content="2016-11-12T12:51:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Blue的博客">
+<meta name="twitter:description" content="什么是面向切面编程切面能帮助我们模块化横切关注点。横切关注点可以背描述为影响应用多处的功能。 
+图4.1 展现了一个被划分为模块的典型应用。每个核心功能都是为特定业务领域提供服务，但是这些模块斗需要类似的辅助功能，例如安全和事务管理。
+切面提供了取代继承和委托的另一种可选方案。在使用面向切面编程时，我们仍可以在一个地方定义通用的功能，但是可以通过声明的方式定义这个功能要以何种方式在何处一个何处应用">
+<meta name="twitter:image" content="https://singthi4079.github.io/面向切面编程图1.png">
   
     <link rel="alternate" href="/atom.xml" title="Blue的博客" type="application/atom+xml">
   
@@ -59,120 +76,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-Hexo-GitHub搭建属于自己的博客" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/11/19/Hexo-GitHub搭建属于自己的博客/" class="article-date">
-  <time datetime="2016-11-19T04:47:41.000Z" itemprop="datePublished">2016-11-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/19/Hexo-GitHub搭建属于自己的博客/">Hexo+GitHub搭建属于自己的博客</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>hexo是一款基于Node.js的静态博客框架.<br>需要配置的环境:</p>
-<ol>
-<li>Node</li>
-<li>Git</li>
-<li>GitHub账号</li>
-<li>Hexo</li>
-</ol>
-<h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><p>使用一下命令安装Hexo<br><code>npm install -g hexo</code></p>
-<p><code>hexo init</code>初始化hexo</p>
-<p><code>hexo generate</code>或者<code>hexo g</code>生成静态页面</p>
-<p><code>hexo server</code>启动本地服务, 在浏览器中输入<code>http://localhost:4000</code>查看</p>
-<h3 id="配置GitHub"><a href="#配置GitHub" class="headerlink" title="配置GitHub"></a>配置GitHub</h3><p>在GitHub创建一个新的Respository, 仓库名必须是</p>
-<p>修改_config.xml文件, 建立与GitHub仓库的关联<br>在_config.xml文件的最后, 修改deploy下的内容<br>deploy:<br>  type: git<br>  repo: GitHub仓库地址<br>  branch: master</p>
-<p>安装hexo-deployer-git<br><code>npm install hexo-deployer-git --save</code></p>
-<p>执行<code>hexo deploy</code>命令将项目部署到GitHub上<br>在浏览器中输入: <code>https://GitHub仓库名</code></p>
-<h3 id="部署三部曲"><a href="#部署三部曲" class="headerlink" title="部署三部曲"></a>部署三部曲</h3><ol>
-<li><code>hexo clean</code></li>
-<li><code>hexo generate</code></li>
-<li><code>hexo deploy</code></li>
-</ol>
-<h3 id="Hexo-常用命令"><a href="#Hexo-常用命令" class="headerlink" title="Hexo 常用命令"></a>Hexo 常用命令</h3><ol>
-<li><code>hexo new &quot;postName&quot;</code>– 新建文章</li>
-<li>`hexo new page “pageName” – 新建页面</li>
-<li><code>hexo generate</code> – 生成静态页面到public目录下</li>
-<li><code>hexo server</code> – 开启本地预览</li>
-<li><code>hexo deploy</code> – 将.deploy目录部署到GitHub</li>
-<li><code>hexo help</code> – 查看帮助</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://singthi4079.github.io/2016/11/19/Hexo-GitHub搭建属于自己的博客/" data-id="civpbolah0000o2q7ao8cf2hd" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo-GitHub/">Hexo, GitHub</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/11/19/hello-world/" class="article-date">
-  <time datetime="2016-11-19T04:17:14.000Z" itemprop="datePublished">2016-11-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/19/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://singthi4079.github.io/2016/11/19/hello-world/" data-id="civpbolan0001o2q729cqo0ln" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-什么是面向切面编程" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-什么是面向切面编程" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/11/12/什么是面向切面编程/" class="article-date">
   <time datetime="2016-11-12T08:06:25.000Z" itemprop="datePublished">2016-11-12</time>
@@ -368,10 +272,23 @@
     </footer>
   </div>
   
-</article>
-
+    
+<nav id="article-nav">
+  
+    <a href="/2016/11/19/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Hello World
+        
+      </div>
+    </a>
+  
+  
+</nav>
 
   
+</article>
 
 </section>
         

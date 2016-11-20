@@ -3,25 +3,25 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Blue的博客</title>
+  <title>什么是面向切面编程 | Blue的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="&amp;#x4EC0;&amp;#x4E48;&amp;#x662F;&amp;#x9762;&amp;#x5411;&amp;#x5207;&amp;#x9762;&amp;#x7F16;&amp;#x7A0B;&amp;#x5207;&amp;#x9762;&amp;#x80FD;&amp;#x5E2E;&amp;#x52A9;&amp;#x6211;&amp;#x4EEC;&amp;#x6A21;&amp;#x5757;&amp;#x5316;&amp;#x6A2A;&amp;#x5207;&amp;#x5173;&amp;#x6CE8;&amp;#x70B9;&amp;#x3002;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Blue的博客">
+<meta property="og:title" content="什么是面向切面编程">
 <meta property="og:url" content="https://singthi4079.github.io/2016/11/12/什么是面向切面编程/index.html">
 <meta property="og:site_name" content="Blue的博客">
 <meta property="og:description" content="&amp;#x4EC0;&amp;#x4E48;&amp;#x662F;&amp;#x9762;&amp;#x5411;&amp;#x5207;&amp;#x9762;&amp;#x7F16;&amp;#x7A0B;&amp;#x5207;&amp;#x9762;&amp;#x80FD;&amp;#x5E2E;&amp;#x52A9;&amp;#x6211;&amp;#x4EEC;&amp;#x6A21;&amp;#x5757;&amp;#x5316;&amp;#x6A2A;&amp;#x5207;&amp;#x5173;&amp;#x6CE8;&amp;#x70B9;&amp;#x3002;">
-<meta property="og:image" content="https://singthi4079.github.io/2016/11/12/什么是面向切面编程/什么是面向切面编/面向切面编程图1.png">
-<meta property="og:image" content="https://singthi4079.github.io/2016/11/12/什么是面向切面编程/什么是面向切面编/AOP术语.png">
-<meta property="og:image" content="https://singthi4079.github.io/2016/11/12/什么是面向切面编程/什么是面向切面编/调用方法时执行切面逻辑.png">
-<meta property="og:image" content="https://singthi4079.github.io/2016/11/12/什么是面向切面编程/什么是面向切面编/切点表达式.png">
-<meta property="og:image" content="https://singthi4079.github.io/2016/11/12/什么是面向切面编程/什么是面向切面编/使用within(">
-<meta property="og:image" content="https://singthi4079.github.io/2016/11/12/什么是面向切面编程/什么是面向切面编/带参数的切点.png">
-<meta property="og:updated_time" content="2016-11-20T06:03:09.000Z">
+<meta property="og:image" content="https://singthi4079.github.io/2016/11/12/什么是面向切面编程/面向切面编程图1.png">
+<meta property="og:image" content="https://singthi4079.github.io/2016/11/12/什么是面向切面编程/AOP术语.png">
+<meta property="og:image" content="https://singthi4079.github.io/2016/11/12/什么是面向切面编程/调用方法时执行切面逻辑.png">
+<meta property="og:image" content="https://singthi4079.github.io/2016/11/12/什么是面向切面编程/切点表达式.png">
+<meta property="og:image" content="https://singthi4079.github.io/2016/11/12/什么是面向切面编程/使用within(">
+<meta property="og:image" content="https://singthi4079.github.io/2016/11/12/什么是面向切面编程/带参数的切点.png">
+<meta property="og:updated_time" content="2016-11-20T06:11:19.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Blue的博客">
+<meta name="twitter:title" content="什么是面向切面编程">
 <meta name="twitter:description" content="&amp;#x4EC0;&amp;#x4E48;&amp;#x662F;&amp;#x9762;&amp;#x5411;&amp;#x5207;&amp;#x9762;&amp;#x7F16;&amp;#x7A0B;&amp;#x5207;&amp;#x9762;&amp;#x80FD;&amp;#x5E2E;&amp;#x52A9;&amp;#x6211;&amp;#x4EEC;&amp;#x6A21;&amp;#x5757;&amp;#x5316;&amp;#x6A2A;&amp;#x5207;&amp;#x5173;&amp;#x6CE8;&amp;#x70B9;&amp;#x3002;">
-<meta name="twitter:image" content="https://singthi4079.github.io/2016/11/12/什么是面向切面编程/什么是面向切面编/面向切面编程图1.png">
+<meta name="twitter:image" content="https://singthi4079.github.io/2016/11/12/什么是面向切面编程/面向切面编程图1.png">
   
     <link rel="alternate" href="/atom.xml" title="Blue的博客" type="application/atom+xml">
   
@@ -59,9 +59,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://singthi4079.github.io"></form>
@@ -80,17 +80,27 @@
   <div class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      什么是面向切面编程
+    </h1>
+  
+
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="&#x4EC0;&#x4E48;&#x662F;&#x9762;&#x5411;&#x5207;&#x9762;&#x7F16;&#x7A0B;"><a href="#&#x4EC0;&#x4E48;&#x662F;&#x9762;&#x5411;&#x5207;&#x9762;&#x7F16;&#x7A0B;" class="headerlink" title="&#x4EC0;&#x4E48;&#x662F;&#x9762;&#x5411;&#x5207;&#x9762;&#x7F16;&#x7A0B;"></a>&#x4EC0;&#x4E48;&#x662F;&#x9762;&#x5411;&#x5207;&#x9762;&#x7F16;&#x7A0B;</h3><p>&#x5207;&#x9762;&#x80FD;&#x5E2E;&#x52A9;&#x6211;&#x4EEC;&#x6A21;&#x5757;&#x5316;&#x6A2A;&#x5207;&#x5173;&#x6CE8;&#x70B9;&#x3002;&#x6A2A;&#x5207;&#x5173;&#x6CE8;&#x70B9;&#x53EF;&#x4EE5;&#x80CC;&#x63CF;&#x8FF0;&#x4E3A;&#x5F71;&#x54CD;&#x5E94;&#x7528;&#x591A;&#x5904;&#x7684;&#x529F;&#x80FD;&#x3002;</p>
-<p> <img src="/2016/11/12/&#x4EC0;&#x4E48;&#x662F;&#x9762;&#x5411;&#x5207;&#x9762;&#x7F16;&#x7A0B;/&#x4EC0;&#x4E48;&#x662F;&#x9762;&#x5411;&#x5207;&#x9762;&#x7F16;/&#x9762;&#x5411;&#x5207;&#x9762;&#x7F16;&#x7A0B;&#x56FE;1.png" alt="&#x9762;&#x5411;&#x5207;&#x9762;&#x7F16;&#x7A0B;&#x56FE;1"></p>
+<p> <img src="/2016/11/12/&#x4EC0;&#x4E48;&#x662F;&#x9762;&#x5411;&#x5207;&#x9762;&#x7F16;&#x7A0B;/&#x9762;&#x5411;&#x5207;&#x9762;&#x7F16;&#x7A0B;&#x56FE;1.png" alt="&#x9762;&#x5411;&#x5207;&#x9762;&#x7F16;&#x7A0B;&#x56FE;1"></p>
 <p>&#x56FE;4.1 &#x5C55;&#x73B0;&#x4E86;&#x4E00;&#x4E2A;&#x88AB;&#x5212;&#x5206;&#x4E3A;&#x6A21;&#x5757;&#x7684;&#x5178;&#x578B;&#x5E94;&#x7528;&#x3002;&#x6BCF;&#x4E2A;&#x6838;&#x5FC3;&#x529F;&#x80FD;&#x90FD;&#x662F;&#x4E3A;&#x7279;&#x5B9A;&#x4E1A;&#x52A1;&#x9886;&#x57DF;&#x63D0;&#x4F9B;&#x670D;&#x52A1;&#xFF0C;&#x4F46;&#x662F;&#x8FD9;&#x4E9B;&#x6A21;&#x5757;&#x6597;&#x9700;&#x8981;&#x7C7B;&#x4F3C;&#x7684;&#x8F85;&#x52A9;&#x529F;&#x80FD;&#xFF0C;&#x4F8B;&#x5982;&#x5B89;&#x5168;&#x548C;&#x4E8B;&#x52A1;&#x7BA1;&#x7406;&#x3002;</p>
 <p>&#x5207;&#x9762;&#x63D0;&#x4F9B;&#x4E86;&#x53D6;&#x4EE3;&#x7EE7;&#x627F;&#x548C;&#x59D4;&#x6258;&#x7684;&#x53E6;&#x4E00;&#x79CD;&#x53EF;&#x9009;&#x65B9;&#x6848;&#x3002;&#x5728;&#x4F7F;&#x7528;&#x9762;&#x5411;&#x5207;&#x9762;&#x7F16;&#x7A0B;&#x65F6;&#xFF0C;&#x6211;&#x4EEC;&#x4ECD;&#x53EF;&#x4EE5;&#x5728;&#x4E00;&#x4E2A;&#x5730;&#x65B9;&#x5B9A;&#x4E49;&#x901A;&#x7528;&#x7684;&#x529F;&#x80FD;&#xFF0C;&#x4F46;&#x662F;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x58F0;&#x660E;&#x7684;&#x65B9;&#x5F0F;&#x5B9A;&#x4E49;&#x8FD9;&#x4E2A;&#x529F;&#x80FD;&#x8981;&#x4EE5;&#x4F55;&#x79CD;&#x65B9;&#x5F0F;&#x5728;&#x4F55;&#x5904;&#x4E00;&#x4E2A;&#x4F55;&#x5904;&#x5E94;&#x7528;&#xFF0C;&#x800C;&#x65E0;&#x9700;&#x4FEE;&#x6539;&#x6536;&#x5F71;&#x54CD;&#x7684;&#x7C7B;&#x3002;&#x6A2A;&#x5207;&#x5173;&#x6CE8;&#x70B9;&#x53EF;&#x4EE5;&#x88AB;&#x6A21;&#x5757;&#x5316;&#x4E3A;&#x7279;&#x6B8A;&#x7684;&#x7C7B;&#xFF0C;&#x8FD9;&#x4E9B;&#x7C7B;&#x88AB;&#x79F0;&#x4E3A;&#x5207;&#x9762;&#x3002;&#x6709;&#x4E24;&#x4E2A;&#x597D;&#x5904;&#xFF1A;</p>
 <ol>
 <li>&#x6BCF;&#x4E2A;&#x5173;&#x6CE8;&#x70B9;&#x6296;&#x96C6;&#x4E2D;&#x4E8E;&#x4E00;&#x4E2A;&#x5730;&#x65B9;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x5206;&#x6563;&#x5230;&#x591A;&#x5904;&#x4EE3;&#x7801;&#x4E2D;&#x3002;</li>
 <li>&#x670D;&#x52A1;&#x6A21;&#x5757;&#x66F4;&#x7B80;&#x6D01;&#xFF0C;&#x56E0;&#x4E3A;&#x5B83;&#x4EEC;&#x53EA;&#x5305;&#x542B;&#x4E3B;&#x8981;&#x7684;&#x5173;&#x6CE8;&#x70B9;&#x7684;&#x4EE3;&#x7801;&#xFF0C;&#x800C;&#x6B21;&#x8981;&#x5173;&#x6CE8;&#x70B9;&#x7684;&#x4EE3;&#x7801;&#x88AB;&#x8F6C;&#x79FB;&#x5230;&#x5207;&#x9762;&#x4E2D;&#x3002;</li>
 </ol>
-<h3 id="&#x5B9A;&#x4E49;AOP&#x7684;&#x672F;&#x8BED;"><a href="#&#x5B9A;&#x4E49;AOP&#x7684;&#x672F;&#x8BED;" class="headerlink" title="&#x5B9A;&#x4E49;AOP&#x7684;&#x672F;&#x8BED;"></a>&#x5B9A;&#x4E49;AOP&#x7684;&#x672F;&#x8BED;</h3><p> <img src="/2016/11/12/&#x4EC0;&#x4E48;&#x662F;&#x9762;&#x5411;&#x5207;&#x9762;&#x7F16;&#x7A0B;/&#x4EC0;&#x4E48;&#x662F;&#x9762;&#x5411;&#x5207;&#x9762;&#x7F16;/AOP&#x672F;&#x8BED;.png" alt="AOP&#x672F;&#x8BED;"></p>
+<h3 id="&#x5B9A;&#x4E49;AOP&#x7684;&#x672F;&#x8BED;"><a href="#&#x5B9A;&#x4E49;AOP&#x7684;&#x672F;&#x8BED;" class="headerlink" title="&#x5B9A;&#x4E49;AOP&#x7684;&#x672F;&#x8BED;"></a>&#x5B9A;&#x4E49;AOP&#x7684;&#x672F;&#x8BED;</h3><p> <img src="/2016/11/12/&#x4EC0;&#x4E48;&#x662F;&#x9762;&#x5411;&#x5207;&#x9762;&#x7F16;&#x7A0B;/AOP&#x672F;&#x8BED;.png" alt="AOP&#x672F;&#x8BED;"></p>
 <ol>
 <li><p>&#x901A;&#x77E5;(Advice)</p>
 <p>AOP&#x672F;&#x8BED;&#x4E2D;&#xFF0C;&#x5207;&#x9762;&#x7684;&#x5DE5;&#x4F5C;&#x88AB;&#x79F0;&#x4E3A;&#x901A;&#x77E5;&#x3002;&#x901A;&#x77E5;&#x5B9A;&#x4E49;&#x4E86;&#x5207;&#x9762;&#x662F;&#x4EC0;&#x4E48;&#x4EE5;&#x53CA;&#x4F55;&#x65F6;&#x4F7F;&#x7528;&#x3002;&#x9664;&#x4E86;&#x63CF;&#x8FF0;&#x5207;&#x9762;&#x8981;&#x5B8C;&#x6210;&#x7684;&#x5DE5;&#x4F5C;&#xFF0C;&#x901A;&#x77E5;&#x8FD8;&#x89E3;&#x51B3;&#x4E86;&#x4F55;&#x65F6;&#x4E4B;&#x884C;&#x8FD9;&#x4E2A;&#x5DE5;&#x4F5C;&#x7684;&#x95EE;&#x9898;&#x3002;</p>
@@ -138,7 +148,7 @@
 </ul>
 <p>Spring&#x901A;&#x77E5;&#x662F;Java&#x7F16;&#x5199;&#x7684;&#x3002;</p>
 <p>Spring&#x5728;&#x8FD0;&#x884C;&#x65F6;&#x901A;&#x77E5;&#x5BF9;&#x8C61;&#xFF0C;&#x901A;&#x8FC7;&#x5728;&#x4EE3;&#x7406;&#x7C7B;&#x4E2D;&#x5305;&#x88F9;&#x5207;&#x9762;&#xFF0C;Spring&#x5728;&#x8FD0;&#x884C;&#x671F;&#x628A;&#x5207;&#x9762;&#x7EC7;&#x5165;&#x5230;Spring&#x7BA1;&#x7406;&#x7684;bean&#x4E2D;&#x3002;&#x56FE;&#x4E2D;&#x4EE3;&#x7406;&#x7C7B;&#x5C01;&#x88C5;&#x4E86;&#x76EE;&#x6807;&#x7C7B;&#xFF0C;&#x5E76;&#x62E6;&#x622A;&#x88AB;&#x901A;&#x77E5;&#x7684;&#x65B9;&#x6CD5;&#x7684;&#x8C03;&#x7528;&#xFF0C;&#x518D;&#x628A;&#x8C03;&#x7528;&#x8F6C;&#x53D1;&#x7ED9;&#x771F;&#x6B63;&#x7684;&#x76EE;&#x6807;bean&#x3002;&#x5F53;&#x4EE3;&#x7406;&#x62E6;&#x622A;&#x5230;&#x65B9;&#x6CD5;&#x8C03;&#x7528;&#x65F6;&#xFF0C;&#x5728;&#x8C03;&#x7528;&#x76EE;&#x6807;bean&#x65B9;&#x6CD5;&#x4E4B;&#x524D;&#xFF0C;&#x4F1A;&#x6267;&#x884C;&#x5207;&#x9762;&#x903B;&#x8F91;&#x3002;</p>
-<p> <img src="/2016/11/12/&#x4EC0;&#x4E48;&#x662F;&#x9762;&#x5411;&#x5207;&#x9762;&#x7F16;&#x7A0B;/&#x4EC0;&#x4E48;&#x662F;&#x9762;&#x5411;&#x5207;&#x9762;&#x7F16;/&#x8C03;&#x7528;&#x65B9;&#x6CD5;&#x65F6;&#x6267;&#x884C;&#x5207;&#x9762;&#x903B;&#x8F91;.png" alt="&#x8C03;&#x7528;&#x65B9;&#x6CD5;&#x65F6;&#x6267;&#x884C;&#x5207;&#x9762;&#x903B;&#x8F91;"></p>
+<p> <img src="/2016/11/12/&#x4EC0;&#x4E48;&#x662F;&#x9762;&#x5411;&#x5207;&#x9762;&#x7F16;&#x7A0B;/&#x8C03;&#x7528;&#x65B9;&#x6CD5;&#x65F6;&#x6267;&#x884C;&#x5207;&#x9762;&#x903B;&#x8F91;.png" alt="&#x8C03;&#x7528;&#x65B9;&#x6CD5;&#x65F6;&#x6267;&#x884C;&#x5207;&#x9762;&#x903B;&#x8F91;"></p>
 <p>&#x76F4;&#x5230;&#x5E94;&#x7528;&#x9700;&#x8981;&#x88AB;&#x4EE3;&#x7406;&#x7684;bean&#x65F6;&#xFF0C;Spring&#x624D;&#x4F1A;&#x521B;&#x5EFA;&#x4EE3;&#x7406;&#x5BF9;&#x8C61;&#x3002;</p>
 <p>Spring &#x53EA;&#x652F;&#x6301;&#x65B9;&#x6CD5;&#x7EA7;&#x522B;&#x7684;&#x8FDE;&#x63A5;&#x70B9;&#x3002;</p>
 <p>&#x200B;</p>
@@ -196,11 +206,11 @@
 <p>&#x6CE8;&#x89E3;&#x53EA;&#x7528;&#x5728;&#x997F;&#x7684;&#x7C97;&#x4F53;&#x54E6;&#x4F60;&#x6307;&#x793A;&#x5668;&#x662F;&#x5B9E;&#x9645;&#x6267;&#x884C;&#x5339;&#x914D;&#x7684;&#xFF0C;&#x5176;&#x4ED6;&#x7684;&#x6307;&#x793A;&#x5668;&#x90FD;&#x662F;&#x7528;&#x6765;&#x9650;&#x5236;&#x5339;&#x914D;&#x7684;&#x3002;executeion&#x6307;&#x793A;&#x5668;&#x662F;&#x5728;&#x7F16;&#x5199;&#x5207;&#x70B9;&#x5B9A;&#x4E49;&#x65F6;&#x6700;&#x4E3B;&#x8981;&#x662F;&#x7528;&#x7684;&#x6307;&#x793A;&#x5668;&#x3002;</p>
 <h3 id="&#x7F16;&#x5199;&#x5207;&#x70B9;"><a href="#&#x7F16;&#x5199;&#x5207;&#x70B9;" class="headerlink" title="&#x7F16;&#x5199;&#x5207;&#x70B9;"></a>&#x7F16;&#x5199;&#x5207;&#x70B9;</h3><p><code>Performance</code>&#x53EF;&#x4EE5;&#x4EE3;&#x8868;&#x4EFB;&#x4F55;&#x7C7B;&#x578B;&#x7684;&#x73B0;&#x573A;&#x8868;&#x6F14;&#x3002;&#x7F16;&#x5199;<code>Performance</code>&#x7684;<code>perform()</code>&#x65B9;&#x6CD5;&#x51FA;&#x53D1;&#x901A;&#x77E5;&#x3002;</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> concert;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Performance</span> </span>{</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">perform</span><span class="params">()</span></span>;</div><div class="line">}</div></pre></td></tr></table></figure>
-<p> <img src="/2016/11/12/&#x4EC0;&#x4E48;&#x662F;&#x9762;&#x5411;&#x5207;&#x9762;&#x7F16;&#x7A0B;/&#x4EC0;&#x4E48;&#x662F;&#x9762;&#x5411;&#x5207;&#x9762;&#x7F16;/&#x5207;&#x70B9;&#x8868;&#x8FBE;&#x5F0F;.png" alt="&#x5207;&#x70B9;&#x8868;&#x8FBE;&#x5F0F;"></p>
+<p> <img src="/2016/11/12/&#x4EC0;&#x4E48;&#x662F;&#x9762;&#x5411;&#x5207;&#x9762;&#x7F16;&#x7A0B;/&#x5207;&#x70B9;&#x8868;&#x8FBE;&#x5F0F;.png" alt="&#x5207;&#x70B9;&#x8868;&#x8FBE;&#x5F0F;"></p>
 <p>&#x4E0A;&#x56FE;&#x5C55;&#x793A; &#x4E86;&#x4E00;&#x4E2A;&#x5207;&#x70B9;&#x8868;&#x8FBE;&#x5F0F;&#xFF0C;&#x8FD9;&#x4E2A;&#x8868;&#x8FBE;&#x5F0F;&#x80FD;&#x591F;&#x8BBE;&#x7F6E;&#x5F53;<code>perform()</code>&#x65B9;&#x6CD5;&#x6267;&#x884C;&#x65F6;&#x89E6;&#x53D1;&#x901A;&#x77E5;&#x7684;&#x8C03;&#x7528;&#x3002;</p>
 <p>&#x65B9;&#x6CD5;&#x8868;&#x8FBE;&#x5F0F;&#x4EE5;&#x201D;*&#x201D;&#x53F7;&#x5F00;&#x59CB;, &#x8868;&#x793A;&#x4E0D;&#x5173;&#x7CFB;&#x65B9;&#x6CD5;&#x8FD4;&#x56DE;&#x7684;&#x7C7B;&#x578B;&#x3002;&#x6307;&#x5B9A;&#x4E86;&#x5168;&#x9650;&#x5B9A;&#x7C7B;&#x540D;&#x548C;&#x65B9;&#x6CD5;&#x540D;. &#x4F7F;&#x7528;&#x4E24;&#x4E2A;&#x70B9;&#x53F7;<code>(..)</code>&#x8868;&#x660E;&#x5207;&#x70B9;&#x8981;&#x9009;&#x62E9;&#x4EFB;&#x610F;&#x7684;<code>perform()</code>&#x65B9;&#x6CD5;, &#x65E0;&#x8BBA;&#x8BE5;&#x65B9;&#x6CD5;&#x7684;&#x5165;&#x53C2;&#x662F;&#x4EC0;&#x4E48;&#x3002;</p>
 <p>&#x5982;&#x679C;&#x9700;&#x8981;&#x5339;&#x914D;&#x7684;&#x5207;&#x70B9;&#x4EC5;&#x5339;&#x914D;concert&#x5305;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;<code>within()</code>&#x6307;&#x793A;&#x5668;&#x9650;&#x5236;&#x5339;&#x914D;&#x3002;</p>
-<p> <img src="/2016/11/12/&#x4EC0;&#x4E48;&#x662F;&#x9762;&#x5411;&#x5207;&#x9762;&#x7F16;&#x7A0B;/&#x4EC0;&#x4E48;&#x662F;&#x9762;&#x5411;&#x5207;&#x9762;&#x7F16;/&#x4F7F;&#x7528;within(" alt="&#x4F7F;&#x7528;within()&#x6307;&#x793A;&#x5668;">&#x6307;&#x793A;&#x5668;.png)</p>
+<p> <img src="/2016/11/12/&#x4EC0;&#x4E48;&#x662F;&#x9762;&#x5411;&#x5207;&#x9762;&#x7F16;&#x7A0B;/&#x4F7F;&#x7528;within(" alt="&#x4F7F;&#x7528;within()&#x6307;&#x793A;&#x5668;">&#x6307;&#x793A;&#x5668;.png)</p>
 <p>&#x4F7F;&#x7528;<code>&amp;&amp;</code>&#x64CD;&#x4F5C;&#x7B26;&#x628A;<code>execution()</code>&#x548C;<code>within()</code>&#x6307;&#x793A;&#x5668;&#x8FDE;&#x63A5;&#x5728;&#x4E00;&#x8D77;&#x5F62;&#x6210;&#x4E0E;(and) &#x5173;&#x7CFB;</p>
 <h3 id="&#x4F7F;&#x7528;&#x6CE8;&#x89E3;&#x521B;&#x5EFA;&#x5207;&#x9762;"><a href="#&#x4F7F;&#x7528;&#x6CE8;&#x89E3;&#x521B;&#x5EFA;&#x5207;&#x9762;" class="headerlink" title="&#x4F7F;&#x7528;&#x6CE8;&#x89E3;&#x521B;&#x5EFA;&#x5207;&#x9762;"></a>&#x4F7F;&#x7528;&#x6CE8;&#x89E3;&#x521B;&#x5EFA;&#x5207;&#x9762;</h3><ol>
 <li>&#x5B9A;&#x4E49;&#x5207;&#x9762;</li>
@@ -258,12 +268,12 @@
 <li>&#x4F7F;&#x7528;&#x5E26;&#x53C2;&#x6570;&#x7684;&#x901A;&#x77E5;</li>
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> soundsystem;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.Aspect;</div><div class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.Before;</div><div class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.Pointcut;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.HashMap;</div><div class="line"><span class="keyword">import</span> java.util.Map;</div><div class="line"></div><div class="line"><span class="meta">@Aspect</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TrackCounter</span> </span>{</div><div class="line"></div><div class="line">    <span class="keyword">private</span> Map&lt;Integer, Integer&gt; trackCounts = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line"></div><div class="line">    <span class="meta">@Pointcut</span>(<span class="string">&quot;execution(* soundsystem.CompactDisc.playTrack(int))&quot;</span> +</div><div class="line">            <span class="string">&quot; &amp;&amp; args(trackNymber)&quot;</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">trackPlayed</span><span class="params">()</span> </span>{</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="meta">@Before</span>(<span class="string">&quot;trackPlayed(trackNumber)&quot;</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">countTrack</span><span class="params">(<span class="keyword">int</span> trackNumber)</span> </span>{</div><div class="line">        <span class="keyword">int</span> currentCount = getPlayCount(trackNumber);</div><div class="line">        trackCounts.put(trackNumber, currentCount + <span class="number">1</span>);</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">getPlayCount</span><span class="params">(<span class="keyword">int</span> trackNumber)</span> </span>{</div><div class="line">        <span class="keyword">return</span> trackCounts.containsKey(trackNumber)</div><div class="line">                ? trackCounts.get(trackNumber) : <span class="number">0</span>;</div><div class="line">    }</div><div class="line"></div><div class="line">}</div></pre></td></tr></table></figure>
-<p> <img src="/2016/11/12/&#x4EC0;&#x4E48;&#x662F;&#x9762;&#x5411;&#x5207;&#x9762;&#x7F16;&#x7A0B;/&#x4EC0;&#x4E48;&#x662F;&#x9762;&#x5411;&#x5207;&#x9762;&#x7F16;/&#x5E26;&#x53C2;&#x6570;&#x7684;&#x5207;&#x70B9;.png" alt="&#x5E26;&#x53C2;&#x6570;&#x7684;&#x5207;&#x70B9;"></p>
+<p> <img src="/2016/11/12/&#x4EC0;&#x4E48;&#x662F;&#x9762;&#x5411;&#x5207;&#x9762;&#x7F16;&#x7A0B;/&#x5E26;&#x53C2;&#x6570;&#x7684;&#x5207;&#x70B9;.png" alt="&#x5E26;&#x53C2;&#x6570;&#x7684;&#x5207;&#x70B9;"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://singthi4079.github.io/2016/11/12/什么是面向切面编程/" data-id="civq8stib0004qjq7a7zugvcp" class="article-share-link">Delen</a>
+      <a data-url="https://singthi4079.github.io/2016/11/12/什么是面向切面编程/" data-id="civq8wy7t0004qzq7rr37b7to" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -273,7 +283,7 @@
 <nav id="article-nav">
   
     <a href="/2016/11/13/SpringMVC/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Nieuwer</strong>
+      <strong class="article-nav-caption">Récent</strong>
       <div class="article-nav-title">
         
           (no title)
@@ -296,7 +306,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Labels</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo-GitHub/">Hexo, GitHub</a></li></ul>
     </div>
@@ -306,7 +316,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
       <a href="/tags/Hexo-GitHub/" style="font-size: 10px;">Hexo, GitHub</a>
     </div>
@@ -315,7 +325,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archieven</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li></ul>
     </div>
@@ -325,7 +335,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recente berichten</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
         
@@ -342,7 +352,7 @@
           </li>
         
           <li>
-            <a href="/2016/11/12/什么是面向切面编程/">(no title)</a>
+            <a href="/2016/11/12/什么是面向切面编程/">什么是面向切面编程</a>
           </li>
         
       </ul>
@@ -358,7 +368,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 Blue<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

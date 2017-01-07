@@ -61,6 +61,136 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Angular笔记-架构概览" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/01/07/Angular笔记-架构概览/" class="article-date">
+  <time datetime="2017-01-06T16:00:00.000Z" itemprop="datePublished">2017-01-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/07/Angular笔记-架构概览/">Angular笔记-架构概览</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="&#x67B6;&#x6784;&#x6982;&#x89C8;"><a href="#&#x67B6;&#x6784;&#x6982;&#x89C8;" class="headerlink" title="&#x67B6;&#x6784;&#x6982;&#x89C8;"></a>&#x67B6;&#x6784;&#x6982;&#x89C8;</h1><h3 id="Angular-&#x5E94;&#x7528;&#x7684;&#x57FA;&#x672C;&#x6784;&#x9020;&#x5757;"><a href="#Angular-&#x5E94;&#x7528;&#x7684;&#x57FA;&#x672C;&#x6784;&#x9020;&#x5757;" class="headerlink" title="Angular &#x5E94;&#x7528;&#x7684;&#x57FA;&#x672C;&#x6784;&#x9020;&#x5757;"></a>Angular &#x5E94;&#x7528;&#x7684;&#x57FA;&#x672C;&#x6784;&#x9020;&#x5757;</h3><p>Angular &#x662F;&#x4E00;&#x4E2A;&#x7528; HTML &#x548C; JavaScript &#x6216;&#x8005;&#x4E00;&#x4E2A;&#x53EF;&#x4EE5;&#x7F16;&#x8BD1;&#x6210; JavaScript &#x7684;&#x8BED;&#x8A00;&#xFF08;&#x4F8B;&#x5982; Dart &#x6216;&#x8005; TypeScript &#xFF09;&#xFF0C;&#x6765;&#x6784;&#x5EFA;&#x5BA2;&#x6237;&#x7AEF;&#x5E94;&#x7528;&#x7684;&#x6846;&#x67B6;&#x3002;</p>
+<p>&#x8BE5;&#x6846;&#x67B6;&#x5305;&#x62EC;&#x4E00;&#x7CFB;&#x5217;&#x5E93;&#xFF0C;&#x6709;&#x4E9B;&#x662F;&#x6838;&#x5FC3;&#x5E93;&#xFF0C;&#x6709;&#x4E9B;&#x662F;&#x53EF;&#x9009;&#x5E93;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x662F;&#x8FD9;&#x6837;&#x5199; Angular &#x5E94;&#x7528;&#x7684;&#xFF1A;&#x7528; Angular &#x6269;&#x5C55;&#x8BED;&#x6CD5;&#x7F16;&#x5199; HTML <em>&#x6A21;&#x677F;</em>&#xFF0C; &#x7528;<em>&#x7EC4;&#x4EF6;</em>&#x7C7B;&#x7BA1;&#x7406;&#x8FD9;&#x4E9B;&#x6A21;&#x677F;&#xFF0C;&#x7528;<em>&#x670D;&#x52A1;</em>&#x6DFB;&#x52A0;&#x5E94;&#x7528;&#x903B;&#x8F91;&#xFF0C; &#x7528;<em>&#x6A21;&#x5757;</em>&#x6253;&#x5305;&#x53D1;&#x5E03;&#x7EC4;&#x4EF6;&#x4E0E;&#x670D;&#x52A1;&#x3002;</p>
+<p>&#x7136;&#x540E;&#xFF0C;&#x6211;&#x4EEC;&#x901A;&#x8FC7;<strong>&#x5F15;&#x5BFC;&#x6839;&#x6A21;&#x5757;</strong>&#x6765;&#x542F;&#x52A8;&#x8BE5;&#x5E94;&#x7528;&#x3002; Angular &#x5728;&#x6D4F;&#x89C8;&#x5668;&#x4E2D;&#x63A5;&#x7BA1;&#x3001;&#x5C55;&#x73B0;&#x5E94;&#x7528;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x5E76;&#x6839;&#x636E;&#x6211;&#x4EEC;&#x63D0;&#x4F9B;&#x7684;&#x64CD;&#x4F5C;&#x6307;&#x4EE4;&#x54CD;&#x5E94;&#x7528;&#x6237;&#x7684;&#x4EA4;&#x4E92;&#x3002; <img src="/2017/01/07/Angular&#x7B14;&#x8BB0;-&#x67B6;&#x6784;&#x6982;&#x89C8;/angular&#x67B6;&#x6784;&#x5168;&#x666F;&#x56FE;.png" alt="angular&#x67B6;&#x6784;&#x5168;&#x666F;&#x56FE;"></p>
+<p>&#x8FD9;&#x4E2A;&#x67B6;&#x6784;&#x56FE;&#x5C55;&#x73B0;&#x4E86; Angular &#x5E94;&#x7528;&#x4E2D;&#x7684; 8 &#x4E2A;&#x4E3B;&#x8981;&#x6784;&#x9020;&#x5757;&#xFF1A;</p>
+<ul>
+<li>&#x6A21;&#x5757;</li>
+<li>&#x7EC4;&#x4EF6;</li>
+<li>&#x6A21;&#x7248;</li>
+<li>&#x5143;&#x6570;&#x636E;</li>
+<li>&#x6570;&#x636E;&#x7ED1;&#x5B9A;</li>
+<li>&#x6307;&#x4EE4;</li>
+<li>&#x670D;&#x52A1;</li>
+<li>&#x4F9D;&#x8D56;&#x6CE8;&#x5165;</li>
+</ul>
+<h3 id="&#x6A21;&#x5757;"><a href="#&#x6A21;&#x5757;" class="headerlink" title="&#x6A21;&#x5757;"></a>&#x6A21;&#x5757;</h3><p>Angular &#x5E94;&#x7528;&#x662F;&#x6A21;&#x5757;&#x5316;&#x7684;&#xFF0C;&#x5E76;&#x4E14; Angular &#x6709;&#x81EA;&#x5DF1;&#x7684;&#x6A21;&#x5757;&#x7CFB;&#x7EDF;&#xFF0C;&#x5B83;&#x88AB;&#x79F0;&#x4E3A; <em>Angular &#x6A21;&#x5757;</em>&#x6216; <em>NgModules</em>&#x3002;&#x6BCF;&#x4E2A; Angular &#x5E94;&#x7528;&#x81F3;&#x5C11;&#x6709;&#x4E00;&#x4E2A;&#x6A21;&#x5757;&#xFF08;<strong>&#x6839;&#x6A21;&#x5757;</strong>&#xFF0C;&#x4E60;&#x60EF;&#x4E0A;&#x547D;&#x540D;&#x4E3A;<code>AppModule</code>&#x3002;</p>
+<p>Angular &#x6A21;&#x5757;&#xFF08;&#x65E0;&#x8BBA;&#x662F;<em>&#x6839;&#x6A21;&#x5757;</em>&#x8FD8;&#x662F;<em>&#x7279;&#x6027;&#x6A21;&#x5757;</em>&#xFF09;&#x90FD;&#x662F;&#x4E00;&#x4E2A;&#x5E26;&#x6709;<code>@NgModule</code>&#x88C5;&#x9970;&#x5668;&#x7684;&#x7C7B;.</p>
+<p><code>NgModule</code>&#x662F;&#x4E00;&#x4E2A;&#x88C5;&#x9970;&#x5668;&#x51FD;&#x6570;&#xFF0C;&#x5B83;&#x63A5;&#x6536;&#x4E00;&#x4E2A;&#x7528;&#x6765;&#x63CF;&#x8FF0;&#x6A21;&#x5757;&#x5C5E;&#x6027;&#x7684;&#x5143;&#x6570;&#x636E;&#x5BF9;&#x8C61;&#x3002;&#x5176;&#x4E2D;&#x6700;&#x91CD;&#x8981;&#x7684;&#x5C5E;&#x6027;&#x662F;&#xFF1A;</p>
+<ul>
+<li><code>declarations</code> - &#x58F0;&#x660E;&#x672C;&#x6A21;&#x5757;&#x4E2D;&#x62E5;&#x6709;&#x7684;<em>&#x89C6;&#x56FE;&#x7C7B;</em>&#x3002; Angular &#x6709;&#x4E09;&#x79CD;&#x89C6;&#x56FE;&#x7C7B;&#xFF1A;<a href="https://angular.cn/docs/ts/latest/guide/architecture.html#components" target="_blank" rel="external">&#x7EC4;&#x4EF6;</a>&#x3001;<a href="https://angular.cn/docs/ts/latest/guide/architecture.html#directives" target="_blank" rel="external">&#x6307;&#x4EE4;</a>&#x548C;<a href="https://angular.cn/docs/ts/latest/guide/pipes.html" target="_blank" rel="external">&#x7BA1;&#x9053;</a>&#x3002;</li>
+<li><code>exports</code> - declarations &#x7684;&#x5B50;&#x96C6;&#xFF0C;&#x53EF;&#x7528;&#x4E8E;&#x5176;&#x5B83;&#x6A21;&#x5757;&#x7684;&#x7EC4;&#x4EF6;<a href="https://angular.cn/docs/ts/latest/guide/architecture.html#templates" target="_blank" rel="external">&#x6A21;&#x677F;</a>&#x3002;</li>
+<li><code>imports</code> - <em>&#x672C;</em>&#x6A21;&#x5757;&#x58F0;&#x660E;&#x7684;&#x7EC4;&#x4EF6;&#x6A21;&#x677F;&#x9700;&#x8981;&#x7684;&#x7C7B;&#x6240;&#x5728;&#x7684;&#x5176;&#x5B83;&#x6A21;&#x5757;&#x3002;</li>
+<li><code>providers</code> - <a href="https://angular.cn/docs/ts/latest/guide/architecture.html#services" target="_blank" rel="external">&#x670D;&#x52A1;</a>&#x7684;&#x521B;&#x5EFA;&#x8005;&#xFF0C;&#x5E76;&#x52A0;&#x5165;&#x5230;&#x5168;&#x5C40;&#x670D;&#x52A1;&#x5217;&#x8868;&#x4E2D;&#xFF0C;&#x53EF;&#x7528;&#x4E8E;&#x5E94;&#x7528;&#x4EFB;&#x4F55;&#x90E8;&#x5206;&#x3002;</li>
+<li><code>bootstrap</code> - &#x6307;&#x5B9A;&#x5E94;&#x7528;&#x7684;&#x4E3B;&#x89C6;&#x56FE;&#xFF08;&#x79F0;&#x4E3A;<em>&#x6839;&#x7EC4;&#x4EF6;</em>&#xFF09;&#xFF0C;&#x5B83;&#x662F;&#x6240;&#x6709;&#x5176;&#x5B83;&#x89C6;&#x56FE;&#x7684;&#x5BBF;&#x4E3B;&#x3002;&#x53EA;&#x6709;<em>&#x6839;&#x6A21;&#x5757;</em>&#x624D;&#x80FD;&#x8BBE;&#x7F6E;<code>bootstrap</code>&#x5C5E;&#x6027;&#x3002;</li>
+</ul>
+<p>&#x4E0B;&#x9762;&#x662F;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x6839;&#x6A21;&#x5757;&#xFF1A;</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> { NgModule }      from <span class="string">&apos;@angular/core&apos;</span>;</div><div class="line"><span class="keyword">import</span> { BrowserModule } from <span class="string">&apos;@angular/platform-browser&apos;</span>;</div><div class="line">@NgModule({</div><div class="line">  imports:      [ BrowserModule ],</div><div class="line">  providers:    [ Logger ],</div><div class="line">  declarations: [ AppComponent ],</div><div class="line">  exports:      [ AppComponent ],</div><div class="line">  bootstrap:    [ AppComponent ]</div><div class="line">})</div><div class="line"><span class="keyword">export</span> <span class="keyword">class</span> AppModule { }</div></pre></td></tr></table></figure>
+<h3 id="&#x7EC4;&#x4EF6;"><a href="#&#x7EC4;&#x4EF6;" class="headerlink" title="&#x7EC4;&#x4EF6;"></a>&#x7EC4;&#x4EF6;</h3><p><em>&#x7EC4;&#x4EF6;</em>&#x8D1F;&#x8D23;&#x63A7;&#x5236;&#x5C4F;&#x5E55;&#x4E0A;&#x7684;&#x4E00;&#x5C0F;&#x5757;&#x533A;&#x57DF;&#xFF0C;&#x6211;&#x4EEC;&#x79F0;&#x4E4B;&#x4E3A;<em>&#x89C6;&#x56FE;</em>&#x3002;&#x5728;&#x7C7B;&#x4E2D;&#x5B9A;&#x4E49;&#x7EC4;&#x4EF6;&#x7684;&#x5E94;&#x7528;&#x903B;&#x8F91;&#xFF0C;&#x4E3A;&#x89C6;&#x56FE;&#x63D0;&#x4F9B;&#x652F;&#x6301;&#x3002; &#x7EC4;&#x4EF6;&#x901A;&#x8FC7;&#x4E00;&#x4E9B;&#x7531;&#x5C5E;&#x6027;&#x548C;&#x65B9;&#x6CD5;&#x7EC4;&#x6210;&#x7684; API &#x4E0E;&#x89C6;&#x56FE;&#x4EA4;&#x4E92;&#x3002;</p>
+<p>Angular &#x4F1A;&#x521B;&#x5EFA;&#x3001;&#x66F4;&#x65B0;&#x548C;&#x9500;&#x6BC1;&#x7EC4;&#x4EF6;&#x3002; &#x5E94;&#x7528;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;<a href="https://angular.cn/docs/ts/latest/guide/lifecycle-hooks.html" target="_blank" rel="external">&#x751F;&#x547D;&#x5468;&#x671F;&#x94A9;&#x5B50;</a>&#x5728;&#x7EC4;&#x4EF6;&#x751F;&#x547D;&#x5468;&#x671F;&#x7684;&#x5404;&#x4E2A;&#x65F6;&#x95F4;&#x70B9;&#x4E0A;&#x63D2;&#x5165;&#x81EA;&#x5DF1;&#x7684;&#x64CD;&#x4F5C;&#xFF0C;&#x4F8B;&#x5982;<code>ngOnInit()</code>&#x3002;</p>
+<h3 id="&#x6A21;&#x677F;"><a href="#&#x6A21;&#x677F;" class="headerlink" title="&#x6A21;&#x677F;"></a>&#x6A21;&#x677F;</h3><p>&#x8FC7;&#x7EC4;&#x4EF6;&#x7684;&#x81EA;&#x5E26;&#x7684;<strong>&#x6A21;&#x677F;</strong>&#x6765;&#x5B9A;&#x4E49;&#x7EC4;&#x4EF6;&#x89C6;&#x56FE;&#x3002;&#x6A21;&#x677F;&#x4EE5; HTML &#x5F62;&#x5F0F;&#x5B58;&#x5728;&#xFF0C;&#x544A;&#x8BC9; Angular &#x5982;&#x4F55;&#x6E32;&#x67D3;&#x7EC4;&#x4EF6;&#x3002;</p>
+<h3 id="&#x5143;&#x6570;&#x636E;"><a href="#&#x5143;&#x6570;&#x636E;" class="headerlink" title="&#x5143;&#x6570;&#x636E;"></a>&#x5143;&#x6570;&#x636E;</h3><p>&#x5143;&#x6570;&#x636E;&#x544A;&#x8BC9; Angular &#x5982;&#x4F55;&#x5904;&#x7406;&#x4E00;&#x4E2A;&#x7C7B;&#x3002;</p>
+<p>&#x5728;TypeScript &#x4E2D;&#xFF0C;&#x7528;<strong>&#x88C5;&#x9970;&#x5668; (decorator) </strong>&#x6765;&#x9644;&#x52A0;&#x5143;&#x6570;&#x636E;&#x3002; &#x4E0B;&#x9762;&#x5C31;&#x662F;<code>HeroListComponent</code>&#x7684;&#x4E00;&#x4E9B;&#x5143;&#x6570;&#x636E;&#x3002;</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">@Component({</div><div class="line">  moduleId: <span class="built_in">module</span>.id,</div><div class="line">  selector:    <span class="string">&apos;hero-list&apos;</span>,</div><div class="line">  templateUrl: <span class="string">&apos;hero-list.component.html&apos;</span>,</div><div class="line">  providers:  [ HeroService ]</div><div class="line">})</div><div class="line"><span class="keyword">export</span> <span class="keyword">class</span> HeroListComponent <span class="keyword">implements</span> OnInit {</div><div class="line"><span class="comment">/* . . . */</span></div><div class="line">}</div></pre></td></tr></table></figure>
+<p><code>@Component</code>&#x88C5;&#x9970;&#x5668;&#xFF0C;&#x5B83;&#x628A;&#x7D27;&#x968F;&#x5176;&#x540E;&#x7684;&#x7C7B;&#x6807;&#x8BB0;&#x6210;&#x4E86;&#x7EC4;&#x4EF6;&#x7C7B;. <code>@Component</code>&#x88C5;&#x9970;&#x5668;&#x80FD;&#x63A5;&#x53D7;&#x4E00;&#x4E2A;&#x914D;&#x7F6E;&#x5BF9;&#x8C61;&#xFF0C;Angular &#x4F1A;&#x57FA;&#x4E8E;&#x8FD9;&#x4E9B;&#x4FE1;&#x606F;&#x521B;&#x5EFA;&#x548C;&#x5C55;&#x793A;&#x7EC4;&#x4EF6;&#x53CA;&#x5176;&#x89C6;&#x56FE;&#x3002;</p>
+<p><code>@Component</code>&#x7684;&#x914D;&#x7F6E;&#x9879;&#x5305;&#x62EC;&#xFF1A;</p>
+<ul>
+<li><code>moduleId</code>: &#x4E3A;&#x4E0E;&#x6A21;&#x5757;&#x76F8;&#x5173;&#x7684; URL&#xFF08;&#x4F8B;&#x5982;<code>templateUrl</code>&#xFF09;&#x63D0;&#x4F9B;&#x57FA;&#x5730;&#x5740;&#x3002;</li>
+<li><code>selector</code>&#xFF1A; CSS &#x9009;&#x62E9;&#x5668;&#xFF0C;&#x5B83;&#x544A;&#x8BC9; Angular &#x5728;<em>&#x7236;&#x7EA7;</em> HTML &#x4E2D;&#x67E5;&#x627E;<code>&#x6807;&#x7B7E;&#xFF0C;&#x521B;&#x5EFA;&#x5E76;&#x63D2;&#x5165;&#x8BE5;&#x7EC4;&#x4EF6;&#x3002; &#x4F8B;&#x5982;&#xFF0C;&#x5982;&#x679C;&#x5E94;&#x7528;&#x7684; HTML &#x5305;&#x542B;</code>&#xFF0C; Angular &#x5C31;&#x4F1A;&#x628A;<code>HeroListComponent</code>&#x7684;&#x4E00;&#x4E2A;&#x5B9E;&#x4F8B;&#x63D2;&#x5165;&#x5230;&#x8FD9;&#x4E2A;&#x6807;&#x7B7E;&#x4E2D;&#x3002;</li>
+<li><code>templateUrl</code>&#xFF1A;&#x7EC4;&#x4EF6; HTML &#x6A21;&#x677F;&#x7684;&#x6A21;&#x5757;&#x76F8;&#x5BF9;&#x5730;&#x5740;&#x3002;</li>
+<li><code>providers</code> - &#x7EC4;&#x4EF6;&#x6240;&#x9700;&#x670D;&#x52A1;&#x7684;<em>&#x4F9D;&#x8D56;&#x6CE8;&#x5165;&#x63D0;&#x4F9B;&#x5546;</em>&#x6570;&#x7EC4;&#x3002; &#x8FD9;&#x662F;&#x5728;&#x544A;&#x8BC9; Angular&#xFF1A;&#x8BE5;&#x7EC4;&#x4EF6;&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;&#x9700;&#x8981;&#x4E00;&#x4E2A;<code>HeroService</code>&#x670D;&#x52A1;&#xFF0C;&#x8FD9;&#x6837;&#x7EC4;&#x4EF6;&#x5C31;&#x53EF;&#x4EE5;&#x4ECE;&#x670D;&#x52A1;&#x4E2D;&#x83B7;&#x5F97;&#x82F1;&#x96C4;&#x6570;&#x636E;&#x3002;</li>
+</ul>
+<h3 id="&#x6570;&#x636E;&#x7ED1;&#x5B9A;"><a href="#&#x6570;&#x636E;&#x7ED1;&#x5B9A;" class="headerlink" title="&#x6570;&#x636E;&#x7ED1;&#x5B9A;"></a>&#x6570;&#x636E;&#x7ED1;&#x5B9A;</h3><p>Angular &#x652F;&#x6301;<strong>&#x6570;&#x636E;&#x7ED1;&#x5B9A;</strong>&#xFF0C;&#x4E00;&#x79CD;&#x8BA9;&#x6A21;&#x677F;&#x7684;&#x5404;&#x90E8;&#x5206;&#x4E0E;&#x7EC4;&#x4EF6;&#x7684;&#x5404;&#x90E8;&#x5206;&#x76F8;&#x4E92;&#x5408;&#x4F5C;&#x7684;&#x673A;&#x5236;&#x3002; &#x6211;&#x4EEC;&#x5F80;&#x6A21;&#x677F; HTML &#x4E2D;&#x6DFB;&#x52A0;&#x7ED1;&#x5B9A;&#x6807;&#x8BB0;&#xFF0C;&#x6765;&#x544A;&#x8BC9; Angular &#x5982;&#x4F55;&#x628A;&#x4E8C;&#x8005;&#x8054;&#x7CFB;&#x8D77;&#x6765;&#x3002;</p>
+<p>&#x6570;&#x636E;&#x7ED1;&#x5B9A;&#x7684;&#x8BED;&#x6CD5;&#x6709;&#x56DB;&#x79CD;&#x5F62;&#x5F0F;&#x3002;&#x6BCF;&#x79CD;&#x5F62;&#x5F0F;&#x90FD;&#x6709;&#x4E00;&#x4E2A;&#x65B9;&#x5411; &#x2014;&#x2014; &#x7ED1;&#x5B9A;&#x5230; DOM &#x3001;&#x7ED1;&#x5B9A;&#x81EA; DOM &#x4EE5;&#x53CA;&#x53CC;&#x5411;&#x7ED1;&#x5B9A;&#x3002;</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">li</span>&gt;</span>{{hero.name}}<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">hero-detail</span> [<span class="attr">hero</span>]=<span class="string">&quot;selectedHero&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">hero-detail</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">li</span> (<span class="attr">click</span>)=<span class="string">&quot;selectHero(hero)&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li><code></code><a href="https://angular.cn/docs/ts/latest/guide/displaying-data.html#interpolation" target="_blank" rel="external"><em>&#x63D2;&#x503C;&#x8868;&#x8FBE;&#x5F0F;</em></a>&#x5728;<code>`&#x6807;&#x7B7E;&#x4E2D;&#x663E;&#x793A;&#x7EC4;&#x4EF6;&#x7684;</code>hero.name`&#x5C5E;&#x6027;&#x7684;&#x503C;&#x3002;</li>
+<li><code>[hero]</code><a href="https://angular.cn/docs/ts/latest/guide/template-syntax.html#property-binding" target="_blank" rel="external"><em>&#x5C5E;&#x6027;&#x7ED1;&#x5B9A;</em></a>&#x628A;&#x7236;&#x7EC4;&#x4EF6;<code>HeroListComponent</code>&#x7684;<code>selectedHero</code>&#x7684;&#x503C;&#x4F20;&#x5230;&#x5B50;&#x7EC4;&#x4EF6;<code>HeroDetailComponent</code>&#x7684;<code>hero</code>&#x5C5E;&#x6027;&#x4E2D;&#x3002;</li>
+<li><code>(click)</code> <a href="https://angular.cn/docs/ts/latest/guide/user-input.html#click" target="_blank" rel="external"><em>&#x4E8B;&#x4EF6;&#x7ED1;&#x5B9A;</em></a>&#x5728;&#x7528;&#x6237;&#x70B9;&#x51FB;&#x82F1;&#x96C4;&#x7684;&#x540D;&#x5B57;&#x65F6;&#x8C03;&#x7528;&#x7EC4;&#x4EF6;&#x7684;<code>selectHero</code>&#x65B9;&#x6CD5;&#x3002;</li>
+</ul>
+<p><strong>&#x53CC;&#x5411;&#x6570;&#x636E;&#x7ED1;&#x5B9A;</strong>&#x662F;&#x91CD;&#x8981;&#x7684;&#x7B2C;&#x56DB;&#x79CD;&#x7ED1;&#x5B9A;&#x5F62;&#x5F0F;&#xFF0C;&#x5B83;&#x4F7F;&#x7528;<code>ngModel</code>&#x6307;&#x4EE4;&#x7EC4;&#x5408;&#x4E86;&#x5C5E;&#x6027;&#x7ED1;&#x5B9A;&#x548C;&#x4E8B;&#x4EF6;&#x7ED1;&#x5B9A;&#x7684;&#x529F;&#x80FD;&#x3002; </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> [(<span class="attr">ngModel</span>)]=<span class="string">&quot;hero.name&quot;</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>&#x5728;&#x53CC;&#x5411;&#x7ED1;&#x5B9A;&#x4E2D;&#xFF0C;&#x6570;&#x636E;&#x5C5E;&#x6027;&#x503C;&#x901A;&#x8FC7;&#x5C5E;&#x6027;&#x7ED1;&#x5B9A;&#x4ECE;&#x7EC4;&#x4EF6;&#x6D41;&#x5230;&#x8F93;&#x5165;&#x6846;&#x3002;&#x7528;&#x6237;&#x7684;&#x4FEE;&#x6539;&#x901A;&#x8FC7;&#x4E8B;&#x4EF6;&#x7ED1;&#x5B9A;&#x6D41;&#x56DE;&#x7EC4;&#x4EF6;&#xFF0C;&#x628A;&#x5C5E;&#x6027;&#x503C;&#x8BBE;&#x7F6E;&#x4E3A;&#x6700;&#x65B0;&#x7684;&#x503C;&#x3002;</p>
+<p>Angular &#x5728;&#x6BCF;&#x4E2A; JavaScript &#x4E8B;&#x4EF6;&#x5FAA;&#x73AF;&#x4E2D;&#x5904;&#x7406;<em>&#x6240;&#x6709;&#x7684;</em>&#x6570;&#x636E;&#x7ED1;&#x5B9A;&#xFF0C;&#x5B83;&#x4F1A;&#x4ECE;&#x7EC4;&#x4EF6;&#x6811;&#x7684;&#x6839;&#x90E8;&#x5F00;&#x59CB;&#xFF0C;&#x9012;&#x5F52;&#x5904;&#x7406;&#x5168;&#x90E8;&#x5B50;&#x7EC4;&#x4EF6;&#x3002;</p>
+<h3 id="&#x6307;&#x4EE4;"><a href="#&#x6307;&#x4EE4;" class="headerlink" title="&#x6307;&#x4EE4;"></a>&#x6307;&#x4EE4;</h3><p>Angular &#x6A21;&#x677F;&#x662F;<em>&#x52A8;&#x6001;&#x7684;</em>&#x3002;&#x5F53; Angular &#x6E32;&#x67D3;&#x5B83;&#x4EEC;&#x65F6;&#xFF0C;&#x5B83;&#x4F1A;&#x6839;&#x636E;<strong>&#x6307;&#x4EE4;</strong>&#x63D0;&#x4F9B;&#x7684;&#x64CD;&#x4F5C;&#x5BF9; DOM &#x8FDB;&#x884C;&#x8F6C;&#x6362;&#x3002;</p>
+<p>&#x6307;&#x4EE4;&#x662F;&#x4E00;&#x4E2A;&#x5E26;&#x6709;&#x201C;&#x6307;&#x4EE4;&#x5143;&#x6570;&#x636E;&#x201D;&#x7684;&#x7C7B;&#x3002;&#x5728; TypeScript &#x4E2D;&#xFF0C;&#x8981;&#x901A;&#x8FC7;<code>@Directive</code>&#x88C5;&#x9970;&#x5668;&#x628A;&#x5143;&#x6570;&#x636E;&#x9644;&#x52A0;&#x5230;&#x7C7B;&#x4E0A;&#x3002;</p>
+<p>&#x7EC4;&#x4EF6;&#x662F;&#x4E00;&#x4E2A;<em>&#x5E26;&#x6A21;&#x677F;&#x7684;&#x6307;&#x4EE4;</em>&#xFF1B;<code>@Component</code>&#x88C5;&#x9970;&#x5668;&#x5B9E;&#x9645;&#x4E0A;&#x5C31;&#x662F;&#x4E00;&#x4E2A;<code>@Directive</code>&#x88C5;&#x9970;&#x5668;&#xFF0C;&#x53EA;&#x662F;&#x6269;&#x5C55;&#x4E86;&#x4E00;&#x4E9B;&#x9762;&#x5411;&#x6A21;&#x677F;&#x7684;&#x7279;&#x6027;&#x3002;</p>
+<p>&#x8FD8;&#x6709;&#x4E24;&#x79CD;<em>&#x5176;&#x5B83;</em>&#x7C7B;&#x578B;&#x7684;&#x6307;&#x4EE4;&#xFF1A;<strong>&#x7ED3;&#x6784;&#x578B;</strong>&#x6307;&#x4EE4;&#x548C;<strong>&#x5C5E;&#x6027; (attribute) &#x578B;</strong>&#x6307;&#x4EE4;&#x3002;</p>
+<p><strong>&#x7ED3;&#x6784;&#x578B;</strong>&#x6307;&#x4EE4;&#x901A;&#x8FC7;&#x5728; DOM &#x4E2D;&#x6DFB;&#x52A0;&#x3001;&#x79FB;&#x9664;&#x548C;&#x66FF;&#x6362;&#x5143;&#x7D20;&#x6765;&#x4FEE;&#x6539;&#x5E03;&#x5C40;&#x3002;</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">li</span> *<span class="attr">ngFor</span>=<span class="string">&quot;let hero of heroes&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">hero-detail</span> *<span class="attr">ngIf</span>=<span class="string">&quot;selectedHero&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">hero-detail</span>&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li><code>*ngFor</code>&#x544A;&#x8BC9; Angular &#x4E3A;<code>heroes</code>&#x5217;&#x8868;&#x4E2D;&#x7684;&#x6BCF;&#x4E2A;&#x82F1;&#x96C4;&#x751F;&#x6210;&#x4E00;&#x4E2A;<code>li</code>&#x6807;&#x7B7E;&#x3002;</li>
+<li><code>*ngIf</code>&#x8868;&#x793A;&#x53EA;&#x6709;&#x5728;&#x9009;&#x62E9;&#x7684;&#x82F1;&#x96C4;&#x5B58;&#x5728;&#x65F6;&#xFF0C;&#x624D;&#x4F1A;&#x5305;&#x542B;<code>HeroDetail</code>&#x7EC4;&#x4EF6;&#x3002;</li>
+</ul>
+<p><strong>&#x5C5E;&#x6027;&#x578B;</strong> &#x6307;&#x4EE4;&#x4FEE;&#x6539;&#x4E00;&#x4E2A;&#x73B0;&#x6709;&#x5143;&#x7D20;&#x7684;&#x5916;&#x89C2;&#x6216;&#x884C;&#x4E3A;&#x3002; &#x5728;&#x6A21;&#x677F;&#x4E2D;&#xFF0C;&#x5B83;&#x4EEC;&#x770B;&#x8D77;&#x6765;&#x5C31;&#x50CF;&#x662F;&#x6807;&#x51C6;&#x7684; HTML &#x5C5E;&#x6027;&#xFF0C;&#x6545;&#x540D;.</p>
+<p><code>ngModel</code>&#x6307;&#x4EE4;&#x5C31;&#x662F;&#x5C5E;&#x6027;&#x578B;&#x6307;&#x4EE4;&#x7684;&#x4E00;&#x4E2A;&#x4F8B;&#x5B50;&#xFF0C;&#x5B83;&#x5B9E;&#x73B0;&#x4E86;&#x53CC;&#x5411;&#x6570;&#x636E;&#x7ED1;&#x5B9A;&#x3002; <code>ngModel</code>&#x4FEE;&#x6539;&#x73B0;&#x6709;&#x5143;&#x7D20;&#xFF08;&#x4E00;&#x822C;&#x662F;``&#xFF09;&#x7684;&#x884C;&#x4E3A;&#xFF1A;&#x8BBE;&#x7F6E;&#x5176;&#x663E;&#x793A;&#x5C5E;&#x6027;&#x503C;&#xFF0C;&#x5E76;&#x54CD;&#x5E94; change &#x4E8B;&#x4EF6;&#x3002;</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> [(<span class="attr">ngModel</span>)]=<span class="string">&quot;hero.name&quot;</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="&#x670D;&#x52A1;"><a href="#&#x670D;&#x52A1;" class="headerlink" title="&#x670D;&#x52A1;"></a>&#x670D;&#x52A1;</h3><p><em>&#x670D;&#x52A1;</em>&#x662F;&#x4E00;&#x4E2A;&#x5E7F;&#x4E49;&#x8303;&#x7574;&#xFF0C;&#x5305;&#x62EC;&#xFF1A;&#x503C;&#x3001;&#x51FD;&#x6570;&#xFF0C;&#x6216;&#x5E94;&#x7528;&#x6240;&#x9700;&#x7684;&#x7279;&#x6027;&#x3002;</p>
+<p>&#x51E0;&#x4E4E;&#x4EFB;&#x4F55;&#x4E1C;&#x897F;&#x90FD;&#x53EF;&#x4EE5;&#x662F;&#x4E00;&#x4E2A;&#x670D;&#x52A1;&#x3002; &#x5178;&#x578B;&#x7684;&#x670D;&#x52A1;&#x662F;&#x4E00;&#x4E2A;&#x7C7B;&#xFF0C;&#x5177;&#x6709;&#x4E13;&#x6CE8;&#x7684;&#x3001;&#x660E;&#x786E;&#x7684;&#x7528;&#x9014;&#x3002;&#x5B83;&#x5E94;&#x8BE5;&#x505A;&#x4E00;&#x4EF6;&#x7279;&#x5B9A;&#x7684;&#x4E8B;&#x60C5;&#xFF0C;&#x5E76;&#x628A;&#x5B83;&#x505A;&#x597D;&#x3002;</p>
+<p>&#x4F8B;&#x5982;&#xFF1A;</p>
+<ul>
+<li>&#x65E5;&#x5FD7;&#x670D;&#x52A1;</li>
+<li>&#x6570;&#x636E;&#x670D;&#x52A1;</li>
+<li>&#x6D88;&#x606F;&#x603B;&#x7EBF;</li>
+<li>&#x7A0E;&#x6B3E;&#x8BA1;&#x7B97;&#x5668;</li>
+<li>&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x914D;&#x7F6E;</li>
+</ul>
+<blockquote>
+<p>&#x7EC4;&#x4EF6;&#x7C7B;&#x5E94;&#x4FDD;&#x6301;&#x7CBE;&#x7B80;&#x3002;&#x7EC4;&#x4EF6;&#x672C;&#x8EAB;&#x4E0D;&#x4ECE;&#x670D;&#x52A1;&#x5668;&#x83B7;&#x5F97;&#x6570;&#x636E;&#x3001;&#x4E0D;&#x8FDB;&#x884C;&#x9A8C;&#x8BC1;&#x8F93;&#x5165;&#xFF0C;&#x4E5F;&#x4E0D;&#x76F4;&#x63A5;&#x5F80;&#x63A7;&#x5236;&#x53F0;&#x5199;&#x65E5;&#x5FD7;&#x3002; &#x5B83;&#x4EEC;&#x628A;&#x8FD9;&#x4E9B;&#x4EFB;&#x52A1;&#x59D4;&#x6258;&#x7ED9;&#x670D;&#x52A1;&#x3002;</p>
+<p>&#x7EC4;&#x4EF6;&#x7684;&#x4EFB;&#x52A1;&#x5C31;&#x662F;&#x63D0;&#x4F9B;&#x7528;&#x6237;&#x4F53;&#x9A8C;&#xFF0C;&#x4EC5;&#x6B64;&#x800C;&#x5DF2;&#x3002;&#x5B83;&#x4ECB;&#x4E8E;&#x89C6;&#x56FE;&#xFF08;&#x7531;&#x6A21;&#x677F;&#x6E32;&#x67D3;&#xFF09;&#x548C;&#x5E94;&#x7528;&#x903B;&#x8F91;&#xFF08;&#x901A;&#x5E38;&#x5305;&#x62EC;<em>&#x6A21;&#x578B;</em>&#x7684;&#x67D0;&#x4E9B;&#x6982;&#x5FF5;&#xFF09;&#x4E4B;&#x95F4;&#x3002; &#x8BBE;&#x8BA1;&#x826F;&#x597D;&#x7684;&#x7EC4;&#x4EF6;&#x4E3A;&#x6570;&#x636E;&#x7ED1;&#x5B9A;&#x63D0;&#x4F9B;&#x5C5E;&#x6027;&#x548C;&#x65B9;&#x6CD5;&#xFF0C;&#x628A;&#x5176;&#x5B83;&#x7410;&#x4E8B;&#x90FD;&#x59D4;&#x6258;&#x7ED9;&#x670D;&#x52A1;&#x3002;</p>
+</blockquote>
+<h3 id="&#x4F9D;&#x8D56;&#x6CE8;&#x5165;"><a href="#&#x4F9D;&#x8D56;&#x6CE8;&#x5165;" class="headerlink" title="&#x4F9D;&#x8D56;&#x6CE8;&#x5165;"></a>&#x4F9D;&#x8D56;&#x6CE8;&#x5165;</h3><p>&#x201C;&#x4F9D;&#x8D56;&#x6CE8;&#x5165;&#x201D;&#x662F;&#x63D0;&#x4F9B;&#x7C7B;&#x7684;&#x65B0;&#x5B9E;&#x4F8B;&#x7684;&#x4E00;&#x79CD;&#x65B9;&#x5F0F;&#xFF0C;&#x8FD8;&#x8D1F;&#x8D23;&#x5904;&#x7406;&#x597D;&#x7C7B;&#x6240;&#x9700;&#x7684;&#x5168;&#x90E8;&#x4F9D;&#x8D56;&#x3002;Angular &#x901A;&#x8FC7;&#x67E5;&#x770B;&#x6784;&#x9020;&#x51FD;&#x6570;&#x7684;&#x53C2;&#x6570;&#x7C7B;&#x578B;&#x5F97;&#x77E5;&#x7EC4;&#x4EF6;&#x9700;&#x8981;&#x54EA;&#x4E9B;&#x670D;&#x52A1;&#x3002;</p>
+<p>&#x9700;&#x8981;&#x8BB0;&#x4F4F;&#x7684;&#x5173;&#x4E8E;&#x4F9D;&#x8D56;&#x6CE8;&#x5165;&#x7684;&#x8981;&#x70B9;&#x662F;&#xFF1A;</p>
+<ul>
+<li>&#x4F9D;&#x8D56;&#x6CE8;&#x5165;&#x6E17;&#x900F;&#x5728;&#x6574;&#x4E2A; Angular &#x6846;&#x67B6;&#x4E2D;&#xFF0C;&#x88AB;&#x5230;&#x5904;&#x4F7F;&#x7528;&#x3002;</li>
+<li><strong>&#x6CE8;&#x5165;&#x5668; (injector)</strong> &#x662F;&#x672C;&#x673A;&#x5236;&#x7684;&#x6838;&#x5FC3;&#x3002;<ul>
+<li>&#x6CE8;&#x5165;&#x5668;&#x8D1F;&#x8D23;&#x7EF4;&#x62A4;&#x4E00;&#x4E2A;<em>&#x5BB9;&#x5668;</em>&#xFF0C;&#x7528;&#x4E8E;&#x5B58;&#x653E;&#x5B83;&#x521B;&#x5EFA;&#x8FC7;&#x7684;&#x670D;&#x52A1;&#x5B9E;&#x4F8B;&#x3002;</li>
+<li>&#x6CE8;&#x5165;&#x5668;&#x80FD;&#x4F7F;&#x7528;<em>&#x63D0;&#x4F9B;&#x5546;</em>&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x670D;&#x52A1;&#x5B9E;&#x4F8B;&#x3002;</li>
+</ul>
+</li>
+<li><em>&#x63D0;&#x4F9B;&#x5546;</em>&#x662F;&#x4E00;&#x4E2A;&#x7528;&#x4E8E;&#x521B;&#x5EFA;&#x670D;&#x52A1;&#x7684;&#x914D;&#x65B9;&#x3002;</li>
+<li>&#x628A;<em>&#x63D0;&#x4F9B;&#x5546;</em>&#x6CE8;&#x518C;&#x5230;&#x6CE8;&#x5165;&#x5668;&#x3002;</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://singthi4079.github.io/2017/01/07/Angular笔记-架构概览/" data-id="cixmy22wu0000a5q7qyfhy5wz" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Angular/">Angular</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-cnetos7_jenkins_git" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/12/14/cnetos7_jenkins_git/" class="article-date">
@@ -190,7 +320,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://singthi4079.github.io/2016/12/14/cnetos7_jenkins_git/" data-id="ciwp1saoh00038wq76oz9g9yb" class="article-share-link">Share</a>
+      <a data-url="https://singthi4079.github.io/2016/12/14/cnetos7_jenkins_git/" data-id="cixmy22xg0004a5q7ibzx1tgj" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CentOS/">CentOS</a></li></ul>
@@ -256,7 +386,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://singthi4079.github.io/2016/11/19/Hexo-GitHub搭建属于自己的博客/" data-id="ciwp1sao700008wq79lienewr" class="article-share-link">Share</a>
+      <a data-url="https://singthi4079.github.io/2016/11/19/Hexo-GitHub搭建属于自己的博客/" data-id="cixmy22wy0001a5q7rz16kazi" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo-GitHub/">Hexo, GitHub</a></li></ul>
@@ -303,7 +433,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://singthi4079.github.io/2016/11/19/hello-world/" data-id="ciwp1saoq00048wq7qjh4ml57" class="article-share-link">Share</a>
+      <a data-url="https://singthi4079.github.io/2016/11/19/hello-world/" data-id="cixmy22xk0005a5q7h9sjgoko" class="article-share-link">Share</a>
       
       
     </footer>
@@ -385,7 +515,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://singthi4079.github.io/2016/11/13/SpringMVC/" data-id="ciwp1saoc00018wq7m6qn4280" class="article-share-link">Share</a>
+      <a data-url="https://singthi4079.github.io/2016/11/13/SpringMVC/" data-id="cixmy22x40003a5q7krebhkhs" class="article-share-link">Share</a>
       
       
     </footer>
@@ -598,7 +728,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://singthi4079.github.io/2016/11/12/什么是面向切面编程/" data-id="ciwp1saou00058wq7p2cvppkg" class="article-share-link">Share</a>
+      <a data-url="https://singthi4079.github.io/2016/11/12/什么是面向切面编程/" data-id="cixmy22xv0008a5q7g1koqczw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -620,7 +750,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/">CentOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo-GitHub/">Hexo, GitHub</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Angular/">Angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/">CentOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo-GitHub/">Hexo, GitHub</a></li></ul>
     </div>
   </div>
 
@@ -630,7 +760,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/CentOS/" style="font-size: 10px;">CentOS</a> <a href="/tags/Hexo-GitHub/" style="font-size: 10px;">Hexo, GitHub</a>
+      <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/CentOS/" style="font-size: 10px;">CentOS</a> <a href="/tags/Hexo-GitHub/" style="font-size: 10px;">Hexo, GitHub</a>
     </div>
   </div>
 
@@ -639,7 +769,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li></ul>
     </div>
   </div>
 
@@ -650,6 +780,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/01/07/Angular笔记-架构概览/">Angular笔记-架构概览</a>
+          </li>
         
           <li>
             <a href="/2016/12/14/cnetos7_jenkins_git/">CentOS 7 Jenkins Git Tomcat 构建Java持续部署环境</a>
@@ -667,10 +801,6 @@
             <a href="/2016/11/13/SpringMVC/">Spring MVC起步</a>
           </li>
         
-          <li>
-            <a href="/2016/11/12/什么是面向切面编程/">什么是面向切面编程</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -683,7 +813,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2016 Blue<br>
+      &copy; 2017 Blue<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

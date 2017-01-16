@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Angular笔记-根模块 | Blue的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Angular笔记-根模块Angular 模块类描述应用的部件是如何组合在一起的。 每个应用都至少有一个 Angular 模块，也就是根模块，用来引导并运行应用。 你可以为它取任何名字。常规名字是AppModule。
+1234567891011app.module.tsimport &amp;#123; NgModule &amp;#125;      from &apos;@angular/core&apos;;import &amp;#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Angular笔记-根模块">
+<meta property="og:url" content="https://singthi4079.github.io/2017/01/17/Angular笔记-跟模块/index.html">
+<meta property="og:site_name" content="Blue的博客">
+<meta property="og:description" content="Angular笔记-根模块Angular 模块类描述应用的部件是如何组合在一起的。 每个应用都至少有一个 Angular 模块，也就是根模块，用来引导并运行应用。 你可以为它取任何名字。常规名字是AppModule。
+1234567891011app.module.tsimport &amp;#123; NgModule &amp;#125;      from &apos;@angular/core&apos;;import &amp;#">
+<meta property="og:updated_time" content="2017-01-15T08:46:53.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Angular笔记-根模块">
+<meta name="twitter:description" content="Angular笔记-根模块Angular 模块类描述应用的部件是如何组合在一起的。 每个应用都至少有一个 Angular 模块，也就是根模块，用来引导并运行应用。 你可以为它取任何名字。常规名字是AppModule。
+1234567891011app.module.tsimport &amp;#123; NgModule &amp;#125;      from &apos;@angular/core&apos;;import &amp;#">
+  
+    <link rel="alternate" href="/atom.xml" title="Blue的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Blue的博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://singthi4079.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Angular笔记-跟模块" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/01/17/Angular笔记-跟模块/" class="article-date">
+  <time datetime="2017-01-16T16:00:00.000Z" itemprop="datePublished">2017-01-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Angular笔记-根模块
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Angular笔记-根模块"><a href="#Angular笔记-根模块" class="headerlink" title="Angular笔记-根模块"></a>Angular笔记-根模块</h2><p>Angular 模块类描述应用的部件是如何组合在一起的。 每个应用都至少有一个 Angular 模块，也就是<em>根</em>模块，用来<strong>引导</strong>并运行应用。 你可以为它取任何名字。常规名字是<code>AppModule</code>。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">app.module.ts</div><div class="line"><span class="keyword">import</span> &#123; NgModule &#125;      from <span class="string">'@angular/core'</span>;</div><div class="line"><span class="keyword">import</span> &#123; BrowserModule &#125; from <span class="string">'@angular/platform-browser'</span>;</div><div class="line"><span class="keyword">import</span> &#123; AppComponent &#125;  from <span class="string">'./app.component'</span>;</div><div class="line"></div><div class="line"><span class="meta">@NgModule</span>(&#123;</div><div class="line">  imports:      [ BrowserModule ],</div><div class="line">  declarations: [ AppComponent ],</div><div class="line">  bootstrap:    [ AppComponent ]</div><div class="line">&#125;)</div><div class="line"><span class="keyword">export</span> <span class="keyword">class</span> AppModule &#123; &#125;</div></pre></td></tr></table></figure>
+<p><code>@NgModule</code>装饰器将<code>AppModule</code>标记为 Angular 模块类（也叫<code>NgModule</code>类）。 <code>@NgModule</code>接受一个<em>元数据</em>对象，告诉 Angular 如何编译和启动应用。</p>
+<h3 id="imports-数组"><a href="#imports-数组" class="headerlink" title="imports 数组"></a><em>imports</em> 数组</h3><p>Angular 模块把特性合并成离散单元的一种方式。 当应用需要模块的特性时，将其添加到<code>imports</code>数组中。</p>
+<blockquote>
+<p><code>imports</code>数组中应该<strong>只有NgModule类</strong>。不要放置其它类型的类。</p>
+</blockquote>
+<h3 id="declarations-数组"><a href="#declarations-数组" class="headerlink" title="declarations 数组"></a><em>declarations</em> 数组</h3><p><em>每个</em>组件必须在且仅在一个<code>NgModule</code>类中声明。 通过将其列到<code>AppModule</code>模块的<code>declarations</code>数组中，告诉 Angular 哪个组件属于<code>AppModule</code>。</p>
+<h3 id="bootstrap-数组"><a href="#bootstrap-数组" class="headerlink" title="bootstrap 数组"></a><em>bootstrap</em> 数组</h3><p>通过<a href="https://angular.cn/docs/ts/latest/guide/appmodule.html#main" target="_blank" rel="external"><em>引导</em></a>根<code>AppModule</code>来启动应用。 在启动过程中，其中一步是创建列在<code>bootstrap</code>数组的组件， 并将它们每一个都插入到浏览器的DOM中。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://singthi4079.github.io/2017/01/17/Angular笔记-跟模块/" data-id="cixzm497j00005aq7jgfztpmx" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Angular/">Angular</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/01/07/Angular笔记-架构概览/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Angular笔记-架构概览</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Angular/">Angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/">CentOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo-GitHub/">Hexo, GitHub</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Angular/" style="font-size: 20px;">Angular</a> <a href="/tags/CentOS/" style="font-size: 10px;">CentOS</a> <a href="/tags/Hexo-GitHub/" style="font-size: 10px;">Hexo, GitHub</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/01/17/Angular笔记-跟模块/">Angular笔记-根模块</a>
+          </li>
+        
+          <li>
+            <a href="/2017/01/07/Angular笔记-架构概览/">Angular笔记-架构概览</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/14/cnetos7_jenkins_git/">CentOS 7 Jenkins Git Tomcat 构建Java持续部署环境</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/19/Hexo-GitHub搭建属于自己的博客/">Hexo+GitHub搭建属于自己的博客</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/19/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Blue<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Java接口和抽象类 | Blue的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Java接口和抽象类抽象类抽象方法是一种特殊的方法, 只有声明, 没有具体的实现. 抽象的方法声明:
+1abstract void fun();
+抽象方法必须用abstract关键字修饰, 如果一个类有抽象方法, 这个类就是抽象类, 抽象类必须在class前用abstract关键字修饰. 由于抽象类中有没有具体实现的方法, 所以不能创建抽象类的实例.
+含有抽象方法的类称为抽象类, 并不是抽象类只能">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java接口和抽象类">
+<meta property="og:url" content="https://singthi4079.github.io/2017/03/08/Java接口和抽象类/index.html">
+<meta property="og:site_name" content="Blue的博客">
+<meta property="og:description" content="Java接口和抽象类抽象类抽象方法是一种特殊的方法, 只有声明, 没有具体的实现. 抽象的方法声明:
+1abstract void fun();
+抽象方法必须用abstract关键字修饰, 如果一个类有抽象方法, 这个类就是抽象类, 抽象类必须在class前用abstract关键字修饰. 由于抽象类中有没有具体实现的方法, 所以不能创建抽象类的实例.
+含有抽象方法的类称为抽象类, 并不是抽象类只能">
+<meta property="og:updated_time" content="2017-03-08T08:12:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java接口和抽象类">
+<meta name="twitter:description" content="Java接口和抽象类抽象类抽象方法是一种特殊的方法, 只有声明, 没有具体的实现. 抽象的方法声明:
+1abstract void fun();
+抽象方法必须用abstract关键字修饰, 如果一个类有抽象方法, 这个类就是抽象类, 抽象类必须在class前用abstract关键字修饰. 由于抽象类中有没有具体实现的方法, 所以不能创建抽象类的实例.
+含有抽象方法的类称为抽象类, 并不是抽象类只能">
+  
+    <link rel="alternate" href="/atom.xml" title="Blue的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Blue的博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://singthi4079.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Java接口和抽象类" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/08/Java接口和抽象类/" class="article-date">
+  <time datetime="2017-03-08T07:12:22.000Z" itemprop="datePublished">2017-03-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Java接口和抽象类
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Java接口和抽象类"><a href="#Java接口和抽象类" class="headerlink" title="Java接口和抽象类"></a>Java接口和抽象类</h2><h3 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h3><p>抽象方法是一种特殊的方法, 只有声明, 没有具体的实现. 抽象的方法声明:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">fun</span><span class="params">()</span></span>;</div></pre></td></tr></table></figure>
+<p>抽象方法必须用<code>abstract</code>关键字修饰, 如果一个类有抽象方法, 这个类就是抽象类, 抽象类必须在class前用<code>abstract</code>关键字修饰. <strong>由于抽象类中有没有具体实现的方法, 所以不能创建抽象类的实例</strong>.</p>
+<p>含有抽象方法的类称为抽象类, 并不是抽象类只能有抽象方法, 它和普通类一样, 可以有成员变量和普通的成员方法.</p>
+<p>抽象类和普通类的主要区别:</p>
+<ol>
+<li>抽象方法必须为public 或者 protected. 默认情况下默认是public</li>
+<li>抽象类不能创建对象.</li>
+<li>如果一个类继承一个抽象类, 子类必须实现抽象类的抽象方法.</li>
+</ol>
+<h3 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h3><p>接口是对行为的抽象. 接口的定义:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IntefaceName</span> </span>&#123;</div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>接口可以含有变量和方法. 接口中的变量被隐式的指定为<code>public static final</code>变量. 方法会被隐式的制定为<code>public abstract</code>方法.</p>
+<p>接口中的方法必须是<code>public</code>的.</p>
+<p>接口中的方法必须是抽象的.</p>
+<p><strong>抽象类和接口的区别</strong></p>
+<ol>
+<li>语法上:<ul>
+<li>抽象类可以提供成员方法的实现细节, 而接口中只能存在public abstract方法</li>
+<li>抽象类中的成员变量可以是各种类型的, 而接口中的成员变量只能是public static final类型的</li>
+<li>接口中布恩感有静态代码块和静态方法. 抽象类可以有</li>
+<li>一个类只能继承一个抽象类, 可以实现多个接口</li>
+</ul>
+</li>
+<li>设计上<ul>
+<li>抽象类是类的抽象, 接口是对行为的抽象. 继承是一种”是不是”的关系, 接口是一种”有没有”的关系</li>
+<li>抽象类作为很多子类的父类, 是一种模板式设计. 接口是一种行为规范, 是辐射式设计.</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://singthi4079.github.io/2017/03/08/Java接口和抽象类/" data-id="cj08068ra000mt5q7a0ue6vzv" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/03/08/Java内部类/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          Java内部类
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/03/04/Java-泛型/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">Java-泛型</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Mot-clés</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Angular/">Angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/">CentOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo-GitHub/">Hexo, GitHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Angular/" style="font-size: 20px;">Angular</a> <a href="/tags/CentOS/" style="font-size: 10px;">CentOS</a> <a href="/tags/Hexo-GitHub/" style="font-size: 10px;">Hexo, GitHub</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/13/Java-LinkedList/">Java-LinkedList</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/13/Java-ArrayList/">Java-ArrayList</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/10/Java集合接口/">Java集合接口</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/09/Java反射机制/">Java反射机制</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/08/Java内部类/">Java内部类</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Blue<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

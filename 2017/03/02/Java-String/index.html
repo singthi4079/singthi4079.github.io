@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Java String | Blue的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="String 不是基本数据类型, 而是一个对象, 并且是不可变的对象. String 类被定义为final, 即不能被继承. 字符串对象在初始化之前, 它的值为null. “”, null, new String()三者的区别.
+
+null表示String 还没有new, 对象的引用还没有创建, 也没有分配内存空间
+“”, new String()说明已经new了一个对象. 只是内部为空
+
+在进行">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java String">
+<meta property="og:url" content="https://singthi4079.github.io/2017/03/02/Java-String/index.html">
+<meta property="og:site_name" content="Blue的博客">
+<meta property="og:description" content="String 不是基本数据类型, 而是一个对象, 并且是不可变的对象. String 类被定义为final, 即不能被继承. 字符串对象在初始化之前, 它的值为null. “”, null, new String()三者的区别.
+
+null表示String 还没有new, 对象的引用还没有创建, 也没有分配内存空间
+“”, new String()说明已经new了一个对象. 只是内部为空
+
+在进行">
+<meta property="og:updated_time" content="2017-03-03T07:01:03.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java String">
+<meta name="twitter:description" content="String 不是基本数据类型, 而是一个对象, 并且是不可变的对象. String 类被定义为final, 即不能被继承. 字符串对象在初始化之前, 它的值为null. “”, null, new String()三者的区别.
+
+null表示String 还没有new, 对象的引用还没有创建, 也没有分配内存空间
+“”, new String()说明已经new了一个对象. 只是内部为空
+
+在进行">
+  
+    <link rel="alternate" href="/atom.xml" title="Blue的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Blue的博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://singthi4079.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Java-String" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/02/Java-String/" class="article-date">
+  <time datetime="2017-03-02T08:31:19.000Z" itemprop="datePublished">2017-03-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Java String
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>String 不是基本数据类型, 而是一个对象, 并且是不可变的对象. String 类被定义为final, 即不能被继承. 字符串对象在初始化之前, 它的值为null. “”, null, new String()三者的区别.</p>
+<ol>
+<li>null表示String 还没有new, 对象的引用还没有创建, 也没有分配内存空间</li>
+<li>“”, new String()说明已经new了一个对象. 只是内部为空</li>
+</ol>
+<p>在进行String连接操作(+)时, 连接操作最开始时如果是字符串常量, 编译后会把尽可能多的字符串常量连接起来, 形成新的字符串常量与后续连接.</p>
+<p>字符串连接是从左向右依次进行, 对于不同的字符串, 首先以最左边的字符串为参数创建StringBuilder对象, 然后依次对右边进行append操作. 最后把StringBuilder对象通过toString()方法转换成String对象. 中间存在多个字符串常量时不会自动拼接.</p>
+<p><strong>当使用+进行多个字符串连接时，实际上是产生了一个StringBuilder对象和一个String对象。</strong></p>
+<p>常用方法:</p>
+<ol>
+<li>字符串比较<ul>
+<li>equals 判断内容是否相同</li>
+<li>compareTo 判断字符串的大小关系</li>
+<li>== 判断内容与地址是否相同</li>
+<li>equalsIgnoreCase 忽略大小写的情况下判断内容是否相同</li>
+<li>reagionMatches()  对字符串中的部分内容是否相同进行比较</li>
+</ul>
+</li>
+</ol>
+<p>JVM为了提高性能和减少内存开销, 内部维护一个字符串常量池, 每创建一个字符串常量, JVM首先检查字符串常量池, 如果存在, 返回此种字符串对象的引用, 不存在就创建该字符串对象放入池中.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">String a = <span class="string">"abc"</span>;</div><div class="line">String b = <span class="string">"abc"</span>;</div><div class="line">System.out.println(a == b); <span class="comment">// true</span></div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">String a = <span class="string">"Hello"</span>;</div><div class="line">String b = <span class="keyword">new</span> String(<span class="string">"Hello"</span>);</div><div class="line">System.out.println(a == b); <span class="comment">// false</span></div><div class="line">System.out.println(a.equals(b)); <span class="comment">// true</span></div></pre></td></tr></table></figure>
+<p>这种方式与创建字符串常量的方式不同, 当使用<code>new String(str)</code> 方式创建字符串对象时, 不管字符串常量池中是否有与此相同内容的字符串, 都会在堆内存创建新的字符串对象.</p>
+<p>intern()方法返回字符串对象在字符串常量池中的对象引用. 如果字符串常量池中没有这个字符串, 就创建一个新的字符串放到常量池中.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">String a = <span class="string">"hello"</span>;</div><div class="line">System.out.println(a == a.intern()); <span class="comment">// true</span></div><div class="line"></div><div class="line">String b = <span class="keyword">new</span> String(<span class="string">"world"</span>);</div><div class="line">String c = b.intern();</div><div class="line"></div><div class="line">System.out.println(c == b); <span class="comment">// false</span></div><div class="line"></div><div class="line">String d = <span class="string">"world"</span>;</div><div class="line">System.out.println(c == d); <span class="comment">// true</span></div></pre></td></tr></table></figure>
+<p>使用StringBuffer处理字符串时, 如果对字符串进行修改操作, 并不会产生一个新的字符串对象.</p>
+<p>在修改时StringBuffer都是修改自身, 而String 类则是产生一个新的对象.</p>
+<p>StringBuffer必须通过构造方法进行初始化.</p>
+<p>StringBuilder也是一个可变的字符串对象, 和StringBuffer不同在于它是线程不安全的. 所以StringBuilder比StringBuffer速度快.</p>
+<p>可以通过Java的反射机制修改String的内容</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">stringReflection</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line"></div><div class="line">    String s = <span class="string">"Hello World"</span>;</div><div class="line"></div><div class="line">    System.out.println(<span class="string">"s = "</span> + s); <span class="comment">//Hello World</span></div><div class="line"></div><div class="line">    <span class="comment">//获取String类中的value字段</span></div><div class="line">    Field valueField = String.class.getDeclaredField(<span class="string">"value"</span>);</div><div class="line"></div><div class="line">    <span class="comment">//改变value属性的访问权限</span></div><div class="line">    valueField.setAccessible(<span class="keyword">true</span>);</div><div class="line"></div><div class="line">    <span class="keyword">char</span>[] value = (<span class="keyword">char</span>[]) valueField.get(s);</div><div class="line"></div><div class="line">    <span class="comment">//改变value所引用的数组中的第5个字符</span></div><div class="line">    value[<span class="number">5</span>] = <span class="string">'_'</span>;</div><div class="line"></div><div class="line">    System.out.println(<span class="string">"s = "</span> + s); <span class="comment">//Hello_World</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://singthi4079.github.io/2017/03/02/Java-String/" data-id="cj08068q8000at5q7k1y7r9rq" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/03/03/Java枚举-Enum/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          Java枚举-Enum
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/03/01/Java对象初始化/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">Java对象初始化</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Mot-clés</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Angular/">Angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/">CentOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo-GitHub/">Hexo, GitHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Angular/" style="font-size: 20px;">Angular</a> <a href="/tags/CentOS/" style="font-size: 10px;">CentOS</a> <a href="/tags/Hexo-GitHub/" style="font-size: 10px;">Hexo, GitHub</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/13/Java-LinkedList/">Java-LinkedList</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/13/Java-ArrayList/">Java-ArrayList</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/10/Java集合接口/">Java集合接口</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/09/Java反射机制/">Java反射机制</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/08/Java内部类/">Java内部类</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Blue<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

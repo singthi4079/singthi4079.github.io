@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Java static | Blue的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Java static关键字在程序中任何变量或代码都是在编译时由系统自动分配内存来存储的,  而静态就是指在编译后所分配的内存一直存在, 直到程序退出内存才会释放这个空间. 只要程序在运行, 这块内存就一直存在.
+static表示全局 或 静态 的意思, 用来修饰成员变量和成员方法, 也可以形成静态的代码块. 被static修饰的成员变量或方法不依赖类特定的实例, 被类的所有实例共享. 只要类被加">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java static">
+<meta property="og:url" content="https://singthi4079.github.io/2017/03/01/Java-static/index.html">
+<meta property="og:site_name" content="Blue的博客">
+<meta property="og:description" content="Java static关键字在程序中任何变量或代码都是在编译时由系统自动分配内存来存储的,  而静态就是指在编译后所分配的内存一直存在, 直到程序退出内存才会释放这个空间. 只要程序在运行, 这块内存就一直存在.
+static表示全局 或 静态 的意思, 用来修饰成员变量和成员方法, 也可以形成静态的代码块. 被static修饰的成员变量或方法不依赖类特定的实例, 被类的所有实例共享. 只要类被加">
+<meta property="og:updated_time" content="2017-02-28T17:14:09.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java static">
+<meta name="twitter:description" content="Java static关键字在程序中任何变量或代码都是在编译时由系统自动分配内存来存储的,  而静态就是指在编译后所分配的内存一直存在, 直到程序退出内存才会释放这个空间. 只要程序在运行, 这块内存就一直存在.
+static表示全局 或 静态 的意思, 用来修饰成员变量和成员方法, 也可以形成静态的代码块. 被static修饰的成员变量或方法不依赖类特定的实例, 被类的所有实例共享. 只要类被加">
+  
+    <link rel="alternate" href="/atom.xml" title="Blue的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Blue的博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://singthi4079.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Java-static" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/01/Java-static/" class="article-date">
+  <time datetime="2017-02-28T16:21:14.000Z" itemprop="datePublished">2017-03-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Java static
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Java-static关键字"><a href="#Java-static关键字" class="headerlink" title="Java static关键字"></a>Java static关键字</h2><p>在程序中任何变量或代码都是在编译时由系统自动分配内存来存储的,  而静态就是指在编译后所分配的内存一直存在, 直到程序退出内存才会释放这个空间. 只要程序在运行, 这块内存就一直存在.</p>
+<p><code>static</code>表示<em>全局</em> 或 <em>静态</em> 的意思, 用来修饰成员变量和成员方法, 也可以形成静态的代码块. 被<code>static</code>修饰的成员变量或方法不依赖类特定的实例, 被类的所有实例共享. 只要类被加载, 虚拟机就会根据类名在运行时数据区的方法区内找到它们. </p>
+<p>static修饰的成员变量和成员方法习惯上称为静态变量和静态方法，可以直接通过类名来访问，访问语法为:</p>
+<p>类名.静态方法名(参数列表…) </p>
+<p>类名.静态变量名</p>
+<p>用static修饰的代码块表示静态代码块,当Java虚拟机(JVM)加载类时,就会执行该代码块.</p>
+<h3 id="static-变量"><a href="#static-变量" class="headerlink" title="static 变量"></a>static 变量</h3><p>被<code>static</code>修饰的变量被称为 <strong>静态变量</strong> 或 <strong>类变量</strong>, 没有被<code>static</code>修饰的变量称为<strong>实例变量</strong>. 静态变量和实例变量的区别:</p>
+<ol>
+<li>JVM只为静态变量分配一次内存, 在加载类的过程中完成内存的分配</li>
+<li>静态变量可以直接通过类名访问</li>
+<li>实例变量依赖于类的实例,</li>
+<li>每创建一个类的实例, 就会给实例变量分配一次内存</li>
+</ol>
+<h3 id="static-方法"><a href="#static-方法" class="headerlink" title="static 方法"></a>static 方法</h3><ol>
+<li>静态方法可以直接通过类名调用</li>
+<li>在静态方法中不能用<code>this</code>, <code>super</code>关键字</li>
+<li>不能在静态方法中直接访问类的实例变量和实例方法</li>
+<li>可以在静态方法中访问静态变量和静态方法</li>
+<li>static方法不依赖任何实例, 所以static方法必须被实现, 不能是abstract的</li>
+</ol>
+<h3 id="static代码块"><a href="#static代码块" class="headerlink" title="static代码块"></a>static代码块</h3><p>static代码块是在类中独立于类成员的static语句块. 可以有多个, 位置可以随意放. 不在任何方法体内, JVM加载类时就会执行静态代码块. 如果一个类中有多个静态代码块, JVM会按照它们在类中出现的先后顺序依次执行. 每个静态代码块只会执行一次.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://singthi4079.github.io/2017/03/01/Java-static/" data-id="cj08068qe000dt5q743qe4lvu" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/03/01/Java对象初始化/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          Java对象初始化
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/02/28/final关键字/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">final关键字</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Mot-clés</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Angular/">Angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/">CentOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo-GitHub/">Hexo, GitHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Angular/" style="font-size: 20px;">Angular</a> <a href="/tags/CentOS/" style="font-size: 10px;">CentOS</a> <a href="/tags/Hexo-GitHub/" style="font-size: 10px;">Hexo, GitHub</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/13/Java-LinkedList/">Java-LinkedList</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/13/Java-ArrayList/">Java-ArrayList</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/10/Java集合接口/">Java集合接口</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/09/Java反射机制/">Java反射机制</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/08/Java内部类/">Java内部类</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Blue<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

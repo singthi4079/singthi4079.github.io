@@ -48,9 +48,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://singthi4079.github.io"></form>
@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-Angular笔记-跟模块" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Java-LinkedList" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/01/17/Angular笔记-跟模块/" class="article-date">
-  <time datetime="2017-01-16T16:00:00.000Z" itemprop="datePublished">2017-01-17</time>
+    <a href="/2017/03/13/Java-LinkedList/" class="article-date">
+  <time datetime="2017-03-13T11:04:47.000Z" itemprop="datePublished">2017-03-13</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/17/Angular笔记-跟模块/">Angular笔记-根模块</a>
+      <a class="article-title" href="/2017/03/13/Java-LinkedList/">Java-LinkedList</a>
     </h1>
   
 
@@ -83,24 +83,232 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Angular笔记-根模块"><a href="#Angular笔记-根模块" class="headerlink" title="Angular笔记-根模块"></a>Angular笔记-根模块</h2><p>Angular 模块类描述应用的部件是如何组合在一起的。 每个应用都至少有一个 Angular 模块，也就是<em>根</em>模块，用来<strong>引导</strong>并运行应用。 你可以为它取任何名字。常规名字是<code>AppModule</code>。</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">app.module.ts</div><div class="line"><span class="keyword">import</span> &#123; NgModule &#125;      from <span class="string">'@angular/core'</span>;</div><div class="line"><span class="keyword">import</span> &#123; BrowserModule &#125; from <span class="string">'@angular/platform-browser'</span>;</div><div class="line"><span class="keyword">import</span> &#123; AppComponent &#125;  from <span class="string">'./app.component'</span>;</div><div class="line"></div><div class="line"><span class="meta">@NgModule</span>(&#123;</div><div class="line">  imports:      [ BrowserModule ],</div><div class="line">  declarations: [ AppComponent ],</div><div class="line">  bootstrap:    [ AppComponent ]</div><div class="line">&#125;)</div><div class="line"><span class="keyword">export</span> <span class="keyword">class</span> AppModule &#123; &#125;</div></pre></td></tr></table></figure>
-<p><code>@NgModule</code>装饰器将<code>AppModule</code>标记为 Angular 模块类（也叫<code>NgModule</code>类）。 <code>@NgModule</code>接受一个<em>元数据</em>对象，告诉 Angular 如何编译和启动应用。</p>
-<h3 id="imports-数组"><a href="#imports-数组" class="headerlink" title="imports 数组"></a><em>imports</em> 数组</h3><p>Angular 模块把特性合并成离散单元的一种方式。 当应用需要模块的特性时，将其添加到<code>imports</code>数组中。</p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://singthi4079.github.io/2017/03/13/Java-LinkedList/" data-id="cj08068pz0005t5q7vlxx4qqu" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Java-ArrayList" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/13/Java-ArrayList/" class="article-date">
+  <time datetime="2017-03-13T02:39:26.000Z" itemprop="datePublished">2017-03-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/13/Java-ArrayList/">Java-ArrayList</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>ArrayList是实现List接口的动态数组. 实现所有可选列表操作, 并允许null在内的所有元素.</p>
+<p>ArrayList的默认初始容量为10. 每次添加新的元素, ArrayList都会检查是否需要进行扩容操作.</p>
+<p>扩容操作是把原来的数组拷贝到新的数组中.</p>
+<p> 如果已知具体的数据量, 在构造时应该指定一个初始容量, 可以减少数据拷贝次数. </p>
+<p>在添加大量新元素前, 可以使用<code>ensureCapacity</code>操作来增加ArrayList实例的容量.</p>
+<p>ArrayList实现不是同步的. 如果多个线程同时访问一个ArrayList实例, 其中至少一个线程从结构上修改了列表, 必须保持外部同步. 最好在创建时, 保证ArrayList时同步的.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">List list = Collections.synchronizedList(<span class="keyword">new</span> ArrayList());</div></pre></td></tr></table></figure>
+<p>ArrayList底层使用数组来保存数据.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">transient</span> Object[] elementData;</div></pre></td></tr></table></figure>
+<p><code>transient</code>是Java关键字, 变量修饰符. 当对象存储时, 它的值不需要维持.</p>
+<p>Java的serialization提供了一个持久化对象实例的机制. 当持久化对象时, 可能有的对象数据成员, 不想用serialization机制保存它. 为了在一个特定的对象的一个域上关闭serialization, 可以在这个域前加上关键字<code>transient</code>. 当对象被序列化时, transient型变量的值不包括在序列号的表示中.</p>
+<p><code>Object[] elementData</code>就是ArrayList的容器. ArrayList的基本操作都是对elementData变量进行操作.</p>
+<p>ArrayList提供三个构造函数.</p>
+<ul>
+<li>ArrayList(): 默认构造器, 提供初始容量为10的空列表</li>
+<li>ArrayList(int initialCapacity): 构造一个具有指定初始容量的空列表</li>
+<li>ArrayList(Collection&lt;? extends E&gt; c): 构造一个包含指定collection的元素的列表, 这些元素时按collectin的迭代器返回的顺序排列的.</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">     * 构造一个初始容量为 10 的空列表</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ArrayList</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>(<span class="number">10</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 构造一个具有指定初始容量的空列表。</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ArrayList</span><span class="params">(<span class="keyword">int</span> initialCapacity)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>();</div><div class="line">        <span class="keyword">if</span> (initialCapacity &lt; <span class="number">0</span>)</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"Illegal Capacity: "</span></div><div class="line">                    + initialCapacity);</div><div class="line">        <span class="keyword">this</span>.elementData = <span class="keyword">new</span> Object[initialCapacity];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     *  构造一个包含指定 collection 的元素的列表，这些元素是按照该 collection 的迭代器返回它们的顺序排列的。</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ArrayList</span><span class="params">(Collection&lt;? extends E&gt; c)</span> </span>&#123;</div><div class="line">        elementData = c.toArray();</div><div class="line">        size = elementData.length;</div><div class="line">        <span class="comment">// c.toArray might (incorrectly) not return Object[] (see 6260652)</span></div><div class="line">        <span class="keyword">if</span> (elementData.getClass() != Object[].class)</div><div class="line">            elementData = Arrays.copyOf(elementData, size, Object[].class);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>ArrayList 提供了add(E e), add(int index, E e), AddAll(Collection&lt;? extends E&gt; c), addAll(int index, Collection&lt;? extends E&gt; c), set(int index, E e); 这五个方法实现ArrayList增加元素.</p>
+<ul>
+<li><p>add(E e): 把指定元素添加的列表尾部</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">add</span><span class="params">(E e)</span> </span>&#123;</div><div class="line">    ensureCapacity(size + <span class="number">1</span>);  <span class="comment">// Increments modCount!!</span></div><div class="line">    elementData[size++] = e;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><code>ensureCapacity()</code>方法是对ArrayList集合进行扩容操作.</p>
+</li>
+<li><p>add(int index, E e): 把指定元素插入到列表的制定位置</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> index, E element)</span> </span>&#123;</div><div class="line">        <span class="comment">//判断索引位置是否正确</span></div><div class="line">        <span class="keyword">if</span> (index &gt; size || index &lt; <span class="number">0</span>)</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IndexOutOfBoundsException(</div><div class="line">            <span class="string">"Index: "</span>+index+<span class="string">", Size: "</span>+size);</div><div class="line">        <span class="comment">//扩容检测</span></div><div class="line">        ensureCapacity(size+<span class="number">1</span>);  </div><div class="line">        <span class="comment">/*</span></div><div class="line">         * 对源数组进行复制处理（位移），从index + 1到size-index。</div><div class="line">         * 主要目的就是空出index位置供数据插入，</div><div class="line">         * 即向右移动当前位于该位置的元素以及所有后续元素。 </div><div class="line">         */</div><div class="line">        System.arraycopy(elementData, index, elementData, index + <span class="number">1</span>,</div><div class="line">                 size - index);</div><div class="line">        <span class="comment">//在指定位置赋值</span></div><div class="line">        elementData[index] = element;</div><div class="line">        size++;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果指定的数据集合需要大量插入操作, 推荐使用LinkedList</p>
+</li>
+<li><p>addAll(Collection&lt;? extends E&gt; c): 按照指定collection的迭代器所返回的元素顺序, 把该collection中的所有元素添加到列表的尾部.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">addAll</span><span class="params">(Collection&lt;? extends E&gt; c)</span> </span>&#123;</div><div class="line">        <span class="comment">// 将集合C转换成数组</span></div><div class="line">        Object[] a = c.toArray();</div><div class="line">        <span class="keyword">int</span> numNew = a.length;</div><div class="line">        <span class="comment">// 扩容处理，大小为size + numNew</span></div><div class="line">        ensureCapacity(size + numNew); <span class="comment">// Increments modCount</span></div><div class="line">        System.arraycopy(a, <span class="number">0</span>, elementData, size, numNew);</div><div class="line">        size += numNew;</div><div class="line">        <span class="keyword">return</span> numNew != <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>使用<code>System.arraycopy()</code>方法把c集合里面的数据复制到elementData数组中.</p>
+<p>public static void <strong>arraycopy</strong>(Object src, int srcPos, Object dest, int destPos, int length)方法的根本目的是进行数组元素的复制. 把原数组src从srcPos位置开始复制到dest数组中, 复制长度为length, 数据从dest的destPos位置开始粘贴.</p>
+</li>
+<li><p>addAll(int x, Collection&lt;? extends E&gt; c): 从指定位置开始, 把collection中的所有元素插入到列表中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">addAll</span><span class="params">(<span class="keyword">int</span> index, Collection&lt;? extends E&gt; c)</span> </span>&#123;</div><div class="line">        <span class="comment">//判断位置是否正确</span></div><div class="line">        <span class="keyword">if</span> (index &gt; size || index &lt; <span class="number">0</span>)</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IndexOutOfBoundsException(<span class="string">"Index: "</span> + index + <span class="string">", Size: "</span></div><div class="line">                    + size);</div><div class="line">        <span class="comment">//转换成数组</span></div><div class="line">        Object[] a = c.toArray();</div><div class="line">        <span class="keyword">int</span> numNew = a.length;</div><div class="line">        <span class="comment">//ArrayList容器扩容处理</span></div><div class="line">        ensureCapacity(size + numNew); <span class="comment">// Increments modCount</span></div><div class="line">        <span class="comment">//ArrayList容器数组向右移动的位置</span></div><div class="line">        <span class="keyword">int</span> numMoved = size - index;</div><div class="line">        <span class="comment">//如果移动位置大于0，则将ArrayList容器的数据向右移动numMoved个位置，确保增加的数据能够增加</span></div><div class="line">        <span class="keyword">if</span> (numMoved &gt; <span class="number">0</span>)</div><div class="line">            System.arraycopy(elementData, index, elementData, index + numNew,</div><div class="line">                    numMoved);</div><div class="line">        <span class="comment">//添加数组</span></div><div class="line">        System.arraycopy(a, <span class="number">0</span>, elementData, index, numNew);</div><div class="line">        <span class="comment">//容器容量变大</span></div><div class="line">        size += numNew;   </div><div class="line">        <span class="keyword">return</span> numNew != <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>set(int index, E e): 用指定元素替换列表中指定位置上的元素</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> E <span class="title">set</span><span class="params">(<span class="keyword">int</span> index, E element)</span> </span>&#123;</div><div class="line">        <span class="comment">//检测插入的位置是否越界</span></div><div class="line">        RangeCheck(index);</div><div class="line"></div><div class="line">        E oldValue = (E) elementData[index];</div><div class="line">        <span class="comment">//替代</span></div><div class="line">        elementData[index] = element;</div><div class="line">        <span class="keyword">return</span> oldValue;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>ArrayList提供remove(int index), remove(Object o), removeRange(int formIndex, int toIndex), removeAll()四个方法进行元素删除</p>
+<ul>
+<li><p>remove(int index): 从列表中删除指定位置上的元素</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> E <span class="title">remove</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</div><div class="line">        <span class="comment">//位置验证</span></div><div class="line">        RangeCheck(index);</div><div class="line"></div><div class="line">        modCount++;</div><div class="line">        <span class="comment">//需要删除的元素</span></div><div class="line">        E oldValue = (E) elementData[index];   </div><div class="line">        <span class="comment">//向左移的位数</span></div><div class="line">        <span class="keyword">int</span> numMoved = size - index - <span class="number">1</span>;</div><div class="line">        <span class="comment">//若需要移动，则想左移动numMoved位</span></div><div class="line">        <span class="keyword">if</span> (numMoved &gt; <span class="number">0</span>)</div><div class="line">            System.arraycopy(elementData, index + <span class="number">1</span>, elementData, index,</div><div class="line">                    numMoved);</div><div class="line">        <span class="comment">//置空最后一个元素</span></div><div class="line">        elementData[--size] = <span class="keyword">null</span>; <span class="comment">// Let gc do its work</span></div><div class="line"></div><div class="line">        <span class="keyword">return</span> oldValue;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>remove(Object o): 删除列表中首次出现的制定元素</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">remove</span><span class="params">(Object o)</span> </span>&#123;</div><div class="line">        <span class="comment">//因为ArrayList中允许存在null，所以需要进行null判断</span></div><div class="line">        <span class="keyword">if</span> (o == <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> index = <span class="number">0</span>; index &lt; size; index++)</div><div class="line">                <span class="keyword">if</span> (elementData[index] == <span class="keyword">null</span>) &#123;</div><div class="line">                    <span class="comment">//移除这个位置的元素</span></div><div class="line">                    fastRemove(index);</div><div class="line">                    <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">                &#125;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> index = <span class="number">0</span>; index &lt; size; index++)</div><div class="line">                <span class="keyword">if</span> (o.equals(elementData[index])) &#123;</div><div class="line">                    fastRemove(index);</div><div class="line">                    <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">                &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>其中<code>fastRemove()</code>方法用于删除指定位置的元素</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">fastRemove</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</div><div class="line">        modCount++;</div><div class="line">        <span class="keyword">int</span> numMoved = size - index - <span class="number">1</span>;</div><div class="line">        <span class="keyword">if</span> (numMoved &gt; <span class="number">0</span>)</div><div class="line">            System.arraycopy(elementData, index+<span class="number">1</span>, elementData, index,</div><div class="line">                             numMoved);</div><div class="line">        elementData[--size] = <span class="keyword">null</span>; <span class="comment">// Let gc do its work</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>removeRange(int fromIndex, int toIndex): 删除列表中索引在<code>formIndex</code>(包含)和<code>toIndex</code>(不包含)之间的元素</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">removeRange</span><span class="params">(<span class="keyword">int</span> fromIndex, <span class="keyword">int</span> toIndex)</span> </span>&#123;</div><div class="line">        modCount++;</div><div class="line">        <span class="keyword">int</span> numMoved = size - toIndex;</div><div class="line">        System</div><div class="line">                .arraycopy(elementData, toIndex, elementData, fromIndex,</div><div class="line">                        numMoved);</div><div class="line"></div><div class="line">        <span class="comment">// Let gc do its work</span></div><div class="line">        <span class="keyword">int</span> newSize = size - (toIndex - fromIndex);</div><div class="line">        <span class="keyword">while</span> (size != newSize)</div><div class="line">            elementData[--size] = <span class="keyword">null</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>removeAll(): 继承自AbstractCollectin方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">removeAll</span><span class="params">(Collection&lt;?&gt; c)</span> </span>&#123;</div><div class="line">        <span class="keyword">boolean</span> modified = <span class="keyword">false</span>;</div><div class="line">        Iterator&lt;?&gt; e = iterator();</div><div class="line">        <span class="keyword">while</span> (e.hasNext()) &#123;</div><div class="line">            <span class="keyword">if</span> (c.contains(e.next())) &#123;</div><div class="line">                e.remove();</div><div class="line">                modified = <span class="keyword">true</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> modified;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>每次新增元素时都需要进行容量检查判断, 如果新增元素的个数超过ArrayList的容量, 就会进行扩容操作. 使用<code>ensureCapacity</code>方法进行扩容</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ensureCapacity</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>&#123;</div><div class="line">        <span class="comment">//修改计时器</span></div><div class="line">        modCount++;</div><div class="line">        <span class="comment">//ArrayList容量大小</span></div><div class="line">        <span class="keyword">int</span> oldCapacity = elementData.length;</div><div class="line">        <span class="comment">/*</span></div><div class="line">         * 若当前需要的长度大于当前数组的长度时，进行扩容操作</div><div class="line">         */</div><div class="line">        <span class="keyword">if</span> (minCapacity &gt; oldCapacity) &#123;</div><div class="line">            Object oldData[] = elementData;</div><div class="line">            <span class="comment">//计算新的容量大小，为当前容量的1.5倍</span></div><div class="line">            <span class="keyword">int</span> newCapacity = (oldCapacity * <span class="number">3</span>) / <span class="number">2</span> + <span class="number">1</span>;</div><div class="line">            <span class="keyword">if</span> (newCapacity &lt; minCapacity)</div><div class="line">                newCapacity = minCapacity;</div><div class="line">            <span class="comment">//数组拷贝，生成新的数组</span></div><div class="line">            elementData = Arrays.copyOf(elementData, newCapacity);</div><div class="line">        &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>每次扩容1.5倍既能满足性能需求, 也不会造成很大的内存消耗.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://singthi4079.github.io/2017/03/13/Java-ArrayList/" data-id="cj08068q40008t5q7i0526avl" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Java集合接口" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/10/Java集合接口/" class="article-date">
+  <time datetime="2017-03-10T06:46:04.000Z" itemprop="datePublished">2017-03-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/10/Java集合接口/">Java集合接口</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Java类库中集合类的基本接口是<code>Collection</code>接口. 这个接口有两个基本方法:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Collection</span>&lt;<span class="title">E</span>&gt; </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">boolean</span> <span class="title">add</span><span class="params">(E element)</span></span>;</div><div class="line">  <span class="function">Iterator&lt;E&gt; <span class="title">iterator</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>add方法用于向集合添加元素, 如果添加元素改变了集合返回true, 否则就返回false.</p>
+<p>iterator方法返回一个实现了<code>Iterator</code>接口的对象. 用这个迭代器对象依次访问集合中的元素.</p>
+<p><code>Iterator</code>接口有三个方法:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Iterator</span>&lt;<span class="title">E</span>&gt; </span>&#123;</div><div class="line">  <span class="function">E <span class="title">next</span><span class="params">()</span></span>;</div><div class="line">  <span class="function"><span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span></span>;</div><div class="line">  <span class="function"><span class="keyword">void</span> <span class="title">remove</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>反复调用<code>next</code>方法可以逐个访问集合中的每个元素. 如果到了集合的末尾, next方法会抛出一个<code>NoSuchElementException</code>. 在调用next方法前要先调用hasNext方法.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Collection&lt;String&gt; c = <span class="keyword">new</span> ArrayList&lt;String&gt;();</div><div class="line">Iterator&lt;String&gt; iter = c.iterator();</div><div class="line"><span class="keyword">while</span> (iter.hasNext()) &#123;</div><div class="line">  String element = iter.next();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>使用<code>for each</code>循环遍历集合</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (String e : c) &#123;</div><div class="line">  System.out.println(e);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>编译器会把<code>for each</code>循环翻译为带有迭代器的循环.</p>
+<p>Java迭代器的查找操作与位置变更是紧密相连的. 查找一个元素的唯一方法是调用next. </p>
+<p>执行查找操作的同时, 迭代器的位置也向前移动.</p>
+<p>应该认为Java迭代器是位于两个元素之间. 当调用next时, 迭代器会越过下一个元素, 并返回刚才越过的那个元素的引用.</p>
+<p><code>Iterator</code>接口的remove方法会删除上次调用next方法时返回的元素.</p>
+<p>要删除指定位置上的元素, 必须要迭代器越过这个元素.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Iterator&lt;String&gt; it = c.iterator();</div><div class="line">it.next();</div><div class="line">it.remove();</div></pre></td></tr></table></figure>
+<p>在调用remove之前必须要调用next, 否则会抛出一个<code>IllegalStateException</code>异常.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://singthi4079.github.io/2017/03/10/Java集合接口/" data-id="cj08068rc000ot5q7qlle5nen" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Java反射机制" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/09/Java反射机制/" class="article-date">
+  <time datetime="2017-03-09T02:28:12.000Z" itemprop="datePublished">2017-03-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/09/Java反射机制/">Java反射机制</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>反射机制是指在运行状态中, 对任意一个类, 都能够知道这个类的所有属性和方法; 多任何一个对象, 都能够调用它的任何一个方法. </p>
+<p>静态编译: 在编译时确定类型, 绑定对象</p>
+<p>动态编译: 运行时确定类型, 绑定对象. 发挥Java的灵活性, 体现多态的应用, 降低耦合.</p>
+<p>使用反射的优点: 实现动态创建对象和编译, 灵活.</p>
+<p>缺点: 对性能有影响. 使用反射比直接执行相同操作要慢.</p>
+<h3 id="Class类"><a href="#Class类" class="headerlink" title="Class类"></a>Class类</h3><p>每个类都是<code>Class</code>类的实例. 普通类创建实例的方法:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">A a = <span class="keyword">new</span> A();</div></pre></td></tr></table></figure>
+<p>Class类的构造函数是私有的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="title">Class</span><span class="params">(ClassLoader loader)</span> </span>&#123;</div><div class="line">  classLoader = loader;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>不能像创建普通类的实例对象一样创建Class类的实例. 有三种方法可以说创建Class对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 每个类都有一个隐含的静态成员变量class</span></div><div class="line">Class c1 = Code.class;</div><div class="line"></div><div class="line"><span class="comment">// code1是Code类的一个实例, 通过一个类的对象的getClass()方法获取Class对象</span></div><div class="line">Class c2 = code1.getClass();</div><div class="line"></div><div class="line"><span class="comment">// 调用Class类的forName方法, 通过类的全量限定名获取Class实例</span></div><div class="line">Class c3 = Class.forName(<span class="string">"com.ex.code.Code"</span>);</div></pre></td></tr></table></figure>
+<p>c1, c2, c3都是Class类的实例对象, 称为类类型. 类类型描述一个类是什么, 都有哪些方法和成员变量.</p>
+<p>1: 获取类名</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">    Class c1 = A.class;</div><div class="line">    System.out.println(c1.getName());</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>获取成员方法信息</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 两个参数分别是方法名和方法参数类的类类型列表</span></div><div class="line"><span class="function"><span class="keyword">public</span> Method <span class="title">getDeclaredMethod</span><span class="params">(String name, Class&lt;?&gt;... parameterTypes)</span> <span class="comment">// 得到该类所有的方法</span></span></div><div class="line"><span class="keyword">public</span> Method <span class="title">getMethod</span><span class="params">(String name, Class&lt;?&gt;... parameterTypes)</span> <span class="comment">// 得到该类所有的public方法，包括父类的</span></div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fun</span><span class="params">(String name, <span class="keyword">int</span> age)</span> </span>&#123;</div><div class="line">    System.out.println(<span class="string">"name is "</span> + name + <span class="string">", age is "</span> + age);</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String []args)</span> </span>&#123;</div><div class="line">    Class c = A.class;</div><div class="line">    A a = (A) c.newInstance(); <span class="comment">// 使用newInstance创建一个类的实例</span></div><div class="line">    Method m = c.getMethod(<span class="string">"fun"</span>, String.class, <span class="keyword">int</span>.class); <span class="comment">// 获取方法实例</span></div><div class="line">    m.invoke(a, <span class="string">"h"</span>, <span class="number">10</span>); <span class="comment">// 调用invoke方法, 调用fun方法, 需要传入一个实例对象和具体的参数</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>获取所有成员方法</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectDemo</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            Class c = Class.forName(<span class="string">"com.tengj.reflect.Person"</span>);</div><div class="line">            Method[] methods = c.getDeclaredMethods();</div><div class="line">            <span class="keyword">for</span>(Method m:methods)&#123;</div><div class="line">                String  methodName= m.getName();</div><div class="line">                System.out.println(methodName);</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>获取成员变量信息</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> Field <span class="title">getDeclaredField</span><span class="params">(String name)</span> <span class="comment">// 获得该类自身声明的所有变量</span></span></div><div class="line"><span class="keyword">public</span> Field <span class="title">getField</span><span class="params">(String name)</span> <span class="comment">// 获得该类自所有的public成员变量，包括其父类变量</span></div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectDemo</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            Class c = Class.forName(<span class="string">"com.tengj.reflect.Person"</span>);</div><div class="line">            <span class="comment">//获取成员变量</span></div><div class="line">            Field field = c.getDeclaredField(<span class="string">"msg"</span>); <span class="comment">//因为msg变量是private的，所以不能用getField方法</span></div><div class="line">            Object o = c.newInstance();</div><div class="line">            field.setAccessible(<span class="keyword">true</span>);<span class="comment">//设置是否允许访问，因为该变量是private的，所以要手动设置允许访问，如果msg是public的就不需要这行了。</span></div><div class="line">            Object msg = field.get(o);</div><div class="line">            System.out.println(msg);</div><div class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>获取所有成员变量</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectDemo</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            Class c = Class.forName(<span class="string">"com.tengj.reflect.Person"</span>);</div><div class="line">            Field[] fields = c.getDeclaredFields();</div><div class="line">            <span class="keyword">for</span>(Field field :fields)&#123;</div><div class="line">                System.out.println(field.getName());</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>获取构造函数</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> Constructor&lt;T&gt; <span class="title">getDeclaredConstructor</span><span class="params">(Class&lt;?&gt;... parameterTypes)</span> <span class="comment">//  获得该类所有的构造器</span></span></div><div class="line"><span class="keyword">public</span> Constructor&lt;T&gt; <span class="title">getConstructor</span><span class="params">(Class&lt;?&gt;... parameterTypes)</span> <span class="comment">// 获得该类所以public构造器，包括父类</span></div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectDemo</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            Class c = Class.forName(<span class="string">"com.tengj.reflect.Person"</span>);</div><div class="line">            <span class="comment">//获取构造函数</span></div><div class="line">            Constructor constructor = c.getDeclaredConstructor(String.class);</div><div class="line">            constructor.setAccessible(<span class="keyword">true</span>);<span class="comment">//设置是否允许访问，因为该构造器是private的，所以要手动设置允许访问，如果构造器是public的就不需要这行了。</span></div><div class="line">            constructor.newInstance(<span class="string">"tengj"</span>);</div><div class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <blockquote>
-<p><code>imports</code>数组中应该<strong>只有NgModule类</strong>。不要放置其它类型的类。</p>
+<p>Class的newInstance方法，只能创建只包含无参数的构造函数的类，如果某类只有带参数的构造函数，那么就要使用另外一种方式：fromClass.getDeclaredConstructor(String.class).newInstance(“tengj”);</p>
 </blockquote>
-<h3 id="declarations-数组"><a href="#declarations-数组" class="headerlink" title="declarations 数组"></a><em>declarations</em> 数组</h3><p><em>每个</em>组件必须在且仅在一个<code>NgModule</code>类中声明。 通过将其列到<code>AppModule</code>模块的<code>declarations</code>数组中，告诉 Angular 哪个组件属于<code>AppModule</code>。</p>
-<h3 id="bootstrap-数组"><a href="#bootstrap-数组" class="headerlink" title="bootstrap 数组"></a><em>bootstrap</em> 数组</h3><p>通过<a href="https://angular.cn/docs/ts/latest/guide/appmodule.html#main" target="_blank" rel="external"><em>引导</em></a>根<code>AppModule</code>来启动应用。 在启动过程中，其中一步是创建列在<code>bootstrap</code>数组的组件， 并将它们每一个都插入到浏览器的DOM中。</p>
+<p><strong>获取所有构造函数</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectDemo</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">            Constructor[] constructors = c.getDeclaredConstructors();</div><div class="line">            <span class="keyword">for</span>(Constructor constructor:constructors)&#123;</div><div class="line">                System.out.println(constructor);</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://singthi4079.github.io/2017/01/17/Angular笔记-跟模块/" data-id="cixzm497j00005aq7jgfztpmx" class="article-share-link">Share</a>
+      <a data-url="https://singthi4079.github.io/2017/03/09/Java反射机制/" data-id="cj08068r3000ht5q7d1da2363" class="article-share-link">Partager</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Angular/">Angular</a></li></ul>
-
     </footer>
   </div>
   
@@ -108,10 +316,10 @@
 
 
   
-    <article id="post-Angular笔记-架构概览" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Java内部类" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/01/07/Angular笔记-架构概览/" class="article-date">
-  <time datetime="2017-01-06T16:00:00.000Z" itemprop="datePublished">2017-01-07</time>
+    <a href="/2017/03/08/Java内部类/" class="article-date">
+  <time datetime="2017-03-08T08:13:52.000Z" itemprop="datePublished">2017-03-08</time>
 </a>
     
   </div>
@@ -122,7 +330,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/07/Angular笔记-架构概览/">Angular笔记-架构概览</a>
+      <a class="article-title" href="/2017/03/08/Java内部类/">Java内部类</a>
     </h1>
   
 
@@ -130,107 +338,75 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="架构概览"><a href="#架构概览" class="headerlink" title="架构概览"></a>架构概览</h1><h3 id="Angular-应用的基本构造块"><a href="#Angular-应用的基本构造块" class="headerlink" title="Angular 应用的基本构造块"></a>Angular 应用的基本构造块</h3><p>Angular 是一个用 HTML 和 JavaScript 或者一个可以编译成 JavaScript 的语言（例如 Dart 或者 TypeScript ），来构建客户端应用的框架。</p>
-<p>该框架包括一系列库，有些是核心库，有些是可选库。</p>
-<p>我们是这样写 Angular 应用的：用 Angular 扩展语法编写 HTML <em>模板</em>， 用<em>组件</em>类管理这些模板，用<em>服务</em>添加应用逻辑， 用<em>模块</em>打包发布组件与服务。</p>
-<p>然后，我们通过<strong>引导根模块</strong>来启动该应用。 Angular 在浏览器中接管、展现应用的内容，并根据我们提供的操作指令响应用户的交互。 <img src="/2017/01/07/Angular笔记-架构概览/angular架构全景图.png" alt="angular架构全景图"></p>
-<p>这个架构图展现了 Angular 应用中的 8 个主要构造块：</p>
+        <p>内部类是指在一个外部类内部再定义一个类. 内部类作为外部类的一个成员, 依附于外部类存在.</p>
+<p>内部类可以是静态的, 可以用<code>protected</code>和<code>private</code>修饰. 内部类有以下几类: 成员内部类, 局部内部类, 静态内部类, 匿名内部类.</p>
+<p>内部类的共性:</p>
+<ol>
+<li>内部类也是一个独立的类, 在编译后内部类被编译成独立的.class文件.</li>
+<li>内部类不能用普通的方式访问</li>
+<li>内部类被声明为静态的, 就不能访问外部类的成员变量, 只能访问外部类的静态成员变量</li>
+<li>外部类不能直接访问内部类的成员, 需要通过内部类对象访问</li>
+</ol>
+<p>内部类可以自由的访问外部类的成员变量, 不管是否是<code>private</code>的</p>
+<p>因为当外部类的对象创建内部类对象时, 内部类会得到一个外部类对象的引用, 通过这个引用, 可以访问外部类对象的全部状态.</p>
+<ol>
+<li>编译器自动为内部类创建一个外部类的成员变量, 这个变量指向外部类对象的.</li>
+<li>编译器自动为内部类的构造方法添加一个外部类类型的参数. 并在构造方法中为外部类类型的成员变量赋值.</li>
+<li>调用内部类的构造函数初始化内部类对象时, 默认传入外部类的引用.</li>
+</ol>
+<p><strong>使用内部类的原因</strong></p>
 <ul>
-<li>模块</li>
-<li>组件</li>
-<li>模版</li>
-<li>元数据</li>
-<li>数据绑定</li>
-<li>指令</li>
-<li>服务</li>
-<li>依赖注入</li>
+<li><p>内部类方法可以访问外部类定义的所有成员变量, 包括私有成员变量</p>
+</li>
+<li><p>对同一个包中其他类隐藏</p>
+</li>
+<li><p>实现多重继承</p>
+</li>
+<li><p>回调函数(匿名内部类比较便捷)</p>
+<p>多重继承的例子:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Example1</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">name</span><span class="params">()</span></span>&#123;</div><div class="line">       <span class="keyword">return</span> <span class="string">"liutao"</span>;</div><div class="line">   &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Example2</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">age</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="number">25</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainExample</span> </span>&#123;</div><div class="line"></div><div class="line">   <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">test1</span> <span class="keyword">extends</span> <span class="title">Example1</span></span>&#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">name</span><span class="params">()</span></span>&#123;</div><div class="line">          <span class="keyword">return</span> <span class="keyword">super</span>.name();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">test2</span> <span class="keyword">extends</span> <span class="title">Example2</span> </span>&#123;</div><div class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">age</span><span class="params">()</span></span>&#123;</div><div class="line">         <span class="keyword">return</span> <span class="keyword">super</span>.age();</div><div class="line">       &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">public</span> String <span class="title">name</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> test1().name(); </div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">age</span><span class="params">()</span></span>&#123;</div><div class="line">       <span class="keyword">return</span> <span class="keyword">new</span> test2().age();</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</div><div class="line">       MainExample mi=<span class="keyword">new</span> MainExample();</div><div class="line">       System.out.println(<span class="string">"姓名:"</span>+mi.name());</div><div class="line">       System.out.println(<span class="string">"年龄:"</span>+mi.age());</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
 </ul>
-<h3 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h3><p>Angular 应用是模块化的，并且 Angular 有自己的模块系统，它被称为 <em>Angular 模块</em>或 <em>NgModules</em>。每个 Angular 应用至少有一个模块（<strong>根模块</strong>，习惯上命名为<code>AppModule</code>。</p>
-<p>Angular 模块（无论是<em>根模块</em>还是<em>特性模块</em>）都是一个带有<code>@NgModule</code>装饰器的类.</p>
-<p><code>NgModule</code>是一个装饰器函数，它接收一个用来描述模块属性的元数据对象。其中最重要的属性是：</p>
-<ul>
-<li><code>declarations</code> - 声明本模块中拥有的<em>视图类</em>。 Angular 有三种视图类：<a href="https://angular.cn/docs/ts/latest/guide/architecture.html#components" target="_blank" rel="external">组件</a>、<a href="https://angular.cn/docs/ts/latest/guide/architecture.html#directives" target="_blank" rel="external">指令</a>和<a href="https://angular.cn/docs/ts/latest/guide/pipes.html" target="_blank" rel="external">管道</a>。</li>
-<li><code>exports</code> - declarations 的子集，可用于其它模块的组件<a href="https://angular.cn/docs/ts/latest/guide/architecture.html#templates" target="_blank" rel="external">模板</a>。</li>
-<li><code>imports</code> - <em>本</em>模块声明的组件模板需要的类所在的其它模块。</li>
-<li><code>providers</code> - <a href="https://angular.cn/docs/ts/latest/guide/architecture.html#services" target="_blank" rel="external">服务</a>的创建者，并加入到全局服务列表中，可用于应用任何部分。</li>
-<li><code>bootstrap</code> - 指定应用的主视图（称为<em>根组件</em>），它是所有其它视图的宿主。只有<em>根模块</em>才能设置<code>bootstrap</code>属性。</li>
-</ul>
-<p>下面是一个简单的根模块：</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123; NgModule &#125;      from <span class="string">'@angular/core'</span>;</div><div class="line"><span class="keyword">import</span> &#123; BrowserModule &#125; from <span class="string">'@angular/platform-browser'</span>;</div><div class="line"><span class="meta">@NgModule</span>(&#123;</div><div class="line">  imports:      [ BrowserModule ],</div><div class="line">  providers:    [ Logger ],</div><div class="line">  declarations: [ AppComponent ],</div><div class="line">  exports:      [ AppComponent ],</div><div class="line">  bootstrap:    [ AppComponent ]</div><div class="line">&#125;)</div><div class="line"><span class="keyword">export</span> <span class="keyword">class</span> AppModule &#123; &#125;</div></pre></td></tr></table></figure>
-<h3 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h3><p><em>组件</em>负责控制屏幕上的一小块区域，我们称之为<em>视图</em>。在类中定义组件的应用逻辑，为视图提供支持。 组件通过一些由属性和方法组成的 API 与视图交互。</p>
-<p>Angular 会创建、更新和销毁组件。 应用可以通过<a href="https://angular.cn/docs/ts/latest/guide/lifecycle-hooks.html" target="_blank" rel="external">生命周期钩子</a>在组件生命周期的各个时间点上插入自己的操作，例如<code>ngOnInit()</code>。</p>
-<h3 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h3><p>过组件的自带的<strong>模板</strong>来定义组件视图。模板以 HTML 形式存在，告诉 Angular 如何渲染组件。</p>
-<h3 id="元数据"><a href="#元数据" class="headerlink" title="元数据"></a>元数据</h3><p>元数据告诉 Angular 如何处理一个类。</p>
-<p>在TypeScript 中，用<strong>装饰器 (decorator) </strong>来附加元数据。 下面就是<code>HeroListComponent</code>的一些元数据。</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span>(&#123;</div><div class="line">  moduleId: <span class="built_in">module</span>.id,</div><div class="line">  selector:    <span class="string">'hero-list'</span>,</div><div class="line">  templateUrl: <span class="string">'hero-list.component.html'</span>,</div><div class="line">  providers:  [ HeroService ]</div><div class="line">&#125;)</div><div class="line"><span class="keyword">export</span> <span class="keyword">class</span> HeroListComponent <span class="keyword">implements</span> OnInit &#123;</div><div class="line"><span class="comment">/* . . . */</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><code>@Component</code>装饰器，它把紧随其后的类标记成了组件类. <code>@Component</code>装饰器能接受一个配置对象，Angular 会基于这些信息创建和展示组件及其视图。</p>
-<p><code>@Component</code>的配置项包括：</p>
-<ul>
-<li><code>moduleId</code>: 为与模块相关的 URL（例如<code>templateUrl</code>）提供基地址。</li>
-<li><code>selector</code>： CSS 选择器，它告诉 Angular 在<em>父级</em> HTML 中查找<code>标签，创建并插入该组件。 例如，如果应用的 HTML 包含</code>， Angular 就会把<code>HeroListComponent</code>的一个实例插入到这个标签中。</li>
-<li><code>templateUrl</code>：组件 HTML 模板的模块相对地址。</li>
-<li><code>providers</code> - 组件所需服务的<em>依赖注入提供商</em>数组。 这是在告诉 Angular：该组件的构造函数需要一个<code>HeroService</code>服务，这样组件就可以从服务中获得英雄数据。</li>
-</ul>
-<h3 id="数据绑定"><a href="#数据绑定" class="headerlink" title="数据绑定"></a>数据绑定</h3><p>Angular 支持<strong>数据绑定</strong>，一种让模板的各部分与组件的各部分相互合作的机制。 我们往模板 HTML 中添加绑定标记，来告诉 Angular 如何把二者联系起来。</p>
-<p>数据绑定的语法有四种形式。每种形式都有一个方向 —— 绑定到 DOM 、绑定自 DOM 以及双向绑定。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">li</span>&gt;</span>&#123;&#123;hero.name&#125;&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">hero-detail</span> [<span class="attr">hero</span>]=<span class="string">"selectedHero"</span>&gt;</span><span class="tag">&lt;/<span class="name">hero-detail</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">li</span> (<span class="attr">click</span>)=<span class="string">"selectHero(hero)"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div></pre></td></tr></table></figure>
-<ul>
-<li><code></code><a href="https://angular.cn/docs/ts/latest/guide/displaying-data.html#interpolation" target="_blank" rel="external"><em>插值表达式</em></a>在<code>`标签中显示组件的</code>hero.name`属性的值。</li>
-<li><code>[hero]</code><a href="https://angular.cn/docs/ts/latest/guide/template-syntax.html#property-binding" target="_blank" rel="external"><em>属性绑定</em></a>把父组件<code>HeroListComponent</code>的<code>selectedHero</code>的值传到子组件<code>HeroDetailComponent</code>的<code>hero</code>属性中。</li>
-<li><code>(click)</code> <a href="https://angular.cn/docs/ts/latest/guide/user-input.html#click" target="_blank" rel="external"><em>事件绑定</em></a>在用户点击英雄的名字时调用组件的<code>selectHero</code>方法。</li>
-</ul>
-<p><strong>双向数据绑定</strong>是重要的第四种绑定形式，它使用<code>ngModel</code>指令组合了属性绑定和事件绑定的功能。 </p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> [(<span class="attr">ngModel</span>)]=<span class="string">"hero.name"</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>在双向绑定中，数据属性值通过属性绑定从组件流到输入框。用户的修改通过事件绑定流回组件，把属性值设置为最新的值。</p>
-<p>Angular 在每个 JavaScript 事件循环中处理<em>所有的</em>数据绑定，它会从组件树的根部开始，递归处理全部子组件。</p>
-<h3 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h3><p>Angular 模板是<em>动态的</em>。当 Angular 渲染它们时，它会根据<strong>指令</strong>提供的操作对 DOM 进行转换。</p>
-<p>指令是一个带有“指令元数据”的类。在 TypeScript 中，要通过<code>@Directive</code>装饰器把元数据附加到类上。</p>
-<p>组件是一个<em>带模板的指令</em>；<code>@Component</code>装饰器实际上就是一个<code>@Directive</code>装饰器，只是扩展了一些面向模板的特性。</p>
-<p>还有两种<em>其它</em>类型的指令：<strong>结构型</strong>指令和<strong>属性 (attribute) 型</strong>指令。</p>
-<p><strong>结构型</strong>指令通过在 DOM 中添加、移除和替换元素来修改布局。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">li</span> *<span class="attr">ngFor</span>=<span class="string">"let hero of heroes"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">hero-detail</span> *<span class="attr">ngIf</span>=<span class="string">"selectedHero"</span>&gt;</span><span class="tag">&lt;/<span class="name">hero-detail</span>&gt;</span></div></pre></td></tr></table></figure>
-<ul>
-<li><code>*ngFor</code>告诉 Angular 为<code>heroes</code>列表中的每个英雄生成一个<code>li</code>标签。</li>
-<li><code>*ngIf</code>表示只有在选择的英雄存在时，才会包含<code>HeroDetail</code>组件。</li>
-</ul>
-<p><strong>属性型</strong> 指令修改一个现有元素的外观或行为。 在模板中，它们看起来就像是标准的 HTML 属性，故名.</p>
-<p><code>ngModel</code>指令就是属性型指令的一个例子，它实现了双向数据绑定。 <code>ngModel</code>修改现有元素（一般是``）的行为：设置其显示属性值，并响应 change 事件。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> [(<span class="attr">ngModel</span>)]=<span class="string">"hero.name"</span>&gt;</span></div></pre></td></tr></table></figure>
-<h3 id="服务"><a href="#服务" class="headerlink" title="服务"></a>服务</h3><p><em>服务</em>是一个广义范畴，包括：值、函数，或应用所需的特性。</p>
-<p>几乎任何东西都可以是一个服务。 典型的服务是一个类，具有专注的、明确的用途。它应该做一件特定的事情，并把它做好。</p>
-<p>例如：</p>
-<ul>
-<li>日志服务</li>
-<li>数据服务</li>
-<li>消息总线</li>
-<li>税款计算器</li>
-<li>应用程序配置</li>
-</ul>
+<h3 id="成员内部类"><a href="#成员内部类" class="headerlink" title="成员内部类"></a>成员内部类</h3><p>在一个类中直接定义内部类, 成员内部类和普通成员没什么区别. 成员内部类不能含有static的变量和方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Outer</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> i = <span class="number">1</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> j = <span class="number">10</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> k = <span class="number">20</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">outer_f1</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">outer_f2</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line"></div><div class="line">    <span class="comment">// 成员内部类中，不能定义静态成员</span></div><div class="line">    <span class="comment">// 成员内部类中，可以访问外部类的所有成员</span></div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Inner</span> </span>&#123;</div><div class="line">        <span class="comment">// static int inner_i = 100;//内部类中不允许定义静态变量</span></div><div class="line">        <span class="keyword">int</span> j = <span class="number">100</span>; <span class="comment">// 内部类和外部类的实例变量可以共存</span></div><div class="line">        <span class="keyword">int</span> inner_i = <span class="number">1</span>;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">void</span> <span class="title">inner_f1</span><span class="params">()</span> </span>&#123;</div><div class="line">            System.out.println(i);</div><div class="line">            <span class="comment">// 在内部类中访问内部类自己的变量直接用变量名</span></div><div class="line">            System.out.println(j);</div><div class="line">            <span class="comment">// 在内部类中访问内部类自己的变量也可以用this.变量名</span></div><div class="line">            System.out.println(<span class="keyword">this</span>.j);</div><div class="line">            <span class="comment">// 在内部类中访问外部类中与内部类同名的实例变量用外部类名.this.变量名</span></div><div class="line">            System.out.println(Outer.<span class="keyword">this</span>.j);</div><div class="line">            <span class="comment">// 如果内部类中没有与外部类同名的变量，则可以直接用变量名访问外部类变量</span></div><div class="line">            System.out.println(k);</div><div class="line">            outer_f1();</div><div class="line">            outer_f2();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 外部类的非静态方法访问成员内部类</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">outer_f3</span><span class="params">()</span> </span>&#123;</div><div class="line">        Inner inner = <span class="keyword">new</span> Inner();</div><div class="line">        inner.inner_f1();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 外部类的静态方法访问成员内部类，与在外部类外部访问成员内部类一样</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">outer_f4</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// step1 建立外部类对象</span></div><div class="line">        Outer out = <span class="keyword">new</span> Outer();</div><div class="line">        <span class="comment">// step2 根据外部类对象建立内部类对象</span></div><div class="line">        Inner inner = out.new Inner();</div><div class="line">        <span class="comment">// step3 访问内部类的方法</span></div><div class="line">        inner.inner_f1();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="comment">//outer_f4();//该语句的输出结果和下面三条语句的输出结果一样</span></div><div class="line">        <span class="comment">// 如果要直接创建内部类的对象，不能想当然地认为只需加上外围类Outer的名字，</span></div><div class="line">        <span class="comment">// 就可以按照通常的样子生成内部类的对象，而是必须使用此外围类的一个对象来</span></div><div class="line">        <span class="comment">// 创建其内部类的一个对象：</span></div><div class="line">        <span class="comment">// Outer.Inner outin = out.new Inner()</span></div><div class="line">        <span class="comment">// 因此，除非你已经有了外围类的一个对象，否则不可能生成内部类的对象。因为此</span></div><div class="line">        <span class="comment">// 内部类的对象会悄悄地链接到创建它的外围类的对象。如果你用的是静态的内部类，</span></div><div class="line">        <span class="comment">// 那就不需要对其外围类对象的引用。</span></div><div class="line">        Outer out = <span class="keyword">new</span> Outer();</div><div class="line">        Outer.Inner outin = out.new Inner();</div><div class="line">        outin.inner_f1();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="局部内部类"><a href="#局部内部类" class="headerlink" title="局部内部类"></a>局部内部类</h3><p>在方法中定义的类称为局部内部类. 和局部变量类似,  只能访问当前代码块内的常量, 和外部类的所有成员.</p>
 <blockquote>
-<p>组件类应保持精简。组件本身不从服务器获得数据、不进行验证输入，也不直接往控制台写日志。 它们把这些任务委托给服务。</p>
-<p>组件的任务就是提供用户体验，仅此而已。它介于视图（由模板渲染）和应用逻辑（通常包括<em>模型</em>的某些概念）之间。 设计良好的组件为数据绑定提供属性和方法，把其它琐事都委托给服务。</p>
+<ol>
+<li>局部内部类只能在定义该内部类的方法实例化, 不能在此方法外对其实例化</li>
+<li>局部内部类对象不能使用该内部类所在方法的非final局部变量</li>
+</ol>
 </blockquote>
-<h3 id="依赖注入"><a href="#依赖注入" class="headerlink" title="依赖注入"></a>依赖注入</h3><p>“依赖注入”是提供类的新实例的一种方式，还负责处理好类所需的全部依赖。Angular 通过查看构造函数的参数类型得知组件需要哪些服务。</p>
-<p>需要记住的关于依赖注入的要点是：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Outer</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> s = <span class="number">100</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> out_i = <span class="number">1</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">(<span class="keyword">final</span> <span class="keyword">int</span> k)</span> </span>&#123;</div><div class="line">        <span class="keyword">final</span> <span class="keyword">int</span> s = <span class="number">200</span>;</div><div class="line">        <span class="keyword">int</span> i = <span class="number">1</span>;</div><div class="line">        <span class="keyword">final</span> <span class="keyword">int</span> j = <span class="number">10</span>;</div><div class="line"></div><div class="line">        <span class="comment">// 定义在方法内部</span></div><div class="line">        <span class="class"><span class="keyword">class</span> <span class="title">Inner</span> </span>&#123;</div><div class="line">            <span class="keyword">int</span> s = <span class="number">300</span>;<span class="comment">// 可以定义与外部类同名的变量</span></div><div class="line"></div><div class="line">            <span class="comment">// static int m = 20;//不可以定义静态变量</span></div><div class="line">            Inner(<span class="keyword">int</span> k) &#123;</div><div class="line">                inner_f(k);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="keyword">int</span> inner_i = <span class="number">100</span>;</div><div class="line"></div><div class="line">            <span class="function"><span class="keyword">void</span> <span class="title">inner_f</span><span class="params">(<span class="keyword">int</span> k)</span> </span>&#123;</div><div class="line">                <span class="comment">// 如果内部类没有与外部类同名的变量，在内部类中可以直接访问外部类的实例变量</span></div><div class="line">                System.out.println(out_i);</div><div class="line">                <span class="comment">// 可以访问外部类的局部变量(即方法内的变量)，但是变量必须是final的</span></div><div class="line">                System.out.println(j);</div><div class="line">                <span class="comment">// System.out.println(i);</span></div><div class="line">                <span class="comment">// 如果内部类中有与外部类同名的变量，直接用变量名访问的是内部类的变量</span></div><div class="line">                System.out.println(s);</div><div class="line">                <span class="comment">// 用this.变量名访问的也是内部类变量</span></div><div class="line">                System.out.println(<span class="keyword">this</span>.s);</div><div class="line">                <span class="comment">// 用外部类名.this.内部类变量名访问的是外部类变量</span></div><div class="line">                System.out.println(Outer.<span class="keyword">this</span>.s);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">new</span> Inner(k);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="comment">// 访问局部内部类必须先有外部类对象</span></div><div class="line">        Outer out = <span class="keyword">new</span> Outer();</div><div class="line">        out.f(<span class="number">3</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="静态内部类"><a href="#静态内部类" class="headerlink" title="静态内部类"></a>静态内部类</h3><p>普通内部类对象隐含一个指向外部类对象的引用. 而静态内部类不是这样的</p>
+<ol>
+<li>不需要外部类的对象就可以创建静态内部类的对象</li>
+<li>不能从静态内部类的对象访问非静态的外部类对象</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Outer</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> i = <span class="number">1</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> j = <span class="number">10</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">outer_f1</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">outer_f2</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line"></div><div class="line">    <span class="comment">// 静态内部类可以用public,protected,private修饰</span></div><div class="line">    <span class="comment">// 静态内部类中可以定义静态或者非静态的成员</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Inner</span> </span>&#123;</div><div class="line">        <span class="keyword">static</span> <span class="keyword">int</span> inner_i = <span class="number">100</span>;</div><div class="line">        <span class="keyword">int</span> inner_j = <span class="number">200</span>;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">inner_f1</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="comment">// 静态内部类只能访问外部类的静态成员(包括静态变量和静态方法)</span></div><div class="line">            System.out.println(<span class="string">"Outer.i"</span> + i);</div><div class="line">            outer_f1();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">void</span> <span class="title">inner_f2</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="comment">// 静态内部类不能访问外部类的非静态成员(包括非静态变量和非静态方法)</span></div><div class="line">            <span class="comment">// System.out.println("Outer.i"+j);</span></div><div class="line">            <span class="comment">// outer_f2();</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">outer_f3</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// 外部类访问内部类的静态成员：内部类.静态成员</span></div><div class="line">        System.out.println(Inner.inner_i);</div><div class="line">        Inner.inner_f1();</div><div class="line">        <span class="comment">// 外部类访问内部类的非静态成员:实例化内部类即可</span></div><div class="line">        Inner inner = <span class="keyword">new</span> Inner();</div><div class="line">        inner.inner_f2();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="keyword">new</span> Outer().outer_f3();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>静态内部类的实例可以通过这样创建</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Outer.Inner in = <span class="keyword">new</span> Outer.Inner();</div></pre></td></tr></table></figure>
+<h3 id="匿名内部类"><a href="#匿名内部类" class="headerlink" title="匿名内部类"></a>匿名内部类</h3><p>什么时候需要使用匿名内部类:</p>
 <ul>
-<li>依赖注入渗透在整个 Angular 框架中，被到处使用。</li>
-<li><strong>注入器 (injector)</strong> 是本机制的核心。<ul>
-<li>注入器负责维护一个<em>容器</em>，用于存放它创建过的服务实例。</li>
-<li>注入器能使用<em>提供商</em>创建一个新的服务实例。</li>
+<li>只用到类的一个实例</li>
+<li>类定义后马上用刀</li>
+<li>类非常小</li>
+<li>给类命名并不会导致你的代码更容易被理解</li>
 </ul>
-</li>
-<li><em>提供商</em>是一个用于创建服务的配方。</li>
-<li>把<em>提供商</em>注册到注入器。</li>
+<p>原则:</p>
+<ul>
+<li>匿名内部类不能有构造方法</li>
+<li>不能定义任何静态成员变量, 方法, 类</li>
+<li>不能使用public, protected, private, static</li>
+<li>只能创建一个实例</li>
+<li>匿名内部类事局部内部类</li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://singthi4079.github.io/2017/01/07/Angular笔记-架构概览/" data-id="cixzm497q00015aq7u4qlchub" class="article-share-link">Share</a>
+      <a data-url="https://singthi4079.github.io/2017/03/08/Java内部类/" data-id="cj08068qm000et5q7pcifplsh" class="article-share-link">Partager</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Angular/">Angular</a></li></ul>
-
     </footer>
   </div>
   
@@ -238,10 +414,10 @@
 
 
   
-    <article id="post-cnetos7_jenkins_git" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Java接口和抽象类" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/12/14/cnetos7_jenkins_git/" class="article-date">
-  <time datetime="2016-12-13T16:00:00.000Z" itemprop="datePublished">2016-12-14</time>
+    <a href="/2017/03/08/Java接口和抽象类/" class="article-date">
+  <time datetime="2017-03-08T07:12:22.000Z" itemprop="datePublished">2017-03-08</time>
 </a>
     
   </div>
@@ -252,7 +428,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/14/cnetos7_jenkins_git/">CentOS 7 Jenkins Git Tomcat 构建Java持续部署环境</a>
+      <a class="article-title" href="/2017/03/08/Java接口和抽象类/">Java接口和抽象类</a>
     </h1>
   
 
@@ -260,118 +436,43 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="必须软件安装"><a href="#必须软件安装" class="headerlink" title="必须软件安装"></a>必须软件安装</h3><ol>
-<li><p>安装JDK</p>
-<ul>
-<li>下载需要的JDK版本的rpm包</li>
-<li>执行 <code>rpm -ivh jdk-**.rpm</code> 命令, JDK会安装到<code>/usr/java/</code>目录下</li>
-<li>验证安装是否成功, 执行<code>java</code>, <code>javac</code></li>
-<li>配置环境变量, 在<code>/etc/profile</code>文件最后添加<ul>
-<li><code>export JAVA_HOME=/usr/java/jdk**</code></li>
-<li><code>export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar</code></li>
-<li><code>export PATH=$PATH:$JAVA_HOME/bin</code></li>
-</ul>
-</li>
-<li>执行<code>source /etc/profile</code> 使修改生效</li>
-</ul>
-</li>
-<li><p>安装GIT</p>
-<ul>
-<li><code>yum -y install git</code> 安装git</li>
-<li><code>git --version</code> 验证git是否安装成功</li>
-</ul>
-</li>
-<li><p>配置Maven</p>
-<ul>
-<li>下载maven, 保存在任意位置, 如: <code>workspace/tools/maven</code>目录下</li>
-<li>修改<code>/etc/profile</code>文件，添加<code>MAVEN_HOME</code><ul>
-<li><code>export MAVEN_HOME=/workspace/tools/maven</code></li>
-<li><code>export PATH=$PATH:$JAVA_HOME/bin:$MAVEN_HOME/bin</code></li>
-</ul>
-</li>
-<li><code>mvn -version</code> 验证Maven是否安装成功</li>
-</ul>
-</li>
-<li><p>安装Jenkins</p>
-<p>CentOS 默认的软件源中是没有Jenkins的，需要添加第三方的软件源.</p>
-<ul>
-<li>执行<code>wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo</code></li>
-<li>执行<code>rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key</code></li>
-<li>执行<code>yum -y install jenkins</code> 安装<code>jenkins</code></li>
-</ul>
-</li>
-</ol>
-<h3 id="配置jenkins"><a href="#配置jenkins" class="headerlink" title="配置jenkins"></a>配置jenkins</h3><ol>
-<li><p>启动 Jenkins</p>
-<p><code>service jenkins start</code></p>
-</li>
-<li><p>设置开机启动</p>
-<p><code>chkconfig jenkins on</code></p>
-</li>
-<li><p>jenkins 默认使用的是8080端口, 在浏览器中输入<code>ip:8080</code>打开jenkins</p>
-</li>
-<li><p><code>/etc/sysconfig/jenkins</code> 这个文件是jenkins的配置文件</p>
-</li>
-<li><p>第一次在浏览器中打开jenkins 时需要在<code>/var/lib/jenkins/secrets/initalAdminPassword</code>文件中复制密码</p>
-</li>
-<li><p>第二步是安装插件, 可以选择默认的插件, 也可以不选择按住插件</p>
-</li>
-<li><p>如果插件安装失败, 可以手动安装</p>
+        <h2 id="Java接口和抽象类"><a href="#Java接口和抽象类" class="headerlink" title="Java接口和抽象类"></a>Java接口和抽象类</h2><h3 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h3><p>抽象方法是一种特殊的方法, 只有声明, 没有具体的实现. 抽象的方法声明:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">fun</span><span class="params">()</span></span>;</div></pre></td></tr></table></figure>
+<p>抽象方法必须用<code>abstract</code>关键字修饰, 如果一个类有抽象方法, 这个类就是抽象类, 抽象类必须在class前用<code>abstract</code>关键字修饰. <strong>由于抽象类中有没有具体实现的方法, 所以不能创建抽象类的实例</strong>.</p>
+<p>含有抽象方法的类称为抽象类, 并不是抽象类只能有抽象方法, 它和普通类一样, 可以有成员变量和普通的成员方法.</p>
+<p>抽象类和普通类的主要区别:</p>
 <ol>
-<li>在<code>系统管理-&gt;管理插件-&gt;可选插件</code>, 中选择需要安装的插件</li>
-<li>或者到<code>http://updates.jenkins-ci.org/download/plugins/</code>去下载插件, 在<code>系统管理-&gt;管理插件-&gt;高级</code>中上传插件 <img src="/2016/12/14/cnetos7_jenkins_git/jenkins_plugin_add.png" alt="jenkins_plugin_add"></li>
+<li>抽象方法必须为public 或者 protected. 默认情况下默认是public</li>
+<li>抽象类不能创建对象.</li>
+<li>如果一个类继承一个抽象类, 子类必须实现抽象类的抽象方法.</li>
 </ol>
-</li>
-<li><p>在<code>系统管理-&gt;管理插件-&gt;Global Tool Configuration</code>中配置JDK、GIT、Maven</p>
+<h3 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h3><p>接口是对行为的抽象. 接口的定义:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IntefaceName</span> </span>&#123;</div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>接口可以含有变量和方法. 接口中的变量被隐式的指定为<code>public static final</code>变量. 方法会被隐式的制定为<code>public abstract</code>方法.</p>
+<p>接口中的方法必须是<code>public</code>的.</p>
+<p>接口中的方法必须是抽象的.</p>
+<p><strong>抽象类和接口的区别</strong></p>
 <ol>
-<li><p>配置JDK和GIT</p>
-<p><img src="/2016/12/14/cnetos7_jenkins_git/jenkins_jdk.png" alt="jenkins_jdk"></p>
+<li>语法上:<ul>
+<li>抽象类可以提供成员方法的实现细节, 而接口中只能存在public abstract方法</li>
+<li>抽象类中的成员变量可以是各种类型的, 而接口中的成员变量只能是public static final类型的</li>
+<li>接口中布恩感有静态代码块和静态方法. 抽象类可以有</li>
+<li>一个类只能继承一个抽象类, 可以实现多个接口</li>
+</ul>
 </li>
-<li><p>配置Maven<img src="/2016/12/14/cnetos7_jenkins_git/jenkins_maven.png" alt="jenkins_maven"></p>
-</li>
-<li>推荐插件: <ol>
-<li><a href="http://wiki.jenkins-ci.org/display/JENKINS/Git+Plugin" target="_blank" rel="external">Git plugin</a></li>
-<li><a href="http://wiki.jenkins-ci.org/display/JENKINS/Github+Plugin" target="_blank" rel="external">GitHub plugin</a></li>
-<li><a href="http://wiki.jenkins-ci.org/display/JENKINS/M2+Release+Plugin" target="_blank" rel="external">Maven Release Plug-in Plug-in</a></li>
-<li><a href="https://wiki.jenkins-ci.org/display/JENKINS/Structs+plugin" target="_blank" rel="external">Structs Plugin</a></li>
-<li><a href="http://wiki.jenkins-ci.org/display/JENKINS/SSH+Credentials+Plugin" target="_blank" rel="external">SSH Credentials Plugin</a></li>
-<li><a href="http://wiki.jenkins-ci.org/display/JENKINS/SCM+API+Plugin" target="_blank" rel="external">SCM API Plugin</a></li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-<h3 id="新建Item"><a href="#新建Item" class="headerlink" title="新建Item"></a>新建Item</h3><p>经过上面的步骤, 环境基本部署完成, 现在可以新建一个项目试试是否可以做到持续部署.x</p>
-<ol>
-<li><p>新建Item</p>
-<p> <img src="/2016/12/14/cnetos7_jenkins_git/jenkins_add_item.png" alt="jenkins_add_item"></p>
-</li>
-<li><p>配置项目的基本信息, 可以根据个人需要选择是否废弃旧的构建 <img src="/2016/12/14/cnetos7_jenkins_git/jenkins_item_general.png" alt="jenkins_item_general"></p>
-</li>
-<li><p>由于需要持续集成发布,需要在git有代码变更时自动构建项目, 所以使用在源码管理这里选择git, 只需要在<code>Repository URL</code> 中输入git仓库地址</p>
-<p><img src="/2016/12/14/cnetos7_jenkins_git/jenkins_item_code.png" alt="jenkins_item_code"></p>
-</li>
-<li><p>在构建触发器中勾选<code>Poll SCM</code>, 这里指定多长时间检索git仓库中的代码是否有更新, 如果有更新, 就会将代码clone到本地, 从新发布. 这里设置为每两分钟检索一次<code>*/2 * * * *</code><img src="/2016/12/14/cnetos7_jenkins_git/jenkins_item_tigger_build.png" alt="jenkins_item_tigger_build"></p>
-</li>
-<li><p>在Pre Steps 中选择<code>Invoke top-level Maven targets</code>, 并选择对应的Maven版本, 在Goals中输入<code>clean install</code></p>
-<p><img src="/2016/12/14/cnetos7_jenkins_git/jenkins_item_preSteps.png" alt="jenkins_item_preSteps"></p>
-</li>
-<li><p>Build 中输入<code>clean package -DskipTests -P prod</code> <img src="/2016/12/14/cnetos7_jenkins_git/jenkins_add_item_build.png" alt="jenkins_add_item_build"></p>
-</li>
-<li><p>在Post Steps中选择Execute shell, 在这里执行关闭tomcat, 将war包复制到tomcat中, 启动tomcat的任务 <img src="/2016/12/14/cnetos7_jenkins_git/jenkins_item_postSteps1.png" alt="jenkins_item_postSteps1"> <img src="/2016/12/14/cnetos7_jenkins_git/jenkins_item_postSteps.png" alt="jenkins_item_postSteps"></p>
-</li>
-<li><p>最后点击保存按钮即可</p>
+<li>设计上<ul>
+<li>抽象类是类的抽象, 接口是对行为的抽象. 继承是一种”是不是”的关系, 接口是一种”有没有”的关系</li>
+<li>抽象类作为很多子类的父类, 是一种模板式设计. 接口是一种行为规范, 是辐射式设计.</li>
+</ul>
 </li>
 </ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://singthi4079.github.io/2016/12/14/cnetos7_jenkins_git/" data-id="cixzm499g000c5aq7oyk7h4x6" class="article-share-link">Share</a>
+      <a data-url="https://singthi4079.github.io/2017/03/08/Java接口和抽象类/" data-id="cj08068ra000mt5q7a0ue6vzv" class="article-share-link">Partager</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CentOS/">CentOS</a></li></ul>
-
     </footer>
   </div>
   
@@ -379,10 +480,10 @@
 
 
   
-    <article id="post-Hexo-GitHub搭建属于自己的博客" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Java-泛型" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/11/19/Hexo-GitHub搭建属于自己的博客/" class="article-date">
-  <time datetime="2016-11-19T04:47:41.000Z" itemprop="datePublished">2016-11-19</time>
+    <a href="/2017/03/04/Java-泛型/" class="article-date">
+  <time datetime="2017-03-04T12:24:09.000Z" itemprop="datePublished">2017-03-04</time>
 </a>
     
   </div>
@@ -393,7 +494,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/19/Hexo-GitHub搭建属于自己的博客/">Hexo+GitHub搭建属于自己的博客</a>
+      <a class="article-title" href="/2017/03/04/Java-泛型/">Java-泛型</a>
     </h1>
   
 
@@ -401,43 +502,51 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>hexo是一款基于Node.js的静态博客框架.<br>需要配置的环境:</p>
+        <p>泛型本质上是提供类型的”类型参数”, 也被称为参数化类型或参数多态. 使用泛型的Java程序和普通的Java程序基本相同, 只是多了参数化的类型同时少了一些类型转换.</p>
+<p>实际上使用泛型的程序首先被转化为一般不带泛型的Java程序再进行处理. 编译器自动完成转化, 具体步骤:</p>
 <ol>
-<li>Node</li>
-<li>Git</li>
-<li>GitHub账号</li>
-<li>Hexo</li>
+<li><p>把参数化类型的类型参数擦除</p>
+</li>
+<li><p>把类型变量用”上限”取代, 通常是Object. 类型变量指的是: 实例域, 本地方法域, 方法参数和方法返回值中用来标记类型信息的变量. 如：</p>
+<ol>
+<li>实例域: <code>A a;</code></li>
+<li>方法声明: <code>Node (A a){}</code></li>
 </ol>
-<h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><p>使用一下命令安装Hexo<br><code>npm install -g hexo</code></p>
-<p><code>hexo init</code>初始化hexo</p>
-<p><code>hexo generate</code>或者<code>hexo g</code>生成静态页面</p>
-<p><code>hexo server</code>启动本地服务, 在浏览器中输入<code>http://localhost:4000</code>查看</p>
-<h3 id="配置GitHub"><a href="#配置GitHub" class="headerlink" title="配置GitHub"></a>配置GitHub</h3><p>在GitHub创建一个新的Respository, 仓库名必须是</p>
-<p>修改_config.xml文件, 建立与GitHub仓库的关联<br>在_config.xml文件的最后, 修改deploy下的内容<br>deploy:<br>  type: git<br>  repo: GitHub仓库地址<br>  branch: master</p>
-<p>安装hexo-deployer-git<br><code>npm install hexo-deployer-git --save</code></p>
-<p>执行<code>hexo deploy</code>命令将项目部署到GitHub上<br>在浏览器中输入: <code>https://GitHub仓库名</code></p>
-<h3 id="部署三部曲"><a href="#部署三部曲" class="headerlink" title="部署三部曲"></a>部署三部曲</h3><ol>
-<li><code>hexo clean</code></li>
-<li><code>hexo generate</code></li>
-<li><code>hexo deploy</code></li>
+<p>A就是类型变量</p>
+</li>
+<li><p>添加类型转换并插入”桥方法”, 方便<code>overridden</code>能够正常工作</p>
+</li>
 </ol>
-<h3 id="Hexo-常用命令"><a href="#Hexo-常用命令" class="headerlink" title="Hexo 常用命令"></a>Hexo 常用命令</h3><ol>
-<li><code>hexo new &quot;postName&quot;</code>– 新建文章</li>
-<li>`hexo new page “pageName” – 新建页面</li>
-<li><code>hexo generate</code> – 生成静态页面到public目录下</li>
-<li><code>hexo server</code> – 开启本地预览</li>
-<li><code>hexo deploy</code> – 将.deploy目录部署到GitHub</li>
-<li><code>hexo help</code> – 查看帮助</li>
+<p>使用泛型的特点:</p>
+<ol>
+<li>类型安全. 泛型的主要目标就是提高类型安全</li>
+<li>消除强制类型转换.</li>
+<li>向后兼容.</li>
+<li>层次清晰, 恪守规范. 泛型主要是在编译器层面实现的, 对JVM是透明的</li>
+<li>性能收益.</li>
 </ol>
+<p><strong>带泛型的类</strong></p>
+<p>一个普通的类:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Box</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> String object;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">set</span><span class="params">(String object)</span> </span>&#123; <span class="keyword">this</span>.object = object; &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">get</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> object; &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这个类不好的地方在于Box里只能放入String类型的元素, 如果需要放入Integer等其他元素时, 需要重写一个Box, 代码不能复用.</p>
+<p>使用泛型可以解决这个问题:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Box</span>&lt;<span class="title">T</span>&gt; </span>&#123;</div><div class="line">    <span class="comment">// T stands for "Type"</span></div><div class="line">    <span class="keyword">private</span> T t;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">set</span><span class="params">(T t)</span> </span>&#123; <span class="keyword">this</span>.t = t; &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> T <span class="title">get</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> t; &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>可以把T替换为任何一个类型:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Box&lt;Integer&gt; integerBox = <span class="keyword">new</span> Box&lt;Integer&gt;();</div><div class="line">Box&lt;Double&gt; doubleBox = <span class="keyword">new</span> Box&lt;Double&gt;();</div><div class="line">Box&lt;String&gt; stringBox = <span class="keyword">new</span> Box&lt;String&gt;();</div></pre></td></tr></table></figure>
+<p><strong>泛型方法</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Pair</span>&lt;<span class="title">K</span>, <span class="title">V</span>&gt; </span>&#123;</div><div class="line">    <span class="keyword">private</span> K key;</div><div class="line">    <span class="keyword">private</span> V value;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Pair</span><span class="params">(K key, V value)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.key = key;</div><div class="line">        <span class="keyword">this</span>.value = value;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setKey</span><span class="params">(K key)</span> </span>&#123; <span class="keyword">this</span>.key = key; &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setValue</span><span class="params">(V value)</span> </span>&#123; <span class="keyword">this</span>.value = value; &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> K <span class="title">getKey</span><span class="params">()</span>   </span>&#123; <span class="keyword">return</span> key; &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> V <span class="title">getValue</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> value; &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>边界符</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T extends Comparable&lt;T&gt;&gt; <span class="function"><span class="keyword">int</span> <span class="title">countGreaterThan</span><span class="params">(T[] anArray, T elem)</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span> (T e : anArray)</div><div class="line">        <span class="keyword">if</span> (e.compareTo(elem) &gt; <span class="number">0</span>)</div><div class="line">            ++count;</div><div class="line">    <span class="keyword">return</span> count;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>通配符</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">CovariantReader</span>&lt;<span class="title">T</span>&gt; </span>&#123;</div><div class="line">    <span class="function">T <span class="title">readCovariant</span><span class="params">(List&lt;? extends T&gt; list)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> list.get(<span class="number">0</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">f2</span><span class="params">()</span> </span>&#123;</div><div class="line">    CovariantReader&lt;Fruit&gt; fruitReader = <span class="keyword">new</span> CovariantReader&lt;Fruit&gt;();</div><div class="line">    Fruit f = fruitReader.readCovariant(fruit);</div><div class="line">    Fruit a = fruitReader.readCovariant(apples);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">    f2();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这样就相当与告诉编译器， fruitReader的readCovariant方法接受的参数只要是满足Fruit的子类就行(包括Fruit自身)，这样子类和父类之间的关系也就关联上了</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://singthi4079.github.io/2016/11/19/Hexo-GitHub搭建属于自己的博客/" data-id="cixzm498800045aq7qn52j84w" class="article-share-link">Share</a>
+      <a data-url="https://singthi4079.github.io/2017/03/04/Java-泛型/" data-id="cj08068r5000it5q7tct87obt" class="article-share-link">Partager</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo-GitHub/">Hexo, GitHub</a></li></ul>
-
     </footer>
   </div>
   
@@ -445,10 +554,10 @@
 
 
   
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Java枚举-Enum" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/11/19/hello-world/" class="article-date">
-  <time datetime="2016-11-19T04:17:14.000Z" itemprop="datePublished">2016-11-19</time>
+    <a href="/2017/03/03/Java枚举-Enum/" class="article-date">
+  <time datetime="2017-03-03T07:38:33.000Z" itemprop="datePublished">2017-03-03</time>
 </a>
     
   </div>
@@ -459,7 +568,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/19/hello-world/">Hello World</a>
+      <a class="article-title" href="/2017/03/03/Java枚举-Enum/">Java枚举-Enum</a>
     </h1>
   
 
@@ -467,20 +576,45 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <p>如果需要描绘彩虹的七种颜色, Java程序中通常使用常量定义方式来实现.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">Public <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">RainbowColor</span> </span>&#123; </div><div class="line">   </div><div class="line">   <span class="comment">// 红橙黄绿青蓝紫七种颜色的常量定义</span></div><div class="line">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> RED = <span class="number">0</span>; </div><div class="line">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> ORANGE = <span class="number">1</span>; </div><div class="line">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> YELLOW = <span class="number">2</span>; </div><div class="line">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> GREEN = <span class="number">3</span>; </div><div class="line">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> CYAN = <span class="number">4</span>; </div><div class="line">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> BLUE = <span class="number">5</span>; </div><div class="line">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> PURPLE = <span class="number">6</span>; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>使用的时候，你可以在程序中直接引用这些常量。但是，这种方式还是存在着一些问题。</p>
+<ol>
+<li><p>类型不安全</p>
+<p>由于颜色常量的对应值是整数形，所以程序执行过程中很有可能给颜色变量传入一个任意的整数值，导致出现错误。</p>
+</li>
+<li><p>没有命名空间</p>
+<p>由于颜色常量只是类的属性，当你使用的时候不得不通过类来访问。</p>
+</li>
+<li><p>一致性差</p>
+<p>因为整形枚举属于编译期常量，所以编译过程完成后，所有客户端和服务器端引用的地方，会直接将整数值写入。这样，当你修改旧的枚举整数值后或者增加新的枚举值后，所有引用地方代码都需要重新编译，否则运行时刻就会出现错误。</p>
+</li>
+<li><p>类型无指意性</p>
+<p>由于颜色枚举值仅仅是一些无任何含义的整数值，如果在运行期调试时候，你就会发现日志中有很多魔术数字，但除了程序员本身，其他人很难明白其奥秘。</p>
+</li>
+</ol>
+<p>定义Enum类型语法:</p>
+<p>enum 关键字加上名称和大括号包含起来的枚举值体即可</p>
+<p><code>enum RainbowColor { RED, ORANGE, YELLOW, GREEN, CYAN, BLUE, PURPLE }</code></p>
+<p>Enum 类型默认实现 Comparable 和 Serializable 接口.</p>
+<p>Enum类型使用:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 定义一周七天的枚举类型			</span></div><div class="line"> <span class="keyword">public</span> <span class="keyword">enum</span> WeekDayEnum &#123; Mon, Tue, Wed, Thu, Fri, Sat, Sun &#125; </div><div class="line"></div><div class="line"> <span class="comment">// 读取当天的信息</span></div><div class="line"> WeekDayEnum today = readToday(); </div><div class="line"> </div><div class="line"> <span class="comment">// 根据日期来选择进行活动</span></div><div class="line"> <span class="keyword">switch</span>(today) &#123; </div><div class="line">  Mon: <span class="keyword">do</span> something; <span class="keyword">break</span>; </div><div class="line">  Tue: <span class="keyword">do</span> something; <span class="keyword">break</span>; </div><div class="line">  Wed: <span class="keyword">do</span> something; <span class="keyword">break</span>; </div><div class="line">  Thu: <span class="keyword">do</span> something; <span class="keyword">break</span>; </div><div class="line">  Fri: <span class="keyword">do</span> something; <span class="keyword">break</span>; </div><div class="line">  Sat: play sports game; <span class="keyword">break</span>; </div><div class="line">  Sun: have a rest; <span class="keyword">break</span>; </div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 定义 RSS(Really Simple Syndication) 种子的枚举类型</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">enum</span> NewsRSSFeedEnum &#123; </div><div class="line">   <span class="comment">// 雅虎头条新闻 RSS 种子</span></div><div class="line">   YAHOO_TOP_STORIES(<span class="string">"http://rss.news.yahoo.com/rss/topstories"</span>), </div><div class="line">   </div><div class="line">   <span class="comment">//CBS 头条新闻 RSS 种子</span></div><div class="line">   CBS_TOP_STORIES(<span class="string">"http://feeds.cbsnews.com/CBSNewsMain?format=xml"</span>), </div><div class="line">   </div><div class="line">   <span class="comment">// 洛杉矶时报头条新闻 RSS 种子</span></div><div class="line">   LATIMES_TOP_STORIES(<span class="string">"http://feeds.latimes.com/latimes/news?format=xml"</span>); </div><div class="line">       </div><div class="line">   <span class="comment">// 枚举对象的 RSS 地址的属性</span></div><div class="line">   <span class="keyword">private</span> String rss_url; </div><div class="line">       </div><div class="line">   <span class="comment">// 枚举对象构造函数</span></div><div class="line">   <span class="function"><span class="keyword">private</span> <span class="title">NewsRSSFeedEnum</span><span class="params">(String rss)</span> </span>&#123; </div><div class="line">       <span class="keyword">this</span>.rss_url = rss; </div><div class="line">   &#125; </div><div class="line">       </div><div class="line">   <span class="comment">// 枚举对象获取 RSS 地址的方法</span></div><div class="line">   <span class="function"><span class="keyword">public</span> String <span class="title">getRssURL</span><span class="params">()</span> </span>&#123; </div><div class="line">       <span class="keyword">return</span> <span class="keyword">this</span>.rss_url; </div><div class="line">   &#125; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>用 Enum 时候有几个地方需要注意:</p>
+<ol>
+<li>enum 类型不支持 public 和 protected 修饰符的构造方法，因此构造函数一定要是 private 或 friendly 的。也正因为如此，所以枚举对象是无法在程序中通过直接调用其构造方法来初始化的。</li>
+<li>定义 enum 类型时候，如果是简单类型，那么最后一个枚举值后不用跟任何一个符号；但如果有定制方法，那么最后一个枚举值与后面代码要用分号’;’隔开，不能用逗号或空格。</li>
+<li>由于 enum 类型的值实际上是通过运行期构造出对象来表示的，所以在 cluster 环境下，每个虚拟机都会构造出一个同义的枚举对象。因而在做比较操作时候就需要注意，如果直接通过使用等号 ( ‘ == ’ ) 操作符，这些看似一样的枚举值一定不相等，因为这不是同一个对象实例。</li>
+</ol>
+<p>向枚举中添加新方法:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">enum</span> Color &#123;  </div><div class="line">    RED(<span class="string">"红色"</span>, <span class="number">1</span>), GREEN(<span class="string">"绿色"</span>, <span class="number">2</span>), BLANK(<span class="string">"白色"</span>, <span class="number">3</span>), YELLO(<span class="string">"黄色"</span>, <span class="number">4</span>);  </div><div class="line">    <span class="comment">// 成员变量  </span></div><div class="line">    <span class="keyword">private</span> String name;  </div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> index;  </div><div class="line">    <span class="comment">// 构造方法  </span></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Color</span><span class="params">(String name, <span class="keyword">int</span> index)</span> </span>&#123;  </div><div class="line">        <span class="keyword">this</span>.name = name;  </div><div class="line">        <span class="keyword">this</span>.index = index;  </div><div class="line">    &#125;  </div><div class="line">    <span class="comment">// 普通方法  </span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getName</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;  </div><div class="line">        <span class="keyword">for</span> (Color c : Color.values()) &#123;  </div><div class="line">            <span class="keyword">if</span> (c.getIndex() == index) &#123;  </div><div class="line">                <span class="keyword">return</span> c.name;  </div><div class="line">            &#125;  </div><div class="line">        &#125;  </div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;  </div><div class="line">    &#125;  </div><div class="line">    <span class="comment">// get set 方法  </span></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;  </div><div class="line">        <span class="keyword">return</span> name;  </div><div class="line">    &#125;  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;  </div><div class="line">        <span class="keyword">this</span>.name = name;  </div><div class="line">    &#125;  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getIndex</span><span class="params">()</span> </span>&#123;  </div><div class="line">        <span class="keyword">return</span> index;  </div><div class="line">    &#125;  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setIndex</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;  </div><div class="line">        <span class="keyword">this</span>.index = index;  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>实现接口:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Behaviour</span> </span>&#123;  </div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>;  </div><div class="line">    <span class="function">String <span class="title">getInfo</span><span class="params">()</span></span>;  </div><div class="line">&#125;  </div><div class="line"><span class="keyword">public</span> <span class="keyword">enum</span> Color implements Behaviour&#123;  </div><div class="line">    RED(<span class="string">"红色"</span>, <span class="number">1</span>), GREEN(<span class="string">"绿色"</span>, <span class="number">2</span>), BLANK(<span class="string">"白色"</span>, <span class="number">3</span>), YELLO(<span class="string">"黄色"</span>, <span class="number">4</span>);  </div><div class="line">    <span class="comment">// 成员变量  </span></div><div class="line">    <span class="keyword">private</span> String name;  </div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> index;  </div><div class="line">    <span class="comment">// 构造方法  </span></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Color</span><span class="params">(String name, <span class="keyword">int</span> index)</span> </span>&#123;  </div><div class="line">        <span class="keyword">this</span>.name = name;  </div><div class="line">        <span class="keyword">this</span>.index = index;  </div><div class="line">    &#125;  </div><div class="line"><span class="comment">//接口方法  </span></div><div class="line">    <span class="meta">@Override</span>  </div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getInfo</span><span class="params">()</span> </span>&#123;  </div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.name;  </div><div class="line">    &#125;  </div><div class="line">    <span class="comment">//接口方法  </span></div><div class="line">    <span class="meta">@Override</span>  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span> </span>&#123;  </div><div class="line">        System.out.println(<span class="keyword">this</span>.index+<span class="string">":"</span>+<span class="keyword">this</span>.name);  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://singthi4079.github.io/2016/11/19/hello-world/" data-id="cixzm498l00055aq75mwonkkc" class="article-share-link">Share</a>
+      <a data-url="https://singthi4079.github.io/2017/03/03/Java枚举-Enum/" data-id="cj08068rb000nt5q713y3sbte" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -490,10 +624,10 @@
 
 
   
-    <article id="post-SpringMVC" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Java-String" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/11/13/SpringMVC/" class="article-date">
-  <time datetime="2016-11-13T03:00:21.000Z" itemprop="datePublished">2016-11-13</time>
+    <a href="/2017/03/02/Java-String/" class="article-date">
+  <time datetime="2017-03-02T08:31:19.000Z" itemprop="datePublished">2017-03-02</time>
 </a>
     
   </div>
@@ -504,7 +638,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/13/SpringMVC/">Spring MVC起步</a>
+      <a class="article-title" href="/2017/03/02/Java-String/">Java String</a>
     </h1>
   
 
@@ -512,57 +646,42 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="Spring-MVC-起步"><a href="#Spring-MVC-起步" class="headerlink" title="Spring MVC 起步"></a>Spring MVC 起步</h3><p> <img src="/2016/11/13/SpringMVC/请求所经历的站点.png" alt="请求所经历的站点"></p>
+        <p>String 不是基本数据类型, 而是一个对象, 并且是不可变的对象. String 类被定义为final, 即不能被继承. 字符串对象在初始化之前, 它的值为null. “”, null, new String()三者的区别.</p>
 <ol>
-<li>请求的第一站是Spring的<code>DispatcherServlet</code>.Spring MVC所有的请求都会经过一个前段控制器(front controller)Servlet.在这里一个单例的Servlet将请求委托给应用程序的其它组件来执行实际的处理. Spring MVC 中, DispatcherServlet就是前端控制器. <code>DispatcherServlet</code>的任务是将请求发送个Spring MVC控制器(Controller). 控制器是一个用于处理请求的Spring组件.DispatcherServlet会查询一个或多个处理器映射(handler mapping) 来确定请求的下一站在哪里.处理器映射会根据请求所携带的URL信息进行决策.</li>
-<li>选择合适的控制器后, DispatcherServlet会将请求发送给选中的控制器. 控制器会处理用户提交的信息.</li>
-<li>控制器完成处理后, 会产生一些信息返回给用户并显示在浏览器中. 这些信息称为(model). 但是信息需要发送给一个视图, 给用户一个友好的体验.</li>
-<li>控制器所做的最后一件事就是将模型数据打包, 并标示用于渲染输出的视图名. 接下来会将请求连同模型和视图名返回<code>DispatcherServlet</code>. 这样控制器就不会与视图耦合, 传递给<code>DispatcherServlet</code>的视图名并不直接指定特定的JSP.传递的仅仅只是一个逻辑名称 这个名字用于查找产生结果的真正视图. DispatcherServlet将会使用视图解析器(view resolver) 来将逻辑视图匹配为一个特定的视图实现.</li>
-<li>既然DispatcherServlet已经知道由哪个视图渲染结果, 那请求的任务基本上也就完成了. 它的最后一站是实图的实现, 在这里交付模型数据.</li>
+<li>null表示String 还没有new, 对象的引用还没有创建, 也没有分配内存空间</li>
+<li>“”, new String()说明已经new了一个对象. 只是内部为空</li>
 </ol>
-<h3 id="搭建Spring-MVC"><a href="#搭建Spring-MVC" class="headerlink" title="搭建Spring MVC"></a>搭建Spring MVC</h3><ol>
-<li>配置DispatcherServlet</li>
-</ol>
-<p>DispatcherServlet是Spring MVC的核心. 在这里请求第一次接触到框架, 它要负责将请求路由到其它组件中.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> spring.config;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SpringWebAppInit</span> <span class="keyword">extends</span> <span class="title">AbstractAnnotationConfigDispatcherServletInitializer</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="keyword">protected</span> Class&lt;?&gt;[] getRootConfigClasses() &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Class&lt;?&gt;[] &#123;RootConfig.class&#125;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="keyword">protected</span> Class&lt;?&gt;[] getServletConfigClasses() &#123;</div><div class="line">        <span class="comment">// 指定配置类</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Class&lt;?&gt;[] &#123;WebConfig.class&#125;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="keyword">protected</span> String[] getServletMappings() &#123;</div><div class="line">        <span class="comment">// 将DispatcherServlet映射到"/"</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> String[] &#123;<span class="string">"/"</span>&#125;;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>扩展AbstractAnnotationConfigDispatcherServletInitializer的任意类都会自动地配置Dispatcher-Servlet和Spring 应用上下文, Spring的应用上下文会位于一个应用程序的Servlet上下文中.</p>
+<p>在进行String连接操作(+)时, 连接操作最开始时如果是字符串常量, 编译后会把尽可能多的字符串常量连接起来, 形成新的字符串常量与后续连接.</p>
+<p>字符串连接是从左向右依次进行, 对于不同的字符串, 首先以最左边的字符串为参数创建StringBuilder对象, 然后依次对右边进行append操作. 最后把StringBuilder对象通过toString()方法转换成String对象. 中间存在多个字符串常量时不会自动拼接.</p>
+<p><strong>当使用+进行多个字符串连接时，实际上是产生了一个StringBuilder对象和一个String对象。</strong></p>
+<p>常用方法:</p>
 <ol>
-<li>AbstractAnnotationConfigDispatcherServletInitializer 剖析</li>
-</ol>
-<p>在Servlet 3.0环境中, 容器会在类路径中查找实现<code>java.servlet.ServletContainerInitializer</code>接口的类, 如果发现的话, 就会用它来配置Servlet容器.</p>
-<p>Spring 提供了这个接口的实现, 名为<code>SpringServletContainerInitializer</code>, 这个类会查找实现<code>WebApplictionInitializer</code>类并将配置的任务交给它们来完成.<code>AbstractAnnotationConfigDispatcherServletInitializer</code>是<code>WebApplictionInitializer</code>的一个基础实现.因为<code>SpringWebAppInit</code>扩展了<code>AbstractAnnotationConfigDispatcherServletInitializer</code>, 同时也就实现了<code>WebApplictionInitializer</code>, 因此Servlet 3.0 容器会自动发现它, 并用它来配置Servlet上下文.</p>
-<ol>
-<li>两个应用上下文之间的故事(<code>DispatcherServlet</code>和<code>ContextLoaderLostener</code>)</li>
-</ol>
-<p>当<code>DispatcherServlet</code>启动时, 会创建Spring应用上下文. 并加载配置文件或配置类中所声明的bean. DispatcherServlet加载包含Web组件的bean，如控制器、视图解析器以及处理器映射，而ContextLoaderListener要加载应用中的其他bean。这些bean通常是驱动应用后端的中间层和数据层组件。</p>
-<p><code>AbstractAnnotationConfigDispatcherServletInitializer</code>实际上同时创建了<code>DispatcherServlet</code>和<code>ContextLoadListener</code>. <code>GetServletConfigClasses()</code>方法返回带有<code>@Configuration</code>注解的类将会用来定义<code>DispatcherServlet</code>应用上下文中的bean. <code>getRootConfigClasses()</code>方法返回带有<code>@Configuration</code>注解的类将会用来配置<code>ContextLoaderListener</code>创建的应用上下文中的bean.</p>
-<ol>
-<li>启用Spring MVC</li>
-</ol>
-<p>最小的Spring MVC配置</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> spring.config;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</div><div class="line"><span class="keyword">import</span> org.springframework.web.servlet.config.annotation.EnableWebMvc;</div><div class="line"></div><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="meta">@EnableWebMvc</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebConfig</span> </span>&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这个类是可用的, 它的确启用了Spring MVC, 但是还存在以下问题：</p>
-<ul>
-<li>没有配置视图解析器. Spring 默认会使用BeanNameView-Resolver, 这个视图解析器会查找ID与视图名称匹配的bean, 查找的要实现View接口.</li>
-<li>没有启用组件扫描. Spring 只能找到显示声明在配置类中控制器.</li>
-<li><code>DispatcherServlet</code>会映射为默认的Servlet, 它会处理所有的请求, 包括静态资源的请求.</li>
+<li>字符串比较<ul>
+<li>equals 判断内容是否相同</li>
+<li>compareTo 判断字符串的大小关系</li>
+<li>== 判断内容与地址是否相同</li>
+<li>equalsIgnoreCase 忽略大小写的情况下判断内容是否相同</li>
+<li>reagionMatches()  对字符串中的部分内容是否相同进行比较</li>
 </ul>
-<p>最小单可用的Spring MVC配置</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> spring.config;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</div><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.ComponentScan;</div><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</div><div class="line"><span class="keyword">import</span> org.springframework.web.servlet.ViewResolver;</div><div class="line"><span class="keyword">import</span> org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;</div><div class="line"><span class="keyword">import</span> org.springframework.web.servlet.config.annotation.EnableWebMvc;</div><div class="line"><span class="keyword">import</span> org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;</div><div class="line"><span class="keyword">import</span> org.springframework.web.servlet.view.InternalResourceViewResolver;</div><div class="line"></div><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="meta">@EnableWebMvc</span></div><div class="line"><span class="meta">@ComponentScan</span>(<span class="string">"spring.web"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebConfig</span> <span class="keyword">extends</span> <span class="title">WebMvcConfigurerAdapter</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> ViewResolver <span class="title">viewResolver</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// JSP视图解析器</span></div><div class="line">        InternalResourceViewResolver resolver = <span class="keyword">new</span> InternalResourceViewResolver();</div><div class="line">        resolver.setPrefix(<span class="string">"/WEB-INF/views/"</span>);</div><div class="line">        resolver.setSuffix(<span class="string">".jsp"</span>);</div><div class="line"></div><div class="line">        resolver.setExposeContextBeansAsAttributes(<span class="keyword">true</span>);</div><div class="line">        <span class="keyword">return</span> resolver;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">configureDefaultServletHandling</span><span class="params">(DefaultServletHandlerConfigurer configurer)</span> </span>&#123;</div><div class="line">        <span class="comment">// 配置静态资源的处理</span></div><div class="line">        configurer.enable();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>配置<code>@ComponentScan(&quot;spring.web&quot;)</code>, 控制器将会带有<code>@Controller</code>注解, 这样组件扫描会扫描到这些bean, 不需要在配置类中显示声明任何控制器.</p>
-<p>添加一个ViewResolver bean, 其实是<code>Internal-ResourceViewResolver</code>. 它会查找JSP文件.</p>
-<p>扩展了<code>WebMvcConfigurerAdapter</code>, 并重写<code>configureDefaultServletHandling()</code>方法, 通过调用<code>DefaultServletHandlerConfigurer</code>的enable()方法, 使<code>DispatcherServlet</code>对静态资源的请求转发到Servlet容器默认的Servlet上.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> spring.config;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.ComponentScan;</div><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</div><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.FilterType;</div><div class="line"><span class="keyword">import</span> org.springframework.web.servlet.config.annotation.EnableWebMvc;</div><div class="line"></div><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="meta">@ComponentScan</span>(basePackages = &#123;<span class="string">"spring"</span>&#125;,</div><div class="line">    excludeFilters = &#123;<span class="meta">@ComponentScan</span>.Filter(type = FilterType.ANNOTATION, value = EnableWebMvc.class)&#125;)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RootConfig</span> </span>&#123;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ol>
-<li>编写基本的控制器</li>
+</li>
 </ol>
-<p>在Spring MVC 中, 控制器只是方法上添加了<code>@RequestMapping</code>注解的类, 这个注解声明它们所要处理的请求.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> spring.web;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.springframework.stereotype.Controller;</div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMethod;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by storm on 16/11/13.</div><div class="line"> */</div><div class="line"><span class="meta">@Controller</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HomeController</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/"</span>, method = RequestMethod.GET)</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">home</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"home"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>JVM为了提高性能和减少内存开销, 内部维护一个字符串常量池, 每创建一个字符串常量, JVM首先检查字符串常量池, 如果存在, 返回此种字符串对象的引用, 不存在就创建该字符串对象放入池中.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">String a = <span class="string">"abc"</span>;</div><div class="line">String b = <span class="string">"abc"</span>;</div><div class="line">System.out.println(a == b); <span class="comment">// true</span></div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">String a = <span class="string">"Hello"</span>;</div><div class="line">String b = <span class="keyword">new</span> String(<span class="string">"Hello"</span>);</div><div class="line">System.out.println(a == b); <span class="comment">// false</span></div><div class="line">System.out.println(a.equals(b)); <span class="comment">// true</span></div></pre></td></tr></table></figure>
+<p>这种方式与创建字符串常量的方式不同, 当使用<code>new String(str)</code> 方式创建字符串对象时, 不管字符串常量池中是否有与此相同内容的字符串, 都会在堆内存创建新的字符串对象.</p>
+<p>intern()方法返回字符串对象在字符串常量池中的对象引用. 如果字符串常量池中没有这个字符串, 就创建一个新的字符串放到常量池中.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">String a = <span class="string">"hello"</span>;</div><div class="line">System.out.println(a == a.intern()); <span class="comment">// true</span></div><div class="line"></div><div class="line">String b = <span class="keyword">new</span> String(<span class="string">"world"</span>);</div><div class="line">String c = b.intern();</div><div class="line"></div><div class="line">System.out.println(c == b); <span class="comment">// false</span></div><div class="line"></div><div class="line">String d = <span class="string">"world"</span>;</div><div class="line">System.out.println(c == d); <span class="comment">// true</span></div></pre></td></tr></table></figure>
+<p>使用StringBuffer处理字符串时, 如果对字符串进行修改操作, 并不会产生一个新的字符串对象.</p>
+<p>在修改时StringBuffer都是修改自身, 而String 类则是产生一个新的对象.</p>
+<p>StringBuffer必须通过构造方法进行初始化.</p>
+<p>StringBuilder也是一个可变的字符串对象, 和StringBuffer不同在于它是线程不安全的. 所以StringBuilder比StringBuffer速度快.</p>
+<p>可以通过Java的反射机制修改String的内容</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">stringReflection</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line"></div><div class="line">    String s = <span class="string">"Hello World"</span>;</div><div class="line"></div><div class="line">    System.out.println(<span class="string">"s = "</span> + s); <span class="comment">//Hello World</span></div><div class="line"></div><div class="line">    <span class="comment">//获取String类中的value字段</span></div><div class="line">    Field valueField = String.class.getDeclaredField(<span class="string">"value"</span>);</div><div class="line"></div><div class="line">    <span class="comment">//改变value属性的访问权限</span></div><div class="line">    valueField.setAccessible(<span class="keyword">true</span>);</div><div class="line"></div><div class="line">    <span class="keyword">char</span>[] value = (<span class="keyword">char</span>[]) valueField.get(s);</div><div class="line"></div><div class="line">    <span class="comment">//改变value所引用的数组中的第5个字符</span></div><div class="line">    value[<span class="number">5</span>] = <span class="string">'_'</span>;</div><div class="line"></div><div class="line">    System.out.println(<span class="string">"s = "</span> + s); <span class="comment">//Hello_World</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://singthi4079.github.io/2016/11/13/SpringMVC/" data-id="cixzm497w00035aq7isffse7n" class="article-share-link">Share</a>
+      <a data-url="https://singthi4079.github.io/2017/03/02/Java-String/" data-id="cj08068q8000at5q7k1y7r9rq" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -572,10 +691,10 @@
 
 
   
-    <article id="post-什么是面向切面编程" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Java对象初始化" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/11/12/什么是面向切面编程/" class="article-date">
-  <time datetime="2016-11-12T08:06:25.000Z" itemprop="datePublished">2016-11-12</time>
+    <a href="/2017/03/01/Java对象初始化/" class="article-date">
+  <time datetime="2017-03-01T01:45:55.000Z" itemprop="datePublished">2017-03-01</time>
 </a>
     
   </div>
@@ -586,7 +705,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/12/什么是面向切面编程/">什么是面向切面编程</a>
+      <a class="article-title" href="/2017/03/01/Java对象初始化/">Java对象初始化</a>
     </h1>
   
 
@@ -594,188 +713,55 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="什么是面向切面编程"><a href="#什么是面向切面编程" class="headerlink" title="什么是面向切面编程"></a>什么是面向切面编程</h3><p>切面能帮助我们模块化横切关注点。横切关注点可以背描述为影响应用多处的功能。</p>
-<p> <img src="/2016/11/12/什么是面向切面编程/面向切面编程图1.png" alt="面向切面编程图1"></p>
-<p>图4.1 展现了一个被划分为模块的典型应用。每个核心功能都是为特定业务领域提供服务，但是这些模块斗需要类似的辅助功能，例如安全和事务管理。</p>
-<p>切面提供了取代继承和委托的另一种可选方案。在使用面向切面编程时，我们仍可以在一个地方定义通用的功能，但是可以通过声明的方式定义这个功能要以何种方式在何处一个何处应用，而无需修改收影响的类。横切关注点可以被模块化为特殊的类，这些类被称为切面。有两个好处：</p>
+        <h2 id="Java对象初始化"><a href="#Java对象初始化" class="headerlink" title="Java对象初始化"></a>Java对象初始化</h2><p>Java中一个对象在被使用前必须要被正确的初始化, 这是Java规范规定的.</p>
+<h3 id="Java对象何时被初始化"><a href="#Java对象何时被初始化" class="headerlink" title="Java对象何时被初始化"></a>Java对象何时被初始化</h3><p>Java对象在被创建的时候初始化. Java中有两种行为会引起对象的创建.</p>
 <ol>
-<li>每个关注点抖集中于一个地方，而不是分散到多处代码中。</li>
-<li>服务模块更简洁，因为它们只包含主要的关注点的代码，而次要关注点的代码被转移到切面中。</li>
-</ol>
-<h3 id="定义AOP的术语"><a href="#定义AOP的术语" class="headerlink" title="定义AOP的术语"></a>定义AOP的术语</h3><p> <img src="/2016/11/12/什么是面向切面编程/AOP术语.png" alt="AOP术语"></p>
-<ol>
-<li><p>通知(Advice)</p>
-<p>AOP术语中，切面的工作被称为通知。通知定义了切面是什么以及何时使用。除了描述切面要完成的工作，通知还解决了何时之行这个工作的问题。</p>
-<p>Spring 切面可以应用5中类型的通知：</p>
+<li><p>显式对象创建: 通过<code>new</code>关键字调用一个类的构造函数.</p>
+</li>
+<li><p>隐式对象创建</p>
 <ul>
-<li>前置通知：</li>
-<li>后置通知</li>
-<li>返回通知</li>
-<li>异常通知</li>
-<li>环绕通知</li>
-</ul>
+<li><p>加载一个包含String字面量的类或者接口会引起一个新的String对象被创建. 如果包含相同字面量的String对象已经存在虚拟机内(JVM会在内存中为所有碰到的String字面量维护一个列表. 程序中使用相同字面量的都会指向同一个String对象)</p>
 </li>
-<li><p>连接点</p>
-<p>应用可能有数以千计的时机应用通知。这些时机被称为连接点。连接点是在应用执行过程中能够插入切面的一个点。这个点可以是调用方法时，跑出异常时，甚至修改一个字段时。</p>
+<li><p>自动封装机制可能会引起一个原子类型的包装类对象被创建</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Wrapper</span> </span>&#123;</div><div class="line">  <span class="keyword">private</span> Integer iWrapper = <span class="number">1</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
-<li><p>切点</p>
-<p>一个切面并不需要通知应用的所有连接点。切点有助于缩小切面所通知的连接点的问题。</p>
-<p>如果说通知定义了切面的“什么”和“何时”的话，那么切点九定义了何处。切点的定义会匹配通知所要织入的一个或多个连接点。我们通常使用明确的类和方法名称，或是使用正则表达式定义所匹配的类和方法名称类指定这些切点。</p>
-</li>
-<li><p>切面</p>
-<p>切面时通知和切点的结合。通知和切点共同定义了切面的全部内容－－它是什么，在何时和何处完成其功能。</p>
-</li>
-<li><p>引入</p>
-<p>引入允许我们想现有的类添加新方法或属性。</p>
-</li>
-<li><p>织入</p>
-<p>织入是把切面应用到目标对象并创建新的代理对象的过程。切面指定的连接点被织入到目标对象中。在目标对象的生命周期里有多个点可以进行织入：</p>
-<ul>
-<li><p>编译期：切面在目标类编译时被织入。</p>
-</li>
-<li><p>类加载期：切面在目标类加载到JVM时被织入。</p>
-</li>
-<li><p>运行期：切面在应用运行的某个时刻被织入。</p>
-<p>一般情况下，在织入切面时，AOP容器为目标对象动态地创建一个代理对象。Spring AOP就是以这种方式织入切面的。</p>
+<li><p>String 连接符也可能引起新的String或者StringBuilder对象被创建. 同时还可能引起原子类型的包装对象呗创建.</p>
 </li>
 </ul>
 </li>
-<li><p>Spring对AOP的支持</p>
-<p>Spring提供了4中类型的AOP支持：</p>
-<ul>
-<li>基于代理的经典Spring AOP</li>
-<li>纯POJO切面</li>
-<li>@AspectJ注解驱动的切面</li>
-<li>注入式AspectJ切面（适用于Spring各版本）</li>
-</ul>
-<p>Spring通知是Java编写的。</p>
-<p>Spring在运行时通知对象，通过在代理类中包裹切面，Spring在运行期把切面织入到Spring管理的bean中。图中代理类封装了目标类，并拦截被通知的方法的调用，再把调用转发给真正的目标bean。当代理拦截到方法调用时，在调用目标bean方法之前，会执行切面逻辑。</p>
-<p> <img src="/2016/11/12/什么是面向切面编程/调用方法时执行切面逻辑.png" alt="调用方法时执行切面逻辑"></p>
-<p>直到应用需要被代理的bean时，Spring才会创建代理对象。</p>
-<p>Spring 只支持方法级别的连接点。</p>
-<p>​</p>
+</ol>
+<h3 id="Java如何初始化对象"><a href="#Java如何初始化对象" class="headerlink" title="Java如何初始化对象"></a>Java如何初始化对象</h3><p>当对象被创建后, JVM会为其分配内存, 用于存放对象实例变量和从父类继承过来的实例变量. 即使从父类继承过来的实例变量可能被隐藏也会分配空间. 在分配内存的同时, 实例变量会被富裕默认值.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span> </span>&#123;</div><div class="line">	<span class="keyword">int</span> i = <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"> </div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bar</span> <span class="keyword">extends</span> <span class="title">Foo</span> </span>&#123;</div><div class="line">	<span class="keyword">int</span> i = <span class="number">1</span>;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String... args)</span> </span>&#123;</div><div class="line">		Foo foo = <span class="keyword">new</span> Bar();</div><div class="line">		System.out.println(foo.i);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>在main方法中，我们用Foo引用一个Bar对象，如果实例变量与方法一样，允许被覆盖，那么打印的结果应该是1，但是实际的结果确是0。<br>但是如果我们在Bar的方法中直接使用i，那么用的会是Bar对象自己定义的实例变量i，这就是隐藏，Bar对象中的i把Foo对象中的i给隐藏了，这条规则对于静态变量同样适用。</p>
+</blockquote>
+<p>内存分配完成后, 虚拟机会开始对新创建的对象执行初始化操作. Java中有三种执行对象初始化的结构. 分别是: 实例初始化器, 实例变量初始化器, 构造函数</p>
+<ol>
+<li><p>构造函数</p>
+<p>每个类至少有一个构造函数, 如果没有显式定义构造函数, Java编译器会自动生成一个无参构造函数. 在生成的字节码中, 构造函数被命名为<init> 方法</init></p>
+<p>在一个对象被初始化前, 它的超类必须被初始化. 除Object对象之外的所欲对象构造函数的第一条语句必须时父类的构造函数的调用语句, 或者事类中定义的其他构造函数.如果我们即没有调用其他的构造函数, 也没有显式调用超类的构造函数, 那么编译器会为我们自动生成一个对超类构造函数的调用指令.</p>
+</li>
+<li><p>实例变量初始化器和实例初始化器</p>
+<p>在定义实例变量时, 对变量进行赋值, 赋值语句就是实例变量初始化器.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InstanceVariableInitializer</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> i = <span class="number">1</span>;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> j = i + <span class="number">1</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在构造函数执行之前会先完成这些初始化操作.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InstanceInitializer</span> </span>&#123;</div><div class="line"> </div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> i = <span class="number">1</span>;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> j;</div><div class="line"> </div><div class="line">	&#123;</div><div class="line">		j = <span class="number">2</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">	j = <span class="number">2</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这段代码被称作实例初始化器. 会在构造函数执行前被执行.</p>
+<p>一个实例变量在对象初始化过程中被赋值的过程: </p>
+<ol>
+<li>JVM为一个对象分配完内存后, 为每个实例变量赋予默认值.</li>
+<li>在实例变量初始化器中被赋值</li>
+<li>在实例初始化器中被赋值</li>
+<li>在构造函数中被赋值</li>
+</ol>
 </li>
 </ol>
-<h3 id="通过切点来选择连接点"><a href="#通过切点来选择连接点" class="headerlink" title="通过切点来选择连接点"></a>通过切点来选择连接点</h3><p>Spring仅支持AspectJ切点指示器的一个子集。</p>
-<p>Spring AOP所支持的AspectJ切点指示器。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">AspectJ指示器</th>
-<th style="text-align:center">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">arg()</td>
-<td style="text-align:center">限制连接点匹配参数为指定类型的执行方法</td>
-</tr>
-<tr>
-<td style="text-align:center">@args()</td>
-<td style="text-align:center">限制连接点匹配参数有指定注解标注的执行方法</td>
-</tr>
-<tr>
-<td style="text-align:center">execution()</td>
-<td style="text-align:center">用于匹配是连接点的执行方法</td>
-</tr>
-<tr>
-<td style="text-align:center">this()</td>
-<td style="text-align:center">限制连接点匹配AOP代理的bean引用为指定类型的类</td>
-</tr>
-<tr>
-<td style="text-align:center">target</td>
-<td style="text-align:center">限制连接点匹配目标对象为指定类型的类</td>
-</tr>
-<tr>
-<td style="text-align:center">@target</td>
-<td style="text-align:center">限制连接点匹配特定的执行对象，这些对象对对应的类要具有指定类型的注解</td>
-</tr>
-<tr>
-<td style="text-align:center">within()</td>
-<td style="text-align:center">限制连接点匹配指定的类型</td>
-</tr>
-<tr>
-<td style="text-align:center">@within()</td>
-<td style="text-align:center">限制连接点匹配指定注解所标注的类型（当使用Spring AOP时，方法定义在由指定的注解所标注的类里）</td>
-</tr>
-<tr>
-<td style="text-align:center">@annotation</td>
-<td style="text-align:center">限定匹配带有指定注解的连接点</td>
-</tr>
-</tbody>
-</table>
-<p>在Spring中尝试使用AspectJ其他指示器时，将会抛出异常。</p>
-<p>注解只用在饿的粗体哦你指示器是实际执行匹配的，其他的指示器都是用来限制匹配的。executeion指示器是在编写切点定义时最主要是用的指示器。</p>
-<h3 id="编写切点"><a href="#编写切点" class="headerlink" title="编写切点"></a>编写切点</h3><p><code>Performance</code>可以代表任何类型的现场表演。编写<code>Performance</code>的<code>perform()</code>方法出发通知。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> concert;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Performance</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">perform</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p> <img src="/2016/11/12/什么是面向切面编程/切点表达式.png" alt="切点表达式"></p>
-<p>上图展示 了一个切点表达式，这个表达式能够设置当<code>perform()</code>方法执行时触发通知的调用。</p>
-<p>方法表达式以”*”号开始, 表示不关系方法返回的类型。指定了全限定类名和方法名. 使用两个点号<code>(..)</code>表明切点要选择任意的<code>perform()</code>方法, 无论该方法的入参是什么。</p>
-<p>如果需要匹配的切点仅匹配concert包，可以使用<code>within()</code>指示器限制匹配.</p>
-<p> <img src="/2016/11/12/什么是面向切面编程/使用withi指示器.png" alt="使用withi指示器"></p>
-<p>使用<code>&amp;&amp;</code>操作符把<code>execution()</code>和<code>within()</code>指示器连接在一起形成与(and) 关系</p>
-<h3 id="使用注解创建切面"><a href="#使用注解创建切面" class="headerlink" title="使用注解创建切面"></a>使用注解创建切面</h3><ol>
-<li>定义切面</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> concert;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.AfterReturning;</div><div class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.AfterThrowing;</div><div class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.Aspect;</div><div class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.Before;</div><div class="line"></div><div class="line"><span class="meta">@Aspect</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Audience</span> </span>&#123;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="meta">@Before</span>(<span class="string">"execution(** concert.Performent.perform(..))"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">silenceCellPhone</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"silencing Cell Phone"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Before</span>(<span class="string">"execution(** concert.Performent.perform(..))"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">taskSeats</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"Taking seats"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@AfterReturning</span>(<span class="string">"execution(** concert.Performent.perform(..))"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">applause</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"CLAP CLAP CLAP!"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@AfterThrowing</span>(<span class="string">"execution(** concert.Performent.perform(..))"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">demandReFund</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"Demaning a refund"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ol>
-<li>AspectJ提供的五个注解来定义通知</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">注解</th>
-<th style="text-align:center">通知</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">@After</td>
-<td style="text-align:center">通知方法会在目标方法返回或抛出异常后调用</td>
-</tr>
-<tr>
-<td style="text-align:center">@AfterReturning</td>
-<td style="text-align:center">通知方法会在目标方法返回后调用</td>
-</tr>
-<tr>
-<td style="text-align:center">@AfterThrowing</td>
-<td style="text-align:center">通知方法会在目标方法抛出异常后调用</td>
-</tr>
-<tr>
-<td style="text-align:center">@Around</td>
-<td style="text-align:center">通知方法会将目标方法封装起来</td>
-</tr>
-<tr>
-<td style="text-align:center">@Before</td>
-<td style="text-align:center">通知方法在目标方法调用之前执行</td>
-</tr>
-</tbody>
-</table>
-<ol>
-<li>通过@Pointcut注解声明频繁使用的切点表达式</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> concert;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.*;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by storm on 16/11/12.</div><div class="line"> */</div><div class="line"><span class="meta">@Aspect</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Audience</span> </span>&#123;</div><div class="line">    </div><div class="line">    <span class="meta">@Pointcut</span>(<span class="string">"execution(** concert.Performent.perform(..))"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">performance</span><span class="params">()</span> </span>&#123;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Before</span>(<span class="string">"performance()"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">silenceCellPhone</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"silencing Cell Phone"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Before</span>(<span class="string">"performance()"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">taskSeats</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"Taking seats"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@AfterReturning</span>(<span class="string">"performance()"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">applause</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"CLAP CLAP CLAP!"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@AfterThrowing</span>(<span class="string">"performance()"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">demandReFund</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"Demaning a refund"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ol>
-<li>使用JavaConfig启用AspectJ注解的自动代理</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> concert;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</div><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.ComponentScan;</div><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</div><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.EnableAspectJAutoProxy;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by storm on 16/11/12.</div><div class="line"> */</div><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="meta">@EnableAspectJAutoProxy</span></div><div class="line"><span class="meta">@ComponentScan</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SpringConfig</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Audience <span class="title">audience</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Audience();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>在配置类中必须使用EnableAspectJAutoProxy注解启动自动代理功能，否则Audience类就会和其他类一样，只是Spring容器中的一个bean。</p>
-<p>Spring的AspectJ自动代理仅仅使用@AspectJ作为创建切面的指导, 切面依然是基于代理的。本质上，他依然是Spring基于代理的切面。</p>
-<ol>
-<li>创建环绕通知</li>
-</ol>
-<p>环绕通知将被通知的目标方法完全包装起来。就像在一个通知方法中国年同时编写了前置通知和后置通知。以下是使用环绕通知的Audience切面</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> concert;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.aspectj.lang.ProceedingJoinPoint;</div><div class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.*;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by storm on 16/11/12.</div><div class="line"> */</div><div class="line"><span class="meta">@Aspect</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Audience</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Pointcut</span>(<span class="string">"execution(** concert.Performent.perform(..))"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">performance</span><span class="params">()</span> </span>&#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Around</span>(<span class="string">"performance()"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">watchPerformance</span><span class="params">(ProceedingJoinPoint proceedingJoinPoint)</span> </span>&#123;</div><div class="line"></div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            System.out.println(<span class="string">"Silencing cell phones"</span>);</div><div class="line">            System.out.println(<span class="string">"Taking seats"</span>);</div><div class="line">            proceedingJoinPoint.proceed();</div><div class="line">            System.out.println(<span class="string">"CLAP CLAP CLAP!"</span>);</div><div class="line">            System.out.println(<span class="string">"Demanding a refund"</span>);</div><div class="line">        &#125; <span class="keyword">catch</span> (Throwable throwable) &#123;</div><div class="line">            throwable.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ol>
-<li>使用带参数的通知</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> soundsystem;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.Aspect;</div><div class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.Before;</div><div class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.Pointcut;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.HashMap;</div><div class="line"><span class="keyword">import</span> java.util.Map;</div><div class="line"></div><div class="line"><span class="meta">@Aspect</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TrackCounter</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> Map&lt;Integer, Integer&gt; trackCounts = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line"></div><div class="line">    <span class="meta">@Pointcut</span>(<span class="string">"execution(* soundsystem.CompactDisc.playTrack(int))"</span> +</div><div class="line">            <span class="string">" &amp;&amp; args(trackNymber)"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">trackPlayed</span><span class="params">()</span> </span>&#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Before</span>(<span class="string">"trackPlayed(trackNumber)"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">countTrack</span><span class="params">(<span class="keyword">int</span> trackNumber)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> currentCount = getPlayCount(trackNumber);</div><div class="line">        trackCounts.put(trackNumber, currentCount + <span class="number">1</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">getPlayCount</span><span class="params">(<span class="keyword">int</span> trackNumber)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> trackCounts.containsKey(trackNumber)</div><div class="line">                ? trackCounts.get(trackNumber) : <span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p> <img src="/2016/11/12/什么是面向切面编程/带参数的切点.png" alt="带参数的切点"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://singthi4079.github.io/2016/11/12/什么是面向切面编程/" data-id="cixzm498s00085aq76d8d5had" class="article-share-link">Share</a>
+      <a data-url="https://singthi4079.github.io/2017/03/01/Java对象初始化/" data-id="cj08068r8000kt5q7migkc6wr" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -786,6 +772,10 @@
 
   
 
+
+  <nav id="page-nav">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">__('next') &raquo;</a>
+  </nav>
 </section>
         
           <aside id="sidebar">
@@ -795,9 +785,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Angular/">Angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/">CentOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo-GitHub/">Hexo, GitHub</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Angular/">Angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/">CentOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo-GitHub/">Hexo, GitHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li></ul>
     </div>
   </div>
 
@@ -805,9 +795,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Angular/" style="font-size: 20px;">Angular</a> <a href="/tags/CentOS/" style="font-size: 10px;">CentOS</a> <a href="/tags/Hexo-GitHub/" style="font-size: 10px;">Hexo, GitHub</a>
+      <a href="/tags/Angular/" style="font-size: 20px;">Angular</a> <a href="/tags/CentOS/" style="font-size: 10px;">CentOS</a> <a href="/tags/Hexo-GitHub/" style="font-size: 10px;">Hexo, GitHub</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a>
     </div>
   </div>
 
@@ -816,7 +806,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li></ul>
     </div>
   </div>
 
@@ -824,28 +814,28 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
         
           <li>
-            <a href="/2017/01/17/Angular笔记-跟模块/">Angular笔记-根模块</a>
+            <a href="/2017/03/13/Java-LinkedList/">Java-LinkedList</a>
           </li>
         
           <li>
-            <a href="/2017/01/07/Angular笔记-架构概览/">Angular笔记-架构概览</a>
+            <a href="/2017/03/13/Java-ArrayList/">Java-ArrayList</a>
           </li>
         
           <li>
-            <a href="/2016/12/14/cnetos7_jenkins_git/">CentOS 7 Jenkins Git Tomcat 构建Java持续部署环境</a>
+            <a href="/2017/03/10/Java集合接口/">Java集合接口</a>
           </li>
         
           <li>
-            <a href="/2016/11/19/Hexo-GitHub搭建属于自己的博客/">Hexo+GitHub搭建属于自己的博客</a>
+            <a href="/2017/03/09/Java反射机制/">Java反射机制</a>
           </li>
         
           <li>
-            <a href="/2016/11/19/hello-world/">Hello World</a>
+            <a href="/2017/03/08/Java内部类/">Java内部类</a>
           </li>
         
       </ul>
@@ -861,7 +851,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 Blue<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

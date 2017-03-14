@@ -5,13 +5,22 @@
   
   <title>Java-LinkedList | Blue的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="article">
+  <meta name="description" content="LinkedList和ArrayList一样实现了List接口, 只是ArrayList是List接口的大小可变数组的实现, LinkedList是List接口链表的实现.
+LinkedList在插入和删除元素时更优于ArrayList, 而随机访问则是ArrayList优于LinkedList.
+LinkedList实现了Deque接口, 为add, poll提供先进先出队列操作, 以及其他堆栈">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Java-LinkedList">
 <meta property="og:url" content="https://singthi4079.github.io/2017/03/13/Java-LinkedList/index.html">
 <meta property="og:site_name" content="Blue的博客">
-<meta property="og:updated_time" content="2017-03-13T11:04:48.000Z">
+<meta property="og:description" content="LinkedList和ArrayList一样实现了List接口, 只是ArrayList是List接口的大小可变数组的实现, LinkedList是List接口链表的实现.
+LinkedList在插入和删除元素时更优于ArrayList, 而随机访问则是ArrayList优于LinkedList.
+LinkedList实现了Deque接口, 为add, poll提供先进先出队列操作, 以及其他堆栈">
+<meta property="og:updated_time" content="2017-03-13T13:58:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java-LinkedList">
+<meta name="twitter:description" content="LinkedList和ArrayList一样实现了List接口, 只是ArrayList是List接口的大小可变数组的实现, LinkedList是List接口链表的实现.
+LinkedList在插入和删除元素时更优于ArrayList, 而随机访问则是ArrayList优于LinkedList.
+LinkedList实现了Deque接口, 为add, poll提供先进先出队列操作, 以及其他堆栈">
   
     <link rel="alternate" href="/atom.xml" title="Blue的博客" type="application/atom+xml">
   
@@ -49,9 +58,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://singthi4079.github.io"></form>
@@ -82,11 +91,71 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>LinkedList和ArrayList一样实现了List接口, 只是ArrayList是List接口的大小可变数组的实现, LinkedList是List接口链表的实现.</p>
+<p>LinkedList在插入和删除元素时更优于ArrayList, 而随机访问则是ArrayList优于LinkedList.</p>
+<p>LinkedList实现了Deque接口, 为add, poll提供先进先出队列操作, 以及其他堆栈和双端队列操作.</p>
+<p>所有操作都是按照双重链接列表的需要执行的. 在列表中编索引的操作将开头或结尾遍历列表</p>
+<p>LinkedList和ArrayList一样也是不同步的.</p>
+<p><strong>LinkedList定义</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LinkedList</span>&lt;<span class="title">E</span>&gt; <span class="keyword">extends</span> <span class="title">AbstractSequentialList</span>&lt;<span class="title">E</span>&gt;</span></div><div class="line">    <span class="keyword">implements</span> <span class="title">List</span>&lt;<span class="title">E</span>&gt;, <span class="title">Deque</span>&lt;<span class="title">E</span>&gt;, <span class="title">Cloneable</span>, <span class="title">java</span>.<span class="title">io</span>.<span class="title">Serializable</span></div></pre></td></tr></table></figure>
+<p>AbstractSequentialList提供了List接口的主要实现. Deque一个线性的collection, 支持在两端插入和移除元素, 定义双端队列的操作.</p>
+<p><strong>LinkedList属性</strong></p>
+<p>LinkedList提供两个基本属性: size, header.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">transient</span> Entry&lt;E&gt; header = <span class="keyword">new</span> Entry&lt;E&gt;(<span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>);</div><div class="line"><span class="keyword">private</span> <span class="keyword">transient</span> <span class="keyword">int</span> size = <span class="number">0</span>;</div></pre></td></tr></table></figure>
+<p>size表示LinkedList的大小</p>
+<p>header表示链表表头, Entry 为节点对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Entry</span>&lt;<span class="title">E</span>&gt; </span>&#123;</div><div class="line">        E element;        <span class="comment">//元素节点</span></div><div class="line">        Entry&lt;E&gt; next;    <span class="comment">//下一个元素</span></div><div class="line">        Entry&lt;E&gt; previous;  <span class="comment">//上一个元素</span></div><div class="line"></div><div class="line">        Entry(E element, Entry&lt;E&gt; next, Entry&lt;E&gt; previous) &#123;</div><div class="line">            <span class="keyword">this</span>.element = element;</div><div class="line">            <span class="keyword">this</span>.next = next;</div><div class="line">            <span class="keyword">this</span>.previous = previous;</div><div class="line">        &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Entry是LinkedList的内部类, 定义了存储的元素. 该元素的前一个元素和后一个元素, 典型的双向链表定义</p>
+<p><strong>构造方法</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">     *  构造一个空列表。</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">LinkedList</span><span class="params">()</span> </span>&#123;</div><div class="line">        header.next = header.previous = header;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="comment">/**</span></div><div class="line">     *  构造一个包含指定 collection 中的元素的列表，这些元素按其 collection 的迭代器返回的顺序排列。</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">LinkedList</span><span class="params">(Collection&lt;? extends E&gt; c)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>();</div><div class="line">        addAll(c);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>LinkedList()构造一个空列表, 没有任何元素, 仅仅只把header节点的前一个元素, 后一个元素指向自身.</p>
+<p>LinkedList(Collection&lt;? extends E&gt; c): 构造一个包含collection中元素的列表. 先调用LinkedList()构造一个空列表, 再调用addAll()方法将collection中的所有元素添加到列表中.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">     *  添加指定 collection 中的所有元素到此列表的结尾，顺序是指定 collection 的迭代器返回这些元素的顺序。</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">addAll</span><span class="params">(Collection&lt;? extends E&gt; c)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> addAll(size, c);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 将指定 collection 中的所有元素从指定位置开始插入此列表。其中index表示在其中插入指定collection中第一个元素的索引</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">addAll</span><span class="params">(<span class="keyword">int</span> index, Collection&lt;? extends E&gt; c)</span> </span>&#123;</div><div class="line">        <span class="comment">//若插入的位置小于0或者大于链表长度，则抛出IndexOutOfBoundsException异常</span></div><div class="line">        <span class="keyword">if</span> (index &lt; <span class="number">0</span> || index &gt; size)</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IndexOutOfBoundsException(<span class="string">"Index: "</span> + index + <span class="string">", Size: "</span> + size);</div><div class="line">        Object[] a = c.toArray();</div><div class="line">        <span class="keyword">int</span> numNew = a.length;    <span class="comment">//插入元素的个数</span></div><div class="line">        <span class="comment">//若插入的元素为空，则返回false</span></div><div class="line">        <span class="keyword">if</span> (numNew == <span class="number">0</span>)</div><div class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">        <span class="comment">//modCount:在AbstractList中定义的，表示从结构上修改列表的次数</span></div><div class="line">        modCount++;</div><div class="line">        <span class="comment">//获取插入位置的节点，若插入的位置在size处，则是头节点，否则获取index位置处的节点</span></div><div class="line">        Entry&lt;E&gt; successor = (index == size ? header : entry(index));</div><div class="line">        <span class="comment">//插入位置的前一个节点，在插入过程中需要修改该节点的next引用：指向插入的节点元素</span></div><div class="line">        Entry&lt;E&gt; predecessor = successor.previous;</div><div class="line">        <span class="comment">//执行插入动作</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; numNew; i++) &#123;</div><div class="line">            <span class="comment">//构造一个节点e，这里已经执行了插入节点动作同时修改了相邻节点的指向引用</span></div><div class="line">            <span class="comment">//</span></div><div class="line">            Entry&lt;E&gt; e = <span class="keyword">new</span> Entry&lt;E&gt;((E) a[i], successor, predecessor);</div><div class="line">            <span class="comment">//将插入位置前一个节点的下一个元素引用指向当前元素</span></div><div class="line">            predecessor.next = e;</div><div class="line">            <span class="comment">//修改插入位置的前一个节点，这样做的目的是将插入位置右移一位，保证后续的元素是插在该元素的后面，确保这些元素的顺序</span></div><div class="line">            predecessor = e;</div><div class="line">        &#125;</div><div class="line">        successor.previous = predecessor;</div><div class="line">        <span class="comment">//修改容量大小</span></div><div class="line">        size += numNew;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>entry(int index)方法主要用来查找index位置的节点元素</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">     * 返回指定位置(若存在)的节点元素</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">private</span> Entry&lt;E&gt; <span class="title">entry</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (index &lt; <span class="number">0</span> || index &gt;= size)</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IndexOutOfBoundsException(<span class="string">"Index: "</span> + index + <span class="string">", Size: "</span></div><div class="line">                    + size);</div><div class="line">        <span class="comment">//头部节点</span></div><div class="line">        Entry&lt;E&gt; e = header;</div><div class="line">        <span class="comment">//判断遍历的方向</span></div><div class="line">        <span class="keyword">if</span> (index &lt; (size &gt;&gt; <span class="number">1</span>)) &#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= index; i++)</div><div class="line">                e = e.next;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = size; i &gt; index; i--)</div><div class="line">                e = e.previous;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> e;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p><strong>增加元素方法</strong></p>
+<ul>
+<li><p>add(E e): 把置顶元素添加到列表结尾</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">add</span><span class="params">(E e)</span> </span>&#123;</div><div class="line">  addBefore(e, header);</div><div class="line">  <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>addBefor方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> Entry&lt;E&gt; <span class="title">addBefore</span><span class="params">(E e, Entry&lt;E&gt; entry)</span> </span>&#123;</div><div class="line">        <span class="comment">//利用Entry构造函数构建一个新节点 newEntry，</span></div><div class="line">        Entry&lt;E&gt; newEntry = <span class="keyword">new</span> Entry&lt;E&gt;(e, entry, entry.previous);</div><div class="line">        <span class="comment">//修改newEntry的前后节点的引用，确保其链表的引用关系是正确的</span></div><div class="line">        newEntry.previous.next = newEntry;</div><div class="line">        newEntry.next.previous = newEntry;</div><div class="line">        <span class="comment">//容量+1</span></div><div class="line">        size++;</div><div class="line">        <span class="comment">//修改次数+1</span></div><div class="line">        modCount++;</div><div class="line">        <span class="keyword">return</span> newEntry;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>addBefore方法构建一个新的节点newEntry, 然后修改他的前后引用</p>
+<p>LinkedList还提供类其他的增加元素的方法:</p>
+<ul>
+<li>add(int index, E element)：在此列表中指定的位置插入指定的元素。</li>
+<li>addAll(Collection&lt;? extends E&gt; c)：添加指定 collection 中的所有元素到此列表的结尾</li>
+<li>addAll(int index, Collection&lt;? extends E&gt; c)：将指定 collection 中的所有元素从指定位置开始插入此列表。</li>
+<li>AddFirst(E e): 将指定元素插入此列表的开头。</li>
+<li>addLast(E e): 将指定元素添加到此列表的结尾。</li>
+</ul>
+</li>
+</ul>
+<p><strong>移除元素方法</strong></p>
+<ul>
+<li><p>remove(Object o) 从列表中首次出现的元素移除.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">remove</span><span class="params">(Object o)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (o==<span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">for</span> (Entry&lt;E&gt; e = header.next; e != header; e = e.next) &#123;</div><div class="line">                <span class="keyword">if</span> (e.element==<span class="keyword">null</span>) &#123;</div><div class="line">                    remove(e);</div><div class="line">                    <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">for</span> (Entry&lt;E&gt; e = header.next; e != header; e = e.next) &#123;</div><div class="line">                <span class="keyword">if</span> (o.equals(e.element)) &#123;</div><div class="line">                    remove(e);</div><div class="line">                    <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>remove(Entry<e> e) : LinkedList所有移除方法的基础</e></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> E <span class="title">remove</span><span class="params">(Entry&lt;E&gt; e)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (e == header)</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NoSuchElementException();</div><div class="line"></div><div class="line">        <span class="comment">//保留被移除的元素：要返回</span></div><div class="line">        E result = e.element;</div><div class="line">        </div><div class="line">        <span class="comment">//将该节点的前一节点的next指向该节点后节点</span></div><div class="line">        e.previous.next = e.next;</div><div class="line">        <span class="comment">//将该节点的后一节点的previous指向该节点的前节点</span></div><div class="line">        <span class="comment">//这两步就可以将该节点从链表从除去：在该链表中是无法遍历到该节点的</span></div><div class="line">        e.next.previous = e.previous;</div><div class="line">        <span class="comment">//将该节点归空</span></div><div class="line">        e.next = e.previous = <span class="keyword">null</span>;</div><div class="line">        e.element = <span class="keyword">null</span>;</div><div class="line">        size--;</div><div class="line">        modCount++;</div><div class="line">        <span class="keyword">return</span> result;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>其他移除方法:</p>
+<ul>
+<li>clear()： 从此列表中移除所有元素。</li>
+<li>remove()：获取并移除此列表的头（第一个元素）</li>
+<li>remove(int index)：移除此列表中指定位置处的元素</li>
+<li>remove(Objec o)：从此列表中移除首次出现的指定元素（如果存在）</li>
+<li>removeFirst()：移除并返回此列表的第一个元素</li>
+<li>removeFirstOccurrence(Object o)：从此列表中移除第一次出现的指定元素（从头部到尾部遍历列表时）</li>
+<li>removeLast()：移除并返回此列表的最后一个元素</li>
+<li>removeLastOccurrence(Object o)：从此列表中移除最后一次出现的指定元素（从头部到尾部遍历列表时）</li>
+</ul>
+</li>
+</ul>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://singthi4079.github.io/2017/03/13/Java-LinkedList/" data-id="cj08068pz0005t5q7vlxx4qqu" class="article-share-link">Partager</a>
+      <a data-url="https://singthi4079.github.io/2017/03/13/Java-LinkedList/" data-id="cj09jlz9s0009keq7391wk272" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -95,9 +164,18 @@
     
 <nav id="article-nav">
   
+    <a href="/2017/03/14/Java-HashMap/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Nieuwer</strong>
+      <div class="article-nav-title">
+        
+          Java-HashMap
+        
+      </div>
+    </a>
+  
   
     <a href="/2017/03/13/Java-ArrayList/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ancien</strong>
+      <strong class="article-nav-caption">Ouder</strong>
       <div class="article-nav-title">Java-ArrayList</div>
     </a>
   
@@ -115,7 +193,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
+    <h3 class="widget-title">Labels</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Angular/">Angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/">CentOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo-GitHub/">Hexo, GitHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li></ul>
     </div>
@@ -125,7 +203,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
       <a href="/tags/Angular/" style="font-size: 20px;">Angular</a> <a href="/tags/CentOS/" style="font-size: 10px;">CentOS</a> <a href="/tags/Hexo-GitHub/" style="font-size: 10px;">Hexo, GitHub</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a>
     </div>
@@ -134,7 +212,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archieven</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li></ul>
     </div>
@@ -144,9 +222,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recente berichten</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/03/14/Java-HashMap/">Java-HashMap</a>
+          </li>
         
           <li>
             <a href="/2017/03/13/Java-LinkedList/">Java-LinkedList</a>
@@ -164,10 +246,6 @@
             <a href="/2017/03/09/Java反射机制/">Java反射机制</a>
           </li>
         
-          <li>
-            <a href="/2017/03/08/Java内部类/">Java内部类</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -181,7 +259,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 Blue<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

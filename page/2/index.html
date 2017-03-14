@@ -48,9 +48,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://singthi4079.github.io"></form>
@@ -60,6 +60,86 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-Java对象初始化" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/01/Java对象初始化/" class="article-date">
+  <time datetime="2017-03-01T01:45:55.000Z" itemprop="datePublished">2017-03-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/01/Java对象初始化/">Java对象初始化</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Java对象初始化"><a href="#Java对象初始化" class="headerlink" title="Java对象初始化"></a>Java对象初始化</h2><p>Java中一个对象在被使用前必须要被正确的初始化, 这是Java规范规定的.</p>
+<h3 id="Java对象何时被初始化"><a href="#Java对象何时被初始化" class="headerlink" title="Java对象何时被初始化"></a>Java对象何时被初始化</h3><p>Java对象在被创建的时候初始化. Java中有两种行为会引起对象的创建.</p>
+<ol>
+<li><p>显式对象创建: 通过<code>new</code>关键字调用一个类的构造函数.</p>
+</li>
+<li><p>隐式对象创建</p>
+<ul>
+<li><p>加载一个包含String字面量的类或者接口会引起一个新的String对象被创建. 如果包含相同字面量的String对象已经存在虚拟机内(JVM会在内存中为所有碰到的String字面量维护一个列表. 程序中使用相同字面量的都会指向同一个String对象)</p>
+</li>
+<li><p>自动封装机制可能会引起一个原子类型的包装类对象被创建</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Wrapper</span> </span>&#123;</div><div class="line">  <span class="keyword">private</span> Integer iWrapper = <span class="number">1</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>String 连接符也可能引起新的String或者StringBuilder对象被创建. 同时还可能引起原子类型的包装对象呗创建.</p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="Java如何初始化对象"><a href="#Java如何初始化对象" class="headerlink" title="Java如何初始化对象"></a>Java如何初始化对象</h3><p>当对象被创建后, JVM会为其分配内存, 用于存放对象实例变量和从父类继承过来的实例变量. 即使从父类继承过来的实例变量可能被隐藏也会分配空间. 在分配内存的同时, 实例变量会被富裕默认值.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span> </span>&#123;</div><div class="line">	<span class="keyword">int</span> i = <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"> </div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bar</span> <span class="keyword">extends</span> <span class="title">Foo</span> </span>&#123;</div><div class="line">	<span class="keyword">int</span> i = <span class="number">1</span>;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String... args)</span> </span>&#123;</div><div class="line">		Foo foo = <span class="keyword">new</span> Bar();</div><div class="line">		System.out.println(foo.i);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>在main方法中，我们用Foo引用一个Bar对象，如果实例变量与方法一样，允许被覆盖，那么打印的结果应该是1，但是实际的结果确是0。<br>但是如果我们在Bar的方法中直接使用i，那么用的会是Bar对象自己定义的实例变量i，这就是隐藏，Bar对象中的i把Foo对象中的i给隐藏了，这条规则对于静态变量同样适用。</p>
+</blockquote>
+<p>内存分配完成后, 虚拟机会开始对新创建的对象执行初始化操作. Java中有三种执行对象初始化的结构. 分别是: 实例初始化器, 实例变量初始化器, 构造函数</p>
+<ol>
+<li><p>构造函数</p>
+<p>每个类至少有一个构造函数, 如果没有显式定义构造函数, Java编译器会自动生成一个无参构造函数. 在生成的字节码中, 构造函数被命名为<init> 方法</init></p>
+<p>在一个对象被初始化前, 它的超类必须被初始化. 除Object对象之外的所欲对象构造函数的第一条语句必须时父类的构造函数的调用语句, 或者事类中定义的其他构造函数.如果我们即没有调用其他的构造函数, 也没有显式调用超类的构造函数, 那么编译器会为我们自动生成一个对超类构造函数的调用指令.</p>
+</li>
+<li><p>实例变量初始化器和实例初始化器</p>
+<p>在定义实例变量时, 对变量进行赋值, 赋值语句就是实例变量初始化器.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InstanceVariableInitializer</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> i = <span class="number">1</span>;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> j = i + <span class="number">1</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在构造函数执行之前会先完成这些初始化操作.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InstanceInitializer</span> </span>&#123;</div><div class="line"> </div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> i = <span class="number">1</span>;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> j;</div><div class="line"> </div><div class="line">	&#123;</div><div class="line">		j = <span class="number">2</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">	j = <span class="number">2</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这段代码被称作实例初始化器. 会在构造函数执行前被执行.</p>
+<p>一个实例变量在对象初始化过程中被赋值的过程: </p>
+<ol>
+<li>JVM为一个对象分配完内存后, 为每个实例变量赋予默认值.</li>
+<li>在实例变量初始化器中被赋值</li>
+<li>在实例初始化器中被赋值</li>
+<li>在构造函数中被赋值</li>
+</ol>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://singthi4079.github.io/2017/03/01/Java对象初始化/" data-id="cj09jlzav000ikeq7phuazng5" class="article-share-link">Delen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-Java-static" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -108,7 +188,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://singthi4079.github.io/2017/03/01/Java-static/" data-id="cj08068qe000dt5q743qe4lvu" class="article-share-link">Partager</a>
+      <a data-url="https://singthi4079.github.io/2017/03/01/Java-static/" data-id="cj09jlz9z000ckeq75l8bftdc" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -183,7 +263,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://singthi4079.github.io/2017/02/28/final关键字/" data-id="cj08068rj000ut5q7eybdzliy" class="article-share-link">Partager</a>
+      <a data-url="https://singthi4079.github.io/2017/02/28/final关键字/" data-id="cj09jlzba000skeq7rln6ll2l" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -267,7 +347,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://singthi4079.github.io/2017/02/24/Java面向对象特性：封装、继承、多态、抽象/" data-id="cj08068rf000qt5q7kg1akhzr" class="article-share-link">Partager</a>
+      <a data-url="https://singthi4079.github.io/2017/02/24/Java面向对象特性：封装、继承、多态、抽象/" data-id="cj09jlzb4000nkeq7kvbddlpd" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -329,7 +409,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://singthi4079.github.io/2017/02/13/Java基础-对象与类/" data-id="cj08068qs000ft5q769uc0pyp" class="article-share-link">Partager</a>
+      <a data-url="https://singthi4079.github.io/2017/02/13/Java基础-对象与类/" data-id="cj09jlzas000gkeq7uwbxwe1p" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -557,7 +637,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://singthi4079.github.io/2017/02/08/Java基础/" data-id="cj08068r6000jt5q7f3zhy5hj" class="article-share-link">Partager</a>
+      <a data-url="https://singthi4079.github.io/2017/02/08/Java基础/" data-id="cj09jlzb1000kkeq740uj32b0" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
@@ -646,7 +726,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://singthi4079.github.io/2017/01/23/Angular笔记-Angular模块/" data-id="cj08068p90000t5q7p6nqhdmn" class="article-share-link">Partager</a>
+      <a data-url="https://singthi4079.github.io/2017/01/23/Angular笔记-Angular模块/" data-id="cj09jlz8o0000keq7kfuqaymv" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Angular/">Angular</a></li></ul>
@@ -693,7 +773,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://singthi4079.github.io/2017/01/17/Angular笔记-跟模块/" data-id="cj08068pq0004t5q7b5cihhql" class="article-share-link">Partager</a>
+      <a data-url="https://singthi4079.github.io/2017/01/17/Angular笔记-跟模块/" data-id="cj09jlz960003keq7vd6gd40l" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Angular/">Angular</a></li></ul>
@@ -823,7 +903,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://singthi4079.github.io/2017/01/07/Angular笔记-架构概览/" data-id="cj08068pf0001t5q7rei5ajhi" class="article-share-link">Partager</a>
+      <a data-url="https://singthi4079.github.io/2017/01/07/Angular笔记-架构概览/" data-id="cj09jlz900001keq73fjnqe8w" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Angular/">Angular</a></li></ul>
@@ -964,76 +1044,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://singthi4079.github.io/2016/12/14/cnetos7_jenkins_git/" data-id="cj08068ri000tt5q71oly7h0b" class="article-share-link">Partager</a>
+      <a data-url="https://singthi4079.github.io/2016/12/14/cnetos7_jenkins_git/" data-id="cj09jlzbb000ukeq72msqthnv" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CentOS/">CentOS</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Hexo-GitHub搭建属于自己的博客" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/11/19/Hexo-GitHub搭建属于自己的博客/" class="article-date">
-  <time datetime="2016-11-19T04:47:41.000Z" itemprop="datePublished">2016-11-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/19/Hexo-GitHub搭建属于自己的博客/">Hexo+GitHub搭建属于自己的博客</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>hexo是一款基于Node.js的静态博客框架.<br>需要配置的环境:</p>
-<ol>
-<li>Node</li>
-<li>Git</li>
-<li>GitHub账号</li>
-<li>Hexo</li>
-</ol>
-<h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><p>使用一下命令安装Hexo<br><code>npm install -g hexo</code></p>
-<p><code>hexo init</code>初始化hexo</p>
-<p><code>hexo generate</code>或者<code>hexo g</code>生成静态页面</p>
-<p><code>hexo server</code>启动本地服务, 在浏览器中输入<code>http://localhost:4000</code>查看</p>
-<h3 id="配置GitHub"><a href="#配置GitHub" class="headerlink" title="配置GitHub"></a>配置GitHub</h3><p>在GitHub创建一个新的Respository, 仓库名必须是</p>
-<p>修改_config.xml文件, 建立与GitHub仓库的关联<br>在_config.xml文件的最后, 修改deploy下的内容<br>deploy:<br>  type: git<br>  repo: GitHub仓库地址<br>  branch: master</p>
-<p>安装hexo-deployer-git<br><code>npm install hexo-deployer-git --save</code></p>
-<p>执行<code>hexo deploy</code>命令将项目部署到GitHub上<br>在浏览器中输入: <code>https://GitHub仓库名</code></p>
-<h3 id="部署三部曲"><a href="#部署三部曲" class="headerlink" title="部署三部曲"></a>部署三部曲</h3><ol>
-<li><code>hexo clean</code></li>
-<li><code>hexo generate</code></li>
-<li><code>hexo deploy</code></li>
-</ol>
-<h3 id="Hexo-常用命令"><a href="#Hexo-常用命令" class="headerlink" title="Hexo 常用命令"></a>Hexo 常用命令</h3><ol>
-<li><code>hexo new &quot;postName&quot;</code>– 新建文章</li>
-<li>`hexo new page “pageName” – 新建页面</li>
-<li><code>hexo generate</code> – 生成静态页面到public目录下</li>
-<li><code>hexo server</code> – 开启本地预览</li>
-<li><code>hexo deploy</code> – 将.deploy目录部署到GitHub</li>
-<li><code>hexo help</code> – 查看帮助</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://singthi4079.github.io/2016/11/19/Hexo-GitHub搭建属于自己的博客/" data-id="cj08068pk0003t5q743ur0yol" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo-GitHub/">Hexo, GitHub</a></li></ul>
 
     </footer>
   </div>
@@ -1056,7 +1070,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
+    <h3 class="widget-title">Labels</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Angular/">Angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/">CentOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo-GitHub/">Hexo, GitHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li></ul>
     </div>
@@ -1066,7 +1080,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
       <a href="/tags/Angular/" style="font-size: 20px;">Angular</a> <a href="/tags/CentOS/" style="font-size: 10px;">CentOS</a> <a href="/tags/Hexo-GitHub/" style="font-size: 10px;">Hexo, GitHub</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a>
     </div>
@@ -1075,7 +1089,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archieven</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li></ul>
     </div>
@@ -1085,9 +1099,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recente berichten</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/03/14/Java-HashMap/">Java-HashMap</a>
+          </li>
         
           <li>
             <a href="/2017/03/13/Java-LinkedList/">Java-LinkedList</a>
@@ -1105,10 +1123,6 @@
             <a href="/2017/03/09/Java反射机制/">Java反射机制</a>
           </li>
         
-          <li>
-            <a href="/2017/03/08/Java内部类/">Java内部类</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -1122,7 +1136,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 Blue<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

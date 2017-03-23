@@ -194,7 +194,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            Accueil
           </a>
         </li>
       
@@ -204,7 +204,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -237,6 +237,152 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/02/13/Java基础-对象与类/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Blue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blue的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/02/13/Java基础-对象与类/" itemprop="url">
+                  Java基础-对象与类
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posté le</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-13T19:48:27+08:00">
+                2017-02-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Java基础-对象与类"><a href="#Java基础-对象与类" class="headerlink" title="Java基础-对象与类"></a>Java基础-对象与类</h2><p><strong>类</strong>是构造对象的木板或蓝图. 由类构造对象的过程称为创建类的实例.</p>
+<p>对象的三个主要特性:</p>
+<ul>
+<li>对象的行为 — 可以对对象施加哪些操作, 或可以对对象施加哪些方法</li>
+<li>对象的状态 — 当施加那些方法时, 对象如何响应</li>
+<li>对象标识 — 如何辨别具有相同行为与状态的不同对象</li>
+</ul>
+<p>类之间的关系</p>
+<ul>
+<li>依赖(uses-a)</li>
+<li>聚合(has-a)</li>
+<li>继承(is-a)</li>
+</ul>
+<p><em>依赖</em>是uses-a关系, A类需要访问B类中的某个属性或方法. 一个类的方法操纵另一个类的对象. 应该尽可能减少类的相互依赖.</p>
+<p><em>聚合</em>是has-a关系, 类A的对象包含类B的对象.</p>
+<p><em>继承</em>是is-a关系, 是一种表示特殊与一般的关系.</p>
+<p>构造器的名字与类名相同.</p>
+<p>一个对象变量并没有包含一个对象, 而是引用对象.</p>
+<p><code>Date d = new Date();</code></p>
+<p>这条语句由两个部分</p>
+<ol>
+<li><code>new Date()</code>构造了一个Date类型的对象</li>
+<li>把新创建的Date对象的引用存储到变量<code>d</code>中</li>
+</ol>
+<p>局部变量不会自动初始化, 只有实例变量才会自动初始化.</p>
+<p>public类的名字必须与文件名相同, 在一个源文件中, 只能有一个公共类, 可以有任意个非公共类.</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -284,7 +430,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posté le</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-08T15:21:43+08:00">
                 2017-02-08
@@ -596,7 +742,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posté le</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-23T00:00:00+08:00">
                 2017-01-23
@@ -767,7 +913,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posté le</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-17T00:00:00+08:00">
                 2017-01-17
@@ -896,7 +1042,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posté le</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-07T00:00:00+08:00">
                 2017-01-07
@@ -1108,7 +1254,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posté le</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-14T00:00:00+08:00">
                 2016-12-14
@@ -1331,7 +1477,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posté le</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-19T12:47:41+08:00">
                 2016-11-19
@@ -1479,7 +1625,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posté le</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-19T12:17:14+08:00">
                 2016-11-19
@@ -1608,7 +1754,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posté le</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-13T11:00:21+08:00">
                 2016-11-13
@@ -1774,7 +1920,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posté le</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-12T16:06:25+08:00">
                 2016-11-12
@@ -2074,8 +2220,8 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">29</span>
-                <span class="site-state-item-name">Artikel</span>
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">articles</span>
               </a>
             </div>
           
@@ -2088,7 +2234,7 @@
             <div class="site-state-item site-state-tags">
               
                 <span class="site-state-item-count">4</span>
-                <span class="site-state-item-name">Tags</span>
+                <span class="site-state-item-name">tags</span>
               
             </div>
           
@@ -2138,11 +2284,11 @@
 
 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
-  Theme -
+  Thème -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
     NexT.Pisces
   </a>

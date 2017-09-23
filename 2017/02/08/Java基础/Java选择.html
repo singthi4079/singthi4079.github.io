@@ -1,0 +1,92 @@
+<hr>
+<h2 id="title-Java选择"><a href="#title-Java选择" class="headerlink" title="title: Java选择"></a>title: Java选择</h2><p>程序可以基于条件决定执行哪些语句.</p>
+<h3 id="boolean数据类型"><a href="#boolean数据类型" class="headerlink" title="boolean数据类型"></a>boolean数据类型</h3><p>boolean数据类型声明一个具有值<code>true</code>或者<code>false</code>的变量.</p>
+<p>Java提供六种关系操作符</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">操作符</th>
+<th style="text-align:center">实例(radius=5)</th>
+<th style="text-align:center">结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">&lt;</td>
+<td style="text-align:center">radius&lt;0</td>
+<td style="text-align:center">false</td>
+</tr>
+<tr>
+<td style="text-align:center">&lt;=</td>
+<td style="text-align:center">radius&lt;=0</td>
+<td style="text-align:center">false</td>
+</tr>
+<tr>
+<td style="text-align:center">&gt;</td>
+<td style="text-align:center">radius&gt;0</td>
+<td style="text-align:center">true</td>
+</tr>
+<tr>
+<td style="text-align:center">&gt;=</td>
+<td style="text-align:center">radius&gt;=0</td>
+<td style="text-align:center">true</td>
+</tr>
+<tr>
+<td style="text-align:center">==</td>
+<td style="text-align:center">radius==0</td>
+<td style="text-align:center">false</td>
+</tr>
+<tr>
+<td style="text-align:center">!=</td>
+<td style="text-align:center">radius!=0</td>
+<td style="text-align:center">true</td>
+</tr>
+</tbody>
+</table>
+<h3 id="if语句"><a href="#if语句" class="headerlink" title="if语句"></a>if语句</h3><p><code>if</code>语句是一种结构, 允许程序确定执行的路径.</p>
+<p>Java有几种类型的选择语句: 单分支if语句, 双分支<code>if-else</code>语句,  嵌套if语句, 多分支<code>if-else</code>语句, <code>switch</code>语句和条件表达式.</p>
+<p><strong>单分支<code>if</code>语句语法</strong>：</p>
+<pre><code class="java"><span class="keyword">if</span> (<span class="keyword">boolean</span>) {
+  code....
+}
+</code></pre>
+<p><strong>双分支<code>if-else</code>语句</strong>:</p>
+<p><code>if-else</code>语句根据条件的真或者假, 决定执行的路径. 当指定条件为true时之星if语句, 当条件为false时, 执行else语句. </p>
+<p>语法:</p>
+<pre><code class="java"><span class="keyword">if</span> (<span class="keyword">boolean</span>) {
+  code....
+} <span class="keyword">else</span> {
+  code.....
+}
+</code></pre>
+<p><strong>嵌套if语句和多分支if-else语句</strong> </p>
+<p>if语句可以在另外一个if语句中, 形成嵌套的if语句.</p>
+<h3 id="switch语句"><a href="#switch语句" class="headerlink" title="switch语句"></a>switch语句</h3><p><code>switch</code>语句基于变量活着表达式来执行语句. 语法: </p>
+<pre><code class="java"><span class="keyword">switch</span> (status) {
+  <span class="keyword">case</span> <span class="number">0</span>:
+      code....
+      <span class="keyword">break</span>;
+  <span class="keyword">case</span> <span class="number">1</span>:
+      code.....
+      <span class="keyword">break</span>;
+  <span class="keyword">default</span>:
+      code....
+      <span class="keyword">break</span>;
+}
+</code></pre>
+<p><code>switch</code>语句遵从以下规则:</p>
+<ol>
+<li>switch表达式必须能计算出一个char, byte, short, int, String的值</li>
+<li>value1,……valueN必须与switch表达式的值具有相同的数据类型. value1,……valueN都是常量表达式, 不能包含变量.</li>
+<li>当switch表达式的值与case语句的值匹配时, 执行从该case开始的语句, 直到遇到一个break语句或者switch语句结束.</li>
+<li>默认情况(default)是可选的.</li>
+<li>break是可选的.</li>
+</ol>
+<h3 id="条件表达式"><a href="#条件表达式" class="headerlink" title="条件表达式"></a>条件表达式</h3><p>条件表达式基于一个条件计算表达式的值. 语法:</p>
+<pre><code class="java"><span class="keyword">boolean</span>-expression ? expression1 : expression2;
+</code></pre>
+<h3 id="操作符的优先级和结合规则"><a href="#操作符的优先级和结合规则" class="headerlink" title="操作符的优先级和结合规则"></a>操作符的优先级和结合规则</h3><p>操作符的优先级和结合规则确定了操作符计算的顺序.</p>
+<p><img src="/Users/storm/workspace/notes/source/_posts/Java基础/Java操作符优先级.png" alt="Java操作符优先级"></p>
+<p>除了赋值操作符, 所有的二元操作符都是<strong>左结合</strong>的.</p>
+<pre><code class="java">a = b += c = <span class="number">5</span> ========= a = (b += (c = <span class="number">5</span>))
+</code></pre>

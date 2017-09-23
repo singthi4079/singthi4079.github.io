@@ -1,0 +1,759 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="同步和异步同步和异步用来行用一次方法调用. 
+同步方法调用一旦开始, 调用者必须等待调用返回, 才能继续后续的行为.
+异步方法调用更像一次消息传递, 一旦开始, 方法调用就回立即返回, 调用者可以继续后续的操作.
+同步调用类似去商场购物空调, 异步调用类似网购.
+并发和并行并发和并行都可以表示两个或者两个以上的任务一起执行.
+并发表示多任务交替执行, 而多任务之间可能是串行的.
+并行**是真正意义">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java高并发程序设计实战读书笔记-基本概念">
+<meta property="og:url" content="https://singthi4079.github.io/2017/09/23/Java高并发程序设计实战读书笔记-基本概念/index.html">
+<meta property="og:site_name" content="Blue的博客">
+<meta property="og:description" content="同步和异步同步和异步用来行用一次方法调用. 
+同步方法调用一旦开始, 调用者必须等待调用返回, 才能继续后续的行为.
+异步方法调用更像一次消息传递, 一旦开始, 方法调用就回立即返回, 调用者可以继续后续的操作.
+同步调用类似去商场购物空调, 异步调用类似网购.
+并发和并行并发和并行都可以表示两个或者两个以上的任务一起执行.
+并发表示多任务交替执行, 而多任务之间可能是串行的.
+并行**是真正意义">
+<meta property="og:updated_time" content="2017-09-23T03:51:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java高并发程序设计实战读书笔记-基本概念">
+<meta name="twitter:description" content="同步和异步同步和异步用来行用一次方法调用. 
+同步方法调用一旦开始, 调用者必须等待调用返回, 才能继续后续的行为.
+异步方法调用更像一次消息传递, 一旦开始, 方法调用就回立即返回, 调用者可以继续后续的操作.
+同步调用类似去商场购物空调, 异步调用类似网购.
+并发和并行并发和并行都可以表示两个或者两个以上的任务一起执行.
+并发表示多任务交替执行, 而多任务之间可能是串行的.
+并行**是真正意义">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://singthi4079.github.io/2017/09/23/Java高并发程序设计实战读书笔记-基本概念/"/>
+
+
+
+
+
+  <title> Java高并发程序设计实战读书笔记-基本概念 | Blue的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Blue的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/09/23/Java高并发程序设计实战读书笔记-基本概念/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Blue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blue的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Java高并发程序设计实战读书笔记-基本概念
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-23T10:08:07+08:00">
+                2017-09-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="同步和异步"><a href="#同步和异步" class="headerlink" title="同步和异步"></a>同步和异步</h3><p>同步和异步用来行用一次方法调用. </p>
+<p><strong>同步方法</strong>调用一旦开始, 调用者必须等待调用返回, 才能继续后续的行为.</p>
+<p><strong>异步方法</strong>调用更像一次消息传递, 一旦开始, 方法调用就回立即返回, 调用者可以继续后续的操作.</p>
+<p>同步调用类似去商场购物空调, 异步调用类似网购.</p>
+<h3 id="并发和并行"><a href="#并发和并行" class="headerlink" title="并发和并行"></a>并发和并行</h3><p>并发和并行都可以表示两个或者两个以上的任务一起执行.</p>
+<p><strong>并发</strong>表示多任务<em>交替</em>执行, 而多任务之间可能是串行的.</p>
+<p>并行**是真正意义上的”同时执行”, 多个任务同时执行.</p>
+<p>如果系统内只有一个CPU,  那就不可能实现真正的并行. 一个CPU一次只能执行一条指令.</p>
+<h3 id="临界区"><a href="#临界区" class="headerlink" title="临界区"></a>临界区</h3><p>临界区用来表示一种公共资源或者说是共享资源, 可以被多个线程使用. 例如: 打印机.</p>
+<h3 id="阻塞和非阻塞"><a href="#阻塞和非阻塞" class="headerlink" title="阻塞和非阻塞"></a>阻塞和非阻塞</h3><p>一个线程占用临界区资源, 那么所有需要这个资源的线程都必须在这个临界区中进行等待. 等待导致线程挂起, 这就是<strong>阻塞</strong>. </p>
+<p><strong>非阻塞</strong>表示没有一个线程可以妨碍其它线程的执行.</p>
+<h3 id="死锁-饥饿-活锁"><a href="#死锁-饥饿-活锁" class="headerlink" title="死锁, 饥饿, 活锁"></a>死锁, 饥饿, 活锁</h3><p>死锁, 饥饿, 活锁都是属于多线程活跃性问题.</p>
+<p><strong>死锁:</strong> 多个线程之相互占用彼此的资源, 导致没有一个线程可以继续执行, 相互等待. </p>
+<p><strong>饥饿: </strong>一个线程或多个线程由于种种原因无法获取所需的资源, 导致移植无法执行. 比如: 线程优先级太低, 而高优先级的线程不断抢占资源.</p>
+<p><strong>活锁: </strong> 由于线程秉承”谦让”的原则, 主动将资源释放给其它线程使用, 导致资源不断在两个线程之间跳动, 而没有一个线程可以拿到所有资源正常直行.</p>
+<h3 id="并发级别"><a href="#并发级别" class="headerlink" title="并发级别"></a>并发级别</h3><p>并发级别分为: 阻塞, 无饥饿, 无障碍, 无锁, 无等待</p>
+<p><strong>阻塞</strong>: 一个线程是阻塞的, 那么其他线程释放资源之前, 当前线程无法继续执行. 当使用<code>synchronize</code>关键字或者重入锁, 得到的就是阻塞线程.</p>
+<p><strong>无饥饿</strong>: 对于非公平锁(有优先级)来说, 系统允许高优先级的线程插队, 这样就可能会导致低优先级的线程饥饿.</p>
+<p><strong>无障碍</strong>: 两个线程如果是无障碍执行, 那么它们不会因为临界区的问题导致一方挂起. 对于无障碍的线程来说, 一旦检测到数据被改坏了, 就会立即对自己所做的修改进行<em>回滚</em>, 如果没有数据竞争, 那么线程顺利完成任务.</p>
+<blockquote>
+<p>一种实现无障碍的方式是<strong>一致性标记</strong>, 线程操作前, 先读取并标记, 操作完成后再读取, 检测标记是否被修改过, 如果两者一致, 表示资源访问没有冲突. 如果不一致, 表示资源被修改过, 需要重试操作.</p>
+</blockquote>
+<p><strong>无锁</strong>: 无锁并行都是无障碍的. 所有线程都可以尝试对临界区进行访问, 无锁的并发保证必然有一个线程能够在有限步内完成操作离开临界区.</p>
+<blockquote>
+<p>在无锁的调用中, 一个典型的特点就是可能会包含一个无限循环, 在这个循环中, 线程不断尝试修改临界区数据, 如果没有冲突, 修改成功. 否则继续尝试修改. 无论如何, 无锁的并行总能保证有一个线程可以胜出.</p>
+</blockquote>
+<p><strong>无等待</strong>: 要求所有线程都必须在有限步内完成操作. 这样就不会引起饥饿问题.</p>
+<blockquote>
+<p>一种典型的无等待结构是<strong>RCP(Read-Copy-Update)</strong>. 对数据的读不加控制. 但在写数据时, 先取得原始数据的副本, 接着只修改副本, 修改完成后在合适的时机写回数据</p>
+</blockquote>
+<h3 id="并行的两大定律"><a href="#并行的两大定律" class="headerlink" title="并行的两大定律"></a>并行的两大定律</h3><p><strong>Amdahl定律</strong>: 加速比定义: <code>加速比=优化前系统耗时/优化后系统耗时</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Tn=1/(F+1*(1-F)/n)</div></pre></td></tr></table></figure>
+<blockquote>
+<p>Tn表示使用n个处理器优化后的耗时</p>
+<p>F是程序中只能串行执行的比例</p>
+<p>n表示处理器个数</p>
+<p>T表示时间</p>
+</blockquote>
+<p>根据<code>Amdahl</code>定律, 使用多核CPU对系统进行优化, 优化效果取决于CPU的数量以及系统中串行化程序的比重. CPU数量越多, 串行比重越低, 则优化效果越好. 仅提升CPU数量而不降低程序中串行化比重, 也无法提升系统性能.</p>
+<p><strong>Gustafson定律</strong>: Gustafson定律试图说明处理器熟练, 串行化比重和加速比之间的关系.</p>
+<blockquote>
+<p>执行时间: a (串行时间) + b (并行时间)</p>
+<p>总执行时间: a+ n(处理器个数)*b</p>
+<p>加速比: (a+n*b)/(a+b)</p>
+<p>定义: F=a/(a+b)  (串行比例)</p>
+<p>加速比: S(n) = n - F(n-1)</p>
+</blockquote>
+<h3 id="Java内存模型-JMM"><a href="#Java内存模型-JMM" class="headerlink" title="Java内存模型(JMM)"></a>Java内存模型(JMM)</h3><p>JMM的关键技术点都是围绕着多线程的<strong>原子性</strong>, <strong>可见性</strong>, <strong>有序性</strong>建立的.</p>
+<p><strong>原子性(Atomicity)</strong>: 指一个操作是不可中断的, 一个操作一旦开始, 就不会被其他线程干扰.</p>
+<blockquote>
+<p>在32位系统中, long型数据的读写不是原子性的.(long是64位的)</p>
+</blockquote>
+<p><strong>可见性(Visibility)</strong>: 指当一个线程修改了共享数据, 其他线程能否立即知道这个修改.</p>
+<blockquote>
+<p>导致可见性问题的原因可能是:</p>
+<ol>
+<li>缓存优化或者硬件优化</li>
+<li>指令重排</li>
+<li>编辑器优化</li>
+</ol>
+</blockquote>
+<p><strong>有序性(Ordering)</strong>: 对于一个线程执行代码而言, 代码总是从先往后执行, 但在并发时, 程序的执行就可能会出现乱序. </p>
+<blockquote>
+<p>原因是因为程序在执行时, 可能会进行指令重排.</p>
+<p>指令重排可以保证串行语义一致, 但没有义务保证多线程间的语义一致</p>
+<p>为什么要指令重排?</p>
+<p>CPU在执行指令时, 采用<strong>流水线技术</strong>来执行指令. 类似:</p>
+<blockquote>
+<p>指令一: IF    ID    EX    MEM    WB</p>
+<p>指令二:          IF    ID    EX        MEN    WB</p>
+</blockquote>
+<p>流水线总是害怕中断的, 一旦中断, 所有设备都会进入一个停顿期, 再次满载又需要几个周期, 因此性能损失比较大.</p>
+<p>指令重排的目的是为了减少中断流水线</p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/21/Java基础/Java字符串和字符/" rel="next" title="Java字符串和字符">
+                <i class="fa fa-chevron-left"></i> Java字符串和字符
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Blue" />
+          <p class="site-author-name" itemprop="name">Blue</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#同步和异步"><span class="nav-number">1.</span> <span class="nav-text">同步和异步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#并发和并行"><span class="nav-number">2.</span> <span class="nav-text">并发和并行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#临界区"><span class="nav-number">3.</span> <span class="nav-text">临界区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#阻塞和非阻塞"><span class="nav-number">4.</span> <span class="nav-text">阻塞和非阻塞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#死锁-饥饿-活锁"><span class="nav-number">5.</span> <span class="nav-text">死锁, 饥饿, 活锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#并发级别"><span class="nav-number">6.</span> <span class="nav-text">并发级别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#并行的两大定律"><span class="nav-number">7.</span> <span class="nav-text">并行的两大定律</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java内存模型-JMM"><span class="nav-number">8.</span> <span class="nav-text">Java内存模型(JMM)</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Blue</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

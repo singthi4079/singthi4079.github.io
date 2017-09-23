@@ -1,0 +1,860 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="标识符标识符实为了标识程序中诸如类, 方法和变量的元素而采用的命名. 例如: main, input, number1.
+标识符必须遵从以下规则:
+
+由字母, 数字, 下划线(_)和美元符号($)构成的字符序列
+必须以字母, 下划线(_)或美元符号($)开头, 不能以数字开头
+不能是保留字
+不能是true, false 或 null
+可以是任意长度
+
+如: area, radius, $2都是合法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java基本程序设计">
+<meta property="og:url" content="https://singthi4079.github.io/2017/09/20/Java基础/Java基本程序设计/index.html">
+<meta property="og:site_name" content="Blue的博客">
+<meta property="og:description" content="标识符标识符实为了标识程序中诸如类, 方法和变量的元素而采用的命名. 例如: main, input, number1.
+标识符必须遵从以下规则:
+
+由字母, 数字, 下划线(_)和美元符号($)构成的字符序列
+必须以字母, 下划线(_)或美元符号($)开头, 不能以数字开头
+不能是保留字
+不能是true, false 或 null
+可以是任意长度
+
+如: area, radius, $2都是合法">
+<meta property="og:updated_time" content="2017-09-20T06:48:48.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java基本程序设计">
+<meta name="twitter:description" content="标识符标识符实为了标识程序中诸如类, 方法和变量的元素而采用的命名. 例如: main, input, number1.
+标识符必须遵从以下规则:
+
+由字母, 数字, 下划线(_)和美元符号($)构成的字符序列
+必须以字母, 下划线(_)或美元符号($)开头, 不能以数字开头
+不能是保留字
+不能是true, false 或 null
+可以是任意长度
+
+如: area, radius, $2都是合法">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://singthi4079.github.io/2017/09/20/Java基础/Java基本程序设计/"/>
+
+
+
+
+
+  <title> Java基本程序设计 | Blue的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Blue的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/09/20/Java基础/Java基本程序设计/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Blue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blue的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Java基本程序设计
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-20T11:22:23+08:00">
+                2017-09-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="标识符"><a href="#标识符" class="headerlink" title="标识符"></a>标识符</h3><p>标识符实为了标识程序中诸如类, 方法和变量的元素而采用的命名. 例如: main, input, number1.</p>
+<p>标识符必须遵从以下规则:</p>
+<ul>
+<li>由字母, 数字, 下划线(_)和美元符号($)构成的字符序列</li>
+<li>必须以字母, 下划线(_)或美元符号($)开头, 不能以数字开头</li>
+<li>不能是保留字</li>
+<li>不能是true, false 或 null</li>
+<li>可以是任意长度</li>
+</ul>
+<p>如: area, radius, $2都是合法的标识符. 2A, d+4都是非法的标识符.</p>
+<p>Java是区分大小写的, 所以area, Area和AREA都是不同的标识符.</p>
+<p>尽量不要用$命名标识符, 习惯上, $只用在机器自动生成的源代码中.</p>
+<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>变量用于表示特定类型的数据. 他们的值是可以被改变的.</p>
+<p>变量声明告知编译器根据数据类型为变量分配合适的内存空间. 例如:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> count;</div><div class="line"><span class="keyword">double</span> radius;</div></pre></td></tr></table></figure>
+<p>在赋值给变量之前, 必须声明变量. 方法中声明的变量在使用之前必须被赋值.</p>
+<h3 id="赋值语句和赋值表达式"><a href="#赋值语句和赋值表达式" class="headerlink" title="赋值语句和赋值表达式"></a>赋值语句和赋值表达式</h3><p>赋值语句将一个值指定给一个变量. 赋值语句可以作为一个表达式. 等号(=)表示赋值操作符.</p>
+<p>赋值语句语法:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">variable = expression;</div></pre></td></tr></table></figure>
+<p>如:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> y = <span class="number">1</span>;</div><div class="line"><span class="keyword">int</span> x = <span class="number">5</span> * (<span class="number">3</span>/<span class="number">2</span>);</div><div class="line">x = y + <span class="number">1</span>;</div></pre></td></tr></table></figure>
+<p>变量名必须在赋值操作符的左边.</p>
+<p>赋值语句中, 左边变量的数据类型必须与右边值的数据类型兼容. 如<code>int x=1.0;</code>是非法的, 这种情况下必须进行类型转换.</p>
+<h3 id="命名常量"><a href="#命名常量" class="headerlink" title="命名常量"></a>命名常量</h3><p>命名常量是一个代表不变值的标识符. 常量表示从不改变的永久数据. 语法如下:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">final</span> dataytep CONSTANTNAME = value</div></pre></td></tr></table></figure>
+<p>常量必须在同一条语句中声明和赋值. <code>final</code>是声明常量的关键字.</p>
+<p>使用常量的好处:</p>
+<ol>
+<li>不必重复输入同一个值.</li>
+<li>如果必须修改常量值, 只需要在代码中一个地方做改动.</li>
+<li>给常量赋一个描述性的名字提高程序易读性</li>
+</ol>
+<h3 id="命名习惯"><a href="#命名习惯" class="headerlink" title="命名习惯"></a>命名习惯</h3><p>严格遵循Java的命名习惯, 让程序易于理解, 避免错误.</p>
+<ul>
+<li>使用小写字母命名变量和方法. 如果包含多个单词, 第一个单词的字母小写, 后面没个单词的首字母大写. </li>
+<li>类名中每个单词首字母大写</li>
+<li>大写常量中的所有字母, 两个单词间用下划线连接</li>
+</ul>
+<h3 id="数值数据类型和操作"><a href="#数值数据类型和操作" class="headerlink" title="数值数据类型和操作"></a>数值数据类型和操作</h3><p>Java为数值, 字符值, 布尔值提供8种基本数据类型.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">类型名</th>
+<th style="text-align:center">范围</th>
+<th style="text-align:center">存储大小</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">byte</td>
+<td style="text-align:center">-128~127</td>
+<td style="text-align:center">8位带符号数</td>
+</tr>
+<tr>
+<td style="text-align:center">short</td>
+<td style="text-align:center">-2^15~2^15 -1</td>
+<td style="text-align:center">16位带符号数</td>
+</tr>
+<tr>
+<td style="text-align:center">int</td>
+<td style="text-align:center">-2^31~2^31 -1</td>
+<td style="text-align:center">32位带符号数</td>
+</tr>
+<tr>
+<td style="text-align:center">long</td>
+<td style="text-align:center">-2^63~2^63 -1</td>
+<td style="text-align:center">64位带符号数</td>
+</tr>
+<tr>
+<td style="text-align:center">float</td>
+<td style="text-align:center">负数范围: -3.4028235E+38~-1.4E-35                               正数范围: 1.4E-45~3.4028235E+38</td>
+<td style="text-align:center">32位带符号数</td>
+</tr>
+<tr>
+<td style="text-align:center">double</td>
+<td style="text-align:center">负数范围: -1.7976931348623157E+308~-4.9E-32         正数范围: 4.9E-324~48623157E+308 –4.9E-3</td>
+<td style="text-align:center">64位带符号数</td>
+</tr>
+</tbody>
+</table>
+<p>Scanner对象有以下方法可以从键盘读取基本类型数值:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">方法</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">nextByte()</td>
+<td style="text-align:center">读取一个byte类型的数</td>
+</tr>
+<tr>
+<td style="text-align:center">nextShort()</td>
+<td style="text-align:center">读取一个short类型的数</td>
+</tr>
+<tr>
+<td style="text-align:center">nextInt()</td>
+<td style="text-align:center">读取一个int类型的数</td>
+</tr>
+<tr>
+<td style="text-align:center">nextLong()</td>
+<td style="text-align:center">读取一个long类型的数</td>
+</tr>
+<tr>
+<td style="text-align:center">nextFloat()</td>
+<td style="text-align:center">读取一个float类型的数</td>
+</tr>
+<tr>
+<td style="text-align:center">nextDouble()</td>
+<td style="text-align:center">读取一个double类型的数</td>
+</tr>
+</tbody>
+</table>
+<p>数值数据类型的操作符包括+,-,*,/,%.</p>
+<p>当除法的操作数都是整数时, 除法的结果是整数.</p>
+<h3 id="数值类型直接量"><a href="#数值类型直接量" class="headerlink" title="数值类型直接量"></a>数值类型直接量</h3><p>一个直接量是程序中直接出线的常量值.</p>
+<h3 id="增强赋值操作符"><a href="#增强赋值操作符" class="headerlink" title="增强赋值操作符"></a>增强赋值操作符</h3><p>操作符<code>+</code>,<code>-</code>,<code>*</code>,<code>/</code>,<code>%</code>可以结合赋值操作符形成增强操作符.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">操作符</th>
+<th style="text-align:center">示例</th>
+<th style="text-align:center">等价于</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">+=</td>
+<td style="text-align:center">i+=8</td>
+<td style="text-align:center">i = i+8</td>
+</tr>
+<tr>
+<td style="text-align:center">-=</td>
+<td style="text-align:center">i-=8</td>
+<td style="text-align:center">i = i-8</td>
+</tr>
+<tr>
+<td style="text-align:center">*=</td>
+<td style="text-align:center">i*=8</td>
+<td style="text-align:center">i = i*8</td>
+</tr>
+<tr>
+<td style="text-align:center">/=</td>
+<td style="text-align:center">i/=8</td>
+<td style="text-align:center">i = i/8</td>
+</tr>
+<tr>
+<td style="text-align:center">%=</td>
+<td style="text-align:center">i%=8</td>
+<td style="text-align:center">i = i%8</td>
+</tr>
+</tbody>
+</table>
+<h3 id="自增和自减操作符"><a href="#自增和自减操作符" class="headerlink" title="自增和自减操作符"></a>自增和自减操作符</h3><p>自增操作符(++)和自减操作符(—)是对变量进行加1和减1的操作.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> i = <span class="number">3</span>, j = <span class="number">4</span>;</div><div class="line">++i; <span class="comment">// i==4 true</span></div><div class="line">--j; <span class="comment">// j==2 true</span></div></pre></td></tr></table></figure>
+<h3 id="数值类型转换"><a href="#数值类型转换" class="headerlink" title="数值类型转换"></a>数值类型转换</h3><p>类型转换是一种将一种数据类型的值转换成另一种数据类型的操作. <code>(int) 1.7</code></p>
+<p>如果一个二元运算中, 其中一个操作数是整数, 另一个操作数是浮点数, Java会自动将整数转换为浮点数.</p>
+<p>总是可以将一个数值赋值给支持更大数值范围的变量. </p>
+<p>如果不尽兴类型转换, 就不能将一个值赋给范围较小类型的变量.</p>
+<p>当double类型被转换为int类型时, 小数部分会被截去.</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/07/Java编程思想笔记-操作符/" rel="next" title="Java编程思想笔记-操作符">
+                <i class="fa fa-chevron-left"></i> Java编程思想笔记-操作符
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/21/Java基础/Java选择/" rel="prev" title="Java选择">
+                Java选择 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Blue" />
+          <p class="site-author-name" itemprop="name">Blue</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#标识符"><span class="nav-number">1.</span> <span class="nav-text">标识符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量"><span class="nav-number">2.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#赋值语句和赋值表达式"><span class="nav-number">3.</span> <span class="nav-text">赋值语句和赋值表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命名常量"><span class="nav-number">4.</span> <span class="nav-text">命名常量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命名习惯"><span class="nav-number">5.</span> <span class="nav-text">命名习惯</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数值数据类型和操作"><span class="nav-number">6.</span> <span class="nav-text">数值数据类型和操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数值类型直接量"><span class="nav-number">7.</span> <span class="nav-text">数值类型直接量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#增强赋值操作符"><span class="nav-number">8.</span> <span class="nav-text">增强赋值操作符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自增和自减操作符"><span class="nav-number">9.</span> <span class="nav-text">自增和自减操作符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数值类型转换"><span class="nav-number">10.</span> <span class="nav-text">数值类型转换</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Blue</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

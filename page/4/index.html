@@ -247,6 +247,320 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/02/24/Java面向对象特性：封装、继承、多态、抽象/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Blue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blue的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/02/24/Java面向对象特性：封装、继承、多态、抽象/" itemprop="url">
+                  Java面向对象特性：封装、继承、多态
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-24T11:22:08+08:00">
+                2017-02-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Java面向对象特性：封装、继承、多态"><a href="#Java面向对象特性：封装、继承、多态" class="headerlink" title="Java面向对象特性：封装、继承、多态"></a>Java面向对象特性：封装、继承、多态</h2><h3 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h3><h4 id="封装的定义"><a href="#封装的定义" class="headerlink" title="封装的定义"></a>封装的定义</h4><p>在面向对象程式设计方法中，封装（英语：Encapsulation）是指，一种将抽象性函式接口的实作细节部份包装、隐藏起来的方法。</p>
+<h4 id="封装有什么作用"><a href="#封装有什么作用" class="headerlink" title="封装有什么作用"></a>封装有什么作用</h4><ol>
+<li>良好的封装能够减少耦合;</li>
+<li>类内部的结构可以自由修改;</li>
+<li>可以对成员变量进行更精确的控制;</li>
+<li>隐藏信息，实现细节.</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Man</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> String name;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> age;</div><div class="line">	<span class="keyword">private</span> Woman wife;</div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> name;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.name = name;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> age;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.age = age;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setWife</span><span class="params">(Woman wife)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.wife = wife;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Woman</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> String name;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> age;</div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> name;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.name = name;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.age = age;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>以上代码定义了一个Man类和一个Woman类, 其中Woman类中的<code>age</code>成员变量没有访问方法<code>getter</code>, 而Man类中的<code>wife</code>成员变量也没有访问方法. 因为每个女人都不想让别人知道自己的年龄, 而男人则不想将自己的wife给别人使用. 这样就是<strong>隐藏信息</strong>. </p>
+<p>考虑以下情况是否正确</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Woman w = <span class="keyword">new</span> Waman();</div><div class="line">w.setAge(<span class="number">300</span>);</div></pre></td></tr></table></figure>
+<p>这段代码定义了一个Woman对象w, 并设置她的age为300, 实际情况中是不存在的. 所以需要对age变量的setter方法进行限制.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Woman</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> String name;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> age;</div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> name;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.name = name;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</div><div class="line">		<span class="keyword">if</span> (age &gt; <span class="number">120</span>) </div><div class="line">			System.out.println(<span class="string">"输入错误"</span>);</div><div class="line">		<span class="keyword">this</span>.age = age;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里只需要在Woman类中修改相关代码即可, 而不需要修改使用Woman对象的地方. </p>
+<p>如果由于某些不可描述的原因需要把age的类型改为String, 也只需要在age的setter方法处修改一次即可.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Woman</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> String name;</div><div class="line">	<span class="keyword">private</span> String age;</div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> name;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.name = name;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">		<span class="keyword">if</span> (age &gt; <span class="number">120</span>) </div><div class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> Exception(<span class="string">"输入错误"</span>);</div><div class="line">		<span class="keyword">this</span>.age = String.valueOf(age);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>再看看不封装的情况. Woman类的定义就变成这样了.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Woman</span> </span>&#123;</div><div class="line">	<span class="keyword">public</span> String name;</div><div class="line">	<span class="keyword">public</span> <span class="keyword">int</span> age;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>假设A类和B类都需要使用Woman对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</div><div class="line">  Woman w = <span class="keyword">new</span> Woman();</div><div class="line">  w.name=<span class="string">"A1"</span>;</div><div class="line">  w.age=<span class="number">18</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</div><div class="line">  Woman w = <span class="keyword">new</span> Woman();</div><div class="line">  w.name=<span class="string">"B1"</span>;</div><div class="line">  w.age=<span class="number">18</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果需求改变, 要求把Woman类的age的类型改为String类型, 这时就需要在A类和B类修改.</p>
+<h4 id="如何实现封装"><a href="#如何实现封装" class="headerlink" title="如何实现封装"></a>如何实现封装</h4><p>Java中通过各种访问限定符实现数据封装, 共分为四种访问级别: private, friendly, protected, public.</p>
+<ol>
+<li><p>使用访问限定修饰符修饰类的实例变量或方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Woman</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> String name;</div><div class="line">	<span class="keyword">private</span> String age;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+<li><p>对外提供公共的访问方法, 访问或修改类中的方法和实力变量. 可以在访问方法中对变量进行其它限制. 如: 年龄不能大于100.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Woman</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> String name;</div><div class="line">	<span class="keyword">private</span> String age;</div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> name;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.name = name;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">		<span class="keyword">if</span> (age &gt; <span class="number">120</span>) </div><div class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> Exception(<span class="string">"输入错误"</span>);</div><div class="line">		<span class="keyword">this</span>.age = String.valueOf(age);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><h4 id="继承的定义"><a href="#继承的定义" class="headerlink" title="继承的定义"></a>继承的定义</h4><p>继承就是子类继承父类的特征和行为，使得子类对象（实例）具有父类的实例域和方法，或子类从父类继承方法，使得子类具有父类相同的行为。</p>
+<h4 id="继承有什么作用"><a href="#继承有什么作用" class="headerlink" title="继承有什么作用"></a>继承有什么作用</h4><ol>
+<li>服用以前的代码, 提高开发效率</li>
+<li>让类与类之间产生了关系，是<strong>多态的前提</strong></li>
+</ol>
+<p>每个人都会有身高、体重、年龄、性别等属性, 而男人与女人之间不是完全一样的. 所以在设计的时候可以将人抽象为一个类, 存放男人和女人公共的属性, 再定一个一个男人类和一个女人类, 继承人这个类.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> String name;</div><div class="line">	<span class="keyword">private</span> String sex;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> age;</div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> name;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.name = name;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getSex</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> sex;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setSex</span><span class="params">(String sex)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.sex = sex;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> age;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.age = age;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Man</span> <span class="keyword">extends</span> <span class="title">Person</span> </span>&#123;</div><div class="line">	</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Woman</span> <span class="keyword">extends</span> <span class="title">Person</span> </span>&#123;</div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Man继承Person类后, Man类就拥有Person类的属性、方法; 在Man类中还可以定义自己独有的实例变量和方法.</p>
+<p>同时在使用继承时需要记住三句话：</p>
+<ol>
+<li>子类拥有父类非private的属性和方法。</li>
+<li>子类可以拥有自己属性和方法，即子类可以对父类进行扩展。</li>
+<li>子类可以用自己的方式实现父类的方法。</li>
+</ol>
+<h3 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h3><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>多态就是指程序中定义的引用变量所指向的具体类型和通过该引用变量发出的方法调用在编程时并不确定，而是在程序运行期间才确定，即一个引用变量倒底会指向哪个类的实例对象，该引用变量发出的方法调用到底是哪个类中实现的方法，必须在由程序运行期间才能决定。因为在程序运行时才确定具体的类，这样，不用修改源程序代码，就可以让引用变量绑定到各种不同的类实现上，从而导致该引用调用的具体方法随之改变，即不修改程序代码就可以改变程序运行时所绑定的具体代码，让程序可以选择多个运行状态，这就是多态性。</p>
+<p>简单说就是父类对象引用子类对象. B类继承A类. </p>
+<p><code>A a = new B();</code></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/02/13/Java基础-对象与类/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Blue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blue的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/02/13/Java基础-对象与类/" itemprop="url">
+                  Java基础-对象与类
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-13T19:48:27+08:00">
+                2017-02-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Java基础-对象与类"><a href="#Java基础-对象与类" class="headerlink" title="Java基础-对象与类"></a>Java基础-对象与类</h2><p><strong>类</strong>是构造对象的木板或蓝图. 由类构造对象的过程称为创建类的实例.</p>
+<p>对象的三个主要特性:</p>
+<ul>
+<li>对象的行为 — 可以对对象施加哪些操作, 或可以对对象施加哪些方法</li>
+<li>对象的状态 — 当施加那些方法时, 对象如何响应</li>
+<li>对象标识 — 如何辨别具有相同行为与状态的不同对象</li>
+</ul>
+<p>类之间的关系</p>
+<ul>
+<li>依赖(uses-a)</li>
+<li>聚合(has-a)</li>
+<li>继承(is-a)</li>
+</ul>
+<p><em>依赖</em>是uses-a关系, A类需要访问B类中的某个属性或方法. 一个类的方法操纵另一个类的对象. 应该尽可能减少类的相互依赖.</p>
+<p><em>聚合</em>是has-a关系, 类A的对象包含类B的对象.</p>
+<p><em>继承</em>是is-a关系, 是一种表示特殊与一般的关系.</p>
+<p>构造器的名字与类名相同.</p>
+<p>一个对象变量并没有包含一个对象, 而是引用对象.</p>
+<p><code>Date d = new Date();</code></p>
+<p>这条语句由两个部分</p>
+<ol>
+<li><code>new Date()</code>构造了一个Date类型的对象</li>
+<li>把新创建的Date对象的引用存储到变量<code>d</code>中</li>
+</ol>
+<p>局部变量不会自动初始化, 只有实例变量才会自动初始化.</p>
+<p>public类的名字必须与文件名相同, 在一个源文件中, 只能有一个公共类, 可以有任意个非公共类.</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/02/08/Java基础/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1728,308 +2042,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2016/11/12/什么是面向切面编程/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Blue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blue的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/11/12/什么是面向切面编程/" itemprop="url">
-                  什么是面向切面编程
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-12T16:06:25+08:00">
-                2016-11-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="什么是面向切面编程"><a href="#什么是面向切面编程" class="headerlink" title="什么是面向切面编程"></a>什么是面向切面编程</h3><p>切面能帮助我们模块化横切关注点。横切关注点可以背描述为影响应用多处的功能。</p>
-<p> <img src="/2016/11/12/什么是面向切面编程/面向切面编程图1.png" alt="面向切面编程图1"></p>
-<p>图4.1 展现了一个被划分为模块的典型应用。每个核心功能都是为特定业务领域提供服务，但是这些模块斗需要类似的辅助功能，例如安全和事务管理。</p>
-<p>切面提供了取代继承和委托的另一种可选方案。在使用面向切面编程时，我们仍可以在一个地方定义通用的功能，但是可以通过声明的方式定义这个功能要以何种方式在何处一个何处应用，而无需修改收影响的类。横切关注点可以被模块化为特殊的类，这些类被称为切面。有两个好处：</p>
-<ol>
-<li>每个关注点抖集中于一个地方，而不是分散到多处代码中。</li>
-<li>服务模块更简洁，因为它们只包含主要的关注点的代码，而次要关注点的代码被转移到切面中。</li>
-</ol>
-<h3 id="定义AOP的术语"><a href="#定义AOP的术语" class="headerlink" title="定义AOP的术语"></a>定义AOP的术语</h3><p> <img src="/2016/11/12/什么是面向切面编程/AOP术语.png" alt="AOP术语"></p>
-<ol>
-<li><p>通知(Advice)</p>
-<p>AOP术语中，切面的工作被称为通知。通知定义了切面是什么以及何时使用。除了描述切面要完成的工作，通知还解决了何时之行这个工作的问题。</p>
-<p>Spring 切面可以应用5中类型的通知：</p>
-<ul>
-<li>前置通知：</li>
-<li>后置通知</li>
-<li>返回通知</li>
-<li>异常通知</li>
-<li>环绕通知</li>
-</ul>
-</li>
-<li><p>连接点</p>
-<p>应用可能有数以千计的时机应用通知。这些时机被称为连接点。连接点是在应用执行过程中能够插入切面的一个点。这个点可以是调用方法时，跑出异常时，甚至修改一个字段时。</p>
-</li>
-<li><p>切点</p>
-<p>一个切面并不需要通知应用的所有连接点。切点有助于缩小切面所通知的连接点的问题。</p>
-<p>如果说通知定义了切面的“什么”和“何时”的话，那么切点九定义了何处。切点的定义会匹配通知所要织入的一个或多个连接点。我们通常使用明确的类和方法名称，或是使用正则表达式定义所匹配的类和方法名称类指定这些切点。</p>
-</li>
-<li><p>切面</p>
-<p>切面时通知和切点的结合。通知和切点共同定义了切面的全部内容－－它是什么，在何时和何处完成其功能。</p>
-</li>
-<li><p>引入</p>
-<p>引入允许我们想现有的类添加新方法或属性。</p>
-</li>
-<li><p>织入</p>
-<p>织入是把切面应用到目标对象并创建新的代理对象的过程。切面指定的连接点被织入到目标对象中。在目标对象的生命周期里有多个点可以进行织入：</p>
-<ul>
-<li><p>编译期：切面在目标类编译时被织入。</p>
-</li>
-<li><p>类加载期：切面在目标类加载到JVM时被织入。</p>
-</li>
-<li><p>运行期：切面在应用运行的某个时刻被织入。</p>
-<p>一般情况下，在织入切面时，AOP容器为目标对象动态地创建一个代理对象。Spring AOP就是以这种方式织入切面的。</p>
-</li>
-</ul>
-</li>
-<li><p>Spring对AOP的支持</p>
-<p>Spring提供了4中类型的AOP支持：</p>
-<ul>
-<li>基于代理的经典Spring AOP</li>
-<li>纯POJO切面</li>
-<li>@AspectJ注解驱动的切面</li>
-<li>注入式AspectJ切面（适用于Spring各版本）</li>
-</ul>
-<p>Spring通知是Java编写的。</p>
-<p>Spring在运行时通知对象，通过在代理类中包裹切面，Spring在运行期把切面织入到Spring管理的bean中。图中代理类封装了目标类，并拦截被通知的方法的调用，再把调用转发给真正的目标bean。当代理拦截到方法调用时，在调用目标bean方法之前，会执行切面逻辑。</p>
-<p> <img src="/2016/11/12/什么是面向切面编程/调用方法时执行切面逻辑.png" alt="调用方法时执行切面逻辑"></p>
-<p>直到应用需要被代理的bean时，Spring才会创建代理对象。</p>
-<p>Spring 只支持方法级别的连接点。</p>
-<p>​</p>
-</li>
-</ol>
-<h3 id="通过切点来选择连接点"><a href="#通过切点来选择连接点" class="headerlink" title="通过切点来选择连接点"></a>通过切点来选择连接点</h3><p>Spring仅支持AspectJ切点指示器的一个子集。</p>
-<p>Spring AOP所支持的AspectJ切点指示器。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">AspectJ指示器</th>
-<th style="text-align:center">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">arg()</td>
-<td style="text-align:center">限制连接点匹配参数为指定类型的执行方法</td>
-</tr>
-<tr>
-<td style="text-align:center">@args()</td>
-<td style="text-align:center">限制连接点匹配参数有指定注解标注的执行方法</td>
-</tr>
-<tr>
-<td style="text-align:center">execution()</td>
-<td style="text-align:center">用于匹配是连接点的执行方法</td>
-</tr>
-<tr>
-<td style="text-align:center">this()</td>
-<td style="text-align:center">限制连接点匹配AOP代理的bean引用为指定类型的类</td>
-</tr>
-<tr>
-<td style="text-align:center">target</td>
-<td style="text-align:center">限制连接点匹配目标对象为指定类型的类</td>
-</tr>
-<tr>
-<td style="text-align:center">@target</td>
-<td style="text-align:center">限制连接点匹配特定的执行对象，这些对象对对应的类要具有指定类型的注解</td>
-</tr>
-<tr>
-<td style="text-align:center">within()</td>
-<td style="text-align:center">限制连接点匹配指定的类型</td>
-</tr>
-<tr>
-<td style="text-align:center">@within()</td>
-<td style="text-align:center">限制连接点匹配指定注解所标注的类型（当使用Spring AOP时，方法定义在由指定的注解所标注的类里）</td>
-</tr>
-<tr>
-<td style="text-align:center">@annotation</td>
-<td style="text-align:center">限定匹配带有指定注解的连接点</td>
-</tr>
-</tbody>
-</table>
-<p>在Spring中尝试使用AspectJ其他指示器时，将会抛出异常。</p>
-<p>注解只用在饿的粗体哦你指示器是实际执行匹配的，其他的指示器都是用来限制匹配的。executeion指示器是在编写切点定义时最主要是用的指示器。</p>
-<h3 id="编写切点"><a href="#编写切点" class="headerlink" title="编写切点"></a>编写切点</h3><p><code>Performance</code>可以代表任何类型的现场表演。编写<code>Performance</code>的<code>perform()</code>方法出发通知。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> concert;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Performance</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">perform</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p> <img src="/2016/11/12/什么是面向切面编程/切点表达式.png" alt="切点表达式"></p>
-<p>上图展示 了一个切点表达式，这个表达式能够设置当<code>perform()</code>方法执行时触发通知的调用。</p>
-<p>方法表达式以”*”号开始, 表示不关系方法返回的类型。指定了全限定类名和方法名. 使用两个点号<code>(..)</code>表明切点要选择任意的<code>perform()</code>方法, 无论该方法的入参是什么。</p>
-<p>如果需要匹配的切点仅匹配concert包，可以使用<code>within()</code>指示器限制匹配.</p>
-<p> <img src="/2016/11/12/什么是面向切面编程/使用withi指示器.png" alt="使用withi指示器"></p>
-<p>使用<code>&amp;&amp;</code>操作符把<code>execution()</code>和<code>within()</code>指示器连接在一起形成与(and) 关系</p>
-<h3 id="使用注解创建切面"><a href="#使用注解创建切面" class="headerlink" title="使用注解创建切面"></a>使用注解创建切面</h3><ol>
-<li>定义切面</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> concert;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.AfterReturning;</div><div class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.AfterThrowing;</div><div class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.Aspect;</div><div class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.Before;</div><div class="line"></div><div class="line"><span class="meta">@Aspect</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Audience</span> </span>&#123;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="meta">@Before</span>(<span class="string">"execution(** concert.Performent.perform(..))"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">silenceCellPhone</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"silencing Cell Phone"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Before</span>(<span class="string">"execution(** concert.Performent.perform(..))"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">taskSeats</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"Taking seats"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@AfterReturning</span>(<span class="string">"execution(** concert.Performent.perform(..))"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">applause</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"CLAP CLAP CLAP!"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@AfterThrowing</span>(<span class="string">"execution(** concert.Performent.perform(..))"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">demandReFund</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"Demaning a refund"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ol>
-<li>AspectJ提供的五个注解来定义通知</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">注解</th>
-<th style="text-align:center">通知</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">@After</td>
-<td style="text-align:center">通知方法会在目标方法返回或抛出异常后调用</td>
-</tr>
-<tr>
-<td style="text-align:center">@AfterReturning</td>
-<td style="text-align:center">通知方法会在目标方法返回后调用</td>
-</tr>
-<tr>
-<td style="text-align:center">@AfterThrowing</td>
-<td style="text-align:center">通知方法会在目标方法抛出异常后调用</td>
-</tr>
-<tr>
-<td style="text-align:center">@Around</td>
-<td style="text-align:center">通知方法会将目标方法封装起来</td>
-</tr>
-<tr>
-<td style="text-align:center">@Before</td>
-<td style="text-align:center">通知方法在目标方法调用之前执行</td>
-</tr>
-</tbody>
-</table>
-<ol>
-<li>通过@Pointcut注解声明频繁使用的切点表达式</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> concert;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.*;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by storm on 16/11/12.</div><div class="line"> */</div><div class="line"><span class="meta">@Aspect</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Audience</span> </span>&#123;</div><div class="line">    </div><div class="line">    <span class="meta">@Pointcut</span>(<span class="string">"execution(** concert.Performent.perform(..))"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">performance</span><span class="params">()</span> </span>&#123;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Before</span>(<span class="string">"performance()"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">silenceCellPhone</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"silencing Cell Phone"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Before</span>(<span class="string">"performance()"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">taskSeats</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"Taking seats"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@AfterReturning</span>(<span class="string">"performance()"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">applause</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"CLAP CLAP CLAP!"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@AfterThrowing</span>(<span class="string">"performance()"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">demandReFund</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"Demaning a refund"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ol>
-<li>使用JavaConfig启用AspectJ注解的自动代理</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> concert;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</div><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.ComponentScan;</div><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</div><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.EnableAspectJAutoProxy;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by storm on 16/11/12.</div><div class="line"> */</div><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="meta">@EnableAspectJAutoProxy</span></div><div class="line"><span class="meta">@ComponentScan</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SpringConfig</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Audience <span class="title">audience</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Audience();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>在配置类中必须使用EnableAspectJAutoProxy注解启动自动代理功能，否则Audience类就会和其他类一样，只是Spring容器中的一个bean。</p>
-<p>Spring的AspectJ自动代理仅仅使用@AspectJ作为创建切面的指导, 切面依然是基于代理的。本质上，他依然是Spring基于代理的切面。</p>
-<ol>
-<li>创建环绕通知</li>
-</ol>
-<p>环绕通知将被通知的目标方法完全包装起来。就像在一个通知方法中国年同时编写了前置通知和后置通知。以下是使用环绕通知的Audience切面</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> concert;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.aspectj.lang.ProceedingJoinPoint;</div><div class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.*;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by storm on 16/11/12.</div><div class="line"> */</div><div class="line"><span class="meta">@Aspect</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Audience</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Pointcut</span>(<span class="string">"execution(** concert.Performent.perform(..))"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">performance</span><span class="params">()</span> </span>&#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Around</span>(<span class="string">"performance()"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">watchPerformance</span><span class="params">(ProceedingJoinPoint proceedingJoinPoint)</span> </span>&#123;</div><div class="line"></div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            System.out.println(<span class="string">"Silencing cell phones"</span>);</div><div class="line">            System.out.println(<span class="string">"Taking seats"</span>);</div><div class="line">            proceedingJoinPoint.proceed();</div><div class="line">            System.out.println(<span class="string">"CLAP CLAP CLAP!"</span>);</div><div class="line">            System.out.println(<span class="string">"Demanding a refund"</span>);</div><div class="line">        &#125; <span class="keyword">catch</span> (Throwable throwable) &#123;</div><div class="line">            throwable.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ol>
-<li>使用带参数的通知</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> soundsystem;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.Aspect;</div><div class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.Before;</div><div class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.Pointcut;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.HashMap;</div><div class="line"><span class="keyword">import</span> java.util.Map;</div><div class="line"></div><div class="line"><span class="meta">@Aspect</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TrackCounter</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> Map&lt;Integer, Integer&gt; trackCounts = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line"></div><div class="line">    <span class="meta">@Pointcut</span>(<span class="string">"execution(* soundsystem.CompactDisc.playTrack(int))"</span> +</div><div class="line">            <span class="string">" &amp;&amp; args(trackNymber)"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">trackPlayed</span><span class="params">()</span> </span>&#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Before</span>(<span class="string">"trackPlayed(trackNumber)"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">countTrack</span><span class="params">(<span class="keyword">int</span> trackNumber)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> currentCount = getPlayCount(trackNumber);</div><div class="line">        trackCounts.put(trackNumber, currentCount + <span class="number">1</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">getPlayCount</span><span class="params">(<span class="keyword">int</span> trackNumber)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> trackCounts.containsKey(trackNumber)</div><div class="line">                ? trackCounts.get(trackNumber) : <span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p> <img src="/2016/11/12/什么是面向切面编程/带参数的切点.png" alt="带参数的切点"></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2074,7 +2091,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-count">41</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>

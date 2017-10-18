@@ -194,7 +194,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            Home
           </a>
         </li>
       
@@ -204,7 +204,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -237,6 +237,126 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/10/18/Java高并发程序设计读书笔记-JDK并发包-并发容器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Blue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blue的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/10/18/Java高并发程序设计读书笔记-JDK并发包-并发容器/" itemprop="url">
+                  Java高并发程序设计读书笔记-JDK并发包-并发容器
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-18T22:40:15+08:00">
+                2017-10-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -284,7 +404,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-17T21:09:56+08:00">
                 2017-10-17
@@ -388,6 +508,36 @@
 </ul>
 <p>内置的策略实现了RejectedExecutionHandler接口, 可以自己扩张RejectedExecutionHandler接口, 实现自己的拒绝策略.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RejectThreadPoolDemo</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">MyTask</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">            System.out.println(System.currentTimeMillis() + <span class="string">": Thread ID: "</span> + Thread.currentThread().getId());</div><div class="line"></div><div class="line">            <span class="keyword">try</span> &#123;</div><div class="line">                Thread.sleep(<span class="number">100</span>);</div><div class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</div><div class="line">        MyTask task = <span class="keyword">new</span> MyTask();</div><div class="line"></div><div class="line">        ExecutorService executorService = <span class="keyword">new</span> ThreadPoolExecutor(<span class="number">5</span>, <span class="number">5</span>,</div><div class="line">                <span class="number">0L</span>, TimeUnit.MILLISECONDS,</div><div class="line">                <span class="keyword">new</span> LinkedBlockingDeque&lt;&gt;(<span class="number">10</span>),</div><div class="line">                Executors.defaultThreadFactory(), <span class="keyword">new</span> RejectedExecutionHandler() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">rejectedExecution</span><span class="params">(Runnable r, ThreadPoolExecutor executor)</span> </span>&#123;</div><div class="line">                System.out.println(r.toString() + <span class="string">" is discard"</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line"></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;Integer.MAX_VALUE; i++) &#123;</div><div class="line">            executorService.submit(task);</div><div class="line">            Thread.sleep(<span class="number">10</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="自定义线程创建"><a href="#自定义线程创建" class="headerlink" title="自定义线程创建"></a>自定义线程创建</h3><p>ThreadFactory是一个接口, 只有一个方法, 用来创建线程</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function">Thread <span class="title">newThread</span><span class="params">(Runnable r)</span></span>;</div></pre></td></tr></table></figure>
+<p>线程池创建线程就是调用这个方法.</p>
+<p>自定义线程池有以下好处:</p>
+<ol>
+<li>可以跟踪线程池在何时床创建了多少线程</li>
+<li>可以自定义线程名称, 组, 优先级</li>
+<li>可以吧线程设置为守护线程</li>
+</ol>
+<p>ThreadFactory简单示例:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadFactoryDemo</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">MyTask</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">            System.out.println(System.currentTimeMillis() + <span class="string">": Thread ID: "</span> + Thread.currentThread().getId());</div><div class="line"></div><div class="line">            <span class="keyword">try</span> &#123;</div><div class="line">                Thread.sleep(<span class="number">100</span>);</div><div class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</div><div class="line">        MyTask task = <span class="keyword">new</span> MyTask();</div><div class="line">        ExecutorService executorService = <span class="keyword">new</span> ThreadPoolExecutor(<span class="number">5</span>, <span class="number">5</span>,</div><div class="line">                <span class="number">0L</span>, TimeUnit.MILLISECONDS,</div><div class="line">                <span class="keyword">new</span> SynchronousQueue&lt;&gt;(),</div><div class="line">                <span class="keyword">new</span> ThreadFactory() &#123;</div><div class="line">                    <span class="meta">@Override</span></div><div class="line">                    <span class="function"><span class="keyword">public</span> Thread <span class="title">newThread</span><span class="params">(Runnable r)</span> </span>&#123;</div><div class="line">                        Thread t = <span class="keyword">new</span> Thread(r);</div><div class="line">                        t.setDaemon(<span class="keyword">true</span>);</div><div class="line">                        System.out.println(<span class="string">"create "</span> + t);</div><div class="line">                        <span class="keyword">return</span> t;</div><div class="line">                    &#125;</div><div class="line">                &#125;);</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">5</span>; i++) &#123;</div><div class="line">            executorService.submit(task);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        Thread.sleep(<span class="number">2000</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="扩张线程池"><a href="#扩张线程池" class="headerlink" title="扩张线程池"></a>扩张线程池</h3><p>ThreadPoolExecutor是一个可以扩展的线程池. 它提供了beforeExecute(), afterExecute(), terminated()三个接口对线程池进行控制.</p>
+<p>ThreadPoolExecutor.Worker是ThreadPoolExecutor的内部类, 它实现了Runnable接口, ThreadPoolExecutor线程池的工作线程也正是Worker实例. Worker.runTask方法被线程池以多线程模式异步调用.</p>
+<p>扩张线程池示例:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExtThreadPool</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">MyTask</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</div><div class="line">        <span class="keyword">public</span> String name;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">MyTask</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">            <span class="keyword">this</span>.name = name;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">            System.out.println(<span class="string">"正在执行: Thread ID: "</span> + Thread.currentThread().getId() + <span class="string">", Task Name="</span> + name);</div><div class="line"></div><div class="line">            <span class="keyword">try</span> &#123;</div><div class="line">                Thread.sleep(<span class="number">100</span>);</div><div class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</div><div class="line">        ExecutorService es = <span class="keyword">new</span> ThreadPoolExecutor(<span class="number">5</span>, <span class="number">5</span>, <span class="number">0L</span>, TimeUnit.MILLISECONDS,</div><div class="line">                <span class="keyword">new</span> LinkedBlockingDeque&lt;&gt;()) &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">beforeExecute</span><span class="params">(Thread t, Runnable r)</span> </span>&#123;</div><div class="line">                System.out.println(<span class="string">"准备执行: "</span> + ((MyTask) r).name);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">afterExecute</span><span class="params">(Runnable r, Throwable t)</span> </span>&#123;</div><div class="line">                System.out.println(<span class="string">"执行完成: "</span> + ((MyTask) r).name);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">terminated</span><span class="params">()</span> </span>&#123;</div><div class="line">                System.out.println(<span class="string">"线程池退出"</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line"></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">5</span>; i++) &#123;</div><div class="line">            MyTask task = <span class="keyword">new</span> MyTask(<span class="string">"Task-Geym-"</span> + i);</div><div class="line">            es.execute(task);</div><div class="line">            Thread.sleep(<span class="number">10</span>);</div><div class="line">        &#125;</div><div class="line">      <span class="comment">// shutdown()方法不会立即终止所有任务, 会等待所有任务执行完成后再关闭线程池</span></div><div class="line">        es.shutdown();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="优化线程池线程数量"><a href="#优化线程池线程数量" class="headerlink" title="优化线程池线程数量"></a>优化线程池线程数量</h3><p>线程池的大小对系统的性能有一定的影响. 过大或者过小的线程数量都无法发挥最有的系统性能, 但是线程池大小的确定也不需要做到非常精确. 只要避免极大和极小两种情况, 线程池的大小对系统性能的影响并不大. 确定线程池大小需要考虑CPU数量, 内存大小等因素. 估计线程池大小的经验公式:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Ncpu = CPU数量</div><div class="line">Ucpu = 目标CPU使用率, 0 &lt;= Ucpu &lt;= 1</div><div class="line">W/C = 等待时间和计算时间的比率</div><div class="line">为保持处理器达到期望的使用率, 最优的池大小等于:</div><div class="line">Nthreads = Ncpu * Ucpu * (1 + W/C)</div><div class="line">在Java中, 通过:</div><div class="line">Runtime.getRuntime().availableProcessors();</div><div class="line">获取可以CPU数量</div></pre></td></tr></table></figure>
+<h3 id="线程池中的堆栈"><a href="#线程池中的堆栈" class="headerlink" title="线程池中的堆栈"></a>线程池中的堆栈</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadTrace</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">DivTask</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> a, b;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">DivTask</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</div><div class="line">            <span class="keyword">this</span>.a = a;</div><div class="line">            <span class="keyword">this</span>.b = b;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">double</span> re = a/b;</div><div class="line">            System.out.println(re);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">TraceThreadPoolExecutor</span> <span class="keyword">extends</span> <span class="title">ThreadPoolExecutor</span> </span>&#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">TraceThreadPoolExecutor</span><span class="params">(<span class="keyword">int</span> corePoolSize, <span class="keyword">int</span> maximumPoolSize,</span></span></div><div class="line">                                       <span class="keyword">long</span> keepAliveTime, TimeUnit unit, BlockingQueue&lt;Runnable&gt; workQueue) &#123;</div><div class="line">            <span class="keyword">super</span>(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">(Runnable command)</span> </span>&#123;</div><div class="line">            <span class="keyword">super</span>.execute(wrap(command, clientTrace(), Thread.currentThread().getName()));</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="keyword">public</span> Future&lt;?&gt; submit(Runnable task) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">super</span>.submit(wrap(task, clientTrace(), Thread.currentThread().getName()));</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">private</span> Exception <span class="title">clientTrace</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">new</span> Exception(<span class="string">"Client stack trace"</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">private</span> Runnable <span class="title">wrap</span><span class="params">(<span class="keyword">final</span> Runnable task, <span class="keyword">final</span> Exception clientStack, String threadName)</span> </span>&#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">new</span> Runnable() &#123;</div><div class="line">                <span class="meta">@Override</span></div><div class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">                    <span class="keyword">try</span> &#123;</div><div class="line">                        task.run();</div><div class="line">                    &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">                        clientStack.printStackTrace();</div><div class="line">                        <span class="keyword">throw</span>  e;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        ThreadPoolExecutor pools = <span class="keyword">new</span> TraceThreadPoolExecutor(<span class="number">0</span>, Integer.MAX_VALUE,</div><div class="line">                <span class="number">0L</span>, TimeUnit.MILLISECONDS, <span class="keyword">new</span> SynchronousQueue&lt;&gt;());</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">5</span>; i++) &#123;</div><div class="line">            pools.execute(<span class="keyword">new</span> DivTask(<span class="number">100</span>,i));</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="Fork-Join框架"><a href="#Fork-Join框架" class="headerlink" title="Fork/Join框架"></a>Fork/Join框架</h3><p>“分而治之”是一个非常有效的处理大量数据的方法. 例如: 需要处理1000个数据, 可以先处理其中10个, 然后, 分阶段处理100次, 将100次的结果进行合成, 就是最终想要的对原始1000个数据的处理结果.</p>
+<p>JDK中, 给出一个ForKoinPoo线程池, 服役fork()方法并不急着开启线程, 而是提交给ForkJoinPool线程池处理, 以节省系统资源.</p>
+<p>如果遇到以下情况: 线程A已经把任务处理完了, 而线程B还有一堆任务未处理, 此时, 线程A会帮助线程B, 从线程B的任务队列中的<strong>底部</strong>拿任务处理. 而线程B继续从任务队列的<strong>顶部</strong>开始拿任务处理.</p>
+<p>ForkJoinTask有两个重要的子类, RecursiveAction, RecursiveTas, 分别代表没有返回值的任务和可以携带返回值的任务.</p>
+<p>Fork/Join框架的使用:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CountTask</span> <span class="keyword">extends</span> <span class="title">RecursiveTask</span>&lt;<span class="title">Long</span>&gt; </span>&#123;</div><div class="line"><span class="comment">// 任务分解规模, 如果需要求和的总数大于THRESHOLD, 那么任务需要再次分解</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> THRESHOLD = <span class="number">10000</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">long</span> start;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">long</span> end;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">CountTask</span><span class="params">(<span class="keyword">long</span> start, <span class="keyword">long</span> end)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.start = start;</div><div class="line">        <span class="keyword">this</span>.end = end;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> Long <span class="title">compute</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">long</span> sum = <span class="number">0</span>;</div><div class="line">        <span class="keyword">boolean</span> canCompute = (end-start)&lt;THRESHOLD;</div><div class="line">        <span class="keyword">if</span> (canCompute) &#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">long</span> i=sum; i&lt;=end; i++) &#123;</div><div class="line">                sum += i;</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="comment">// 分成100个小任务</span></div><div class="line">            <span class="keyword">long</span> step = (start+end)/<span class="number">100</span>;</div><div class="line">            ArrayList&lt;CountTask&gt; subTasks = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">            <span class="keyword">long</span> pos = start;</div><div class="line"></div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">100</span>; i++) &#123;</div><div class="line">                <span class="keyword">long</span> lastOne = pos + step;</div><div class="line">                <span class="keyword">if</span> (lastOne &gt; end)</div><div class="line">                    lastOne = end;</div><div class="line">                CountTask subTask = <span class="keyword">new</span> CountTask(pos, lastOne);</div><div class="line">                pos += step + <span class="number">1</span>;</div><div class="line">                subTasks.add(subTask);</div><div class="line">                subTask.fork();</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="keyword">for</span> (CountTask t : subTasks) &#123;</div><div class="line">                sum += t.join();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">return</span> sum;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        ForkJoinPool forkJoinPool = <span class="keyword">new</span> ForkJoinPool();</div><div class="line">        CountTask task = <span class="keyword">new</span> CountTask(<span class="number">0</span>, <span class="number">200000L</span>);</div><div class="line">        ForkJoinTask&lt;Long&gt; result = forkJoinPool.submit(task);</div><div class="line"></div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="keyword">long</span> res = result.get();</div><div class="line">            System.out.println(<span class="string">"sum="</span> + res);</div><div class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125; <span class="keyword">catch</span> (ExecutionException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>使用ForkJoin需要注意, 任务的划分层次很深, 一直得不到返回, 可能会发生两种情况:</p>
+<ul>
+<li>系统内的线程数量越积越多, 导致性能下降</li>
+<li>函数调用层次变得很深, 导致栈溢出</li>
+</ul>
+<p>ForkJoin线程池使用无锁的栈来管理线程. 如果一个工作线程暂时取不到可用的任务, 可能会被挂起, 挂起的线程会被压入由线程池维护的栈中. 等将来有任务可用时, 再唤醒栈中的这些线程.</p>
 
           
         
@@ -468,7 +618,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-16T22:25:39+08:00">
                 2017-10-16
@@ -599,7 +749,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-16T21:49:46+08:00">
                 2017-10-16
@@ -726,7 +876,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-16T21:35:49+08:00">
                 2017-10-16
@@ -851,7 +1001,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-12T22:27:20+08:00">
                 2017-10-12
@@ -997,7 +1147,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-12T22:14:01+08:00">
                 2017-10-12
@@ -1124,7 +1274,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-12T21:01:36+08:00">
                 2017-10-12
@@ -1255,7 +1405,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-10T22:31:44+08:00">
                 2017-10-10
@@ -1428,7 +1578,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-24T10:36:51+08:00">
                 2017-09-24
@@ -1580,200 +1730,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/09/23/Java高并发程序设计实战读书笔记-基本概念/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Blue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blue的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/09/23/Java高并发程序设计实战读书笔记-基本概念/" itemprop="url">
-                  Java高并发程序设计实战读书笔记-基本概念
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-23T10:08:07+08:00">
-                2017-09-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="同步和异步"><a href="#同步和异步" class="headerlink" title="同步和异步"></a>同步和异步</h3><p>同步和异步用来行用一次方法调用. </p>
-<p><strong>同步方法</strong>调用一旦开始, 调用者必须等待调用返回, 才能继续后续的行为.</p>
-<p><strong>异步方法</strong>调用更像一次消息传递, 一旦开始, 方法调用就回立即返回, 调用者可以继续后续的操作.</p>
-<p>同步调用类似去商场购物空调, 异步调用类似网购.</p>
-<h3 id="并发和并行"><a href="#并发和并行" class="headerlink" title="并发和并行"></a>并发和并行</h3><p>并发和并行都可以表示两个或者两个以上的任务一起执行.</p>
-<p><strong>并发</strong>表示多任务<em>交替</em>执行, 而多任务之间可能是串行的.</p>
-<p>并行**是真正意义上的”同时执行”, 多个任务同时执行.</p>
-<p>如果系统内只有一个CPU,  那就不可能实现真正的并行. 一个CPU一次只能执行一条指令.</p>
-<h3 id="临界区"><a href="#临界区" class="headerlink" title="临界区"></a>临界区</h3><p>临界区用来表示一种公共资源或者说是共享资源, 可以被多个线程使用. 例如: 打印机.</p>
-<h3 id="阻塞和非阻塞"><a href="#阻塞和非阻塞" class="headerlink" title="阻塞和非阻塞"></a>阻塞和非阻塞</h3><p>一个线程占用临界区资源, 那么所有需要这个资源的线程都必须在这个临界区中进行等待. 等待导致线程挂起, 这就是<strong>阻塞</strong>. </p>
-<p><strong>非阻塞</strong>表示没有一个线程可以妨碍其它线程的执行.</p>
-<h3 id="死锁-饥饿-活锁"><a href="#死锁-饥饿-活锁" class="headerlink" title="死锁, 饥饿, 活锁"></a>死锁, 饥饿, 活锁</h3><p>死锁, 饥饿, 活锁都是属于多线程活跃性问题.</p>
-<p><strong>死锁:</strong> 多个线程之相互占用彼此的资源, 导致没有一个线程可以继续执行, 相互等待. </p>
-<p><strong>饥饿: </strong>一个线程或多个线程由于种种原因无法获取所需的资源, 导致移植无法执行. 比如: 线程优先级太低, 而高优先级的线程不断抢占资源.</p>
-<p><strong>活锁: </strong> 由于线程秉承”谦让”的原则, 主动将资源释放给其它线程使用, 导致资源不断在两个线程之间跳动, 而没有一个线程可以拿到所有资源正常直行.</p>
-<h3 id="并发级别"><a href="#并发级别" class="headerlink" title="并发级别"></a>并发级别</h3><p>并发级别分为: 阻塞, 无饥饿, 无障碍, 无锁, 无等待</p>
-<p><strong>阻塞</strong>: 一个线程是阻塞的, 那么其他线程释放资源之前, 当前线程无法继续执行. 当使用<code>synchronize</code>关键字或者重入锁, 得到的就是阻塞线程.</p>
-<p><strong>无饥饿</strong>: 对于非公平锁(有优先级)来说, 系统允许高优先级的线程插队, 这样就可能会导致低优先级的线程饥饿.</p>
-<p><strong>无障碍</strong>: 两个线程如果是无障碍执行, 那么它们不会因为临界区的问题导致一方挂起. 对于无障碍的线程来说, 一旦检测到数据被改坏了, 就会立即对自己所做的修改进行<em>回滚</em>, 如果没有数据竞争, 那么线程顺利完成任务.</p>
-<blockquote>
-<p>一种实现无障碍的方式是<strong>一致性标记</strong>, 线程操作前, 先读取并标记, 操作完成后再读取, 检测标记是否被修改过, 如果两者一致, 表示资源访问没有冲突. 如果不一致, 表示资源被修改过, 需要重试操作.</p>
-</blockquote>
-<p><strong>无锁</strong>: 无锁并行都是无障碍的. 所有线程都可以尝试对临界区进行访问, 无锁的并发保证必然有一个线程能够在有限步内完成操作离开临界区.</p>
-<blockquote>
-<p>在无锁的调用中, 一个典型的特点就是可能会包含一个无限循环, 在这个循环中, 线程不断尝试修改临界区数据, 如果没有冲突, 修改成功. 否则继续尝试修改. 无论如何, 无锁的并行总能保证有一个线程可以胜出.</p>
-</blockquote>
-<p><strong>无等待</strong>: 要求所有线程都必须在有限步内完成操作. 这样就不会引起饥饿问题.</p>
-<blockquote>
-<p>一种典型的无等待结构是<strong>RCP(Read-Copy-Update)</strong>. 对数据的读不加控制. 但在写数据时, 先取得原始数据的副本, 接着只修改副本, 修改完成后在合适的时机写回数据</p>
-</blockquote>
-<h3 id="并行的两大定律"><a href="#并行的两大定律" class="headerlink" title="并行的两大定律"></a>并行的两大定律</h3><p><strong>Amdahl定律</strong>: 加速比定义: <code>加速比=优化前系统耗时/优化后系统耗时</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Tn=1/(F+1*(1-F)/n)</div></pre></td></tr></table></figure>
-<blockquote>
-<p>Tn表示使用n个处理器优化后的耗时</p>
-<p>F是程序中只能串行执行的比例</p>
-<p>n表示处理器个数</p>
-<p>T表示时间</p>
-</blockquote>
-<p>根据<code>Amdahl</code>定律, 使用多核CPU对系统进行优化, 优化效果取决于CPU的数量以及系统中串行化程序的比重. CPU数量越多, 串行比重越低, 则优化效果越好. 仅提升CPU数量而不降低程序中串行化比重, 也无法提升系统性能.</p>
-<p><strong>Gustafson定律</strong>: Gustafson定律试图说明处理器熟练, 串行化比重和加速比之间的关系.</p>
-<blockquote>
-<p>执行时间: a (串行时间) + b (并行时间)</p>
-<p>总执行时间: a+ n(处理器个数)*b</p>
-<p>加速比: (a+n*b)/(a+b)</p>
-<p>定义: F=a/(a+b)  (串行比例)</p>
-<p>加速比: S(n) = n - F(n-1)</p>
-</blockquote>
-<h3 id="Java内存模型-JMM"><a href="#Java内存模型-JMM" class="headerlink" title="Java内存模型(JMM)"></a>Java内存模型(JMM)</h3><p>JMM的关键技术点都是围绕着多线程的<strong>原子性</strong>, <strong>可见性</strong>, <strong>有序性</strong>建立的.</p>
-<p><strong>原子性(Atomicity)</strong>: 指一个操作是不可中断的, 一个操作一旦开始, 就不会被其他线程干扰.</p>
-<blockquote>
-<p>在32位系统中, long型数据的读写不是原子性的.(long是64位的)</p>
-</blockquote>
-<p><strong>可见性(Visibility)</strong>: 指当一个线程修改了共享数据, 其他线程能否立即知道这个修改.</p>
-<blockquote>
-<p>导致可见性问题的原因可能是:</p>
-<ol>
-<li>缓存优化或者硬件优化</li>
-<li>指令重排</li>
-<li>编辑器优化</li>
-</ol>
-</blockquote>
-<p><strong>有序性(Ordering)</strong>: 对于一个线程执行代码而言, 代码总是从先往后执行, 但在并发时, 程序的执行就可能会出现乱序. </p>
-<blockquote>
-<p>原因是因为程序在执行时, 可能会进行指令重排.</p>
-<p>指令重排可以保证串行语义一致, 但没有义务保证多线程间的语义一致</p>
-<p>为什么要指令重排?</p>
-<p>CPU在执行指令时, 采用<strong>流水线技术</strong>来执行指令. 类似:</p>
-<blockquote>
-<p>指令一: IF    ID    EX    MEM    WB</p>
-<p>指令二:          IF    ID    EX        MEN    WB</p>
-</blockquote>
-<p>流水线总是害怕中断的, 一旦中断, 所有设备都会进入一个停顿期, 再次满载又需要几个周期, 因此性能损失比较大.</p>
-<p>指令重排的目的是为了减少中断流水线</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1823,8 +1779,8 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">48</span>
-                <span class="site-state-item-name">Artikel</span>
+                <span class="site-state-item-count">49</span>
+                <span class="site-state-item-name">posts</span>
               </a>
             </div>
           
@@ -1837,7 +1793,7 @@
             <div class="site-state-item site-state-tags">
               
                 <span class="site-state-item-count">4</span>
-                <span class="site-state-item-name">Tags</span>
+                <span class="site-state-item-name">tags</span>
               
             </div>
           
@@ -1887,7 +1843,7 @@
 
 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">

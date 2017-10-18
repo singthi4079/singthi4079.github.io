@@ -87,55 +87,13 @@
 
 
 
-<meta name="description" content="Java基础-对象与类类是构造对象的木板或蓝图. 由类构造对象的过程称为创建类的实例.
-对象的三个主要特性:
-
-对象的行为 — 可以对对象施加哪些操作, 或可以对对象施加哪些方法
-对象的状态 — 当施加那些方法时, 对象如何响应
-对象标识 — 如何辨别具有相同行为与状态的不同对象
-
-类之间的关系
-
-依赖(uses-a)
-聚合(has-a)
-继承(is-a)
-
-依赖是uses-a关系, A类需要访问">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java基础-对象与类">
-<meta property="og:url" content="https://singthi4079.github.io/2017/02/13/Java基础-对象与类/index.html">
+<meta property="og:title" content="Java高并发程序设计读书笔记-JDK并发包-并发容器">
+<meta property="og:url" content="https://singthi4079.github.io/2017/10/18/Java高并发程序设计读书笔记-JDK并发包-并发容器/index.html">
 <meta property="og:site_name" content="Blue的博客">
-<meta property="og:description" content="Java基础-对象与类类是构造对象的木板或蓝图. 由类构造对象的过程称为创建类的实例.
-对象的三个主要特性:
-
-对象的行为 — 可以对对象施加哪些操作, 或可以对对象施加哪些方法
-对象的状态 — 当施加那些方法时, 对象如何响应
-对象标识 — 如何辨别具有相同行为与状态的不同对象
-
-类之间的关系
-
-依赖(uses-a)
-聚合(has-a)
-继承(is-a)
-
-依赖是uses-a关系, A类需要访问">
-<meta property="og:updated_time" content="2017-02-13T12:18:43.000Z">
+<meta property="og:updated_time" content="2017-10-18T14:40:19.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java基础-对象与类">
-<meta name="twitter:description" content="Java基础-对象与类类是构造对象的木板或蓝图. 由类构造对象的过程称为创建类的实例.
-对象的三个主要特性:
-
-对象的行为 — 可以对对象施加哪些操作, 或可以对对象施加哪些方法
-对象的状态 — 当施加那些方法时, 对象如何响应
-对象标识 — 如何辨别具有相同行为与状态的不同对象
-
-类之间的关系
-
-依赖(uses-a)
-聚合(has-a)
-继承(is-a)
-
-依赖是uses-a关系, A类需要访问">
+<meta name="twitter:title" content="Java高并发程序设计读书笔记-JDK并发包-并发容器">
 
 
 
@@ -163,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="https://singthi4079.github.io/2017/02/13/Java基础-对象与类/"/>
+  <link rel="canonical" href="https://singthi4079.github.io/2017/10/18/Java高并发程序设计读书笔记-JDK并发包-并发容器/"/>
 
 
 
 
 
-  <title> Java基础-对象与类 | Blue的博客 </title>
+  <title> Java高并发程序设计读书笔记-JDK并发包-并发容器 | Blue的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="">
@@ -288,7 +246,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/02/13/Java基础-对象与类/">
+    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/10/18/Java高并发程序设计读书笔记-JDK并发包-并发容器/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Blue">
@@ -309,7 +267,7 @@
             
             
               
-                Java基础-对象与类
+                Java高并发程序设计读书笔记-JDK并发包-并发容器
               
             
           </h1>
@@ -324,8 +282,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-13T19:48:27+08:00">
-                2017-02-13
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-18T22:40:15+08:00">
+                2017-10-18
               </time>
             
 
@@ -360,33 +318,7 @@
       
 
       
-        <h2 id="Java基础-对象与类"><a href="#Java基础-对象与类" class="headerlink" title="Java基础-对象与类"></a>Java基础-对象与类</h2><p><strong>类</strong>是构造对象的木板或蓝图. 由类构造对象的过程称为创建类的实例.</p>
-<p>对象的三个主要特性:</p>
-<ul>
-<li>对象的行为 — 可以对对象施加哪些操作, 或可以对对象施加哪些方法</li>
-<li>对象的状态 — 当施加那些方法时, 对象如何响应</li>
-<li>对象标识 — 如何辨别具有相同行为与状态的不同对象</li>
-</ul>
-<p>类之间的关系</p>
-<ul>
-<li>依赖(uses-a)</li>
-<li>聚合(has-a)</li>
-<li>继承(is-a)</li>
-</ul>
-<p><em>依赖</em>是uses-a关系, A类需要访问B类中的某个属性或方法. 一个类的方法操纵另一个类的对象. 应该尽可能减少类的相互依赖.</p>
-<p><em>聚合</em>是has-a关系, 类A的对象包含类B的对象.</p>
-<p><em>继承</em>是is-a关系, 是一种表示特殊与一般的关系.</p>
-<p>构造器的名字与类名相同.</p>
-<p>一个对象变量并没有包含一个对象, 而是引用对象.</p>
-<p><code>Date d = new Date();</code></p>
-<p>这条语句由两个部分</p>
-<ol>
-<li><code>new Date()</code>构造了一个Date类型的对象</li>
-<li>把新创建的Date对象的引用存储到变量<code>d</code>中</li>
-</ol>
-<p>局部变量不会自动初始化, 只有实例变量才会自动初始化.</p>
-<p>public类的名字必须与文件名相同, 在一个源文件中, 只能有一个公共类, 可以有任意个非公共类.</p>
-
+        
       
     </div>
 
@@ -422,8 +354,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/02/08/Java基础/" rel="next" title="Java基础-基本程序设计结构">
-                <i class="fa fa-chevron-left"></i> Java基础-基本程序设计结构
+              <a href="/2017/10/17/Java高并发程序设计读书笔记-JDK并发包-线程池/" rel="next" title="Java高并发程序设计读书笔记-JDK并发包-线程池">
+                <i class="fa fa-chevron-left"></i> Java高并发程序设计读书笔记-JDK并发包-线程池
               </a>
             
           </div>
@@ -431,10 +363,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/02/24/Java面向对象特性：封装、继承、多态、抽象/" rel="prev" title="Java面向对象特性：封装、继承、多态">
-                Java面向对象特性：封装、继承、多态 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -481,17 +409,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -544,22 +463,6 @@
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java基础-对象与类"><span class="nav-number">1.</span> <span class="nav-text">Java基础-对象与类</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       

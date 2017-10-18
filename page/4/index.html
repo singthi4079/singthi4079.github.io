@@ -194,7 +194,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            Home
           </a>
         </li>
       
@@ -204,7 +204,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -237,6 +237,156 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/03/08/Java接口和抽象类/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Blue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blue的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/08/Java接口和抽象类/" itemprop="url">
+                  Java接口和抽象类
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-08T15:12:22+08:00">
+                2017-03-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Java接口和抽象类"><a href="#Java接口和抽象类" class="headerlink" title="Java接口和抽象类"></a>Java接口和抽象类</h2><h3 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h3><p>抽象方法是一种特殊的方法, 只有声明, 没有具体的实现. 抽象的方法声明:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">fun</span><span class="params">()</span></span>;</div></pre></td></tr></table></figure>
+<p>抽象方法必须用<code>abstract</code>关键字修饰, 如果一个类有抽象方法, 这个类就是抽象类, 抽象类必须在class前用<code>abstract</code>关键字修饰. <strong>由于抽象类中有没有具体实现的方法, 所以不能创建抽象类的实例</strong>.</p>
+<p>含有抽象方法的类称为抽象类, 并不是抽象类只能有抽象方法, 它和普通类一样, 可以有成员变量和普通的成员方法.</p>
+<p>抽象类和普通类的主要区别:</p>
+<ol>
+<li>抽象方法必须为public 或者 protected. 默认情况下默认是public</li>
+<li>抽象类不能创建对象.</li>
+<li>如果一个类继承一个抽象类, 子类必须实现抽象类的抽象方法.</li>
+</ol>
+<h3 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h3><p>接口是对行为的抽象. 接口的定义:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IntefaceName</span> </span>&#123;</div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>接口可以含有变量和方法. 接口中的变量被隐式的指定为<code>public static final</code>变量. 方法会被隐式的制定为<code>public abstract</code>方法.</p>
+<p>接口中的方法必须是<code>public</code>的.</p>
+<p>接口中的方法必须是抽象的.</p>
+<p><strong>抽象类和接口的区别</strong></p>
+<ol>
+<li>语法上:<ul>
+<li>抽象类可以提供成员方法的实现细节, 而接口中只能存在public abstract方法</li>
+<li>抽象类中的成员变量可以是各种类型的, 而接口中的成员变量只能是public static final类型的</li>
+<li>接口中布恩感有静态代码块和静态方法. 抽象类可以有</li>
+<li>一个类只能继承一个抽象类, 可以实现多个接口</li>
+</ul>
+</li>
+<li>设计上<ul>
+<li>抽象类是类的抽象, 接口是对行为的抽象. 继承是一种”是不是”的关系, 接口是一种”有没有”的关系</li>
+<li>抽象类作为很多子类的父类, 是一种模板式设计. 接口是一种行为规范, 是辐射式设计.</li>
+</ul>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -284,7 +434,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-04T20:24:09+08:00">
                 2017-03-04
@@ -442,7 +592,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-03T15:38:33+08:00">
                 2017-03-03
@@ -596,7 +746,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-02T16:31:19+08:00">
                 2017-03-02
@@ -747,7 +897,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-01T09:45:55+08:00">
                 2017-03-01
@@ -911,7 +1061,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-01T00:21:14+08:00">
                 2017-03-01
@@ -1052,7 +1202,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-28T15:12:58+08:00">
                 2017-02-28
@@ -1197,7 +1347,7 @@
               
                 
                 <a class="post-title-link" href="/2017/02/24/Java继承/" itemprop="url">
-                  Unbenannt
+                  Untitled
                 </a>
               
             
@@ -1211,7 +1361,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-24T16:35:27+08:00">
                 2017-02-24
@@ -1441,7 +1591,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-24T11:22:08+08:00">
                 2017-02-24
@@ -1609,7 +1759,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-13T19:48:27+08:00">
                 2017-02-13
@@ -1709,318 +1859,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/02/08/Java基础/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Blue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blue的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/02/08/Java基础/" itemprop="url">
-                  Java基础-基本程序设计结构
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-08T15:21:43+08:00">
-                2017-02-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Java基础-基本程序设计结构"><a href="#Java基础-基本程序设计结构" class="headerlink" title="Java基础-基本程序设计结构"></a>Java基础-基本程序设计结构</h2><h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><p>Java中一共有8种基本类型</p>
-<ol>
-<li>4种整型(byte, short, int, long)</li>
-<li>2种浮点型(float, double)</li>
-<li>1种表示Unicode编码的字符单元的字符类型(char)</li>
-<li>1中表示真值的类型(boolean)</li>
-</ol>
-<h4 id="整型"><a href="#整型" class="headerlink" title="整型"></a>整型</h4><p>整型表示没有小数部分的数值, 允许是负数. Java提供4种整型.</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">类型</th>
-<th style="text-align:center">存储需求</th>
-<th style="text-align:center">取值范围</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">byte</td>
-<td style="text-align:center">1字节</td>
-<td style="text-align:center">-128 ~ 127</td>
-</tr>
-<tr>
-<td style="text-align:center">short</td>
-<td style="text-align:center">2字节</td>
-<td style="text-align:center">-32768 ~ 32787</td>
-</tr>
-<tr>
-<td style="text-align:center">int</td>
-<td style="text-align:center">4字节</td>
-<td style="text-align:center">-2^32 ~ 2^32 -1</td>
-</tr>
-<tr>
-<td style="text-align:center">long</td>
-<td style="text-align:center">8字节</td>
-<td style="text-align:center">-2^64 ~ 2^64 -1</td>
-</tr>
-</tbody>
-</table>
-<p>长整型数值有一个后缀L(40000L)</p>
-<p> 十六进制数值有一个前缀0x(0xCAFE)</p>
-<p>八进制数值前缀0(010)</p>
-<p>从Java 7开始, 加上前缀0b表示二进制数(0b1001)</p>
-<p>Java 没有任何无符号类型(unsigned)</p>
-<h4 id="浮点类型"><a href="#浮点类型" class="headerlink" title="浮点类型"></a>浮点类型</h4><p>浮点类型用于表示有小数部分的数值.</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">类型</th>
-<th style="text-align:center">存储需求</th>
-<th style="text-align:center">取值范围</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">float</td>
-<td style="text-align:center">4字节</td>
-<td style="text-align:center">大约正负3.40282347E+38F(有效位数为6 ~ 7 位)</td>
-</tr>
-<tr>
-<td style="text-align:center">double</td>
-<td style="text-align:center">8字节</td>
-<td style="text-align:center">大约正负1.797693134862315E+308(有效位数为15位)</td>
-</tr>
-</tbody>
-</table>
-<p>float 类型的数值有一个后缀F(3.14F), 没有后缀F的浮点数值(3.14)<strong>默认为double类型</strong></p>
-<p>表示溢出和出错情况的三个特殊的浮点数值:</p>
-<ul>
-<li>正无穷大(正整数除以0结果为无穷大) Double.POSITIVE_INFINITY</li>
-<li>负无穷大  Double.NEGATIVE_INFINITY</li>
-<li>NaN(0/0 或 负数平方根 不是一个数字) Double.NaN</li>
-</ul>
-<h4 id="char-类型"><a href="#char-类型" class="headerlink" title="char 类型"></a>char 类型</h4><p>char类型用于表示单个字符, 常用来表示字符常量. ‘A’是编码为65所对应的字符常量. 与”A”不通, “A”是一个包含字符A的字符串.</p>
-<p>在Java中, char类型用UTF-16编码描述一个代码单元.</p>
-<h4 id="boolean-类型"><a href="#boolean-类型" class="headerlink" title="boolean 类型"></a>boolean 类型</h4><p>boolean类型有两个值: false和true. 整型值和布尔值之间不能进行相互转换.</p>
-<h4 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h4><p>Java中, 每个变量属于一种类型. 声明变量时, 变量的类型位于变量名之前.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">double</span> salary;</div><div class="line"><span class="keyword">int</span> vacationDays;</div><div class="line"><span class="keyword">long</span> earthPopulation;</div><div class="line"><span class="keyword">boolean</span> done;</div></pre></td></tr></table></figure>
-<p><strong>每条语句必须以分号结束</strong></p>
-<p>变量名必须是一个以字母开头的由字母或数字构成的序列；</p>
-<p>变量名大小写敏感, 长度没有限制</p>
-<p><code>$</code>不能在代码中使用这个字符,  它只用在Java编译器或其它工具生成的名字中.</p>
-<p>声明一个变量后, 必须用赋值语句初始化. 不能使用<strong>未初始化</strong>的变量</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> vac;</div><div class="line">System.out.println(vac);<span class="comment">// Java编译器认为这是错误的</span></div></pre></td></tr></table></figure>
-<p>赋值: <code>int var=12;</code>.  可以在任何地方声明变量, 尽量在变量第一次使用的地方声明.</p>
-<h4 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h4><p>利用<code>final</code>关键字表示常量.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">final</span> <span class="keyword">double</span> CM_PER_INCH = <span class="number">2.54</span>;</div></pre></td></tr></table></figure>
-<p>关键字<code>final</code>表示这个变量只能被赋值一次.  不能在更改.  通常常量名使用全大写.</p>
-<h4 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h4><p>除法: 当除数与被除数都是整数时, 表示整数除法; 否则, 表示浮点出发.</p>
-<p>整数被0除会产生一个异常. 浮点数被0除会得到无穷大或者NaN</p>
-<p>自增或自减运算符改变了变量的值, 它们的操作数不能是数值. (4++是非法的语句)</p>
-<p><code>++n</code> 先进行加1运算</p>
-<p><code>n++</code>则使用变量原来的值</p>
-<p><code>&amp;&amp;</code> 和<code>||</code>是按照”短路”方式求值的. <code>a&amp;&amp;b</code>如果a=false, 结果不可能为真,因此b的值没有必要计算.</p>
-<p>三元操作符: condition ? e1:e2</p>
-<h4 id="数值类型之间的转换"><a href="#数值类型之间的转换" class="headerlink" title="数值类型之间的转换"></a>数值类型之间的转换</h4><p>安全转换: byte -&gt; short -&gt; int -&gt; long; char -&gt; int;  int -&gt; double;</p>
-<p>不安全转换: int -&gt; float; long -&gt; float; long -&gt; double;</p>
-<p>两个类型不一样的数进行二元操作时, 其中一个数的类型的取值范围小于另一个数, 则取值范围较小的那个数会转换为取值范围较大的类型.</p>
-<ul>
-<li>如果两个操作数中有一个是double类型, 另一个操作数就会转为double类型</li>
-</ul>
-<h4 id="运算符优先级"><a href="#运算符优先级" class="headerlink" title="运算符优先级"></a>运算符优先级</h4><table>
-<thead>
-<tr>
-<th>运算符</th>
-<th>结合性</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>[], () (方法调用)</td>
-<td>从左向右</td>
-</tr>
-<tr>
-<td>!, ~, ++, –, +(一元运算), -(二元运算), ()(强制类型转换), new</td>
-<td>从右向左</td>
-</tr>
-<tr>
-<td>*, /, %</td>
-<td>从左向右</td>
-</tr>
-<tr>
-<td>从左向右</td>
-<td>从左向右</td>
-</tr>
-<tr>
-<td>&lt;&lt;, &gt;&gt;, &gt;&gt;&gt;</td>
-<td>从左向右</td>
-</tr>
-<tr>
-<td>&lt;, &lt;=, &gt;, &gt;=, instanceof</td>
-<td>从左向右</td>
-</tr>
-<tr>
-<td>==, !=</td>
-<td>从左向右</td>
-</tr>
-<tr>
-<td>&amp;</td>
-<td>从左向右</td>
-</tr>
-<tr>
-<td>^</td>
-<td>从左向右</td>
-</tr>
-<tr>
-<td>\</td>
-<td></td>
-<td>从左向右</td>
-</tr>
-<tr>
-<td>&amp;&amp;</td>
-<td>从左向右</td>
-</tr>
-<tr>
-<td>\</td>
-<td>\</td>
-<td></td>
-<td>从左向右</td>
-</tr>
-<tr>
-<td>?:(三元运算)</td>
-<td>从右向左</td>
-</tr>
-<tr>
-<td>=, +=, -=, *=, /=, %=, &amp;=, \</td>
-<td>=, ^=, &lt;&lt;=, &gt;&gt;=, &gt;&gt;&gt;=</td>
-<td>从右向左</td>
-</tr>
-</tbody>
-</table>
-<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><p>使用<code>+</code>号连接两个字符串</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">String s1 = <span class="string">"Hello, "</span>;</div><div class="line">String s2 = <span class="string">"World"</span>;</div><div class="line">String message = s1 + s2;</div></pre></td></tr></table></figure>
-<p>使用equals方法判断两个字符串是否相等.</p>
-<p><code>s1 == s2</code>只能判断两个字符串是否存放在内存的同一个位置.</p>
-<h3 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a>流程控制</h3><h4 id="条件语句"><a href="#条件语句" class="headerlink" title="条件语句"></a>条件语句</h4><p>语法: <code>if (condition) statement</code></p>
-<h4 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h4><p>while语法:<code>while (condition) statement</code></p>
-<p>do-while语法: <code>do statement while (condition)</code></p>
-<p>for 语法: <code>for (int i=0; i&lt;10; i++) {}</code></p>
-<h4 id="switch-语句"><a href="#switch-语句" class="headerlink" title="switch 语句"></a>switch 语句</h4><p>语法: </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">switch</span>(condition) &#123;</div><div class="line">  <span class="keyword">case</span> case1:</div><div class="line">    ...</div><div class="line">      <span class="keyword">break</span>;</div><div class="line">  <span class="keyword">case</span> case2:</div><div class="line">    ...</div><div class="line">      <span class="keyword">break</span>;</div><div class="line">  <span class="keyword">default</span>:</div><div class="line">    ...</div><div class="line">      <span class="keyword">break</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>switch语句从与选项值相匹配的case标签处开始执行, 知道遇到break语句, 或执行到switch语句的结束为止. 没有匹配的case标签, 而有default字句, 就执行default字句.</p>
-<p>如果case分支语句末尾没有break语句, 就会接着执行下一个case分支语句.</p>
-<p>case 标签可以是</p>
-<ul>
-<li>类型为char, byte, short, int(或其包装器类Character, Byte, Short, Integer)的常量表达式</li>
-<li>枚举常量</li>
-<li>Java SE 7开始, case标签可以是字符串字面量</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">String input = <span class="string">""</span>;</div><div class="line"><span class="keyword">switch</span> (input) &#123;</div><div class="line">  <span class="keyword">case</span> <span class="string">"yes"</span>:</div><div class="line">    <span class="keyword">break</span>;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="break语句"><a href="#break语句" class="headerlink" title="break语句"></a>break语句</h4><p>带标签的break语句</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">read_date:</div><div class="line"><span class="keyword">while</span> (a) &#123;</div><div class="line">  <span class="keyword">for</span> (...) &#123;</div><div class="line">    ...</div><div class="line">      <span class="keyword">if</span>(b) &#123;</div><div class="line">        <span class="keyword">break</span> read_date;</div><div class="line">      &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2070,8 +1908,8 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">48</span>
-                <span class="site-state-item-name">Artikel</span>
+                <span class="site-state-item-count">49</span>
+                <span class="site-state-item-name">posts</span>
               </a>
             </div>
           
@@ -2084,7 +1922,7 @@
             <div class="site-state-item site-state-tags">
               
                 <span class="site-state-item-count">4</span>
-                <span class="site-state-item-name">Tags</span>
+                <span class="site-state-item-name">tags</span>
               
             </div>
           
@@ -2134,7 +1972,7 @@
 
 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">

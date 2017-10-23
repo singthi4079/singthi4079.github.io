@@ -194,7 +194,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Home
+            Startseite
           </a>
         </li>
       
@@ -204,7 +204,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archives
+            Archiv
           </a>
         </li>
       
@@ -237,6 +237,340 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/03/09/Java反射机制/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Blue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blue的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/09/Java反射机制/" itemprop="url">
+                  Java反射机制
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-09T10:28:12+08:00">
+                2017-03-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>反射机制是指在运行状态中, 对任意一个类, 都能够知道这个类的所有属性和方法; 多任何一个对象, 都能够调用它的任何一个方法. </p>
+<p>静态编译: 在编译时确定类型, 绑定对象</p>
+<p>动态编译: 运行时确定类型, 绑定对象. 发挥Java的灵活性, 体现多态的应用, 降低耦合.</p>
+<p>使用反射的优点: 实现动态创建对象和编译, 灵活.</p>
+<p>缺点: 对性能有影响. 使用反射比直接执行相同操作要慢.</p>
+<h3 id="Class类"><a href="#Class类" class="headerlink" title="Class类"></a>Class类</h3><p>每个类都是<code>Class</code>类的实例. 普通类创建实例的方法:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">A a = <span class="keyword">new</span> A();</div></pre></td></tr></table></figure>
+<p>Class类的构造函数是私有的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="title">Class</span><span class="params">(ClassLoader loader)</span> </span>&#123;</div><div class="line">  classLoader = loader;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>不能像创建普通类的实例对象一样创建Class类的实例. 有三种方法可以说创建Class对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 每个类都有一个隐含的静态成员变量class</span></div><div class="line">Class c1 = Code.class;</div><div class="line"></div><div class="line"><span class="comment">// code1是Code类的一个实例, 通过一个类的对象的getClass()方法获取Class对象</span></div><div class="line">Class c2 = code1.getClass();</div><div class="line"></div><div class="line"><span class="comment">// 调用Class类的forName方法, 通过类的全量限定名获取Class实例</span></div><div class="line">Class c3 = Class.forName(<span class="string">"com.ex.code.Code"</span>);</div></pre></td></tr></table></figure>
+<p>c1, c2, c3都是Class类的实例对象, 称为类类型. 类类型描述一个类是什么, 都有哪些方法和成员变量.</p>
+<p>1: 获取类名</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">    Class c1 = A.class;</div><div class="line">    System.out.println(c1.getName());</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>获取成员方法信息</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 两个参数分别是方法名和方法参数类的类类型列表</span></div><div class="line"><span class="function"><span class="keyword">public</span> Method <span class="title">getDeclaredMethod</span><span class="params">(String name, Class&lt;?&gt;... parameterTypes)</span> <span class="comment">// 得到该类所有的方法</span></span></div><div class="line"><span class="keyword">public</span> Method <span class="title">getMethod</span><span class="params">(String name, Class&lt;?&gt;... parameterTypes)</span> <span class="comment">// 得到该类所有的public方法，包括父类的</span></div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fun</span><span class="params">(String name, <span class="keyword">int</span> age)</span> </span>&#123;</div><div class="line">    System.out.println(<span class="string">"name is "</span> + name + <span class="string">", age is "</span> + age);</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String []args)</span> </span>&#123;</div><div class="line">    Class c = A.class;</div><div class="line">    A a = (A) c.newInstance(); <span class="comment">// 使用newInstance创建一个类的实例</span></div><div class="line">    Method m = c.getMethod(<span class="string">"fun"</span>, String.class, <span class="keyword">int</span>.class); <span class="comment">// 获取方法实例</span></div><div class="line">    m.invoke(a, <span class="string">"h"</span>, <span class="number">10</span>); <span class="comment">// 调用invoke方法, 调用fun方法, 需要传入一个实例对象和具体的参数</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>获取所有成员方法</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectDemo</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            Class c = Class.forName(<span class="string">"com.tengj.reflect.Person"</span>);</div><div class="line">            Method[] methods = c.getDeclaredMethods();</div><div class="line">            <span class="keyword">for</span>(Method m:methods)&#123;</div><div class="line">                String  methodName= m.getName();</div><div class="line">                System.out.println(methodName);</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>获取成员变量信息</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> Field <span class="title">getDeclaredField</span><span class="params">(String name)</span> <span class="comment">// 获得该类自身声明的所有变量</span></span></div><div class="line"><span class="keyword">public</span> Field <span class="title">getField</span><span class="params">(String name)</span> <span class="comment">// 获得该类自所有的public成员变量，包括其父类变量</span></div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectDemo</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            Class c = Class.forName(<span class="string">"com.tengj.reflect.Person"</span>);</div><div class="line">            <span class="comment">//获取成员变量</span></div><div class="line">            Field field = c.getDeclaredField(<span class="string">"msg"</span>); <span class="comment">//因为msg变量是private的，所以不能用getField方法</span></div><div class="line">            Object o = c.newInstance();</div><div class="line">            field.setAccessible(<span class="keyword">true</span>);<span class="comment">//设置是否允许访问，因为该变量是private的，所以要手动设置允许访问，如果msg是public的就不需要这行了。</span></div><div class="line">            Object msg = field.get(o);</div><div class="line">            System.out.println(msg);</div><div class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>获取所有成员变量</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectDemo</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            Class c = Class.forName(<span class="string">"com.tengj.reflect.Person"</span>);</div><div class="line">            Field[] fields = c.getDeclaredFields();</div><div class="line">            <span class="keyword">for</span>(Field field :fields)&#123;</div><div class="line">                System.out.println(field.getName());</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>获取构造函数</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> Constructor&lt;T&gt; <span class="title">getDeclaredConstructor</span><span class="params">(Class&lt;?&gt;... parameterTypes)</span> <span class="comment">//  获得该类所有的构造器</span></span></div><div class="line"><span class="keyword">public</span> Constructor&lt;T&gt; <span class="title">getConstructor</span><span class="params">(Class&lt;?&gt;... parameterTypes)</span> <span class="comment">// 获得该类所以public构造器，包括父类</span></div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectDemo</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            Class c = Class.forName(<span class="string">"com.tengj.reflect.Person"</span>);</div><div class="line">            <span class="comment">//获取构造函数</span></div><div class="line">            Constructor constructor = c.getDeclaredConstructor(String.class);</div><div class="line">            constructor.setAccessible(<span class="keyword">true</span>);<span class="comment">//设置是否允许访问，因为该构造器是private的，所以要手动设置允许访问，如果构造器是public的就不需要这行了。</span></div><div class="line">            constructor.newInstance(<span class="string">"tengj"</span>);</div><div class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>Class的newInstance方法，只能创建只包含无参数的构造函数的类，如果某类只有带参数的构造函数，那么就要使用另外一种方式：fromClass.getDeclaredConstructor(String.class).newInstance(“tengj”);</p>
+</blockquote>
+<p><strong>获取所有构造函数</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectDemo</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">            Constructor[] constructors = c.getDeclaredConstructors();</div><div class="line">            <span class="keyword">for</span>(Constructor constructor:constructors)&#123;</div><div class="line">                System.out.println(constructor);</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/03/08/Java内部类/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Blue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blue的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/08/Java内部类/" itemprop="url">
+                  Java内部类
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-08T16:13:52+08:00">
+                2017-03-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>内部类是指在一个外部类内部再定义一个类. 内部类作为外部类的一个成员, 依附于外部类存在.</p>
+<p>内部类可以是静态的, 可以用<code>protected</code>和<code>private</code>修饰. 内部类有以下几类: 成员内部类, 局部内部类, 静态内部类, 匿名内部类.</p>
+<p>内部类的共性:</p>
+<ol>
+<li>内部类也是一个独立的类, 在编译后内部类被编译成独立的.class文件.</li>
+<li>内部类不能用普通的方式访问</li>
+<li>内部类被声明为静态的, 就不能访问外部类的成员变量, 只能访问外部类的静态成员变量</li>
+<li>外部类不能直接访问内部类的成员, 需要通过内部类对象访问</li>
+</ol>
+<p>内部类可以自由的访问外部类的成员变量, 不管是否是<code>private</code>的</p>
+<p>因为当外部类的对象创建内部类对象时, 内部类会得到一个外部类对象的引用, 通过这个引用, 可以访问外部类对象的全部状态.</p>
+<ol>
+<li>编译器自动为内部类创建一个外部类的成员变量, 这个变量指向外部类对象的.</li>
+<li>编译器自动为内部类的构造方法添加一个外部类类型的参数. 并在构造方法中为外部类类型的成员变量赋值.</li>
+<li>调用内部类的构造函数初始化内部类对象时, 默认传入外部类的引用.</li>
+</ol>
+<p><strong>使用内部类的原因</strong></p>
+<ul>
+<li><p>内部类方法可以访问外部类定义的所有成员变量, 包括私有成员变量</p>
+</li>
+<li><p>对同一个包中其他类隐藏</p>
+</li>
+<li><p>实现多重继承</p>
+</li>
+<li><p>回调函数(匿名内部类比较便捷)</p>
+<p>多重继承的例子:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Example1</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">name</span><span class="params">()</span></span>&#123;</div><div class="line">       <span class="keyword">return</span> <span class="string">"liutao"</span>;</div><div class="line">   &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Example2</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">age</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="number">25</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainExample</span> </span>&#123;</div><div class="line"></div><div class="line">   <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">test1</span> <span class="keyword">extends</span> <span class="title">Example1</span></span>&#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">name</span><span class="params">()</span></span>&#123;</div><div class="line">          <span class="keyword">return</span> <span class="keyword">super</span>.name();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">test2</span> <span class="keyword">extends</span> <span class="title">Example2</span> </span>&#123;</div><div class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">age</span><span class="params">()</span></span>&#123;</div><div class="line">         <span class="keyword">return</span> <span class="keyword">super</span>.age();</div><div class="line">       &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">public</span> String <span class="title">name</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> test1().name(); </div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">age</span><span class="params">()</span></span>&#123;</div><div class="line">       <span class="keyword">return</span> <span class="keyword">new</span> test2().age();</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</div><div class="line">       MainExample mi=<span class="keyword">new</span> MainExample();</div><div class="line">       System.out.println(<span class="string">"姓名:"</span>+mi.name());</div><div class="line">       System.out.println(<span class="string">"年龄:"</span>+mi.age());</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="成员内部类"><a href="#成员内部类" class="headerlink" title="成员内部类"></a>成员内部类</h3><p>在一个类中直接定义内部类, 成员内部类和普通成员没什么区别. 成员内部类不能含有static的变量和方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Outer</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> i = <span class="number">1</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> j = <span class="number">10</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> k = <span class="number">20</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">outer_f1</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">outer_f2</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line"></div><div class="line">    <span class="comment">// 成员内部类中，不能定义静态成员</span></div><div class="line">    <span class="comment">// 成员内部类中，可以访问外部类的所有成员</span></div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Inner</span> </span>&#123;</div><div class="line">        <span class="comment">// static int inner_i = 100;//内部类中不允许定义静态变量</span></div><div class="line">        <span class="keyword">int</span> j = <span class="number">100</span>; <span class="comment">// 内部类和外部类的实例变量可以共存</span></div><div class="line">        <span class="keyword">int</span> inner_i = <span class="number">1</span>;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">void</span> <span class="title">inner_f1</span><span class="params">()</span> </span>&#123;</div><div class="line">            System.out.println(i);</div><div class="line">            <span class="comment">// 在内部类中访问内部类自己的变量直接用变量名</span></div><div class="line">            System.out.println(j);</div><div class="line">            <span class="comment">// 在内部类中访问内部类自己的变量也可以用this.变量名</span></div><div class="line">            System.out.println(<span class="keyword">this</span>.j);</div><div class="line">            <span class="comment">// 在内部类中访问外部类中与内部类同名的实例变量用外部类名.this.变量名</span></div><div class="line">            System.out.println(Outer.<span class="keyword">this</span>.j);</div><div class="line">            <span class="comment">// 如果内部类中没有与外部类同名的变量，则可以直接用变量名访问外部类变量</span></div><div class="line">            System.out.println(k);</div><div class="line">            outer_f1();</div><div class="line">            outer_f2();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 外部类的非静态方法访问成员内部类</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">outer_f3</span><span class="params">()</span> </span>&#123;</div><div class="line">        Inner inner = <span class="keyword">new</span> Inner();</div><div class="line">        inner.inner_f1();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 外部类的静态方法访问成员内部类，与在外部类外部访问成员内部类一样</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">outer_f4</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// step1 建立外部类对象</span></div><div class="line">        Outer out = <span class="keyword">new</span> Outer();</div><div class="line">        <span class="comment">// step2 根据外部类对象建立内部类对象</span></div><div class="line">        Inner inner = out.new Inner();</div><div class="line">        <span class="comment">// step3 访问内部类的方法</span></div><div class="line">        inner.inner_f1();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="comment">//outer_f4();//该语句的输出结果和下面三条语句的输出结果一样</span></div><div class="line">        <span class="comment">// 如果要直接创建内部类的对象，不能想当然地认为只需加上外围类Outer的名字，</span></div><div class="line">        <span class="comment">// 就可以按照通常的样子生成内部类的对象，而是必须使用此外围类的一个对象来</span></div><div class="line">        <span class="comment">// 创建其内部类的一个对象：</span></div><div class="line">        <span class="comment">// Outer.Inner outin = out.new Inner()</span></div><div class="line">        <span class="comment">// 因此，除非你已经有了外围类的一个对象，否则不可能生成内部类的对象。因为此</span></div><div class="line">        <span class="comment">// 内部类的对象会悄悄地链接到创建它的外围类的对象。如果你用的是静态的内部类，</span></div><div class="line">        <span class="comment">// 那就不需要对其外围类对象的引用。</span></div><div class="line">        Outer out = <span class="keyword">new</span> Outer();</div><div class="line">        Outer.Inner outin = out.new Inner();</div><div class="line">        outin.inner_f1();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="局部内部类"><a href="#局部内部类" class="headerlink" title="局部内部类"></a>局部内部类</h3><p>在方法中定义的类称为局部内部类. 和局部变量类似,  只能访问当前代码块内的常量, 和外部类的所有成员.</p>
+<blockquote>
+<ol>
+<li>局部内部类只能在定义该内部类的方法实例化, 不能在此方法外对其实例化</li>
+<li>局部内部类对象不能使用该内部类所在方法的非final局部变量</li>
+</ol>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Outer</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> s = <span class="number">100</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> out_i = <span class="number">1</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">(<span class="keyword">final</span> <span class="keyword">int</span> k)</span> </span>&#123;</div><div class="line">        <span class="keyword">final</span> <span class="keyword">int</span> s = <span class="number">200</span>;</div><div class="line">        <span class="keyword">int</span> i = <span class="number">1</span>;</div><div class="line">        <span class="keyword">final</span> <span class="keyword">int</span> j = <span class="number">10</span>;</div><div class="line"></div><div class="line">        <span class="comment">// 定义在方法内部</span></div><div class="line">        <span class="class"><span class="keyword">class</span> <span class="title">Inner</span> </span>&#123;</div><div class="line">            <span class="keyword">int</span> s = <span class="number">300</span>;<span class="comment">// 可以定义与外部类同名的变量</span></div><div class="line"></div><div class="line">            <span class="comment">// static int m = 20;//不可以定义静态变量</span></div><div class="line">            Inner(<span class="keyword">int</span> k) &#123;</div><div class="line">                inner_f(k);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="keyword">int</span> inner_i = <span class="number">100</span>;</div><div class="line"></div><div class="line">            <span class="function"><span class="keyword">void</span> <span class="title">inner_f</span><span class="params">(<span class="keyword">int</span> k)</span> </span>&#123;</div><div class="line">                <span class="comment">// 如果内部类没有与外部类同名的变量，在内部类中可以直接访问外部类的实例变量</span></div><div class="line">                System.out.println(out_i);</div><div class="line">                <span class="comment">// 可以访问外部类的局部变量(即方法内的变量)，但是变量必须是final的</span></div><div class="line">                System.out.println(j);</div><div class="line">                <span class="comment">// System.out.println(i);</span></div><div class="line">                <span class="comment">// 如果内部类中有与外部类同名的变量，直接用变量名访问的是内部类的变量</span></div><div class="line">                System.out.println(s);</div><div class="line">                <span class="comment">// 用this.变量名访问的也是内部类变量</span></div><div class="line">                System.out.println(<span class="keyword">this</span>.s);</div><div class="line">                <span class="comment">// 用外部类名.this.内部类变量名访问的是外部类变量</span></div><div class="line">                System.out.println(Outer.<span class="keyword">this</span>.s);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">new</span> Inner(k);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="comment">// 访问局部内部类必须先有外部类对象</span></div><div class="line">        Outer out = <span class="keyword">new</span> Outer();</div><div class="line">        out.f(<span class="number">3</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="静态内部类"><a href="#静态内部类" class="headerlink" title="静态内部类"></a>静态内部类</h3><p>普通内部类对象隐含一个指向外部类对象的引用. 而静态内部类不是这样的</p>
+<ol>
+<li>不需要外部类的对象就可以创建静态内部类的对象</li>
+<li>不能从静态内部类的对象访问非静态的外部类对象</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Outer</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> i = <span class="number">1</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> j = <span class="number">10</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">outer_f1</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">outer_f2</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line"></div><div class="line">    <span class="comment">// 静态内部类可以用public,protected,private修饰</span></div><div class="line">    <span class="comment">// 静态内部类中可以定义静态或者非静态的成员</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Inner</span> </span>&#123;</div><div class="line">        <span class="keyword">static</span> <span class="keyword">int</span> inner_i = <span class="number">100</span>;</div><div class="line">        <span class="keyword">int</span> inner_j = <span class="number">200</span>;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">inner_f1</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="comment">// 静态内部类只能访问外部类的静态成员(包括静态变量和静态方法)</span></div><div class="line">            System.out.println(<span class="string">"Outer.i"</span> + i);</div><div class="line">            outer_f1();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">void</span> <span class="title">inner_f2</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="comment">// 静态内部类不能访问外部类的非静态成员(包括非静态变量和非静态方法)</span></div><div class="line">            <span class="comment">// System.out.println("Outer.i"+j);</span></div><div class="line">            <span class="comment">// outer_f2();</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">outer_f3</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// 外部类访问内部类的静态成员：内部类.静态成员</span></div><div class="line">        System.out.println(Inner.inner_i);</div><div class="line">        Inner.inner_f1();</div><div class="line">        <span class="comment">// 外部类访问内部类的非静态成员:实例化内部类即可</span></div><div class="line">        Inner inner = <span class="keyword">new</span> Inner();</div><div class="line">        inner.inner_f2();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="keyword">new</span> Outer().outer_f3();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>静态内部类的实例可以通过这样创建</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Outer.Inner in = <span class="keyword">new</span> Outer.Inner();</div></pre></td></tr></table></figure>
+<h3 id="匿名内部类"><a href="#匿名内部类" class="headerlink" title="匿名内部类"></a>匿名内部类</h3><p>什么时候需要使用匿名内部类:</p>
+<ul>
+<li>只用到类的一个实例</li>
+<li>类定义后马上用刀</li>
+<li>类非常小</li>
+<li>给类命名并不会导致你的代码更容易被理解</li>
+</ul>
+<p>原则:</p>
+<ul>
+<li>匿名内部类不能有构造方法</li>
+<li>不能定义任何静态成员变量, 方法, 类</li>
+<li>不能使用public, protected, private, static</li>
+<li>只能创建一个实例</li>
+<li>匿名内部类事局部内部类</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -284,7 +618,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-08T15:12:22+08:00">
                 2017-03-08
@@ -434,7 +768,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-04T20:24:09+08:00">
                 2017-03-04
@@ -592,7 +926,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-03T15:38:33+08:00">
                 2017-03-03
@@ -746,7 +1080,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-02T16:31:19+08:00">
                 2017-03-02
@@ -897,7 +1231,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-01T09:45:55+08:00">
                 2017-03-01
@@ -1061,7 +1395,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-01T00:21:14+08:00">
                 2017-03-01
@@ -1202,7 +1536,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-28T15:12:58+08:00">
                 2017-02-28
@@ -1347,7 +1681,7 @@
               
                 
                 <a class="post-title-link" href="/2017/02/24/Java继承/" itemprop="url">
-                  Untitled
+                  Unbenannt
                 </a>
               
             
@@ -1361,7 +1695,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-24T16:35:27+08:00">
                 2017-02-24
@@ -1545,325 +1879,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/02/24/Java面向对象特性：封装、继承、多态、抽象/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Blue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blue的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/02/24/Java面向对象特性：封装、继承、多态、抽象/" itemprop="url">
-                  Java面向对象特性：封装、继承、多态
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-24T11:22:08+08:00">
-                2017-02-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Java面向对象特性：封装、继承、多态"><a href="#Java面向对象特性：封装、继承、多态" class="headerlink" title="Java面向对象特性：封装、继承、多态"></a>Java面向对象特性：封装、继承、多态</h2><h3 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h3><h4 id="封装的定义"><a href="#封装的定义" class="headerlink" title="封装的定义"></a>封装的定义</h4><p>在面向对象程式设计方法中，封装（英语：Encapsulation）是指，一种将抽象性函式接口的实作细节部份包装、隐藏起来的方法。</p>
-<h4 id="封装有什么作用"><a href="#封装有什么作用" class="headerlink" title="封装有什么作用"></a>封装有什么作用</h4><ol>
-<li>良好的封装能够减少耦合;</li>
-<li>类内部的结构可以自由修改;</li>
-<li>可以对成员变量进行更精确的控制;</li>
-<li>隐藏信息，实现细节.</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Man</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> String name;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> age;</div><div class="line">	<span class="keyword">private</span> Woman wife;</div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> name;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.name = name;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> age;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.age = age;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setWife</span><span class="params">(Woman wife)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.wife = wife;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Woman</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> String name;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> age;</div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> name;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.name = name;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.age = age;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>以上代码定义了一个Man类和一个Woman类, 其中Woman类中的<code>age</code>成员变量没有访问方法<code>getter</code>, 而Man类中的<code>wife</code>成员变量也没有访问方法. 因为每个女人都不想让别人知道自己的年龄, 而男人则不想将自己的wife给别人使用. 这样就是<strong>隐藏信息</strong>. </p>
-<p>考虑以下情况是否正确</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Woman w = <span class="keyword">new</span> Waman();</div><div class="line">w.setAge(<span class="number">300</span>);</div></pre></td></tr></table></figure>
-<p>这段代码定义了一个Woman对象w, 并设置她的age为300, 实际情况中是不存在的. 所以需要对age变量的setter方法进行限制.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Woman</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> String name;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> age;</div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> name;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.name = name;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</div><div class="line">		<span class="keyword">if</span> (age &gt; <span class="number">120</span>) </div><div class="line">			System.out.println(<span class="string">"输入错误"</span>);</div><div class="line">		<span class="keyword">this</span>.age = age;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这里只需要在Woman类中修改相关代码即可, 而不需要修改使用Woman对象的地方. </p>
-<p>如果由于某些不可描述的原因需要把age的类型改为String, 也只需要在age的setter方法处修改一次即可.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Woman</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> String name;</div><div class="line">	<span class="keyword">private</span> String age;</div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> name;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.name = name;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">		<span class="keyword">if</span> (age &gt; <span class="number">120</span>) </div><div class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> Exception(<span class="string">"输入错误"</span>);</div><div class="line">		<span class="keyword">this</span>.age = String.valueOf(age);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>再看看不封装的情况. Woman类的定义就变成这样了.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Woman</span> </span>&#123;</div><div class="line">	<span class="keyword">public</span> String name;</div><div class="line">	<span class="keyword">public</span> <span class="keyword">int</span> age;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>假设A类和B类都需要使用Woman对象</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</div><div class="line">  Woman w = <span class="keyword">new</span> Woman();</div><div class="line">  w.name=<span class="string">"A1"</span>;</div><div class="line">  w.age=<span class="number">18</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</div><div class="line">  Woman w = <span class="keyword">new</span> Woman();</div><div class="line">  w.name=<span class="string">"B1"</span>;</div><div class="line">  w.age=<span class="number">18</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>如果需求改变, 要求把Woman类的age的类型改为String类型, 这时就需要在A类和B类修改.</p>
-<h4 id="如何实现封装"><a href="#如何实现封装" class="headerlink" title="如何实现封装"></a>如何实现封装</h4><p>Java中通过各种访问限定符实现数据封装, 共分为四种访问级别: private, friendly, protected, public.</p>
-<ol>
-<li><p>使用访问限定修饰符修饰类的实例变量或方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Woman</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> String name;</div><div class="line">	<span class="keyword">private</span> String age;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>​</p>
-</li>
-<li><p>对外提供公共的访问方法, 访问或修改类中的方法和实力变量. 可以在访问方法中对变量进行其它限制. 如: 年龄不能大于100.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Woman</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> String name;</div><div class="line">	<span class="keyword">private</span> String age;</div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> name;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.name = name;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">		<span class="keyword">if</span> (age &gt; <span class="number">120</span>) </div><div class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> Exception(<span class="string">"输入错误"</span>);</div><div class="line">		<span class="keyword">this</span>.age = String.valueOf(age);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><h4 id="继承的定义"><a href="#继承的定义" class="headerlink" title="继承的定义"></a>继承的定义</h4><p>继承就是子类继承父类的特征和行为，使得子类对象（实例）具有父类的实例域和方法，或子类从父类继承方法，使得子类具有父类相同的行为。</p>
-<h4 id="继承有什么作用"><a href="#继承有什么作用" class="headerlink" title="继承有什么作用"></a>继承有什么作用</h4><ol>
-<li>服用以前的代码, 提高开发效率</li>
-<li>让类与类之间产生了关系，是<strong>多态的前提</strong></li>
-</ol>
-<p>每个人都会有身高、体重、年龄、性别等属性, 而男人与女人之间不是完全一样的. 所以在设计的时候可以将人抽象为一个类, 存放男人和女人公共的属性, 再定一个一个男人类和一个女人类, 继承人这个类.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> String name;</div><div class="line">	<span class="keyword">private</span> String sex;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> age;</div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> name;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.name = name;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getSex</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> sex;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setSex</span><span class="params">(String sex)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.sex = sex;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> age;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.age = age;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Man</span> <span class="keyword">extends</span> <span class="title">Person</span> </span>&#123;</div><div class="line">	</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Woman</span> <span class="keyword">extends</span> <span class="title">Person</span> </span>&#123;</div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>Man继承Person类后, Man类就拥有Person类的属性、方法; 在Man类中还可以定义自己独有的实例变量和方法.</p>
-<p>同时在使用继承时需要记住三句话：</p>
-<ol>
-<li>子类拥有父类非private的属性和方法。</li>
-<li>子类可以拥有自己属性和方法，即子类可以对父类进行扩展。</li>
-<li>子类可以用自己的方式实现父类的方法。</li>
-</ol>
-<h3 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h3><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>多态就是指程序中定义的引用变量所指向的具体类型和通过该引用变量发出的方法调用在编程时并不确定，而是在程序运行期间才确定，即一个引用变量倒底会指向哪个类的实例对象，该引用变量发出的方法调用到底是哪个类中实现的方法，必须在由程序运行期间才能决定。因为在程序运行时才确定具体的类，这样，不用修改源程序代码，就可以让引用变量绑定到各种不同的类实现上，从而导致该引用调用的具体方法随之改变，即不修改程序代码就可以改变程序运行时所绑定的具体代码，让程序可以选择多个运行状态，这就是多态性。</p>
-<p>简单说就是父类对象引用子类对象. B类继承A类. </p>
-<p><code>A a = new B();</code></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/02/13/Java基础-对象与类/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Blue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blue的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/02/13/Java基础-对象与类/" itemprop="url">
-                  Java基础-对象与类
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-13T19:48:27+08:00">
-                2017-02-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Java基础-对象与类"><a href="#Java基础-对象与类" class="headerlink" title="Java基础-对象与类"></a>Java基础-对象与类</h2><p><strong>类</strong>是构造对象的木板或蓝图. 由类构造对象的过程称为创建类的实例.</p>
-<p>对象的三个主要特性:</p>
-<ul>
-<li>对象的行为 — 可以对对象施加哪些操作, 或可以对对象施加哪些方法</li>
-<li>对象的状态 — 当施加那些方法时, 对象如何响应</li>
-<li>对象标识 — 如何辨别具有相同行为与状态的不同对象</li>
-</ul>
-<p>类之间的关系</p>
-<ul>
-<li>依赖(uses-a)</li>
-<li>聚合(has-a)</li>
-<li>继承(is-a)</li>
-</ul>
-<p><em>依赖</em>是uses-a关系, A类需要访问B类中的某个属性或方法. 一个类的方法操纵另一个类的对象. 应该尽可能减少类的相互依赖.</p>
-<p><em>聚合</em>是has-a关系, 类A的对象包含类B的对象.</p>
-<p><em>继承</em>是is-a关系, 是一种表示特殊与一般的关系.</p>
-<p>构造器的名字与类名相同.</p>
-<p>一个对象变量并没有包含一个对象, 而是引用对象.</p>
-<p><code>Date d = new Date();</code></p>
-<p>这条语句由两个部分</p>
-<ol>
-<li><code>new Date()</code>构造了一个Date类型的对象</li>
-<li>把新创建的Date对象的引用存储到变量<code>d</code>中</li>
-</ol>
-<p>局部变量不会自动初始化, 只有实例变量才会自动初始化.</p>
-<p>public类的名字必须与文件名相同, 在一个源文件中, 只能有一个公共类, 可以有任意个非公共类.</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1908,8 +1928,8 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">49</span>
-                <span class="site-state-item-name">posts</span>
+                <span class="site-state-item-count">51</span>
+                <span class="site-state-item-name">Artikel</span>
               </a>
             </div>
           
@@ -1922,7 +1942,7 @@
             <div class="site-state-item site-state-tags">
               
                 <span class="site-state-item-count">4</span>
-                <span class="site-state-item-name">tags</span>
+                <span class="site-state-item-name">Tags</span>
               
             </div>
           
@@ -1972,7 +1992,7 @@
 
 
 <div class="powered-by">
-  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">

@@ -194,7 +194,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Home
+            Startseite
           </a>
         </li>
       
@@ -204,7 +204,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archives
+            Archiv
           </a>
         </li>
       
@@ -237,6 +237,279 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/10/23/Java高并发程序设计读书笔记-锁优化及注意事项-ThreadLocal/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Blue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blue的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/10/23/Java高并发程序设计读书笔记-锁优化及注意事项-ThreadLocal/" itemprop="url">
+                  Java高并发程序设计读书笔记-锁优化及注意事项-ThreadLocal
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-23T22:17:17+08:00">
+                2017-10-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/10/23/Java高并发程序设计读书笔记-锁优化及注意事项-几点建议/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Blue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blue的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/10/23/Java高并发程序设计读书笔记-锁优化及注意事项-几点建议/" itemprop="url">
+                  Java高并发程序设计读书笔记-锁优化及注意事项-几点建议
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-23T21:01:59+08:00">
+                2017-10-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>锁的竞争必然会导致程序的整体性能下降. 一下几点建议可以优化程序性能.</p>
+<h3 id="减小锁持有时间"><a href="#减小锁持有时间" class="headerlink" title="减小锁持有时间"></a>减小锁持有时间</h3><p>对于使用锁进行并发控制的程序而言, 锁竞争过程中, 单个线程对锁的持有时间与系统性能有直接关系.</p>
+<p>持有锁时间长, 锁的竞争程度就越激励. 应该尽可能减少对某个锁的占有时间, 以减少线程间互斥的可能. 以下面的代码段为例:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">syncMethod</span><span class="params">()</span> </span>&#123;</div><div class="line">  othercode1();</div><div class="line">  mutextMethod();</div><div class="line">  othercode2();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>假设只有mutextMethod()方法需要同步, 而othercode1()和othercode2()不需要同步, 而且othercode1()和othercode2()需要较长的时间才能完成,  则syncMethod()方法会占用较长的CPU时间. </p>
+<p>此时, 如果并发量较大, 会导致等待线程大量增加.</p>
+<p>一个较为优化的解决方案, 只在必要时进行同步, 这样能减少线程持有锁的时间, 提高系统吞吐量.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">syncMethod</span><span class="params">()</span> </span>&#123;</div><div class="line">  othercode1();</div><div class="line">  <span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</div><div class="line">    mutextMethod();</div><div class="line">  &#125;</div><div class="line">  othercode2();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="减小锁粒度"><a href="#减小锁粒度" class="headerlink" title="减小锁粒度"></a>减小锁粒度</h3><p>ConcurrentHashMap就是减小锁粒度的典型例子.</p>
+<p>ConcurrentHashMap内部细分了若干个小的HashMap, 称之为段. 默认情况下, 一个ConcurrentHashMap被进一步细分为16个段.</p>
+<p>在向ConcurrentHashMap添加下新的表项时, 首先根据hashcode得到该表项应该被存放在哪个段中, 然后对该段加锁, 并完成put()操作.</p>
+<p>由于默认有16段, 因此ConcurrentHashMap可以接受16个线程同时插入. 大大的提升了吞吐量.</p>
+<p>以下是put()操作的代码:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> V <span class="title">put</span><span class="params">(K key, V value)</span> </span>&#123;</div><div class="line">  Segment&lt;K, V&gt; s;</div><div class="line">  <span class="keyword">if</span> (value == <span class="keyword">null</span>) </div><div class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();</div><div class="line">  <span class="keyword">int</span> hash = hash(key); <span class="comment">// 根据key, 获取对应的段号</span></div><div class="line">  <span class="keyword">int</span> j = (hash &gt;&gt;&gt; segmentShift) &amp; segmentMask; <span class="comment">// 根据key, 获取对应的段号</span></div><div class="line">  <span class="keyword">if</span> ((s = (Segment&lt;K, V&gt;)UNSAFE.getObject(segments, (j &lt;&lt; SSHIFT)) == <span class="keyword">null</span>))</div><div class="line">    s == ensureSegment(j);</div><div class="line">  <span class="keyword">return</span> s.put(key, hash, value, <span class="keyword">false</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>所谓减小锁粒度, 就是指缩小锁定对象的范围, 减少锁冲突的可能性, 提高系统并发能力.</p>
+<h3 id="读写分离替换独占锁"><a href="#读写分离替换独占锁" class="headerlink" title="读写分离替换独占锁"></a>读写分离替换独占锁</h3><p>使用读写锁代替独占锁是减小锁粒度的一种特殊情况.</p>
+<p>在读多写少的场合, 使用读写锁可以有效提高系统的并发能力</p>
+<p>根据程序的功能特点, 使用类似的分离思想, 也可以对独占锁进行分离. java.util.concurrent.LinkedBlockingQueue的实现是典型案例.</p>
+<p>take()函数和put()函数分别实现了从队列中取数和添加数据的功能, 虽然都是对队列进行修改操作, 但由于LinkedBlockingQueue基于链表, 两个操作分别作用于队头和队尾, 理论上两者并不冲突.</p>
+<p>JDK使用两把不通的锁, 分离了take()和put()操作.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">final</span> ReentrantLock takeLock = <span class="keyword">new</span> ReentrantLock();</div><div class="line"><span class="keyword">private</span> <span class="keyword">final</span> Condition notEmpty = takeLock.newCondition();</div><div class="line"><span class="keyword">private</span> <span class="keyword">final</span> ReentrantLock putLock = <span class="keyword">new</span> ReentrantLock();</div><div class="line"><span class="keyword">private</span> <span class="keyword">final</span> Condition notFull = putLock.newCondition();</div></pre></td></tr></table></figure>
+<p>take()函数的实现:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> E <span class="title">take</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</div><div class="line">  E x;</div><div class="line">  <span class="keyword">int</span> c = -<span class="number">1</span>;</div><div class="line">  <span class="keyword">final</span> AtomicInteger count = <span class="keyword">this</span>.count;</div><div class="line">  <span class="keyword">final</span> ReentrantLock takeLock = <span class="keyword">this</span>.takeLock;</div><div class="line">  takeLock.lockInterruptibly();    <span class="comment">// 不能两个线程同时取数据</span></div><div class="line">  <span class="keyword">try</span> &#123;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">      <span class="keyword">while</span> (count.get() == <span class="number">0</span>) </div><div class="line">        notEmpty.await();</div><div class="line">    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">      notEmpty.signal();</div><div class="line">      <span class="keyword">throw</span> e;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    x = extract();    <span class="comment">// 取得第一个数据</span></div><div class="line">    c = count.getAndDecrement();    <span class="comment">// 数量减1, 原子操作因为会和put()函数同时范围count. 注意: 变量c是count-1前的值</span></div><div class="line">    <span class="keyword">if</span> (c &gt; <span class="number">1</span>)</div><div class="line">      notEmpty.signal();    <span class="comment">// 通知其他take()操作</span></div><div class="line">  &#125; <span class="keyword">finally</span> &#123;</div><div class="line">    takeLock.unlock();   <span class="comment">// 释放锁</span></div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="keyword">if</span> (c == capacity) </div><div class="line">    signalNotFull();    <span class="comment">// 通知put()操作, 已有可用空间</span></div><div class="line">  <span class="keyword">return</span> x;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>函数put()的实现:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">put</span><span class="params">(E e)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</div><div class="line">  <span class="keyword">if</span> (e == <span class="keyword">null</span>) <span class="keyword">throw</span> <span class="keyword">new</span> NullPointException();</div><div class="line">  <span class="keyword">int</span> c = -<span class="number">1</span>;</div><div class="line">  <span class="keyword">final</span> ReentrantLock putLock = <span class="keyword">this</span>.putLock;</div><div class="line">  <span class="keyword">final</span> AtomicInteget count = <span class="keyword">this</span>.count;</div><div class="line">  putLock.lockInterruptibly();</div><div class="line">  <span class="keyword">try</span> &#123;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">      <span class="keyword">while</span> (count.get() == capacity) <span class="comment">// 如果队列已满, 等待</span></div><div class="line">        notFull.await();</div><div class="line">    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">      notFull.signal();  <span class="comment">// 通知未中断的线程</span></div><div class="line">      <span class="keyword">throw</span> e;</div><div class="line">    &#125;</div><div class="line">    insert(e);  <span class="comment">// 插入数据</span></div><div class="line">    c = count.getAndIncrement();  <span class="comment">// 更新总数, 变量c是count加1前的值</span></div><div class="line">    <span class="keyword">if</span> (c+<span class="number">1</span> &lt; capacity)</div><div class="line">      notFull.signal();    <span class="comment">// 有足够空间, 通知其他线程</span></div><div class="line">  &#125; <span class="keyword">finally</span> &#123;</div><div class="line">    putLock.unlock();</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">if</span> (c == <span class="number">0</span>) </div><div class="line">    signalNotEmpty();  <span class="comment">// 插入成功后, 通知take()操作取数</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="JDK内部的锁优化策略"><a href="#JDK内部的锁优化策略" class="headerlink" title="JDK内部的锁优化策略"></a>JDK内部的锁优化策略</h3><h4 id="锁偏向"><a href="#锁偏向" class="headerlink" title="锁偏向"></a>锁偏向</h4><p>锁偏向是一种针对锁操作的优化手段. 核心思想是: 如果一个线程获得了锁, 那么锁就进入偏向模式. 当这个线程再次请求锁时, 不需要再做任何同步操作.</p>
+<p>节省了锁申请的操作, 提高了程序的性能. 在几乎没有锁竞争的场合, 偏向锁拥有比较好的优化效果.</p>
+<p>Java虚拟机参数: <code>-XX:+UseBiasedLocking</code>可用开启偏向锁</p>
+<h4 id="轻量级锁"><a href="#轻量级锁" class="headerlink" title="轻量级锁"></a>轻量级锁</h4><p>偏向锁失败, 虚拟机不会立即挂起线程. 会用一种称为轻量级锁的优化手段.</p>
+<p>轻量级锁只是简单的将对象头部作为指针, 指向只有锁的线程堆栈的内部, 来判断一个线程是否持有锁对象. </p>
+<p>如果获得轻量级锁成功, 则进入临界区. 如果失败, 表示锁被其他线程抢先争夺到了, 那当前线程的锁请求会膨胀为重量级锁.</p>
+<h4 id="自旋锁"><a href="#自旋锁" class="headerlink" title="自旋锁"></a>自旋锁</h4><p>锁膨胀后, 虚拟机为避免线程被挂起, 虚拟机会把锁变成自旋锁. </p>
+<p>虚拟机会让当前线程做几个空循环, 在若干个循环后, 如果得到锁, 就进入临界区. 如果不能获得锁, 就挂起.</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -284,7 +557,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-18T22:40:15+08:00">
                 2017-10-18
@@ -493,7 +766,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-17T21:09:56+08:00">
                 2017-10-17
@@ -707,7 +980,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-16T22:25:39+08:00">
                 2017-10-16
@@ -838,7 +1111,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-16T21:49:46+08:00">
                 2017-10-16
@@ -965,7 +1238,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-16T21:35:49+08:00">
                 2017-10-16
@@ -1090,7 +1363,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-12T22:27:20+08:00">
                 2017-10-12
@@ -1236,7 +1509,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-12T22:14:01+08:00">
                 2017-10-12
@@ -1363,7 +1636,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-12T21:01:36+08:00">
                 2017-10-12
@@ -1448,382 +1721,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/10/10/JDK并发包-重入锁/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Blue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blue的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/10/10/JDK并发包-重入锁/" itemprop="url">
-                  Java高并发程序设计读书笔记-JDK并发包-重入锁
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-10T22:31:44+08:00">
-                2017-10-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>重入锁使用<code>java.util.concurrent.locks.ReentrantLock</code>类实现. </p>
-<h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><p>使用重入锁的简单案例:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReenterLock</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> ReentrantLock lock = <span class="keyword">new</span> ReentrantLock();</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> i = <span class="number">0</span>;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;<span class="number">1000000</span>; j++) &#123;</div><div class="line">            lock.lock();</div><div class="line">          	<span class="comment">// lock.lock();</span></div><div class="line"></div><div class="line">            <span class="keyword">try</span> &#123;</div><div class="line">                i++;</div><div class="line">            &#125; <span class="keyword">finally</span> &#123;</div><div class="line">                lock.unlock();</div><div class="line">              	<span class="comment">// lock.unlock();</span></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</div><div class="line">        ReenterLock t1 = <span class="keyword">new</span> ReenterLock();</div><div class="line">        Thread thread1 = <span class="keyword">new</span> Thread(t1);</div><div class="line">        Thread thread2 = <span class="keyword">new</span> Thread(t1);</div><div class="line"></div><div class="line">        thread1.start();</div><div class="line">        thread2.start();</div><div class="line">        thread1.join();</div><div class="line">        thread2.join();</div><div class="line">        System.out.println(i);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>重入锁与<code>synchronized</code>的区别:</p>
-<ol>
-<li>需要明确声明何时加锁, 何时释放锁. 对逻辑控制更灵活</li>
-<li>一个线程可以连续两次获得同一把锁</li>
-</ol>
-</blockquote>
-<h3 id="中断响应"><a href="#中断响应" class="headerlink" title="中断响应"></a>中断响应</h3><p>对于<code>synchronized</code>来说, 一个线程在等待锁, 只有两种结果, 要么获得锁继续执行, 要么保持等待.</p>
-<p>重入锁可以被中断. 如果一个线程在等待锁, 它可能会收到一个通知, 被告知无须再等待, 可以停止工作了.</p>
-<p>可以利用这种机制解决死锁问题</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IntLock</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> ReentrantLock lock1 = <span class="keyword">new</span> ReentrantLock();</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> ReentrantLock lock2 = <span class="keyword">new</span> ReentrantLock();</div><div class="line"></div><div class="line">    <span class="keyword">int</span> lock;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 控制加锁顺序, 方便构造死锁</div><div class="line">     * <span class="doctag">@param</span> lock</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">IntLock</span><span class="params">(<span class="keyword">int</span> lock)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.lock = lock;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="keyword">if</span> (lock == <span class="number">1</span>) &#123;</div><div class="line">                lock1.lockInterruptibly();</div><div class="line"></div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    Thread.sleep(<span class="number">500</span>);</div><div class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line"></div><div class="line">                lock2.lockInterruptibly();</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                lock2.lockInterruptibly();</div><div class="line"></div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    Thread.sleep(<span class="number">500</span>);</div><div class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">                lock1.lockInterruptibly();</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125; <span class="keyword">finally</span> &#123;</div><div class="line">            <span class="keyword">if</span> (lock1.isHeldByCurrentThread())</div><div class="line">                lock1.unlock();</div><div class="line">            <span class="keyword">if</span> (lock2.isHeldByCurrentThread())</div><div class="line">                lock2.unlock();</div><div class="line"></div><div class="line">            System.out.println(Thread.currentThread().getId() + <span class="string">": 线程退出"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</div><div class="line">        IntLock r1 = <span class="keyword">new</span> IntLock(<span class="number">1</span>);</div><div class="line">        IntLock r2 = <span class="keyword">new</span> IntLock(<span class="number">2</span>);</div><div class="line">        Thread t1 = <span class="keyword">new</span> Thread(r1);</div><div class="line">        Thread t2 = <span class="keyword">new</span> Thread(r2);</div><div class="line"></div><div class="line">        t1.start();</div><div class="line">        t2.start();</div><div class="line">        Thread.sleep(<span class="number">1000</span>);</div><div class="line">        t2.interrupt();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>lockInterruptibly()方法是一个可以对中断进行响应的锁申请动作. 在等待锁的过程中可以响应中断.</p>
-</blockquote>
-<h3 id="锁申请等待限时"><a href="#锁申请等待限时" class="headerlink" title="锁申请等待限时"></a>锁申请等待限时</h3><p>避免死锁除了等待外部通知, 还有另一种方法就是<strong>限时等待</strong>.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TimeLock</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> ReentrantLock lock = <span class="keyword">new</span> ReentrantLock();</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="keyword">if</span> (lock.tryLock(<span class="number">5</span>, TimeUnit.SECONDS)) &#123;</div><div class="line">                System.out.println(Thread.currentThread().getId() + <span class="string">": get lock success"</span>);</div><div class="line">                Thread.sleep(<span class="number">6000</span>);</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                System.out.println(Thread.currentThread().getId() + <span class="string">": get lock failed"</span>);</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125; <span class="keyword">finally</span> &#123;</div><div class="line">            <span class="keyword">if</span> (lock.isHeldByCurrentThread())</div><div class="line">                lock.unlock();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        TimeLock t1 = <span class="keyword">new</span> TimeLock();</div><div class="line">        Thread thread1 = <span class="keyword">new</span> Thread(t1);</div><div class="line">        Thread thread2 = <span class="keyword">new</span> Thread(t1);</div><div class="line"></div><div class="line">        thread1.start();</div><div class="line">        thread2.start();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>tryLock()方法有接收两个参数: 1. 等待时长, 2. 计时单位. 如果成功获得锁, 则返回true, 否则返回false</p>
-</blockquote>
-<h3 id="公平锁"><a href="#公平锁" class="headerlink" title="公平锁"></a>公平锁</h3><p>非公平锁: 系统会在锁的等待队列中随机挑选一个线程.</p>
-<p>公平锁: 系统会按照时间的先后顺序, 保证先到者先得.</p>
-<p>公平锁的特点是不会产生饥饿现象.</p>
-<p>使用<code>synchronized</code>进行锁控制, 那产生的锁就是非公平的.</p>
-<p>重入锁允许对锁的公平性进行设置</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">ReentrantLock</span><span class="params">(<span class="keyword">boolean</span> fair)</span></span></div></pre></td></tr></table></figure>
-<p>当参数<code>fair=true</code>时表示公平锁. 公平锁需要系统维护一个有序队列, 实现成本较高, 性能相对较低.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FairLock</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> ReentrantLock fairLock = <span class="keyword">new</span> ReentrantLock(<span class="keyword">true</span>);</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</div><div class="line">            <span class="keyword">try</span> &#123;</div><div class="line">                fairLock.lock();</div><div class="line">                System.out.println(Thread.currentThread().getName() + <span class="string">" 获得锁"</span>);</div><div class="line">            &#125; <span class="keyword">finally</span> &#123;</div><div class="line">                fairLock.lock();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        FairLock r1 = <span class="keyword">new</span> FairLock();</div><div class="line">        Thread t1 = <span class="keyword">new</span> Thread(r1, <span class="string">"Thread_t1"</span>);</div><div class="line">        Thread t2 = <span class="keyword">new</span> Thread(r1, <span class="string">"Thread_t2"</span>);</div><div class="line">        t1.start();</div><div class="line">        t2.start();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>ReentrantLock的几个重要方法:</p>
-<ul>
-<li>lock(): 获得锁, 如果锁已经被占用, 则等待</li>
-<li>lockInterruptibly(): 获得锁, 但优先响应中断</li>
-<li>tryLock(): 尝试获得锁, 成功返回true, 失败返回false, 直接返回</li>
-<li>tryLock(): 在给定的时间内尝试获得锁</li>
-<li>unlock(): 释放锁</li>
-</ul>
-<p>实现重入锁的要素: </p>
-<ol>
-<li>原子状态. 使用CAS操作存储当前锁的状态, 判断锁是否已经被别的线程持有</li>
-<li>等待队列. 所有没有请求到锁的线程都会进入等待队列, 待线程释放锁后, 从队列中唤醒一个线程, 继续工作</li>
-<li>阻塞原语park()和unpark(), 用来挂起和恢复线程.</li>
-</ol>
-<h3 id="Condition条件"><a href="#Condition条件" class="headerlink" title="Condition条件"></a>Condition条件</h3><p>通过Lock接口的Condition new condition()方法生成一个与当前锁绑定的Condition实例.</p>
-<p>利用Condition对象可以让线程在适当的时间等待, 或者在某个特定的时间得到通知, 继续执行.</p>
-<p>Condition接口的基本方法:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">await</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException</span>;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">awaitUninterruptibly</span><span class="params">()</span></span>;</div><div class="line"><span class="function"><span class="keyword">long</span> <span class="title">awaitNanos</span><span class="params">(<span class="keyword">long</span> nanosTimeout)</span> <span class="keyword">throws</span> InterruptedException</span>;</div><div class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">await</span><span class="params">(<span class="keyword">long</span> time, TimeUnit unit)</span> <span class="keyword">throws</span> InterruptedException</span>;</div><div class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">awaitUntil</span><span class="params">(Date deadline)</span> <span class="keyword">throws</span> InterruptedException</span>;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">signal</span><span class="params">()</span></span>;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">signalAll</span><span class="params">()</span></span>;</div></pre></td></tr></table></figure>
-<ul>
-<li>await()方法使得当前线程等待, 同时释放当前锁. 当调用signal()或signalAll()方法时, 线程可以重新获得锁继续执行. 当线程中断时, 可以跳出等待. 与wait()方法类似.</li>
-<li>awaitUninterruptibly()与await()基本相同, 但不会在等待过程中响应中断</li>
-<li>signal()方法用于唤醒等待中的线程. 和notify()方法类似</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReenterLockCondition</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> ReentrantLock lock = <span class="keyword">new</span> ReentrantLock();</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Condition condition = lock.newCondition();</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">        lock.lock();</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            condition.await();</div><div class="line">            System.out.println(<span class="string">"Thread is going on"</span>);</div><div class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125; <span class="keyword">finally</span> &#123;</div><div class="line">            lock.unlock();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</div><div class="line">        ReenterLockCondition r1 = <span class="keyword">new</span> ReenterLockCondition();</div><div class="line">        Thread t1 = <span class="keyword">new</span> Thread(r1);</div><div class="line">        t1.start();</div><div class="line">        Thread.sleep(<span class="number">2000</span>);</div><div class="line">        lock.lock();</div><div class="line">        condition.signal();</div><div class="line">        lock.unlock();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/09/24/Java高并发程序设计读书笔记-Java并行程序基础/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Blue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blue的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/09/24/Java高并发程序设计读书笔记-Java并行程序基础/" itemprop="url">
-                  Java高并发程序设计读书笔记-Java并行程序基础
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-24T10:36:51+08:00">
-                2017-09-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><strong>进程</strong>: 是计算机中程序关于某一数据集合上的一次运行活动, 是系统进行资源分配和调度的基本单位, 是操作系统结构的基础.</p>
-<p><strong>线程</strong>: 是轻量级的进程, 是程序执行的最小单位.</p>
-<p>线程的生命周期:</p>
-<p>NEW -&gt;  RUNNABLE -&gt;  BLOCKED -&gt; WAITING -&gt; TIME_WAITING -&gt; TERMINATED</p>
-<ol>
-<li>NEW状态表示刚刚创建的线程</li>
-<li>RUNNABLE 表示线程需要所需的一切资源都已经准备好了.</li>
-<li>BLOCKED 表示线程执行过程中遇到了<code>synchronized</code>同步块, 线程暂停执行, 直到获得请求的锁</li>
-<li>WAITING表示等待, 无时间限制的等待. 当线程等到期待的事情发生, 就会进入RUNNABLE状态</li>
-<li>TIME_WAITING也不是等待, 有时间限制.当线程等到期待的事情发生, 就会进入RUNNABLE状态</li>
-<li>TERMINATED表示结束状态</li>
-</ol>
-<h3 id="线程基本操作"><a href="#线程基本操作" class="headerlink" title="线程基本操作"></a>线程基本操作</h3><h4 id="新建线程"><a href="#新建线程" class="headerlink" title="新建线程"></a>新建线程</h4><p>使用<code>new</code>关键字创建一个线程对象, 并调用它的<code>start()</code>方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Thread t1 = <span class="keyword">new</span> Thread();</div><div class="line">t1.start();</div></pre></td></tr></table></figure>
-<p>start()方法会新建一个线程, 并让这个线程执行run()方法.</p>
-<p>直接调用Thread对象的<code>run()</code>方法不会新建一个线程, 而是在当前线程中调用<code>run()</code>方法.</p>
-<p><strong>也可以通过实现Runnable接口创建线程</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Runnable</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>默认的<code>Thread.run()</code>方法就是直接调用内部的Runnable接口.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">  <span class="keyword">if</span> (target != <span class="keyword">null</span>) &#123;</div><div class="line">    target.run();</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>通过实现Runnable接口创建线程</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CreatThread</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">    Thread t = <span class="keyword">new</span> Thread(<span class="keyword">new</span> CreateThread());</div><div class="line">    t.start();</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">    code.....</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="终止线程"><a href="#终止线程" class="headerlink" title="终止线程"></a>终止线程</h4><p>使用<code>stop()</code>方法终止线程, 直接终止线程, 并立即释放持有的锁.</p>
-<p> <code>stop()</code>方法会强行把执行到一半的线程终止, 可能会引起数据不一致问题.</p>
-<p>以下代码模拟由于使用<code>stop()</code>方法导致数据不一致问题:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StopThreadUnSafe</span> </span>&#123;</div><div class="line">    </div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> User u = <span class="keyword">new</span> User();</div><div class="line">    </div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">int</span> id;</div><div class="line">        <span class="keyword">private</span> String name;</div><div class="line">        </div><div class="line">        <span class="keyword">public</span> User &#123;</div><div class="line">            id = <span class="number">0</span>;</div><div class="line">            name = <span class="string">"0"</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getId</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">return</span> id;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</div><div class="line">            <span class="keyword">this</span>.id = id;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">return</span> name;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">            <span class="keyword">this</span>.name = name;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">return</span> <span class="string">"User&#123;"</span> +</div><div class="line">                    <span class="string">"id="</span> + id +</div><div class="line">                    <span class="string">", name='"</span> + name + <span class="string">'\''</span> +</div><div class="line">                    <span class="string">'&#125;'</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    </div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ChangeObjectThread</span> <span class="keyword">extends</span>  <span class="title">Thread</span> </span>&#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</div><div class="line">                <span class="keyword">synchronized</span> (u) &#123;</div><div class="line">                    <span class="keyword">int</span> v = (<span class="keyword">int</span>) (System.currentTimeMillis()/<span class="number">1000</span>);</div><div class="line">                    u.setId(v);</div><div class="line">                    <span class="keyword">try</span> &#123;</div><div class="line">                        Thread.sleep(<span class="number">100</span>);</div><div class="line">                    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">                        e.printStackTrace();</div><div class="line">                    &#125;</div><div class="line">                    </div><div class="line">                    u.setName(String.valueOf(v));</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ReadObjectThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</div><div class="line">                <span class="keyword">synchronized</span> (u) &#123;</div><div class="line">                    <span class="keyword">if</span> (u.getId() != Integer.parseInt(u.getName())) &#123;</div><div class="line">                        System.out.println(u.toString());</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">                Thread.yield();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</div><div class="line">        <span class="keyword">new</span> ReadObjectThread().start();</div><div class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</div><div class="line">            Thread t = <span class="keyword">new</span> ChangeObjectThread();</div><div class="line">            t.start();</div><div class="line">            Thread.sleep(<span class="number">150</span>);</div><div class="line">            t.stop();</div><div class="line">        &#125;</div><div class="line">    &#125; </div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>如果非要使用<code>stop()</code>方法终止线程的情况下, 可以在写数据的线程中添加一个<em>标记变量</em>, 在写数据之前先根据标记变量判断线程是否终止.</p>
-<h4 id="线程中断"><a href="#线程中断" class="headerlink" title="线程中断"></a>线程中断</h4><p>线程中断并不会是线程立即退出, 而是给线程一个通知, 通知线程有人希望你退出. 而目标线程收到通知后会如何处理, 有目标线程决定.</p>
-<p>线程中断相关的方法: </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">void</span> Thread.interrupt();				 <span class="comment">// 中断线程</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">boolean</span> Thread.isInterrupted();		 <span class="comment">// 判断是否被中断</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> Thread.interrupted();	 <span class="comment">// 判断是否被中断, 并清除中断状态</span></div></pre></td></tr></table></figure>
-<blockquote>
-<p>Thread.sleep()方法由于中断而抛出异常, 会清除中断标记.</p>
-</blockquote>
-<h4 id="等待-wait-和通知-notify"><a href="#等待-wait-和通知-notify" class="headerlink" title="等待(wait)和通知(notify)"></a>等待(wait)和通知(notify)</h4><p>这两个方法属于Object类. 任何对象都可以调用这两个方法.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">wait</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException</span>;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">native</span> <span class="keyword">void</span> <span class="title">notify</span><span class="params">()</span></span>;</div></pre></td></tr></table></figure>
-<p><code>wait()</code>方法: 当前线程在这个对象上等待, 线程停止执行, 转为等待状态. 直到其他线程调用<code>notify()</code>方法为止.</p>
-<p><code>notify()</code>方法: 从这个对象的等待队列中, <strong>随机选择</strong>一个线程, 并将其唤醒.</p>
-<p><code>notifyAll()</code>方法: 唤醒这个等待队列中所有等待的线程.</p>
-<blockquote>
-<p>wait()方法和notify()方法必须包含在对应的<code>synchronzied</code>语句中.</p>
-</blockquote>
-<p>wait()方法和notify()方法都需要首先获得目标对象的一个监视器.</p>
-<p>线程被唤醒后并不会立即执行后续代码, 而是尝试重新获得对象的监视器.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SimpleWN</span> </span>&#123;</div><div class="line">  <span class="keyword">final</span> <span class="keyword">static</span> Object object = <span class="keyword">new</span> Object();</div><div class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">T1</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">      <span class="keyword">synchronized</span> (object) &#123;</div><div class="line">        System.out.println(System.currentTimeMillis() + <span class="string">":T1 start!"</span>);</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">          System.out.println(System.currentTimeMillis() + <span class="string">":T1 wait for object "</span>);</div><div class="line">          object.wait();</div><div class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">          e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        System.out.println(System.currentTimeMillis() + <span class="string">":T1 end!"</span>);</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">T2</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">      <span class="keyword">synchronized</span> (object) &#123;</div><div class="line">        System.out.println(System.currentTimeMillis() + <span class="string">":T2 start!"</span>);</div><div class="line">        object.notify();</div><div class="line">        System.out.println(System.currentTimeMillis() + <span class="string">":T2 end!"</span>);</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">          Thread.sleep(<span class="number">2000</span>);</div><div class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">          e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">    Thread t1 = <span class="keyword">new</span> T1();</div><div class="line">    Thread t2 = <span class="keyword">new</span> T2();</div><div class="line">    t1.start();</div><div class="line">    t2.start();</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>Object.wait()和Trhead.sleep()方法都可以让线程等待若干时间. 区别在于:</p>
-<ol>
-<li>wait()可以被唤醒</li>
-<li>wait()方法会释放目标对象的锁, Thread.sleep()方法不会释放任何资源</li>
-</ol>
-</blockquote>
-<h4 id="挂起-suspend-和继续执行-resume-线程"><a href="#挂起-suspend-和继续执行-resume-线程" class="headerlink" title="挂起(suspend)和继续执行(resume)线程"></a>挂起(suspend)和继续执行(resume)线程</h4><p>这两个操作是一堆相反的操作, 被挂起的线程必须要等待resume()操作后才能继续执行.</p>
-<p>suspend()导致线程暂停的同时, 不会释放任何锁资源. 此时, 其他线程需要访问被它暂用的锁时, 都会被牵连, 无法正常继续执行. 直到对应的线程上执行resume()操作, 被挂起的线程才能继续, 从而其他所有阻塞的线程也可以继续执行. <strong>但是</strong>, 如果resume()操作在suspend()前执行, 那被挂起的线程可能很难有机会被继续执行.</p>
-<h4 id="等待线程结束-join-和谦让-yeild"><a href="#等待线程结束-join-和谦让-yeild" class="headerlink" title="等待线程结束(join)和谦让(yeild)"></a>等待线程结束(join)和谦让(yeild)</h4><p>join()方法: 一个线程需要等待依赖线程执行完毕, 才能继续执行</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">join</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException</span>; <span class="comment">// 无限等待, 直到目标线程执行完毕</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">join</span><span class="params">(<span class="keyword">long</span> millis)</span> <span class="keyword">throws</span> InterruptedException</span>; <span class="comment">// 如果超出给定时间目标线程还在执行, 当前线程会继续执行下去</span></div></pre></td></tr></table></figure>
-<blockquote>
-<p>join()的本质是让线程调用wait()在当前线程对象实例上.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; <span class="keyword">while</span> (isAlive()) &#123;</div><div class="line">&gt;   wait(<span class="number">0</span>);</div><div class="line">&gt; &#125;</div><div class="line">&gt;</div></pre></td></tr></table></figure>
-</blockquote>
-<p>yeild()方法是一个静态方法, 会使当前线程让出CPU. </p>
-<h3 id="volatile与Java内存模型"><a href="#volatile与Java内存模型" class="headerlink" title="volatile与Java内存模型"></a>volatile与Java内存模型</h3><p>为了在适当的场合, 确保现场间的有序性, 可见性, 原子性. Java使用一些关键字来声明, 告诉虚拟机, 在这个地方, 要尤其注意, 不能随便变动优化目标指令. <code>volatile</code>关键字就是其中之一.</p>
-<blockquote>
-<p>volatile无法保证i++的原子性操作.</p>
-<p>volatile可以保证数据的可见性和有序性</p>
-</blockquote>
-<h3 id="线程组"><a href="#线程组" class="headerlink" title="线程组"></a>线程组</h3><p>ThreadGroup类, 当线程数量较多, 而且功能分配明确, 可以将相同功能的线程放置在一个线程组中.</p>
-<h3 id="守护线程"><a href="#守护线程" class="headerlink" title="守护线程"></a>守护线程</h3><p>守护线程在后台完成一些系统性的服务, 比如: 垃圾回收线程, JIT线程. 如果用户线程全部结束了, 那么守护线程也会退出.</p>
-<h3 id="线程安全与synchronized"><a href="#线程安全与synchronized" class="headerlink" title="线程安全与synchronized"></a>线程安全与synchronized</h3><p>volatile关键字只能保证一个线程修改数据后, 其他线程可以看到这个改动, 当两个线程同时修改一个数据时, 依然会产生冲突.</p>
-<p><code>synchronized</code>的作用是实现线程间的同步. 对同步的代码加锁, 同一时间只能有一个线程进入同步块, 从而保证线程间的安全性.</p>
-<p><code>synchronized</code>的用法:</p>
-<ul>
-<li>指定加锁对象: 对给定对象加锁, 进入同步代码前要获得给定对象的锁</li>
-<li>直接作用于实例方法: 相当于对当前实例加锁, 进入同步代码需要获得当前实例的锁</li>
-<li>直接作用于静态方法: 相当于对当前类加锁, 进入同步代码需要获得当前类的锁</li>
-</ul>
-<blockquote>
-<p><code>synchronized</code>还可以保证线程间的可见性和有序性.</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1868,8 +1770,8 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">49</span>
-                <span class="site-state-item-name">posts</span>
+                <span class="site-state-item-count">51</span>
+                <span class="site-state-item-name">Artikel</span>
               </a>
             </div>
           
@@ -1882,7 +1784,7 @@
             <div class="site-state-item site-state-tags">
               
                 <span class="site-state-item-count">4</span>
-                <span class="site-state-item-name">tags</span>
+                <span class="site-state-item-name">Tags</span>
               
             </div>
           
@@ -1932,7 +1834,7 @@
 
 
 <div class="powered-by">
-  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">

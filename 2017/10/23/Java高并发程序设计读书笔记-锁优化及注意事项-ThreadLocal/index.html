@@ -87,13 +87,25 @@
 
 
 
+<meta name="description" content="除了控制资源的访问外, 还可以通过增加资源来保证所有对象的线程安全.
+ThreadLocal表示一个线程的局部变量, 只有当前线程可用访问. 所以是线程安全的.
+ThreadLocal的简单示例:
+123456789101112131415161718private static ThreadLocal&amp;lt;SimpleDateFormat&amp;gt; t1 = new ThreadLocal&amp;lt">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java高并发程序设计读书笔记-锁优化及注意事项-ThreadLocal">
 <meta property="og:url" content="https://singthi4079.github.io/2017/10/23/Java高并发程序设计读书笔记-锁优化及注意事项-ThreadLocal/index.html">
 <meta property="og:site_name" content="Blue的博客">
-<meta property="og:updated_time" content="2017-10-23T14:17:17.000Z">
+<meta property="og:description" content="除了控制资源的访问外, 还可以通过增加资源来保证所有对象的线程安全.
+ThreadLocal表示一个线程的局部变量, 只有当前线程可用访问. 所以是线程安全的.
+ThreadLocal的简单示例:
+123456789101112131415161718private static ThreadLocal&amp;lt;SimpleDateFormat&amp;gt; t1 = new ThreadLocal&amp;lt">
+<meta property="og:updated_time" content="2017-10-24T13:25:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java高并发程序设计读书笔记-锁优化及注意事项-ThreadLocal">
+<meta name="twitter:description" content="除了控制资源的访问外, 还可以通过增加资源来保证所有对象的线程安全.
+ThreadLocal表示一个线程的局部变量, 只有当前线程可用访问. 所以是线程安全的.
+ThreadLocal的简单示例:
+123456789101112131415161718private static ThreadLocal&amp;lt;SimpleDateFormat&amp;gt; t1 = new ThreadLocal&amp;lt">
 
 
 
@@ -318,7 +330,27 @@
       
 
       
-        
+        <p>除了控制资源的访问外, 还可以通过增加资源来保证所有对象的线程安全.</p>
+<p>ThreadLocal表示一个线程的局部变量, 只有当前线程可用访问. 所以是线程安全的.</p>
+<p>ThreadLocal的简单示例:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> ThreadLocal&lt;SimpleDateFormat&gt; t1 = <span class="keyword">new</span> ThreadLocal&lt;SimpleDateFormat&gt;();</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ParseDate</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</div><div class="line">  <span class="keyword">int</span> i = <span class="number">0</span>;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="title">ParseDate</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</div><div class="line">    <span class="keyword">this</span>.i = i;</div><div class="line">  &#125;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">      <span class="keyword">if</span> (t1.get() == <span class="keyword">null</span>) &#123;</div><div class="line">        t1.set(<span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyy-MM-dd HH:mm:ss"</span>));</div><div class="line">      &#125;</div><div class="line">      Date t = t1.get().parse(<span class="string">"2015-03-29 19:29:"</span>+i%<span class="number">60</span>);</div><div class="line">      System.out.println(i + <span class="string">":"</span> + t);</div><div class="line">    &#125; <span class="keyword">catch</span> (ParseException e) &#123;</div><div class="line">      e.printStackTrace();</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果在应用上为每一个线程分配了相同的对象实例, 那ThreadLocal也不能保证线程安全.</p>
+<blockquote>
+<p>为每一个线程分配不通的对象, 需要在应用层面保证. ThreadLocal只是起到简单的容器作用</p>
+</blockquote>
+<h3 id="ThreadLocal的实现原理"><a href="#ThreadLocal的实现原理" class="headerlink" title="ThreadLocal的实现原理"></a>ThreadLocal的实现原理</h3><p>ThreadLocal的set()方法:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">set</span><span class="params">(T value)</span> </span>&#123;</div><div class="line">  Thread t = Thread.currentThread();</div><div class="line">  ThreadLocalMap map = getMap(t);</div><div class="line">  <span class="keyword">if</span> (map != <span class="keyword">null</span>)</div><div class="line">    map.set(<span class="keyword">this</span>, value);</div><div class="line">  <span class="keyword">else</span> </div><div class="line">    createMap(t, value);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>ThreadLocalMap是定义在Thread内部的成员. 设置数据, 就是写入到ThreadLocalMap中. 而ThreadLocalMap本身就保存了所在线程的所有”局部变量”, 也就是一个ThreadLocal变量的集合.</p>
+<p>ThreadLocal的get()方法:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> T <span class="title">get</span><span class="params">()</span> </span>&#123;</div><div class="line">  Thread t = Thread.currentThread();</div><div class="line">  ThreadLocalMap map = getMap(t);</div><div class="line">  <span class="keyword">if</span> (map != <span class="keyword">null</span>) &#123;</div><div class="line">    ThreadLocalMap.Entry e = map.getEntity(<span class="keyword">this</span>);</div><div class="line">    <span class="keyword">if</span> (e != <span class="keyword">null</span>)</div><div class="line">      <span class="keyword">return</span> (T) e.value;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> setInitialValue();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这些变量是维护在Thread类内部的, 只要线程不退出, 对象的引用就将一只存在.</p>
+<p>当线程退出Thread类会进行一些清理工作, 包括清理ThreadLocalMap:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">exit</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (group != <span class="keyword">null</span>) &#123;</div><div class="line">        group.threadTerminated(<span class="keyword">this</span>);</div><div class="line">        group = <span class="keyword">null</span>;</div><div class="line">    &#125;</div><div class="line">    target = <span class="keyword">null</span>;</div><div class="line">    <span class="comment">/* 加速资源清理 */</span></div><div class="line">    threadLocals = <span class="keyword">null</span>;</div><div class="line">    inheritableThreadLocals = <span class="keyword">null</span>;</div><div class="line">    inheritedAccessControlContext = <span class="keyword">null</span>;</div><div class="line">    blocker = <span class="keyword">null</span>;</div><div class="line">    uncaughtExceptionHandler = <span class="keyword">null</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果使用线程池, 那当前线程不一定会退出. 如果将一些很大的对象设置到ThreadLocal中(实际保存在Thread中的ThreadLocalMap对象), 可能会出现内存泄漏的可能(对象不再有用, 但却无法被回收).</p>
+<p>调用ThreadLocal.remove()方法可以将这个变量移除, 是它可以被回收.</p>
+<p>也可以把ThreadLocal对象设置为null, 使得这个ThreadLocal对应的所有线程的局部变量都有可能被回收.</p>
+<p>ThreadLocalMap类似WeakHashMap, 使用弱引用, JVM在垃圾回收时, 如果发现弱引用, 就会立即回收. ThreadLocalMap由一系列Entry构成, 每个Entry都是<code>WeakReference&lt;ThreadLocal&gt;</code>:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Entry</span> <span class="keyword">extends</span> <span class="title">WeakReference</span>&lt;<span class="title">ThreadLocal</span>&gt; </span>&#123;</div><div class="line">  Object value;</div><div class="line">  Entry (ThreadLocal k, Object v) &#123;</div><div class="line">    <span class="keyword">super</span>(k);</div><div class="line">    value = v;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
       
     </div>
 
@@ -409,8 +441,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -463,6 +504,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ThreadLocal的实现原理"><span class="nav-number">1.</span> <span class="nav-text">ThreadLocal的实现原理</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

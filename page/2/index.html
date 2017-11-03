@@ -194,7 +194,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            Home
           </a>
         </li>
       
@@ -204,7 +204,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -237,6 +237,531 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/10/16/Java高并发程序设计读书笔记-JDK并发包-循环栅栏/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Blue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blue的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/10/16/Java高并发程序设计读书笔记-JDK并发包-循环栅栏/" itemprop="url">
+                  Java高并发程序设计读书笔记-JDK并发包-循环栅栏
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-16T21:49:46+08:00">
+                2017-10-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>CyclicBarrier是一种多线程并发控制工具. 和CountDownLatch类似, 可以实现线程间的计数等待.</p>
+<p>CyclicBarrier表示循环栅栏, 这里的栅栏用来阻止线程继续执行, 要求线程在栅栏处等待. 这个计数器可以反复使用.</p>
+<p>如果将计数器设置为10, 那么凑齐第一批10个线程后, 计数器归零, 然后接着凑齐下一批10个线程.</p>
+<p>CyclicBarrier的构造函数接受一个参数作为barrierAction, 即当计数器一次计数完成后, 系统会执行的动作.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">CyclicBarrier</span><span class="params">(<span class="keyword">int</span> parties, Runnable barrierAction)</span></span>;</div></pre></td></tr></table></figure>
+<p>CyclicBarrier简单示例:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CyclicBarrierDemo</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Soldier</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</div><div class="line">        <span class="keyword">private</span> String soldier;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">final</span> CyclicBarrier cyclic;</div><div class="line"></div><div class="line">        Soldier (CyclicBarrier cyclic, String soldierName) &#123;</div><div class="line">            <span class="keyword">this</span>.cyclic = cyclic;</div><div class="line">            <span class="keyword">this</span>.soldier = soldierName;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">try</span> &#123;</div><div class="line">              	<span class="comment">// 等待士兵到齐</span></div><div class="line">                cyclic.await();</div><div class="line">                doWork();</div><div class="line">              <span class="comment">// 等待士兵完成任务</span></div><div class="line">                cyclic.await();</div><div class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125; <span class="keyword">catch</span> (BrokenBarrierException e) &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">void</span> <span class="title">doWork</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">try</span> &#123;</div><div class="line">                Thread.sleep(Math.abs(<span class="keyword">new</span> Random().nextInt()%<span class="number">10000</span>));</div><div class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            System.out.println(soldier + <span class="string">": 完成任务"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">BarrierRun</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</div><div class="line">        <span class="keyword">boolean</span> flag;</div><div class="line">        <span class="keyword">int</span> N;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">BarrierRun</span><span class="params">(<span class="keyword">boolean</span> flag, <span class="keyword">int</span> N)</span> </span>&#123;</div><div class="line">            <span class="keyword">this</span>.flag = flag;</div><div class="line">            <span class="keyword">this</span>.N = N;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">if</span> (flag) &#123;</div><div class="line">                System.out.println(<span class="string">"司令:[士兵"</span> + N + <span class="string">"个, 任务完成!"</span>);</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                System.out.println(<span class="string">"司令:[士兵"</span> + N + <span class="string">"个, 集合完毕!"</span>);</div><div class="line">                flag = <span class="keyword">true</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="keyword">final</span> <span class="keyword">int</span> N = <span class="number">10</span>;</div><div class="line">        Thread[] allSoldier = <span class="keyword">new</span> Thread[N];</div><div class="line">        <span class="keyword">boolean</span> flag = <span class="keyword">false</span>;</div><div class="line">      <span class="comment">// 将计数器设置为10, 并要求在计数器达到指标时, 执行BarrierRun的run方法</span></div><div class="line">        CyclicBarrier cyclic = <span class="keyword">new</span> CyclicBarrier(N, <span class="keyword">new</span> BarrierRun(flag, N));</div><div class="line"></div><div class="line">        System.out.println(<span class="string">"集合队伍!"</span>);</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; i++) &#123;</div><div class="line">            System.out.println(<span class="string">"士兵"</span> + i + <span class="string">"报道!"</span>);</div><div class="line">            allSoldier[i] = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Soldier(cyclic, <span class="string">"士兵"</span>+i));</div><div class="line">            allSoldier[i].start();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/10/16/Java高并发程序设计读书笔记-JDK并发包-倒计时器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Blue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blue的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/10/16/Java高并发程序设计读书笔记-JDK并发包-倒计时器/" itemprop="url">
+                  Java高并发程序设计读书笔记-JDK并发包-倒计时器
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-16T21:35:49+08:00">
+                2017-10-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>CountDownLatch是一个非常实用的多线程控制工具类. 通常用来控制线程等待, 可以让某一个线程等待知道倒计时结束, 再执行.</p>
+<p>CountDownLatch的构造函数接受一个整数作为参数, 即当前这个计数器的计数个数.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">CountDownLatch</span><span class="params">(<span class="keyword">int</span> count)</span></span>;</div></pre></td></tr></table></figure>
+<p>简单示例: </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CountDownLacthDemo</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</div><div class="line">    <span class="comment">// 表示需要10个线程完成任务</span></div><div class="line">    <span class="keyword">static</span> <span class="keyword">final</span> CountDownLatch end = <span class="keyword">new</span> CountDownLatch(<span class="number">10</span>);</div><div class="line">    <span class="keyword">static</span> <span class="keyword">final</span> CountDownLacthDemo demo = <span class="keyword">new</span> CountDownLacthDemo();</div><div class="line">    </div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            Thread.sleep(<span class="keyword">new</span> Random().nextInt(<span class="number">10</span>) * <span class="number">1000</span>);</div><div class="line">            System.out.println(<span class="string">"check complete"</span>);</div><div class="line">            <span class="comment">// 通知CountDownLatch, 一个线程已经完成工作. 倒计时器可以减1了</span></div><div class="line">            end.countDown();</div><div class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</div><div class="line">        ExecutorService executorService = Executors.newFixedThreadPool(<span class="number">10</span>);</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">10</span>; i++) &#123;</div><div class="line">            executorService.submit(demo);</div><div class="line">        &#125;</div><div class="line">        <span class="comment">// 要求主线程等待10个任务全部完成后, 主线程才能继续执行</span></div><div class="line">        end.await();</div><div class="line">        System.out.println(<span class="string">"Fire!"</span>);</div><div class="line">        executorService.shutdown();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/10/12/Java高并发程序设计读书笔记-JDK并发包-读写锁/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Blue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blue的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/10/12/Java高并发程序设计读书笔记-JDK并发包-读写锁/" itemprop="url">
+                  Java高并发程序设计读书笔记-JDK并发包-读写锁
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-12T22:27:20+08:00">
+                2017-10-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>ReadWriteLock是JDK5提供的读写分离锁. 读写分离锁可以有效的减少锁竞争, 提升性能.</p>
+<p>读写锁允许多个线程同时读, 写写操作和读写操作相互等待和持有锁.</p>
+<p>读写锁访问约束情况</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th style="text-align:center">读</th>
+<th style="text-align:center">写</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>读</td>
+<td style="text-align:center">非阻塞</td>
+<td style="text-align:center">阻塞</td>
+</tr>
+<tr>
+<td>写</td>
+<td style="text-align:center">阻塞</td>
+<td style="text-align:center">阻塞</td>
+</tr>
+</tbody>
+</table>
+<p>使用读写锁示例:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReadWriteLockDemo</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Lock lock = <span class="keyword">new</span> ReentrantLock();</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> ReentrantReadWriteLock readWriteLock = <span class="keyword">new</span> ReentrantReadWriteLock();</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Lock readLock = readWriteLock.readLock();</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Lock writeLock = readWriteLock.writeLock();</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> value;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">handleRead</span><span class="params">(Lock lock)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            lock.lock(); <span class="comment">// 模拟读操作</span></div><div class="line">            Thread.sleep(<span class="number">1000</span>); <span class="comment">// 读操作耗时越多, 读写锁优势就越明显</span></div><div class="line">            <span class="keyword">return</span> value;</div><div class="line">        &#125; <span class="keyword">finally</span> &#123;</div><div class="line">            lock.unlock();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleWrite</span><span class="params">(Lock lock, <span class="keyword">int</span> index)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            lock.lock();<span class="comment">// 模拟写操作</span></div><div class="line">            Thread.sleep(<span class="number">1000</span>);</div><div class="line">            value = index;</div><div class="line">        &#125; <span class="keyword">finally</span> &#123;</div><div class="line">            lock.unlock();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</div><div class="line">        <span class="keyword">final</span> ReadWriteLockDemo demo = <span class="keyword">new</span> ReadWriteLockDemo();</div><div class="line"></div><div class="line">        Runnable readRunnable = <span class="keyword">new</span> Runnable() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    demo.handleRead(readLock);</div><div class="line">                    demo.handleRead(lock);</div><div class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line"></div><div class="line">        Runnable writeRunnable = <span class="keyword">new</span> Runnable() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    demo.handleWrite(writeLock, <span class="keyword">new</span> Random().nextInt());</div><div class="line">                    demo.handleWrite(lock, <span class="keyword">new</span> Random().nextInt());</div><div class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/10/12/Java高并发程序设计读书笔记-JDK并发包-信号量/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Blue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blue的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/10/12/Java高并发程序设计读书笔记-JDK并发包-信号量/" itemprop="url">
+                  Java高并发程序设计读书笔记-JDK并发包-信号量
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-12T22:14:01+08:00">
+                2017-10-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>信号量是对锁的扩展. <code>synchronized</code>和<code>ReentrantLock</code>一次只允许一个线程访问一个资源. 而信号量可以指定多个线程同时访问一个资源.</p>
+<p>信号量的构造函数:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">Semaphore</span><span class="params">(<span class="keyword">int</span> permits)</span> <span class="comment">// 指定信号量的准入数, 即同时能有多少个许可</span></span></div><div class="line"><span class="keyword">public</span> <span class="title">Semaphore</span><span class="params">(<span class="keyword">int</span> permits, <span class="keyword">boolean</span> fair)</span> <span class="comment">// 第二个参数指定是否公平</span></div></pre></td></tr></table></figure>
+<p>信号量的主要逻辑方法:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">acquire</span><span class="params">()</span></span>; <span class="comment">// 尝试获得一个许可, 如果无法获得, 则等待. 直到有线程释放一个许可或当前线程中断</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">acquireUninterruptibly</span><span class="params">()</span></span>; <span class="comment">// 和acquire类似, 但不响应中断</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">tryAcquire</span><span class="params">()</span></span>; <span class="comment">// 尝试获得一个许可, 成功返回true, 否则返回false, 立即返回</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">tryAcquire</span><span class="params">(<span class="keyword">long</span> timeout, TimeUnit unit)</span></span>;<span class="comment">// 尝试获得一个许可, 成功返回true, 否则返回false, 等待timeout个单位时间</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">release</span><span class="params">()</span></span>; <span class="comment">//释放一个许可</span></div></pre></td></tr></table></figure>
+<p>使用信号量的简单示例:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SemapDemo</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">final</span> Semaphore semaphore = <span class="keyword">new</span> Semaphore(<span class="number">5</span>);</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            semaphore.acquire();</div><div class="line">            Thread.sleep(<span class="number">2000</span>);</div><div class="line">            System.out.println(Thread.currentThread().getId() + <span class="string">":done!"</span>);</div><div class="line">            semaphore.release();</div><div class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        ExecutorService executorService = Executors.newFixedThreadPool(<span class="number">20</span>);</div><div class="line">        <span class="keyword">final</span> SemapDemo demo = <span class="keyword">new</span> SemapDemo();</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">20</span>; i++) &#123;</div><div class="line">            executorService.submit(demo);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -284,7 +809,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-12T21:01:36+08:00">
                 2017-10-12
@@ -415,7 +940,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-10T22:31:44+08:00">
                 2017-10-10
@@ -588,7 +1113,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-24T10:36:51+08:00">
                 2017-09-24
@@ -786,7 +1311,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-23T10:08:07+08:00">
                 2017-09-23
@@ -980,7 +1505,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-21T14:26:12+08:00">
                 2017-09-21
@@ -1110,7 +1635,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-21T10:19:35+08:00">
                 2017-09-21
@@ -1253,851 +1778,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/09/20/Java基础/Java基本程序设计/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Blue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blue的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/09/20/Java基础/Java基本程序设计/" itemprop="url">
-                  Java基本程序设计
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-20T11:22:23+08:00">
-                2017-09-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="标识符"><a href="#标识符" class="headerlink" title="标识符"></a>标识符</h3><p>标识符实为了标识程序中诸如类, 方法和变量的元素而采用的命名. 例如: main, input, number1.</p>
-<p>标识符必须遵从以下规则:</p>
-<ul>
-<li>由字母, 数字, 下划线(_)和美元符号($)构成的字符序列</li>
-<li>必须以字母, 下划线(_)或美元符号($)开头, 不能以数字开头</li>
-<li>不能是保留字</li>
-<li>不能是true, false 或 null</li>
-<li>可以是任意长度</li>
-</ul>
-<p>如: area, radius, $2都是合法的标识符. 2A, d+4都是非法的标识符.</p>
-<p>Java是区分大小写的, 所以area, Area和AREA都是不同的标识符.</p>
-<p>尽量不要用$命名标识符, 习惯上, $只用在机器自动生成的源代码中.</p>
-<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>变量用于表示特定类型的数据. 他们的值是可以被改变的.</p>
-<p>变量声明告知编译器根据数据类型为变量分配合适的内存空间. 例如:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> count;</div><div class="line"><span class="keyword">double</span> radius;</div></pre></td></tr></table></figure>
-<p>在赋值给变量之前, 必须声明变量. 方法中声明的变量在使用之前必须被赋值.</p>
-<h3 id="赋值语句和赋值表达式"><a href="#赋值语句和赋值表达式" class="headerlink" title="赋值语句和赋值表达式"></a>赋值语句和赋值表达式</h3><p>赋值语句将一个值指定给一个变量. 赋值语句可以作为一个表达式. 等号(=)表示赋值操作符.</p>
-<p>赋值语句语法:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">variable = expression;</div></pre></td></tr></table></figure>
-<p>如:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> y = <span class="number">1</span>;</div><div class="line"><span class="keyword">int</span> x = <span class="number">5</span> * (<span class="number">3</span>/<span class="number">2</span>);</div><div class="line">x = y + <span class="number">1</span>;</div></pre></td></tr></table></figure>
-<p>变量名必须在赋值操作符的左边.</p>
-<p>赋值语句中, 左边变量的数据类型必须与右边值的数据类型兼容. 如<code>int x=1.0;</code>是非法的, 这种情况下必须进行类型转换.</p>
-<h3 id="命名常量"><a href="#命名常量" class="headerlink" title="命名常量"></a>命名常量</h3><p>命名常量是一个代表不变值的标识符. 常量表示从不改变的永久数据. 语法如下:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">final</span> dataytep CONSTANTNAME = value</div></pre></td></tr></table></figure>
-<p>常量必须在同一条语句中声明和赋值. <code>final</code>是声明常量的关键字.</p>
-<p>使用常量的好处:</p>
-<ol>
-<li>不必重复输入同一个值.</li>
-<li>如果必须修改常量值, 只需要在代码中一个地方做改动.</li>
-<li>给常量赋一个描述性的名字提高程序易读性</li>
-</ol>
-<h3 id="命名习惯"><a href="#命名习惯" class="headerlink" title="命名习惯"></a>命名习惯</h3><p>严格遵循Java的命名习惯, 让程序易于理解, 避免错误.</p>
-<ul>
-<li>使用小写字母命名变量和方法. 如果包含多个单词, 第一个单词的字母小写, 后面没个单词的首字母大写. </li>
-<li>类名中每个单词首字母大写</li>
-<li>大写常量中的所有字母, 两个单词间用下划线连接</li>
-</ul>
-<h3 id="数值数据类型和操作"><a href="#数值数据类型和操作" class="headerlink" title="数值数据类型和操作"></a>数值数据类型和操作</h3><p>Java为数值, 字符值, 布尔值提供8种基本数据类型.</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">类型名</th>
-<th style="text-align:center">范围</th>
-<th style="text-align:center">存储大小</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">byte</td>
-<td style="text-align:center">-128~127</td>
-<td style="text-align:center">8位带符号数</td>
-</tr>
-<tr>
-<td style="text-align:center">short</td>
-<td style="text-align:center">-2^15~2^15 -1</td>
-<td style="text-align:center">16位带符号数</td>
-</tr>
-<tr>
-<td style="text-align:center">int</td>
-<td style="text-align:center">-2^31~2^31 -1</td>
-<td style="text-align:center">32位带符号数</td>
-</tr>
-<tr>
-<td style="text-align:center">long</td>
-<td style="text-align:center">-2^63~2^63 -1</td>
-<td style="text-align:center">64位带符号数</td>
-</tr>
-<tr>
-<td style="text-align:center">float</td>
-<td style="text-align:center">负数范围: -3.4028235E+38~-1.4E-35                               正数范围: 1.4E-45~3.4028235E+38</td>
-<td style="text-align:center">32位带符号数</td>
-</tr>
-<tr>
-<td style="text-align:center">double</td>
-<td style="text-align:center">负数范围: -1.7976931348623157E+308~-4.9E-32         正数范围: 4.9E-324~48623157E+308 –4.9E-3</td>
-<td style="text-align:center">64位带符号数</td>
-</tr>
-</tbody>
-</table>
-<p>Scanner对象有以下方法可以从键盘读取基本类型数值:</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">方法</th>
-<th style="text-align:center">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">nextByte()</td>
-<td style="text-align:center">读取一个byte类型的数</td>
-</tr>
-<tr>
-<td style="text-align:center">nextShort()</td>
-<td style="text-align:center">读取一个short类型的数</td>
-</tr>
-<tr>
-<td style="text-align:center">nextInt()</td>
-<td style="text-align:center">读取一个int类型的数</td>
-</tr>
-<tr>
-<td style="text-align:center">nextLong()</td>
-<td style="text-align:center">读取一个long类型的数</td>
-</tr>
-<tr>
-<td style="text-align:center">nextFloat()</td>
-<td style="text-align:center">读取一个float类型的数</td>
-</tr>
-<tr>
-<td style="text-align:center">nextDouble()</td>
-<td style="text-align:center">读取一个double类型的数</td>
-</tr>
-</tbody>
-</table>
-<p>数值数据类型的操作符包括+,-,*,/,%.</p>
-<p>当除法的操作数都是整数时, 除法的结果是整数.</p>
-<h3 id="数值类型直接量"><a href="#数值类型直接量" class="headerlink" title="数值类型直接量"></a>数值类型直接量</h3><p>一个直接量是程序中直接出线的常量值.</p>
-<h3 id="增强赋值操作符"><a href="#增强赋值操作符" class="headerlink" title="增强赋值操作符"></a>增强赋值操作符</h3><p>操作符<code>+</code>,<code>-</code>,<code>*</code>,<code>/</code>,<code>%</code>可以结合赋值操作符形成增强操作符.</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">操作符</th>
-<th style="text-align:center">示例</th>
-<th style="text-align:center">等价于</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">+=</td>
-<td style="text-align:center">i+=8</td>
-<td style="text-align:center">i = i+8</td>
-</tr>
-<tr>
-<td style="text-align:center">-=</td>
-<td style="text-align:center">i-=8</td>
-<td style="text-align:center">i = i-8</td>
-</tr>
-<tr>
-<td style="text-align:center">*=</td>
-<td style="text-align:center">i*=8</td>
-<td style="text-align:center">i = i*8</td>
-</tr>
-<tr>
-<td style="text-align:center">/=</td>
-<td style="text-align:center">i/=8</td>
-<td style="text-align:center">i = i/8</td>
-</tr>
-<tr>
-<td style="text-align:center">%=</td>
-<td style="text-align:center">i%=8</td>
-<td style="text-align:center">i = i%8</td>
-</tr>
-</tbody>
-</table>
-<h3 id="自增和自减操作符"><a href="#自增和自减操作符" class="headerlink" title="自增和自减操作符"></a>自增和自减操作符</h3><p>自增操作符(++)和自减操作符(—)是对变量进行加1和减1的操作.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> i = <span class="number">3</span>, j = <span class="number">4</span>;</div><div class="line">++i; <span class="comment">// i==4 true</span></div><div class="line">--j; <span class="comment">// j==2 true</span></div></pre></td></tr></table></figure>
-<h3 id="数值类型转换"><a href="#数值类型转换" class="headerlink" title="数值类型转换"></a>数值类型转换</h3><p>类型转换是一种将一种数据类型的值转换成另一种数据类型的操作. <code>(int) 1.7</code></p>
-<p>如果一个二元运算中, 其中一个操作数是整数, 另一个操作数是浮点数, Java会自动将整数转换为浮点数.</p>
-<p>总是可以将一个数值赋值给支持更大数值范围的变量. </p>
-<p>如果不尽兴类型转换, 就不能将一个值赋给范围较小类型的变量.</p>
-<p>当double类型被转换为int类型时, 小数部分会被截去.</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/06/07/Java编程思想笔记-操作符/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Blue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blue的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/06/07/Java编程思想笔记-操作符/" itemprop="url">
-                  Java编程思想笔记-操作符
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-07T16:04:57+08:00">
-                2017-06-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>在最底层, Java中的数据是通过食用操作符来操作的.</p>
-<p>对基本数据类型的赋值是很简单的. 基本类型存储了实际的数值, 而并非指向一个对象的引用. 在为其赋值时, 是直接将一个地方的内容复制到了另一个地方. 例如:</p>
-<p><code>a=b</code>, 那么b的内容就复制给a. 直接修改a, 而b根本不会受到影响.</p>
-<p>将一个对象赋值给另一个对象时, 实际是将”引用”从一个地方复制到另一个地方. 如: <code>c=d</code>, 那么c和d都指向原本只有d指向的那个对象.</p>
-<p>整数除法会直接去掉结果的小数位.</p>
-<p>按位操作符用来操作整数基本数据类型中的单个bit, 即二进制位. 按位操作符会对两个参数中对应的位执行布尔代数运算, 并最终生成一个结果.</p>
-<p>如果两个输入位都是1, 则按位与操作(<strong>&amp;</strong>)生成一个输出位1, 否则生成一个输出位0.</p>
-<p>如果两个输入位挚友一个是1, 则按位或操作(<strong>|</strong>)生成一个输出位1, 只有在两个输入位都是0的情况下, 才会生成一个输出位0.</p>
-<p>如果某个输入位是1, 单不全都是1, 按位异或操作(<strong>^</strong>)生成一个输出位1.</p>
-<p>按位非(<strong>~</strong>)也称取反操作符, 属于一元操作符. 按位非生成与输入位相反的值, 若输入0, 则输出1; 若输入1, 则输出0.</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/06/06/Java编程思想笔记-一切都是对象/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Blue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blue的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/06/06/Java编程思想笔记-一切都是对象/" itemprop="url">
-                  Java编程思想笔记-一切都是对象
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-06T12:44:27+08:00">
-                2017-06-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>在Java中一切都被视为对象, 但是操纵的标识符实际上是对象的一个”引用”. 类似于遥控器(引用)来操纵电视器(对象). </p>
-<p>即使没有电视器, 遥控器也能独立存在. 也就是说, 拥有一个引用, 并不一定需要有一个对象与它关联.</p>
-<p>创建一个<code>String</code>应用:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">String s;</div></pre></td></tr></table></figure>
-<p>这里创建的只是引用, 并不是对象. 如果此时向s发送一个消息, 就会返回一个运行时异常. 因为s没有与任何事物相关联.</p>
-<p>一种安全的做法: 创建一个引用同时初始化:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">String s = <span class="string">"asdf"</span>;</div></pre></td></tr></table></figure>
-<p>通常使用<code>new</code>操作符创建对象.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">String s = <span class="keyword">new</span> String(<span class="string">"asdf"</span>);</div></pre></td></tr></table></figure>
-<p>有五个地方可以存储数据:</p>
-<ol>
-<li><strong>寄存器</strong>. 最快的存储区, 位于处理器内部, 与其他存储区不同. 寄存器数量极其有限, 所有寄存器根据需要进行分配. 不能直接控制, 也不能在程序中感觉到寄存器的存在.</li>
-<li><strong>堆栈</strong>. 位于通用RAM(随机访问存储器). 这是一种快速有效的分配存储方法, 仅次于寄存器. 创建程序时, Java系统必须知道存储在堆栈内所有项的确切生命周期, 以便上下移动堆栈指针(堆栈指针向下移则分配新的内存, 向上移则释放内存). <strong>Java的对象引用存储在堆栈中</strong>. </li>
-<li><strong>堆</strong>. 一种通用的内存池(位于RAM中), <strong>用于存放所有的Java对象</strong>. 堆不同于堆栈的好处是: 编译器不需要知道存储的数据在堆里存活多长时间. 当需要一个对象时, 只需用<code>new</code>写一行代码, 当执行这行代码时,  会自动在堆里进行存储分配. 用堆进行存储分配和清理可能比用堆栈进行存储分配需要更多的时间.</li>
-<li><strong>常量粗糙</strong>. 常量值通常直接存放在程序代码内部.</li>
-<li><strong>非RAM存储</strong>. 如果数据完全存活于程序之外, 那么它可以不受程序的任何控制, 在程序没有运行时也可以存在. 两个基本例子是:<em>流对象</em>和<em>持久化对象</em>.</li>
-</ol>
-<p><strong>基本类型</strong>存储在堆栈中, 这样会更加高效.</p>
-<p>Java确定每种基本类型所占存储空间的大小. 并不会随机器硬件架构的变化而变化. </p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">基本类型</th>
-<th style="text-align:center">大小</th>
-<th style="text-align:center">最小值</th>
-<th style="text-align:center">最大值</th>
-<th style="text-align:center">包装器类型</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">boolean</td>
-<td style="text-align:center">-</td>
-<td style="text-align:center">-</td>
-<td style="text-align:center">-</td>
-<td style="text-align:center">Boolean</td>
-</tr>
-<tr>
-<td style="text-align:center">char</td>
-<td style="text-align:center">16-bit</td>
-<td style="text-align:center">Unicode 0</td>
-<td style="text-align:center">Unicode 2^16 -1</td>
-<td style="text-align:center">Character</td>
-</tr>
-<tr>
-<td style="text-align:center">byte</td>
-<td style="text-align:center">8 bits</td>
-<td style="text-align:center">-128</td>
-<td style="text-align:center">+127</td>
-<td style="text-align:center">Byte</td>
-</tr>
-<tr>
-<td style="text-align:center">short</td>
-<td style="text-align:center">16 bits</td>
-<td style="text-align:center">-2^15</td>
-<td style="text-align:center">+2^15 - 1</td>
-<td style="text-align:center">Short</td>
-</tr>
-<tr>
-<td style="text-align:center">int</td>
-<td style="text-align:center">32 bits</td>
-<td style="text-align:center">-2^31</td>
-<td style="text-align:center">+2^31 - 1</td>
-<td style="text-align:center">Integer</td>
-</tr>
-<tr>
-<td style="text-align:center">long</td>
-<td style="text-align:center">64 bits</td>
-<td style="text-align:center">-2^63</td>
-<td style="text-align:center">+2^63 - 1</td>
-<td style="text-align:center">Long</td>
-</tr>
-<tr>
-<td style="text-align:center">float</td>
-<td style="text-align:center">32 bits</td>
-<td style="text-align:center">IEEE745</td>
-<td style="text-align:center">IEEE745</td>
-<td style="text-align:center">Float</td>
-</tr>
-<tr>
-<td style="text-align:center">double</td>
-<td style="text-align:center">64 bits</td>
-<td style="text-align:center">IEEE745</td>
-<td style="text-align:center">IEEE745</td>
-<td style="text-align:center">Double</td>
-</tr>
-<tr>
-<td style="text-align:center">void</td>
-<td style="text-align:center">-</td>
-<td style="text-align:center">-</td>
-<td style="text-align:center">-</td>
-<td style="text-align:center">Void</td>
-</tr>
-</tbody>
-</table>
-<p>所有数值类型都有正负号, 没有无符号的数字类型.</p>
-<p>基本类型具有的包装器类, 使得可以在堆中创建一个非基本对象, 用来表示对应的基本类型:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">char</span> c = <span class="string">'x'</span>;</div><div class="line">Character ch = <span class="keyword">new</span> Character(c);</div></pre></td></tr></table></figure>
-<p>也可以这样用:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Character ch = <span class="keyword">new</span> Character(<span class="string">'x'</span>);</div></pre></td></tr></table></figure>
-<p><strong>Java SE5 的自动包装功能将自动地将基本类型转换为包装器类型</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Character ch = <span class="string">'x'</span>;</div></pre></td></tr></table></figure>
-<p>并可以反向转换:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">char</span> c = ch;</div></pre></td></tr></table></figure>
-<p>Java 提供两个用于高精度计算的类: <code>BigInteger</code>和<code>BigDecimal</code>. 能够作用于<code>int</code>或<code>float</code>的操作, 也同样能作用于<code>BigInteger</code>或<code>BigDecimal</code>.</p>
-<p><strong>BigInteger</strong>支持任意精度的整数.</p>
-<p><strong>BigDecimal</strong>支持任意精度的定点数. 可以用它进行精确的货币计算.</p>
-<p>Java取保数组会被初始化, 而且不能在它的范围之外被访问. 这种范围检查, 是以每个数组少量的内存开销及运行时的下标检查为代价的. </p>
-<p><code>null</code>表示这个引用没有指向某个对象. 在使用任何引用前, 必须为其指定一个对象.</p>
-<p>创建存放基本数据类型的数组时, Java会自动将数组全部初始化为0.</p>
-<p><strong>作用域</strong>决定了在其内定义的变量名的可见性和生命周期. Java中, 作用域由花括号的位置决定.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="keyword">int</span> x = <span class="number">12</span>;</div><div class="line">  <span class="comment">// Only x available</span></div><div class="line">  &#123;</div><div class="line">    <span class="keyword">int</span> q = <span class="number">96</span>;</div><div class="line">    <span class="comment">// Both x &amp; q available</span></div><div class="line">  &#125;</div><div class="line">  <span class="comment">// Only x available</span></div><div class="line">  <span class="comment">// q is "out of scope"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>在作用域里定义的变量只可以用于作用于结束之前</p>
-<p>在Java中不能这样写:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="keyword">int</span> x = <span class="number">12</span>;</div><div class="line">  &#123;</div><div class="line">    <span class="keyword">int</span> x = <span class="number">96</span>;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>Java设计者认为这会导致程序混乱.</p>
-<p>Java对象不具备和基本类型一样的生命周期. 当用<code>new</code>创建一个Java对象时,  它可以存活于作用域之外. 例如:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  String s = <span class="keyword">new</span> String(<span class="string">"a string"</span>)</div><div class="line">&#125; <span class="comment">// End of scope</span></div></pre></td></tr></table></figure>
-<p>引用<code>s</code>在作用域终点就消失了. 然而, <code>s</code>指向的String对象仍继续占据内存空间.</p>
-<p>Java使用<strong>垃圾回收器</strong>, 监视用<code>new</code>创建的所有对象, 辨别那些不会再被引用的对象. 随后, 释放这些对象的内存空间. </p>
-<p>使用关键字<strong>class</strong>来表示”我准备告诉你一种新类型的对象看起来像什么样子”. 例如:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ATypeName</span> </span>&#123; <span class="comment">/* Class body goes here */</span> &#125;</div></pre></td></tr></table></figure>
-<p>字段可以是任何类型的对象, 可以通过其引用与其进行通信; 也可以是基本类型中的一种. 如果字段是对某个对象的引用, 那么必须初始化该引用, 以便使其与一个实际对象相关联.</p>
-<p>每个对象都有用来存储其字段的空间; 普通字段不能再对象间共享. 例如:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">DataOnly</span> </span>&#123;</div><div class="line">  <span class="keyword">int</span> i;</div><div class="line">  <span class="keyword">double</span> d;</div><div class="line">  <span class="keyword">boolean</span> b;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>在对象引用的名称之后紧接着一个句点,  然后再接着是对象内部的成员名称:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">objectReference.member</div></pre></td></tr></table></figure>
-<p>如：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">DataOnly data = <span class="keyword">new</span> DataOnly();</div><div class="line">data.i = <span class="number">47</span>;</div><div class="line">data.d = <span class="number">1.1</span>;</div><div class="line">data.b = <span class="keyword">false</span>;</div></pre></td></tr></table></figure>
-<p>类中的某个成员是基本数据类型, 即使没有进行初始化, Java也会确保它获得一个默认值.</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">基本类型</th>
-<th style="text-align:center">默认值</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">boolean</td>
-<td style="text-align:center">false</td>
-</tr>
-<tr>
-<td style="text-align:center">char</td>
-<td style="text-align:center">‘\u0000’(null)</td>
-</tr>
-<tr>
-<td style="text-align:center">byte</td>
-<td style="text-align:center">(byte) 0</td>
-</tr>
-<tr>
-<td style="text-align:center">short</td>
-<td style="text-align:center">(short) 0</td>
-</tr>
-<tr>
-<td style="text-align:center">int</td>
-<td style="text-align:center">0</td>
-</tr>
-<tr>
-<td style="text-align:center">long</td>
-<td style="text-align:center">0L</td>
-</tr>
-<tr>
-<td style="text-align:center">float</td>
-<td style="text-align:center">0.0f</td>
-</tr>
-<tr>
-<td style="text-align:center">double</td>
-<td style="text-align:center">0.0d</td>
-</tr>
-</tbody>
-</table>
-<p>局部变量不会Java不会初始化默认值. 如果在某个方法定义中有<code>int x;</code>, 这个x得到的可能是任意值, 而不会被自动初始化为0.</p>
-<p>方法的基本组成部分包括: 名称, 参数, 返回值, 方法体.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function">ReturnType <span class="title">methodName</span><span class="params">( <span class="comment">/* Argument list */</span>)</span> </span>&#123;</div><div class="line">  <span class="comment">/* Method body */</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>返回类型描述在调用方法后从方法返回的值.</p>
-<p>参数列表给出要传给方法的信息的类型和名称.</p>
-<p><strong>方法名和参数列表</strong>唯一标识一个方法</p>
-<p>在调用方法是实际上传递的是对象的引用.</p>
-<p><strong>return</strong>关键字用法: </p>
-<ol>
-<li>代表已经做完, 离开此方法</li>
-<li>如果此方法产生一个值, 这个值要放在return语句后面.</li>
-</ol>
-<p><strong>static</strong>关键字使用情形:</p>
-<ol>
-<li>只想为某个特定的域分配单一存储空间, 不去考虑究竟要创建多少对象, 甚至根本不创建任何对象</li>
-<li>希望某个方法不与包含它的类的任何对象关联. 即使不创建对象, 也能调用这个方法.</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">StaticTest</span> </span>&#123;</div><div class="line">  <span class="keyword">static</span> <span class="keyword">int</span> i = <span class="number">47</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>static变量只分配一份存储空间, 即使你创建了两个StaticTest对象.</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/06/05/Java基础-AgileJava/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Blue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blue的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/06/05/Java基础-AgileJava/" itemprop="url">
-                  Java基础-AgileJava
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-05T10:44:22+08:00">
-                2017-06-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Java中的数字不是对象. 不能发送消息给数字.非对象类型被称作基本类型</p>
-<p>Java总是先执行某个赋值语句右边的代码</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2147,8 +1827,8 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">52</span>
-                <span class="site-state-item-name">Artikel</span>
+                <span class="site-state-item-count">56</span>
+                <span class="site-state-item-name">posts</span>
               </a>
             </div>
           
@@ -2161,7 +1841,7 @@
             <div class="site-state-item site-state-tags">
               
                 <span class="site-state-item-count">4</span>
-                <span class="site-state-item-name">Tags</span>
+                <span class="site-state-item-name">tags</span>
               
             </div>
           
@@ -2211,7 +1891,7 @@
 
 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">

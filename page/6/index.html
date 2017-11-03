@@ -194,7 +194,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            Home
           </a>
         </li>
       
@@ -204,7 +204,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -237,6 +237,718 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/01/07/Angular笔记-架构概览/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Blue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blue的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/01/07/Angular笔记-架构概览/" itemprop="url">
+                  Angular笔记-架构概览
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-07T00:00:00+08:00">
+                2017-01-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="架构概览"><a href="#架构概览" class="headerlink" title="架构概览"></a>架构概览</h1><h3 id="Angular-应用的基本构造块"><a href="#Angular-应用的基本构造块" class="headerlink" title="Angular 应用的基本构造块"></a>Angular 应用的基本构造块</h3><p>Angular 是一个用 HTML 和 JavaScript 或者一个可以编译成 JavaScript 的语言（例如 Dart 或者 TypeScript ），来构建客户端应用的框架。</p>
+<p>该框架包括一系列库，有些是核心库，有些是可选库。</p>
+<p>我们是这样写 Angular 应用的：用 Angular 扩展语法编写 HTML <em>模板</em>， 用<em>组件</em>类管理这些模板，用<em>服务</em>添加应用逻辑， 用<em>模块</em>打包发布组件与服务。</p>
+<p>然后，我们通过<strong>引导根模块</strong>来启动该应用。 Angular 在浏览器中接管、展现应用的内容，并根据我们提供的操作指令响应用户的交互。 <img src="/2017/01/07/Angular笔记-架构概览/angular架构全景图.png" alt="angular架构全景图"></p>
+<p>这个架构图展现了 Angular 应用中的 8 个主要构造块：</p>
+<ul>
+<li>模块</li>
+<li>组件</li>
+<li>模版</li>
+<li>元数据</li>
+<li>数据绑定</li>
+<li>指令</li>
+<li>服务</li>
+<li>依赖注入</li>
+</ul>
+<h3 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h3><p>Angular 应用是模块化的，并且 Angular 有自己的模块系统，它被称为 <em>Angular 模块</em>或 <em>NgModules</em>。每个 Angular 应用至少有一个模块（<strong>根模块</strong>，习惯上命名为<code>AppModule</code>。</p>
+<p>Angular 模块（无论是<em>根模块</em>还是<em>特性模块</em>）都是一个带有<code>@NgModule</code>装饰器的类.</p>
+<p><code>NgModule</code>是一个装饰器函数，它接收一个用来描述模块属性的元数据对象。其中最重要的属性是：</p>
+<ul>
+<li><code>declarations</code> - 声明本模块中拥有的<em>视图类</em>。 Angular 有三种视图类：<a href="https://angular.cn/docs/ts/latest/guide/architecture.html#components" target="_blank" rel="external">组件</a>、<a href="https://angular.cn/docs/ts/latest/guide/architecture.html#directives" target="_blank" rel="external">指令</a>和<a href="https://angular.cn/docs/ts/latest/guide/pipes.html" target="_blank" rel="external">管道</a>。</li>
+<li><code>exports</code> - declarations 的子集，可用于其它模块的组件<a href="https://angular.cn/docs/ts/latest/guide/architecture.html#templates" target="_blank" rel="external">模板</a>。</li>
+<li><code>imports</code> - <em>本</em>模块声明的组件模板需要的类所在的其它模块。</li>
+<li><code>providers</code> - <a href="https://angular.cn/docs/ts/latest/guide/architecture.html#services" target="_blank" rel="external">服务</a>的创建者，并加入到全局服务列表中，可用于应用任何部分。</li>
+<li><code>bootstrap</code> - 指定应用的主视图（称为<em>根组件</em>），它是所有其它视图的宿主。只有<em>根模块</em>才能设置<code>bootstrap</code>属性。</li>
+</ul>
+<p>下面是一个简单的根模块：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123; NgModule &#125;      from <span class="string">'@angular/core'</span>;</div><div class="line"><span class="keyword">import</span> &#123; BrowserModule &#125; from <span class="string">'@angular/platform-browser'</span>;</div><div class="line"><span class="meta">@NgModule</span>(&#123;</div><div class="line">  imports:      [ BrowserModule ],</div><div class="line">  providers:    [ Logger ],</div><div class="line">  declarations: [ AppComponent ],</div><div class="line">  exports:      [ AppComponent ],</div><div class="line">  bootstrap:    [ AppComponent ]</div><div class="line">&#125;)</div><div class="line"><span class="keyword">export</span> <span class="keyword">class</span> AppModule &#123; &#125;</div></pre></td></tr></table></figure>
+<h3 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h3><p><em>组件</em>负责控制屏幕上的一小块区域，我们称之为<em>视图</em>。在类中定义组件的应用逻辑，为视图提供支持。 组件通过一些由属性和方法组成的 API 与视图交互。</p>
+<p>Angular 会创建、更新和销毁组件。 应用可以通过<a href="https://angular.cn/docs/ts/latest/guide/lifecycle-hooks.html" target="_blank" rel="external">生命周期钩子</a>在组件生命周期的各个时间点上插入自己的操作，例如<code>ngOnInit()</code>。</p>
+<h3 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h3><p>过组件的自带的<strong>模板</strong>来定义组件视图。模板以 HTML 形式存在，告诉 Angular 如何渲染组件。</p>
+<h3 id="元数据"><a href="#元数据" class="headerlink" title="元数据"></a>元数据</h3><p>元数据告诉 Angular 如何处理一个类。</p>
+<p>在TypeScript 中，用<strong>装饰器 (decorator) </strong>来附加元数据。 下面就是<code>HeroListComponent</code>的一些元数据。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span>(&#123;</div><div class="line">  moduleId: <span class="built_in">module</span>.id,</div><div class="line">  selector:    <span class="string">'hero-list'</span>,</div><div class="line">  templateUrl: <span class="string">'hero-list.component.html'</span>,</div><div class="line">  providers:  [ HeroService ]</div><div class="line">&#125;)</div><div class="line"><span class="keyword">export</span> <span class="keyword">class</span> HeroListComponent <span class="keyword">implements</span> OnInit &#123;</div><div class="line"><span class="comment">/* . . . */</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><code>@Component</code>装饰器，它把紧随其后的类标记成了组件类. <code>@Component</code>装饰器能接受一个配置对象，Angular 会基于这些信息创建和展示组件及其视图。</p>
+<p><code>@Component</code>的配置项包括：</p>
+<ul>
+<li><code>moduleId</code>: 为与模块相关的 URL（例如<code>templateUrl</code>）提供基地址。</li>
+<li><code>selector</code>： CSS 选择器，它告诉 Angular 在<em>父级</em> HTML 中查找<code>标签，创建并插入该组件。 例如，如果应用的 HTML 包含</code>， Angular 就会把<code>HeroListComponent</code>的一个实例插入到这个标签中。</li>
+<li><code>templateUrl</code>：组件 HTML 模板的模块相对地址。</li>
+<li><code>providers</code> - 组件所需服务的<em>依赖注入提供商</em>数组。 这是在告诉 Angular：该组件的构造函数需要一个<code>HeroService</code>服务，这样组件就可以从服务中获得英雄数据。</li>
+</ul>
+<h3 id="数据绑定"><a href="#数据绑定" class="headerlink" title="数据绑定"></a>数据绑定</h3><p>Angular 支持<strong>数据绑定</strong>，一种让模板的各部分与组件的各部分相互合作的机制。 我们往模板 HTML 中添加绑定标记，来告诉 Angular 如何把二者联系起来。</p>
+<p>数据绑定的语法有四种形式。每种形式都有一个方向 —— 绑定到 DOM 、绑定自 DOM 以及双向绑定。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">li</span>&gt;</span>&#123;&#123;hero.name&#125;&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">hero-detail</span> [<span class="attr">hero</span>]=<span class="string">"selectedHero"</span>&gt;</span><span class="tag">&lt;/<span class="name">hero-detail</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">li</span> (<span class="attr">click</span>)=<span class="string">"selectHero(hero)"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li><code></code><a href="https://angular.cn/docs/ts/latest/guide/displaying-data.html#interpolation" target="_blank" rel="external"><em>插值表达式</em></a>在<code>`标签中显示组件的</code>hero.name`属性的值。</li>
+<li><code>[hero]</code><a href="https://angular.cn/docs/ts/latest/guide/template-syntax.html#property-binding" target="_blank" rel="external"><em>属性绑定</em></a>把父组件<code>HeroListComponent</code>的<code>selectedHero</code>的值传到子组件<code>HeroDetailComponent</code>的<code>hero</code>属性中。</li>
+<li><code>(click)</code> <a href="https://angular.cn/docs/ts/latest/guide/user-input.html#click" target="_blank" rel="external"><em>事件绑定</em></a>在用户点击英雄的名字时调用组件的<code>selectHero</code>方法。</li>
+</ul>
+<p><strong>双向数据绑定</strong>是重要的第四种绑定形式，它使用<code>ngModel</code>指令组合了属性绑定和事件绑定的功能。 </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> [(<span class="attr">ngModel</span>)]=<span class="string">"hero.name"</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>在双向绑定中，数据属性值通过属性绑定从组件流到输入框。用户的修改通过事件绑定流回组件，把属性值设置为最新的值。</p>
+<p>Angular 在每个 JavaScript 事件循环中处理<em>所有的</em>数据绑定，它会从组件树的根部开始，递归处理全部子组件。</p>
+<h3 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h3><p>Angular 模板是<em>动态的</em>。当 Angular 渲染它们时，它会根据<strong>指令</strong>提供的操作对 DOM 进行转换。</p>
+<p>指令是一个带有“指令元数据”的类。在 TypeScript 中，要通过<code>@Directive</code>装饰器把元数据附加到类上。</p>
+<p>组件是一个<em>带模板的指令</em>；<code>@Component</code>装饰器实际上就是一个<code>@Directive</code>装饰器，只是扩展了一些面向模板的特性。</p>
+<p>还有两种<em>其它</em>类型的指令：<strong>结构型</strong>指令和<strong>属性 (attribute) 型</strong>指令。</p>
+<p><strong>结构型</strong>指令通过在 DOM 中添加、移除和替换元素来修改布局。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">li</span> *<span class="attr">ngFor</span>=<span class="string">"let hero of heroes"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">hero-detail</span> *<span class="attr">ngIf</span>=<span class="string">"selectedHero"</span>&gt;</span><span class="tag">&lt;/<span class="name">hero-detail</span>&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li><code>*ngFor</code>告诉 Angular 为<code>heroes</code>列表中的每个英雄生成一个<code>li</code>标签。</li>
+<li><code>*ngIf</code>表示只有在选择的英雄存在时，才会包含<code>HeroDetail</code>组件。</li>
+</ul>
+<p><strong>属性型</strong> 指令修改一个现有元素的外观或行为。 在模板中，它们看起来就像是标准的 HTML 属性，故名.</p>
+<p><code>ngModel</code>指令就是属性型指令的一个例子，它实现了双向数据绑定。 <code>ngModel</code>修改现有元素（一般是``）的行为：设置其显示属性值，并响应 change 事件。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> [(<span class="attr">ngModel</span>)]=<span class="string">"hero.name"</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="服务"><a href="#服务" class="headerlink" title="服务"></a>服务</h3><p><em>服务</em>是一个广义范畴，包括：值、函数，或应用所需的特性。</p>
+<p>几乎任何东西都可以是一个服务。 典型的服务是一个类，具有专注的、明确的用途。它应该做一件特定的事情，并把它做好。</p>
+<p>例如：</p>
+<ul>
+<li>日志服务</li>
+<li>数据服务</li>
+<li>消息总线</li>
+<li>税款计算器</li>
+<li>应用程序配置</li>
+</ul>
+<blockquote>
+<p>组件类应保持精简。组件本身不从服务器获得数据、不进行验证输入，也不直接往控制台写日志。 它们把这些任务委托给服务。</p>
+<p>组件的任务就是提供用户体验，仅此而已。它介于视图（由模板渲染）和应用逻辑（通常包括<em>模型</em>的某些概念）之间。 设计良好的组件为数据绑定提供属性和方法，把其它琐事都委托给服务。</p>
+</blockquote>
+<h3 id="依赖注入"><a href="#依赖注入" class="headerlink" title="依赖注入"></a>依赖注入</h3><p>“依赖注入”是提供类的新实例的一种方式，还负责处理好类所需的全部依赖。Angular 通过查看构造函数的参数类型得知组件需要哪些服务。</p>
+<p>需要记住的关于依赖注入的要点是：</p>
+<ul>
+<li>依赖注入渗透在整个 Angular 框架中，被到处使用。</li>
+<li><strong>注入器 (injector)</strong> 是本机制的核心。<ul>
+<li>注入器负责维护一个<em>容器</em>，用于存放它创建过的服务实例。</li>
+<li>注入器能使用<em>提供商</em>创建一个新的服务实例。</li>
+</ul>
+</li>
+<li><em>提供商</em>是一个用于创建服务的配方。</li>
+<li>把<em>提供商</em>注册到注入器。</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2016/12/14/cnetos7_jenkins_git/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Blue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blue的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/12/14/cnetos7_jenkins_git/" itemprop="url">
+                  CentOS 7 Jenkins Git Tomcat 构建Java持续部署环境
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-14T00:00:00+08:00">
+                2016-12-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="必须软件安装"><a href="#必须软件安装" class="headerlink" title="必须软件安装"></a>必须软件安装</h3><ol>
+<li><p>安装JDK</p>
+<ul>
+<li>下载需要的JDK版本的rpm包</li>
+<li>执行 <code>rpm -ivh jdk-**.rpm</code> 命令, JDK会安装到<code>/usr/java/</code>目录下</li>
+<li>验证安装是否成功, 执行<code>java</code>, <code>javac</code></li>
+<li>配置环境变量, 在<code>/etc/profile</code>文件最后添加<ul>
+<li><code>export JAVA_HOME=/usr/java/jdk**</code></li>
+<li><code>export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar</code></li>
+<li><code>export PATH=$PATH:$JAVA_HOME/bin</code></li>
+</ul>
+</li>
+<li>执行<code>source /etc/profile</code> 使修改生效</li>
+</ul>
+</li>
+<li><p>安装GIT</p>
+<ul>
+<li><code>yum -y install git</code> 安装git</li>
+<li><code>git --version</code> 验证git是否安装成功</li>
+</ul>
+</li>
+<li><p>配置Maven</p>
+<ul>
+<li>下载maven, 保存在任意位置, 如: <code>workspace/tools/maven</code>目录下</li>
+<li>修改<code>/etc/profile</code>文件，添加<code>MAVEN_HOME</code><ul>
+<li><code>export MAVEN_HOME=/workspace/tools/maven</code></li>
+<li><code>export PATH=$PATH:$JAVA_HOME/bin:$MAVEN_HOME/bin</code></li>
+</ul>
+</li>
+<li><code>mvn -version</code> 验证Maven是否安装成功</li>
+</ul>
+</li>
+<li><p>安装Jenkins</p>
+<p>CentOS 默认的软件源中是没有Jenkins的，需要添加第三方的软件源.</p>
+<ul>
+<li>执行<code>wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo</code></li>
+<li>执行<code>rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key</code></li>
+<li>执行<code>yum -y install jenkins</code> 安装<code>jenkins</code></li>
+</ul>
+</li>
+</ol>
+<h3 id="配置jenkins"><a href="#配置jenkins" class="headerlink" title="配置jenkins"></a>配置jenkins</h3><ol>
+<li><p>启动 Jenkins</p>
+<p><code>service jenkins start</code></p>
+</li>
+<li><p>设置开机启动</p>
+<p><code>chkconfig jenkins on</code></p>
+</li>
+<li><p>jenkins 默认使用的是8080端口, 在浏览器中输入<code>ip:8080</code>打开jenkins</p>
+</li>
+<li><p><code>/etc/sysconfig/jenkins</code> 这个文件是jenkins的配置文件</p>
+</li>
+<li><p>第一次在浏览器中打开jenkins 时需要在<code>/var/lib/jenkins/secrets/initalAdminPassword</code>文件中复制密码</p>
+</li>
+<li><p>第二步是安装插件, 可以选择默认的插件, 也可以不选择按住插件</p>
+</li>
+<li><p>如果插件安装失败, 可以手动安装</p>
+<ol>
+<li>在<code>系统管理-&gt;管理插件-&gt;可选插件</code>, 中选择需要安装的插件</li>
+<li>或者到<code>http://updates.jenkins-ci.org/download/plugins/</code>去下载插件, 在<code>系统管理-&gt;管理插件-&gt;高级</code>中上传插件 <img src="/2016/12/14/cnetos7_jenkins_git/jenkins_plugin_add.png" alt="jenkins_plugin_add"></li>
+</ol>
+</li>
+<li><p>在<code>系统管理-&gt;管理插件-&gt;Global Tool Configuration</code>中配置JDK、GIT、Maven</p>
+<ol>
+<li><p>配置JDK和GIT</p>
+<p><img src="/2016/12/14/cnetos7_jenkins_git/jenkins_jdk.png" alt="jenkins_jdk"></p>
+</li>
+<li><p>配置Maven<img src="/2016/12/14/cnetos7_jenkins_git/jenkins_maven.png" alt="jenkins_maven"></p>
+</li>
+<li>推荐插件: <ol>
+<li><a href="http://wiki.jenkins-ci.org/display/JENKINS/Git+Plugin" target="_blank" rel="external">Git plugin</a></li>
+<li><a href="http://wiki.jenkins-ci.org/display/JENKINS/Github+Plugin" target="_blank" rel="external">GitHub plugin</a></li>
+<li><a href="http://wiki.jenkins-ci.org/display/JENKINS/M2+Release+Plugin" target="_blank" rel="external">Maven Release Plug-in Plug-in</a></li>
+<li><a href="https://wiki.jenkins-ci.org/display/JENKINS/Structs+plugin" target="_blank" rel="external">Structs Plugin</a></li>
+<li><a href="http://wiki.jenkins-ci.org/display/JENKINS/SSH+Credentials+Plugin" target="_blank" rel="external">SSH Credentials Plugin</a></li>
+<li><a href="http://wiki.jenkins-ci.org/display/JENKINS/SCM+API+Plugin" target="_blank" rel="external">SCM API Plugin</a></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="新建Item"><a href="#新建Item" class="headerlink" title="新建Item"></a>新建Item</h3><p>经过上面的步骤, 环境基本部署完成, 现在可以新建一个项目试试是否可以做到持续部署.x</p>
+<ol>
+<li><p>新建Item</p>
+<p> <img src="/2016/12/14/cnetos7_jenkins_git/jenkins_add_item.png" alt="jenkins_add_item"></p>
+</li>
+<li><p>配置项目的基本信息, 可以根据个人需要选择是否废弃旧的构建 <img src="/2016/12/14/cnetos7_jenkins_git/jenkins_item_general.png" alt="jenkins_item_general"></p>
+</li>
+<li><p>由于需要持续集成发布,需要在git有代码变更时自动构建项目, 所以使用在源码管理这里选择git, 只需要在<code>Repository URL</code> 中输入git仓库地址</p>
+<p><img src="/2016/12/14/cnetos7_jenkins_git/jenkins_item_code.png" alt="jenkins_item_code"></p>
+</li>
+<li><p>在构建触发器中勾选<code>Poll SCM</code>, 这里指定多长时间检索git仓库中的代码是否有更新, 如果有更新, 就会将代码clone到本地, 从新发布. 这里设置为每两分钟检索一次<code>*/2 * * * *</code><img src="/2016/12/14/cnetos7_jenkins_git/jenkins_item_tigger_build.png" alt="jenkins_item_tigger_build"></p>
+</li>
+<li><p>在Pre Steps 中选择<code>Invoke top-level Maven targets</code>, 并选择对应的Maven版本, 在Goals中输入<code>clean install</code></p>
+<p><img src="/2016/12/14/cnetos7_jenkins_git/jenkins_item_preSteps.png" alt="jenkins_item_preSteps"></p>
+</li>
+<li><p>Build 中输入<code>clean package -DskipTests -P prod</code> <img src="/2016/12/14/cnetos7_jenkins_git/jenkins_add_item_build.png" alt="jenkins_add_item_build"></p>
+</li>
+<li><p>在Post Steps中选择Execute shell, 在这里执行关闭tomcat, 将war包复制到tomcat中, 启动tomcat的任务 <img src="/2016/12/14/cnetos7_jenkins_git/jenkins_item_postSteps1.png" alt="jenkins_item_postSteps1"> <img src="/2016/12/14/cnetos7_jenkins_git/jenkins_item_postSteps.png" alt="jenkins_item_postSteps"></p>
+</li>
+<li><p>最后点击保存按钮即可</p>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2016/11/19/Hexo-GitHub搭建属于自己的博客/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Blue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blue的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/11/19/Hexo-GitHub搭建属于自己的博客/" itemprop="url">
+                  Hexo+GitHub搭建属于自己的博客
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-19T12:47:41+08:00">
+                2016-11-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>hexo是一款基于Node.js的静态博客框架.<br>需要配置的环境:</p>
+<ol>
+<li>Node</li>
+<li>Git</li>
+<li>GitHub账号</li>
+<li>Hexo</li>
+</ol>
+<h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><p>使用一下命令安装Hexo<br><code>npm install -g hexo</code></p>
+<p><code>hexo init</code>初始化hexo</p>
+<p><code>hexo generate</code>或者<code>hexo g</code>生成静态页面</p>
+<p><code>hexo server</code>启动本地服务, 在浏览器中输入<code>http://localhost:4000</code>查看</p>
+<h3 id="配置GitHub"><a href="#配置GitHub" class="headerlink" title="配置GitHub"></a>配置GitHub</h3><p>在GitHub创建一个新的Respository, 仓库名必须是</p>
+<p>修改_config.xml文件, 建立与GitHub仓库的关联<br>在_config.xml文件的最后, 修改deploy下的内容<br>deploy:<br>  type: git<br>  repo: GitHub仓库地址<br>  branch: master</p>
+<p>安装hexo-deployer-git<br><code>npm install hexo-deployer-git --save</code></p>
+<p>执行<code>hexo deploy</code>命令将项目部署到GitHub上<br>在浏览器中输入: <code>https://GitHub仓库名</code></p>
+<h3 id="部署三部曲"><a href="#部署三部曲" class="headerlink" title="部署三部曲"></a>部署三部曲</h3><ol>
+<li><code>hexo clean</code></li>
+<li><code>hexo generate</code></li>
+<li><code>hexo deploy</code></li>
+</ol>
+<h3 id="Hexo-常用命令"><a href="#Hexo-常用命令" class="headerlink" title="Hexo 常用命令"></a>Hexo 常用命令</h3><ol>
+<li><code>hexo new &quot;postName&quot;</code>– 新建文章</li>
+<li>`hexo new page “pageName” – 新建页面</li>
+<li><code>hexo generate</code> – 生成静态页面到public目录下</li>
+<li><code>hexo server</code> – 开启本地预览</li>
+<li><code>hexo deploy</code> – 将.deploy目录部署到GitHub</li>
+<li><code>hexo help</code> – 查看帮助</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2016/11/19/hello-world/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Blue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blue的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/11/19/hello-world/" itemprop="url">
+                  Hello World
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-19T12:17:14+08:00">
+                2016-11-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -284,7 +996,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-13T11:00:21+08:00">
                 2016-11-13
@@ -450,7 +1162,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-12T16:06:25+08:00">
                 2016-11-12
@@ -750,8 +1462,8 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">52</span>
-                <span class="site-state-item-name">Artikel</span>
+                <span class="site-state-item-count">56</span>
+                <span class="site-state-item-name">posts</span>
               </a>
             </div>
           
@@ -764,7 +1476,7 @@
             <div class="site-state-item site-state-tags">
               
                 <span class="site-state-item-count">4</span>
-                <span class="site-state-item-name">Tags</span>
+                <span class="site-state-item-name">tags</span>
               
             </div>
           
@@ -814,7 +1526,7 @@
 
 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">

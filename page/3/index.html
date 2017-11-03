@@ -194,7 +194,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            Home
           </a>
         </li>
       
@@ -204,7 +204,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -237,6 +237,851 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/09/20/Java基础/Java基本程序设计/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Blue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blue的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/09/20/Java基础/Java基本程序设计/" itemprop="url">
+                  Java基本程序设计
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-20T11:22:23+08:00">
+                2017-09-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="标识符"><a href="#标识符" class="headerlink" title="标识符"></a>标识符</h3><p>标识符实为了标识程序中诸如类, 方法和变量的元素而采用的命名. 例如: main, input, number1.</p>
+<p>标识符必须遵从以下规则:</p>
+<ul>
+<li>由字母, 数字, 下划线(_)和美元符号($)构成的字符序列</li>
+<li>必须以字母, 下划线(_)或美元符号($)开头, 不能以数字开头</li>
+<li>不能是保留字</li>
+<li>不能是true, false 或 null</li>
+<li>可以是任意长度</li>
+</ul>
+<p>如: area, radius, $2都是合法的标识符. 2A, d+4都是非法的标识符.</p>
+<p>Java是区分大小写的, 所以area, Area和AREA都是不同的标识符.</p>
+<p>尽量不要用$命名标识符, 习惯上, $只用在机器自动生成的源代码中.</p>
+<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>变量用于表示特定类型的数据. 他们的值是可以被改变的.</p>
+<p>变量声明告知编译器根据数据类型为变量分配合适的内存空间. 例如:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> count;</div><div class="line"><span class="keyword">double</span> radius;</div></pre></td></tr></table></figure>
+<p>在赋值给变量之前, 必须声明变量. 方法中声明的变量在使用之前必须被赋值.</p>
+<h3 id="赋值语句和赋值表达式"><a href="#赋值语句和赋值表达式" class="headerlink" title="赋值语句和赋值表达式"></a>赋值语句和赋值表达式</h3><p>赋值语句将一个值指定给一个变量. 赋值语句可以作为一个表达式. 等号(=)表示赋值操作符.</p>
+<p>赋值语句语法:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">variable = expression;</div></pre></td></tr></table></figure>
+<p>如:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> y = <span class="number">1</span>;</div><div class="line"><span class="keyword">int</span> x = <span class="number">5</span> * (<span class="number">3</span>/<span class="number">2</span>);</div><div class="line">x = y + <span class="number">1</span>;</div></pre></td></tr></table></figure>
+<p>变量名必须在赋值操作符的左边.</p>
+<p>赋值语句中, 左边变量的数据类型必须与右边值的数据类型兼容. 如<code>int x=1.0;</code>是非法的, 这种情况下必须进行类型转换.</p>
+<h3 id="命名常量"><a href="#命名常量" class="headerlink" title="命名常量"></a>命名常量</h3><p>命名常量是一个代表不变值的标识符. 常量表示从不改变的永久数据. 语法如下:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">final</span> dataytep CONSTANTNAME = value</div></pre></td></tr></table></figure>
+<p>常量必须在同一条语句中声明和赋值. <code>final</code>是声明常量的关键字.</p>
+<p>使用常量的好处:</p>
+<ol>
+<li>不必重复输入同一个值.</li>
+<li>如果必须修改常量值, 只需要在代码中一个地方做改动.</li>
+<li>给常量赋一个描述性的名字提高程序易读性</li>
+</ol>
+<h3 id="命名习惯"><a href="#命名习惯" class="headerlink" title="命名习惯"></a>命名习惯</h3><p>严格遵循Java的命名习惯, 让程序易于理解, 避免错误.</p>
+<ul>
+<li>使用小写字母命名变量和方法. 如果包含多个单词, 第一个单词的字母小写, 后面没个单词的首字母大写. </li>
+<li>类名中每个单词首字母大写</li>
+<li>大写常量中的所有字母, 两个单词间用下划线连接</li>
+</ul>
+<h3 id="数值数据类型和操作"><a href="#数值数据类型和操作" class="headerlink" title="数值数据类型和操作"></a>数值数据类型和操作</h3><p>Java为数值, 字符值, 布尔值提供8种基本数据类型.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">类型名</th>
+<th style="text-align:center">范围</th>
+<th style="text-align:center">存储大小</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">byte</td>
+<td style="text-align:center">-128~127</td>
+<td style="text-align:center">8位带符号数</td>
+</tr>
+<tr>
+<td style="text-align:center">short</td>
+<td style="text-align:center">-2^15~2^15 -1</td>
+<td style="text-align:center">16位带符号数</td>
+</tr>
+<tr>
+<td style="text-align:center">int</td>
+<td style="text-align:center">-2^31~2^31 -1</td>
+<td style="text-align:center">32位带符号数</td>
+</tr>
+<tr>
+<td style="text-align:center">long</td>
+<td style="text-align:center">-2^63~2^63 -1</td>
+<td style="text-align:center">64位带符号数</td>
+</tr>
+<tr>
+<td style="text-align:center">float</td>
+<td style="text-align:center">负数范围: -3.4028235E+38~-1.4E-35                               正数范围: 1.4E-45~3.4028235E+38</td>
+<td style="text-align:center">32位带符号数</td>
+</tr>
+<tr>
+<td style="text-align:center">double</td>
+<td style="text-align:center">负数范围: -1.7976931348623157E+308~-4.9E-32         正数范围: 4.9E-324~48623157E+308 –4.9E-3</td>
+<td style="text-align:center">64位带符号数</td>
+</tr>
+</tbody>
+</table>
+<p>Scanner对象有以下方法可以从键盘读取基本类型数值:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">方法</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">nextByte()</td>
+<td style="text-align:center">读取一个byte类型的数</td>
+</tr>
+<tr>
+<td style="text-align:center">nextShort()</td>
+<td style="text-align:center">读取一个short类型的数</td>
+</tr>
+<tr>
+<td style="text-align:center">nextInt()</td>
+<td style="text-align:center">读取一个int类型的数</td>
+</tr>
+<tr>
+<td style="text-align:center">nextLong()</td>
+<td style="text-align:center">读取一个long类型的数</td>
+</tr>
+<tr>
+<td style="text-align:center">nextFloat()</td>
+<td style="text-align:center">读取一个float类型的数</td>
+</tr>
+<tr>
+<td style="text-align:center">nextDouble()</td>
+<td style="text-align:center">读取一个double类型的数</td>
+</tr>
+</tbody>
+</table>
+<p>数值数据类型的操作符包括+,-,*,/,%.</p>
+<p>当除法的操作数都是整数时, 除法的结果是整数.</p>
+<h3 id="数值类型直接量"><a href="#数值类型直接量" class="headerlink" title="数值类型直接量"></a>数值类型直接量</h3><p>一个直接量是程序中直接出线的常量值.</p>
+<h3 id="增强赋值操作符"><a href="#增强赋值操作符" class="headerlink" title="增强赋值操作符"></a>增强赋值操作符</h3><p>操作符<code>+</code>,<code>-</code>,<code>*</code>,<code>/</code>,<code>%</code>可以结合赋值操作符形成增强操作符.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">操作符</th>
+<th style="text-align:center">示例</th>
+<th style="text-align:center">等价于</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">+=</td>
+<td style="text-align:center">i+=8</td>
+<td style="text-align:center">i = i+8</td>
+</tr>
+<tr>
+<td style="text-align:center">-=</td>
+<td style="text-align:center">i-=8</td>
+<td style="text-align:center">i = i-8</td>
+</tr>
+<tr>
+<td style="text-align:center">*=</td>
+<td style="text-align:center">i*=8</td>
+<td style="text-align:center">i = i*8</td>
+</tr>
+<tr>
+<td style="text-align:center">/=</td>
+<td style="text-align:center">i/=8</td>
+<td style="text-align:center">i = i/8</td>
+</tr>
+<tr>
+<td style="text-align:center">%=</td>
+<td style="text-align:center">i%=8</td>
+<td style="text-align:center">i = i%8</td>
+</tr>
+</tbody>
+</table>
+<h3 id="自增和自减操作符"><a href="#自增和自减操作符" class="headerlink" title="自增和自减操作符"></a>自增和自减操作符</h3><p>自增操作符(++)和自减操作符(—)是对变量进行加1和减1的操作.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> i = <span class="number">3</span>, j = <span class="number">4</span>;</div><div class="line">++i; <span class="comment">// i==4 true</span></div><div class="line">--j; <span class="comment">// j==2 true</span></div></pre></td></tr></table></figure>
+<h3 id="数值类型转换"><a href="#数值类型转换" class="headerlink" title="数值类型转换"></a>数值类型转换</h3><p>类型转换是一种将一种数据类型的值转换成另一种数据类型的操作. <code>(int) 1.7</code></p>
+<p>如果一个二元运算中, 其中一个操作数是整数, 另一个操作数是浮点数, Java会自动将整数转换为浮点数.</p>
+<p>总是可以将一个数值赋值给支持更大数值范围的变量. </p>
+<p>如果不尽兴类型转换, 就不能将一个值赋给范围较小类型的变量.</p>
+<p>当double类型被转换为int类型时, 小数部分会被截去.</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/06/07/Java编程思想笔记-操作符/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Blue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blue的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/06/07/Java编程思想笔记-操作符/" itemprop="url">
+                  Java编程思想笔记-操作符
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-07T16:04:57+08:00">
+                2017-06-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在最底层, Java中的数据是通过食用操作符来操作的.</p>
+<p>对基本数据类型的赋值是很简单的. 基本类型存储了实际的数值, 而并非指向一个对象的引用. 在为其赋值时, 是直接将一个地方的内容复制到了另一个地方. 例如:</p>
+<p><code>a=b</code>, 那么b的内容就复制给a. 直接修改a, 而b根本不会受到影响.</p>
+<p>将一个对象赋值给另一个对象时, 实际是将”引用”从一个地方复制到另一个地方. 如: <code>c=d</code>, 那么c和d都指向原本只有d指向的那个对象.</p>
+<p>整数除法会直接去掉结果的小数位.</p>
+<p>按位操作符用来操作整数基本数据类型中的单个bit, 即二进制位. 按位操作符会对两个参数中对应的位执行布尔代数运算, 并最终生成一个结果.</p>
+<p>如果两个输入位都是1, 则按位与操作(<strong>&amp;</strong>)生成一个输出位1, 否则生成一个输出位0.</p>
+<p>如果两个输入位挚友一个是1, 则按位或操作(<strong>|</strong>)生成一个输出位1, 只有在两个输入位都是0的情况下, 才会生成一个输出位0.</p>
+<p>如果某个输入位是1, 单不全都是1, 按位异或操作(<strong>^</strong>)生成一个输出位1.</p>
+<p>按位非(<strong>~</strong>)也称取反操作符, 属于一元操作符. 按位非生成与输入位相反的值, 若输入0, 则输出1; 若输入1, 则输出0.</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/06/06/Java编程思想笔记-一切都是对象/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Blue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blue的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/06/06/Java编程思想笔记-一切都是对象/" itemprop="url">
+                  Java编程思想笔记-一切都是对象
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-06T12:44:27+08:00">
+                2017-06-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在Java中一切都被视为对象, 但是操纵的标识符实际上是对象的一个”引用”. 类似于遥控器(引用)来操纵电视器(对象). </p>
+<p>即使没有电视器, 遥控器也能独立存在. 也就是说, 拥有一个引用, 并不一定需要有一个对象与它关联.</p>
+<p>创建一个<code>String</code>应用:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">String s;</div></pre></td></tr></table></figure>
+<p>这里创建的只是引用, 并不是对象. 如果此时向s发送一个消息, 就会返回一个运行时异常. 因为s没有与任何事物相关联.</p>
+<p>一种安全的做法: 创建一个引用同时初始化:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">String s = <span class="string">"asdf"</span>;</div></pre></td></tr></table></figure>
+<p>通常使用<code>new</code>操作符创建对象.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">String s = <span class="keyword">new</span> String(<span class="string">"asdf"</span>);</div></pre></td></tr></table></figure>
+<p>有五个地方可以存储数据:</p>
+<ol>
+<li><strong>寄存器</strong>. 最快的存储区, 位于处理器内部, 与其他存储区不同. 寄存器数量极其有限, 所有寄存器根据需要进行分配. 不能直接控制, 也不能在程序中感觉到寄存器的存在.</li>
+<li><strong>堆栈</strong>. 位于通用RAM(随机访问存储器). 这是一种快速有效的分配存储方法, 仅次于寄存器. 创建程序时, Java系统必须知道存储在堆栈内所有项的确切生命周期, 以便上下移动堆栈指针(堆栈指针向下移则分配新的内存, 向上移则释放内存). <strong>Java的对象引用存储在堆栈中</strong>. </li>
+<li><strong>堆</strong>. 一种通用的内存池(位于RAM中), <strong>用于存放所有的Java对象</strong>. 堆不同于堆栈的好处是: 编译器不需要知道存储的数据在堆里存活多长时间. 当需要一个对象时, 只需用<code>new</code>写一行代码, 当执行这行代码时,  会自动在堆里进行存储分配. 用堆进行存储分配和清理可能比用堆栈进行存储分配需要更多的时间.</li>
+<li><strong>常量粗糙</strong>. 常量值通常直接存放在程序代码内部.</li>
+<li><strong>非RAM存储</strong>. 如果数据完全存活于程序之外, 那么它可以不受程序的任何控制, 在程序没有运行时也可以存在. 两个基本例子是:<em>流对象</em>和<em>持久化对象</em>.</li>
+</ol>
+<p><strong>基本类型</strong>存储在堆栈中, 这样会更加高效.</p>
+<p>Java确定每种基本类型所占存储空间的大小. 并不会随机器硬件架构的变化而变化. </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">基本类型</th>
+<th style="text-align:center">大小</th>
+<th style="text-align:center">最小值</th>
+<th style="text-align:center">最大值</th>
+<th style="text-align:center">包装器类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">boolean</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">Boolean</td>
+</tr>
+<tr>
+<td style="text-align:center">char</td>
+<td style="text-align:center">16-bit</td>
+<td style="text-align:center">Unicode 0</td>
+<td style="text-align:center">Unicode 2^16 -1</td>
+<td style="text-align:center">Character</td>
+</tr>
+<tr>
+<td style="text-align:center">byte</td>
+<td style="text-align:center">8 bits</td>
+<td style="text-align:center">-128</td>
+<td style="text-align:center">+127</td>
+<td style="text-align:center">Byte</td>
+</tr>
+<tr>
+<td style="text-align:center">short</td>
+<td style="text-align:center">16 bits</td>
+<td style="text-align:center">-2^15</td>
+<td style="text-align:center">+2^15 - 1</td>
+<td style="text-align:center">Short</td>
+</tr>
+<tr>
+<td style="text-align:center">int</td>
+<td style="text-align:center">32 bits</td>
+<td style="text-align:center">-2^31</td>
+<td style="text-align:center">+2^31 - 1</td>
+<td style="text-align:center">Integer</td>
+</tr>
+<tr>
+<td style="text-align:center">long</td>
+<td style="text-align:center">64 bits</td>
+<td style="text-align:center">-2^63</td>
+<td style="text-align:center">+2^63 - 1</td>
+<td style="text-align:center">Long</td>
+</tr>
+<tr>
+<td style="text-align:center">float</td>
+<td style="text-align:center">32 bits</td>
+<td style="text-align:center">IEEE745</td>
+<td style="text-align:center">IEEE745</td>
+<td style="text-align:center">Float</td>
+</tr>
+<tr>
+<td style="text-align:center">double</td>
+<td style="text-align:center">64 bits</td>
+<td style="text-align:center">IEEE745</td>
+<td style="text-align:center">IEEE745</td>
+<td style="text-align:center">Double</td>
+</tr>
+<tr>
+<td style="text-align:center">void</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">Void</td>
+</tr>
+</tbody>
+</table>
+<p>所有数值类型都有正负号, 没有无符号的数字类型.</p>
+<p>基本类型具有的包装器类, 使得可以在堆中创建一个非基本对象, 用来表示对应的基本类型:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">char</span> c = <span class="string">'x'</span>;</div><div class="line">Character ch = <span class="keyword">new</span> Character(c);</div></pre></td></tr></table></figure>
+<p>也可以这样用:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Character ch = <span class="keyword">new</span> Character(<span class="string">'x'</span>);</div></pre></td></tr></table></figure>
+<p><strong>Java SE5 的自动包装功能将自动地将基本类型转换为包装器类型</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Character ch = <span class="string">'x'</span>;</div></pre></td></tr></table></figure>
+<p>并可以反向转换:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">char</span> c = ch;</div></pre></td></tr></table></figure>
+<p>Java 提供两个用于高精度计算的类: <code>BigInteger</code>和<code>BigDecimal</code>. 能够作用于<code>int</code>或<code>float</code>的操作, 也同样能作用于<code>BigInteger</code>或<code>BigDecimal</code>.</p>
+<p><strong>BigInteger</strong>支持任意精度的整数.</p>
+<p><strong>BigDecimal</strong>支持任意精度的定点数. 可以用它进行精确的货币计算.</p>
+<p>Java取保数组会被初始化, 而且不能在它的范围之外被访问. 这种范围检查, 是以每个数组少量的内存开销及运行时的下标检查为代价的. </p>
+<p><code>null</code>表示这个引用没有指向某个对象. 在使用任何引用前, 必须为其指定一个对象.</p>
+<p>创建存放基本数据类型的数组时, Java会自动将数组全部初始化为0.</p>
+<p><strong>作用域</strong>决定了在其内定义的变量名的可见性和生命周期. Java中, 作用域由花括号的位置决定.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="keyword">int</span> x = <span class="number">12</span>;</div><div class="line">  <span class="comment">// Only x available</span></div><div class="line">  &#123;</div><div class="line">    <span class="keyword">int</span> q = <span class="number">96</span>;</div><div class="line">    <span class="comment">// Both x &amp; q available</span></div><div class="line">  &#125;</div><div class="line">  <span class="comment">// Only x available</span></div><div class="line">  <span class="comment">// q is "out of scope"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在作用域里定义的变量只可以用于作用于结束之前</p>
+<p>在Java中不能这样写:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="keyword">int</span> x = <span class="number">12</span>;</div><div class="line">  &#123;</div><div class="line">    <span class="keyword">int</span> x = <span class="number">96</span>;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Java设计者认为这会导致程序混乱.</p>
+<p>Java对象不具备和基本类型一样的生命周期. 当用<code>new</code>创建一个Java对象时,  它可以存活于作用域之外. 例如:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  String s = <span class="keyword">new</span> String(<span class="string">"a string"</span>)</div><div class="line">&#125; <span class="comment">// End of scope</span></div></pre></td></tr></table></figure>
+<p>引用<code>s</code>在作用域终点就消失了. 然而, <code>s</code>指向的String对象仍继续占据内存空间.</p>
+<p>Java使用<strong>垃圾回收器</strong>, 监视用<code>new</code>创建的所有对象, 辨别那些不会再被引用的对象. 随后, 释放这些对象的内存空间. </p>
+<p>使用关键字<strong>class</strong>来表示”我准备告诉你一种新类型的对象看起来像什么样子”. 例如:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ATypeName</span> </span>&#123; <span class="comment">/* Class body goes here */</span> &#125;</div></pre></td></tr></table></figure>
+<p>字段可以是任何类型的对象, 可以通过其引用与其进行通信; 也可以是基本类型中的一种. 如果字段是对某个对象的引用, 那么必须初始化该引用, 以便使其与一个实际对象相关联.</p>
+<p>每个对象都有用来存储其字段的空间; 普通字段不能再对象间共享. 例如:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">DataOnly</span> </span>&#123;</div><div class="line">  <span class="keyword">int</span> i;</div><div class="line">  <span class="keyword">double</span> d;</div><div class="line">  <span class="keyword">boolean</span> b;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在对象引用的名称之后紧接着一个句点,  然后再接着是对象内部的成员名称:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">objectReference.member</div></pre></td></tr></table></figure>
+<p>如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">DataOnly data = <span class="keyword">new</span> DataOnly();</div><div class="line">data.i = <span class="number">47</span>;</div><div class="line">data.d = <span class="number">1.1</span>;</div><div class="line">data.b = <span class="keyword">false</span>;</div></pre></td></tr></table></figure>
+<p>类中的某个成员是基本数据类型, 即使没有进行初始化, Java也会确保它获得一个默认值.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">基本类型</th>
+<th style="text-align:center">默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">boolean</td>
+<td style="text-align:center">false</td>
+</tr>
+<tr>
+<td style="text-align:center">char</td>
+<td style="text-align:center">‘\u0000’(null)</td>
+</tr>
+<tr>
+<td style="text-align:center">byte</td>
+<td style="text-align:center">(byte) 0</td>
+</tr>
+<tr>
+<td style="text-align:center">short</td>
+<td style="text-align:center">(short) 0</td>
+</tr>
+<tr>
+<td style="text-align:center">int</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">long</td>
+<td style="text-align:center">0L</td>
+</tr>
+<tr>
+<td style="text-align:center">float</td>
+<td style="text-align:center">0.0f</td>
+</tr>
+<tr>
+<td style="text-align:center">double</td>
+<td style="text-align:center">0.0d</td>
+</tr>
+</tbody>
+</table>
+<p>局部变量不会Java不会初始化默认值. 如果在某个方法定义中有<code>int x;</code>, 这个x得到的可能是任意值, 而不会被自动初始化为0.</p>
+<p>方法的基本组成部分包括: 名称, 参数, 返回值, 方法体.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function">ReturnType <span class="title">methodName</span><span class="params">( <span class="comment">/* Argument list */</span>)</span> </span>&#123;</div><div class="line">  <span class="comment">/* Method body */</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>返回类型描述在调用方法后从方法返回的值.</p>
+<p>参数列表给出要传给方法的信息的类型和名称.</p>
+<p><strong>方法名和参数列表</strong>唯一标识一个方法</p>
+<p>在调用方法是实际上传递的是对象的引用.</p>
+<p><strong>return</strong>关键字用法: </p>
+<ol>
+<li>代表已经做完, 离开此方法</li>
+<li>如果此方法产生一个值, 这个值要放在return语句后面.</li>
+</ol>
+<p><strong>static</strong>关键字使用情形:</p>
+<ol>
+<li>只想为某个特定的域分配单一存储空间, 不去考虑究竟要创建多少对象, 甚至根本不创建任何对象</li>
+<li>希望某个方法不与包含它的类的任何对象关联. 即使不创建对象, 也能调用这个方法.</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">StaticTest</span> </span>&#123;</div><div class="line">  <span class="keyword">static</span> <span class="keyword">int</span> i = <span class="number">47</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>static变量只分配一份存储空间, 即使你创建了两个StaticTest对象.</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/06/05/Java基础-AgileJava/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Blue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blue的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/06/05/Java基础-AgileJava/" itemprop="url">
+                  Java基础-AgileJava
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-05T10:44:22+08:00">
+                2017-06-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Java中的数字不是对象. 不能发送消息给数字.非对象类型被称作基本类型</p>
+<p>Java总是先执行某个赋值语句右边的代码</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -284,7 +1129,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-19T11:24:20+08:00">
                 2017-04-19
@@ -713,7 +1558,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-22T10:43:35+08:00">
                 2017-03-22
@@ -862,7 +1707,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-21T09:53:37+08:00">
                 2017-03-21
@@ -1013,7 +1858,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-21T09:37:22+08:00">
                 2017-03-21
@@ -1147,7 +1992,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-19T19:27:05+08:00">
                 2017-03-19
@@ -1328,7 +2173,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-15T14:01:41+08:00">
                 2017-03-15
@@ -1456,682 +2301,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/03/15/Java-HashSet/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Blue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blue的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/15/Java-HashSet/" itemprop="url">
-                  Java-HashSet
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-15T11:02:59+08:00">
-                2017-03-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>HashSet是基于HashMap来实现的, 底层采用HashMap来保存元素.</p>
-<p><strong>HashSet定义</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HashSet</span>&lt;<span class="title">E</span>&gt; <span class="keyword">extends</span> <span class="title">AbstractSet</span>&lt;<span class="title">E</span>&gt; <span class="keyword">implements</span> <span class="title">Set</span>&lt;<span class="title">E</span>&gt;, <span class="title">Cloneable</span>, <span class="title">java</span>.<span class="title">io</span>.<span class="title">Serializable</span></span></div></pre></td></tr></table></figure>
-<p>Set接口是一种不包含重复元素的Collection, 它维持自己的内部排序, 所以随机访问没有任何意义.</p>
-<p><strong>基本属性</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//基于HashMap实现，底层使用HashMap保存所有元素</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">transient</span> HashMap&lt;E,Object&gt; map;</div><div class="line"></div><div class="line"><span class="comment">//定义一个Object对象作为HashMap的value</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Object PRESENT = <span class="keyword">new</span> Object();</div></pre></td></tr></table></figure>
-<p><strong>构造函数</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 默认构造函数</div><div class="line"> * 初始化一个空的HashMap，并使用默认初始容量为16和加载因子0.75。</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">HashSet</span><span class="params">()</span> </span>&#123;</div><div class="line">    map = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 构造一个包含指定 collection 中的元素的新 set。</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">HashSet</span><span class="params">(Collection&lt;? extends E&gt; c)</span> </span>&#123;</div><div class="line">    map = <span class="keyword">new</span> HashMap&lt;&gt;(Math.max((<span class="keyword">int</span>) (c.size()/.<span class="number">75f</span>) + <span class="number">1</span>, <span class="number">16</span>));</div><div class="line">    addAll(c);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 构造一个新的空 set，其底层 HashMap 实例具有指定的初始容量和指定的加载因子</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">HashSet</span><span class="params">(<span class="keyword">int</span> initialCapacity, <span class="keyword">float</span> loadFactor)</span> </span>&#123;</div><div class="line">    map = <span class="keyword">new</span> HashMap&lt;&gt;(initialCapacity, loadFactor);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 构造一个新的空 set，其底层 HashMap 实例具有指定的初始容量和默认的加载因子（0.75）。</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">HashSet</span><span class="params">(<span class="keyword">int</span> initialCapacity)</span> </span>&#123;</div><div class="line">   map = <span class="keyword">new</span> HashMap&lt;&gt;(initialCapacity);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 在API中我没有看到这个构造函数，今天看源码才发现（原来访问权限为包权限，不对外公开的）</div><div class="line"> * 以指定的initialCapacity和loadFactor构造一个新的空链接哈希集合。</div><div class="line"> * dummy 为标识 该构造函数主要作用是对LinkedHashSet起到一个支持作用</div><div class="line"> */</div><div class="line">HashSet(<span class="keyword">int</span> initialCapacity, <span class="keyword">float</span> loadFactor, <span class="keyword">boolean</span> dummy) &#123;</div><div class="line">   map = <span class="keyword">new</span> LinkedHashMap&lt;&gt;(initialCapacity, loadFactor);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>HashSet所有的构造函数都会构造一个新的HashMap.</p>
-<p>由于HashSet是基于HashMap实现, 所以HashSet的方法实现过程很简单</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> Iterator&lt;E&gt; <span class="title">iterator</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> map.keySet().iterator();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><code>iterator</code>方法返回set中元素的迭代器, 返回元素的顺序不是特定的. 底层调用HashMap的keySet返回所有的key.</p>
-<p>HashSet中所有元素都保存在HashMap的key中, value使用PRESENT对象.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">contains</span><span class="params">(Object o)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> map.containsKey(o);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><code>contains</code>方法判断某个元素是否存在于HashSet中, 判断是否满足以下关系:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(o == <span class="keyword">null</span> ? e==<span class="keyword">null</span>:o.equals(e));</div></pre></td></tr></table></figure>
-<p>底层调用<code>containsKey</code>方法判断HashMap的key值是否为空</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">add</span><span class="params">(E e)</span> </span>&#123;</div><div class="line">  <span class="keyword">return</span> map.put(e, PRESENT)==<span class="keyword">null</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">clone</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            HashSet&lt;E&gt; newSet = (HashSet&lt;E&gt;) <span class="keyword">super</span>.clone();</div><div class="line">            newSet.map = (HashMap&lt;E, Object&gt;) map.clone();</div><div class="line">            <span class="keyword">return</span> newSet;</div><div class="line">        &#125; <span class="keyword">catch</span> (CloneNotSupportedException e) &#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> InternalError();</div><div class="line">        &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>clone返回此 <code>HashSet</code> 实例的浅表副本：并没有复制这些元素本身</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/03/14/Java-HashMap/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Blue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blue的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/14/Java-HashMap/" itemprop="url">
-                  Java-HashMap
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-14T19:59:35+08:00">
-                2017-03-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>HashMap是基于哈希表的Map接口的实现, 以key-value的形式存在. 在HashMap中, key-value总是作为一个整体处理. 系统根据hash算法来计算key-value的存储位置</p>
-<p><strong>定义</strong></p>
-<p>HashMap实现了Map接口, 继承AbstractMap. Map接口定义了key映射到value的规则. </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HashMap</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">extends</span> <span class="title">AbstractMap</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">implements</span> <span class="title">Map</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt;, <span class="title">Cloneable</span>, <span class="title">Serializable</span></span></div></pre></td></tr></table></figure>
-<p><strong>构造函数</strong></p>
-<p>HashMap有三个构造函数:</p>
-<ul>
-<li>HashMap(): 构造一个具有默认初始容量(16)和默认加载因子(0.75)的空HashMap</li>
-<li>HashMap(int initialCapacity): 构造一个带有指定初始容量和默认加载因子的空HashMap</li>
-<li>HashMap(int initialCapacity, float loadFactor): 构造一个指定初始容量和加载因子的空HashMap</li>
-</ul>
-<p>容量表示哈希表中桶的数量</p>
-<p>加载因子是哈希表在其容量自动增加之前可以达到多满的一种尺度. 它衡量的是一个散列表的空间使用程度, 负载因子越大表示散列表装填程度越高.</p>
-<p>对于使用链表的散列表来说, 查找一个元素的平均时间是O(1+a), 因此如果负载因子越大, 对空间的利用率越充分, 但是后果是查找效率越低.</p>
-<p>负载因子太小, 因为散列表数据过于稀疏, 对空间造成严重的浪费.</p>
-<p>HashMap指出快速存储.</p>
-<p><strong>数据结构</strong></p>
-<p>Java最常用的两种结构是数组和引用, 几乎所有的数据结构都可以利用这两种来组合实现</p>
-<p>HashMap实际上是一个链表散列, 数据结构如下:</p>
-<p><img src="/2017/03/14/Java-HashMap/Users/storm/workspace/notes/source/_posts/Java-HashMap/HashMap-数据结构.png" alt="HashMap-数据结构"></p>
-<p>上图看出HashMap底层有用数组实现, 数组中每一项都是一条链. initialCapacity表示数组的长度</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">HashMap</span><span class="params">(<span class="keyword">int</span> initialCapacity, <span class="keyword">float</span> loadFactor)</span> </span>&#123;</div><div class="line">        <span class="comment">//初始容量不能&lt;0</span></div><div class="line">        <span class="keyword">if</span> (initialCapacity &lt; <span class="number">0</span>)</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"Illegal initial capacity: "</span></div><div class="line">                    + initialCapacity);</div><div class="line">        <span class="comment">//初始容量不能 &gt; 最大容量值，HashMap的最大容量值为2^30</span></div><div class="line">        <span class="keyword">if</span> (initialCapacity &gt; MAXIMUM_CAPACITY)</div><div class="line">            initialCapacity = MAXIMUM_CAPACITY;</div><div class="line">        <span class="comment">//负载因子不能 &lt; 0</span></div><div class="line">        <span class="keyword">if</span> (loadFactor &lt;= <span class="number">0</span> || Float.isNaN(loadFactor))</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"Illegal load factor: "</span></div><div class="line">                    + loadFactor);</div><div class="line"></div><div class="line">        <span class="comment">// 计算出大于 initialCapacity 的最小的 2 的 n 次方值。</span></div><div class="line">        <span class="keyword">int</span> capacity = <span class="number">1</span>;</div><div class="line">        <span class="keyword">while</span> (capacity &lt; initialCapacity)</div><div class="line">            capacity &lt;&lt;= <span class="number">1</span>;</div><div class="line">        </div><div class="line">        <span class="keyword">this</span>.loadFactor = loadFactor;</div><div class="line">        <span class="comment">//设置HashMap的容量极限，当HashMap的容量达到该极限时就会进行扩容操作</span></div><div class="line">        threshold = (<span class="keyword">int</span>) (capacity * loadFactor);</div><div class="line">        <span class="comment">//初始化table数组</span></div><div class="line">        table = <span class="keyword">new</span> Entry[capacity];</div><div class="line">        init();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>每次新建一个HashMap时, 都会初始化一个table数组, 元素为Entry节点</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Entry</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">implements</span> <span class="title">Map</span>.<span class="title">Entry</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; </span>&#123;</div><div class="line">        <span class="keyword">final</span> K key;</div><div class="line">        V value;</div><div class="line">        Entry&lt;K,V&gt; next; <span class="comment">// 下一个节点</span></div><div class="line">        <span class="keyword">final</span> <span class="keyword">int</span> hash;</div><div class="line"></div><div class="line">        <span class="comment">/**</span></div><div class="line">         * Creates new entry.</div><div class="line">         */</div><div class="line">        Entry(<span class="keyword">int</span> h, K k, V v, Entry&lt;K,V&gt; n) &#123;</div><div class="line">            value = v;</div><div class="line">            next = n;</div><div class="line">            key = k;</div><div class="line">            hash = h;</div><div class="line">        &#125;</div><div class="line">        .......</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><strong>HashMap的put方法</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> V <span class="title">put</span><span class="params">(K key, V value)</span> </span>&#123;</div><div class="line">        <span class="comment">//当key为null，调用putForNullKey方法，保存null与table第一个位置中，这是HashMap允许为null的原因</span></div><div class="line">        <span class="keyword">if</span> (key == <span class="keyword">null</span>)</div><div class="line">            <span class="keyword">return</span> putForNullKey(value);</div><div class="line">        <span class="comment">//计算key的hash值</span></div><div class="line">        <span class="keyword">int</span> hash = hash(key.hashCode());                  ------(<span class="number">1</span>)</div><div class="line">        <span class="comment">//计算key hash 值在 table 数组中的位置</span></div><div class="line">        <span class="keyword">int</span> i = indexFor(hash, table.length);             ------(<span class="number">2</span>)</div><div class="line">        <span class="comment">//从i出开始迭代 e,找到 key 保存的位置</span></div><div class="line">        <span class="keyword">for</span> (Entry&lt;K, V&gt; e = table[i]; e != <span class="keyword">null</span>; e = e.next) &#123;</div><div class="line">            Object k;</div><div class="line">            <span class="comment">//判断该条链上是否有hash值相同的(key相同)</span></div><div class="line">            <span class="comment">//若存在相同，则直接覆盖value，返回旧value</span></div><div class="line">            <span class="keyword">if</span> (e.hash == hash &amp;&amp; ((k = e.key) == key || key.equals(k))) &#123;</div><div class="line">                V oldValue = e.value;    <span class="comment">//旧值 = 新值</span></div><div class="line">                e.value = value;</div><div class="line">                e.recordAccess(<span class="keyword">this</span>);</div><div class="line">                <span class="keyword">return</span> oldValue;     <span class="comment">//返回旧值</span></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//修改次数增加1</span></div><div class="line">        modCount++;</div><div class="line">        <span class="comment">//将key、value添加至i位置处</span></div><div class="line">        addEntry(hash, key, value, i);</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>HashMap保存数据的过程</p>
-<ol>
-<li>判断key是否为null, 如果是null, 直接调用<code>putForNullKey</code>方法</li>
-<li>如果key不是null, 先计算key的hash值</li>
-<li>根据hash值搜索在table数组中的索引位置</li>
-<li>如果table数组在该位置处有元素, 通过比较是否存在相同的key, 如果存在就覆盖key的value, 否则就保存元素到链头(最先保存的元素放在链尾)</li>
-<li>如果没有元素直接爆粗</li>
-</ol>
-<blockquote>
-<p>注意点: </p>
-<ol>
-<li>迭代的地方: 迭代的原因是为了防止存在相同的key, 如果两个key的hash值相同, HashMap的处理方式是用新的value替换旧value</li>
-<li>(1), (2)处, hash方法是一个纯粹的数学计算, 用于计算hash值</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt; <span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">hash</span><span class="params">(<span class="keyword">int</span> h)</span> </span>&#123;</div><div class="line">&gt;         h ^= (h &gt;&gt;&gt; <span class="number">20</span>) ^ (h &gt;&gt;&gt; <span class="number">12</span>);</div><div class="line">&gt;         <span class="keyword">return</span> h ^ (h &gt;&gt;&gt; <span class="number">7</span>) ^ (h &gt;&gt;&gt; <span class="number">4</span>);</div><div class="line">&gt; &#125;</div><div class="line">&gt;</div></pre></td></tr></table></figure>
-</blockquote>
-<p>HashMap使用indexFor方法保证table元素分布均匀</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">indexFor</span><span class="params">(<span class="keyword">int</span> h, <span class="keyword">int</span> length)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> h &amp; (length-<span class="number">1</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>HashMap的底层数组长度总是2的n次方(<code>capacity &lt;&lt;= 1;</code>), 当length为2的n次方时, h&amp;(length-1)相当于对length取模, 而怯速度比直接取模快得多.</p>
-<p><code>h&amp;(length – 1)</code>除了取模运算外, 还负责均匀分布table数据和充分利用空间</p>
-<p>假设length=16(2^n) 和 15, h=5,6,7</p>
-<p><img src="/2017/03/14/Java-HashMap/Users/storm/workspace/notes/source/_posts/Java-HashMap/HashMap-table1.jpg" alt="HashMap-table1"></p>
-<p>当n=15时, 6和7的结果一样, 表示他们在table的存储位置相同, 产生了碰撞, 6,7会在一个位置形成链表, 导致查询速度下降. 看看0-15的结果:</p>
-<p><img src="/2017/03/14/Java-HashMap/Users/storm/workspace/notes/source/_posts/Java-HashMap/HashMap-table2.jpg" alt="HashMap-table2"></p>
-<p>表中看出总共发生了8次碰撞, 同时浪费空间非常大</p>
-<p>而当length = 16时，length – 1 = 15 即1111，那么进行低位&amp;运算时，值总是与原来hash值相同，而进行高位运算时，其值等于其低位值。所以说当length = 2^n时，不同的hash值发生碰撞的概率比较小，这样就会使得数据在table数组中分布较均匀，查询速度也较快.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">addEntry</span><span class="params">(<span class="keyword">int</span> hash, K key, V value, <span class="keyword">int</span> bucketIndex)</span> </span>&#123;</div><div class="line">        <span class="comment">//获取bucketIndex处的Entry</span></div><div class="line">        Entry&lt;K, V&gt; e = table[bucketIndex];</div><div class="line">        <span class="comment">//将新创建的 Entry 放入 bucketIndex 索引处，并让新的 Entry 指向原来的 Entry </span></div><div class="line">        table[bucketIndex] = <span class="keyword">new</span> Entry&lt;K, V&gt;(hash, key, value, e);</div><div class="line">        <span class="comment">//若HashMap中元素的个数超过极限了，则容量扩大两倍</span></div><div class="line">        <span class="keyword">if</span> (size++ &gt;= threshold)</div><div class="line">            resize(<span class="number">2</span> * table.length);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>系统总是将新的Entry对象添加到bucketIndex处。如果bucketIndex处已经有了对象，那么新添加的Entry对象将指向原有的Entry对象，形成一条Entry链，但是若bucketIndex处没有Entry对象，也就是e==null,那么新添加的Entry对象指向null，也就不会产生Entry链了</p>
-<p><strong>HashMap的get(key)方法</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> V <span class="title">get</span><span class="params">(Object key)</span> </span>&#123;</div><div class="line">        <span class="comment">// 若为null，调用getForNullKey方法返回相对应的value</span></div><div class="line">        <span class="keyword">if</span> (key == <span class="keyword">null</span>)</div><div class="line">            <span class="keyword">return</span> getForNullKey();</div><div class="line">        <span class="comment">// 根据该 key 的 hashCode 值计算它的 hash 码  </span></div><div class="line">        <span class="keyword">int</span> hash = hash(key.hashCode());</div><div class="line">        <span class="comment">// 取出 table 数组中指定索引处的值</span></div><div class="line">        <span class="keyword">for</span> (Entry&lt;K, V&gt; e = table[indexFor(hash, table.length)]; e != <span class="keyword">null</span>; e = e.next) &#123;</div><div class="line">            Object k;</div><div class="line">            <span class="comment">//若搜索的key与查找的key相同，则返回相对应的value</span></div><div class="line">            <span class="keyword">if</span> (e.hash == hash &amp;&amp; ((k = e.key) == key || key.equals(k)))</div><div class="line">                <span class="keyword">return</span> e.value;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/03/13/Java-LinkedList/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Blue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blue的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/13/Java-LinkedList/" itemprop="url">
-                  Java-LinkedList
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-13T19:04:47+08:00">
-                2017-03-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>LinkedList和ArrayList一样实现了List接口, 只是ArrayList是List接口的大小可变数组的实现, LinkedList是List接口链表的实现.</p>
-<p>LinkedList在插入和删除元素时更优于ArrayList, 而随机访问则是ArrayList优于LinkedList.</p>
-<p>LinkedList实现了Deque接口, 为add, poll提供先进先出队列操作, 以及其他堆栈和双端队列操作.</p>
-<p>所有操作都是按照双重链接列表的需要执行的. 在列表中编索引的操作将开头或结尾遍历列表</p>
-<p>LinkedList和ArrayList一样也是不同步的.</p>
-<p><strong>LinkedList定义</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LinkedList</span>&lt;<span class="title">E</span>&gt; <span class="keyword">extends</span> <span class="title">AbstractSequentialList</span>&lt;<span class="title">E</span>&gt;</span></div><div class="line">    <span class="keyword">implements</span> <span class="title">List</span>&lt;<span class="title">E</span>&gt;, <span class="title">Deque</span>&lt;<span class="title">E</span>&gt;, <span class="title">Cloneable</span>, <span class="title">java</span>.<span class="title">io</span>.<span class="title">Serializable</span></div></pre></td></tr></table></figure>
-<p>AbstractSequentialList提供了List接口的主要实现. Deque一个线性的collection, 支持在两端插入和移除元素, 定义双端队列的操作.</p>
-<p><strong>LinkedList属性</strong></p>
-<p>LinkedList提供两个基本属性: size, header.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">transient</span> Entry&lt;E&gt; header = <span class="keyword">new</span> Entry&lt;E&gt;(<span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>);</div><div class="line"><span class="keyword">private</span> <span class="keyword">transient</span> <span class="keyword">int</span> size = <span class="number">0</span>;</div></pre></td></tr></table></figure>
-<p>size表示LinkedList的大小</p>
-<p>header表示链表表头, Entry 为节点对象</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Entry</span>&lt;<span class="title">E</span>&gt; </span>&#123;</div><div class="line">        E element;        <span class="comment">//元素节点</span></div><div class="line">        Entry&lt;E&gt; next;    <span class="comment">//下一个元素</span></div><div class="line">        Entry&lt;E&gt; previous;  <span class="comment">//上一个元素</span></div><div class="line"></div><div class="line">        Entry(E element, Entry&lt;E&gt; next, Entry&lt;E&gt; previous) &#123;</div><div class="line">            <span class="keyword">this</span>.element = element;</div><div class="line">            <span class="keyword">this</span>.next = next;</div><div class="line">            <span class="keyword">this</span>.previous = previous;</div><div class="line">        &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>Entry是LinkedList的内部类, 定义了存储的元素. 该元素的前一个元素和后一个元素, 典型的双向链表定义</p>
-<p><strong>构造方法</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">     *  构造一个空列表。</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">LinkedList</span><span class="params">()</span> </span>&#123;</div><div class="line">        header.next = header.previous = header;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="comment">/**</span></div><div class="line">     *  构造一个包含指定 collection 中的元素的列表，这些元素按其 collection 的迭代器返回的顺序排列。</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">LinkedList</span><span class="params">(Collection&lt;? extends E&gt; c)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>();</div><div class="line">        addAll(c);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<p>LinkedList()构造一个空列表, 没有任何元素, 仅仅只把header节点的前一个元素, 后一个元素指向自身.</p>
-<p>LinkedList(Collection&lt;? extends E&gt; c): 构造一个包含collection中元素的列表. 先调用LinkedList()构造一个空列表, 再调用addAll()方法将collection中的所有元素添加到列表中.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">     *  添加指定 collection 中的所有元素到此列表的结尾，顺序是指定 collection 的迭代器返回这些元素的顺序。</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">addAll</span><span class="params">(Collection&lt;? extends E&gt; c)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> addAll(size, c);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 将指定 collection 中的所有元素从指定位置开始插入此列表。其中index表示在其中插入指定collection中第一个元素的索引</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">addAll</span><span class="params">(<span class="keyword">int</span> index, Collection&lt;? extends E&gt; c)</span> </span>&#123;</div><div class="line">        <span class="comment">//若插入的位置小于0或者大于链表长度，则抛出IndexOutOfBoundsException异常</span></div><div class="line">        <span class="keyword">if</span> (index &lt; <span class="number">0</span> || index &gt; size)</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IndexOutOfBoundsException(<span class="string">"Index: "</span> + index + <span class="string">", Size: "</span> + size);</div><div class="line">        Object[] a = c.toArray();</div><div class="line">        <span class="keyword">int</span> numNew = a.length;    <span class="comment">//插入元素的个数</span></div><div class="line">        <span class="comment">//若插入的元素为空，则返回false</span></div><div class="line">        <span class="keyword">if</span> (numNew == <span class="number">0</span>)</div><div class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">        <span class="comment">//modCount:在AbstractList中定义的，表示从结构上修改列表的次数</span></div><div class="line">        modCount++;</div><div class="line">        <span class="comment">//获取插入位置的节点，若插入的位置在size处，则是头节点，否则获取index位置处的节点</span></div><div class="line">        Entry&lt;E&gt; successor = (index == size ? header : entry(index));</div><div class="line">        <span class="comment">//插入位置的前一个节点，在插入过程中需要修改该节点的next引用：指向插入的节点元素</span></div><div class="line">        Entry&lt;E&gt; predecessor = successor.previous;</div><div class="line">        <span class="comment">//执行插入动作</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; numNew; i++) &#123;</div><div class="line">            <span class="comment">//构造一个节点e，这里已经执行了插入节点动作同时修改了相邻节点的指向引用</span></div><div class="line">            <span class="comment">//</span></div><div class="line">            Entry&lt;E&gt; e = <span class="keyword">new</span> Entry&lt;E&gt;((E) a[i], successor, predecessor);</div><div class="line">            <span class="comment">//将插入位置前一个节点的下一个元素引用指向当前元素</span></div><div class="line">            predecessor.next = e;</div><div class="line">            <span class="comment">//修改插入位置的前一个节点，这样做的目的是将插入位置右移一位，保证后续的元素是插在该元素的后面，确保这些元素的顺序</span></div><div class="line">            predecessor = e;</div><div class="line">        &#125;</div><div class="line">        successor.previous = predecessor;</div><div class="line">        <span class="comment">//修改容量大小</span></div><div class="line">        size += numNew;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<p>entry(int index)方法主要用来查找index位置的节点元素</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">     * 返回指定位置(若存在)的节点元素</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">private</span> Entry&lt;E&gt; <span class="title">entry</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (index &lt; <span class="number">0</span> || index &gt;= size)</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IndexOutOfBoundsException(<span class="string">"Index: "</span> + index + <span class="string">", Size: "</span></div><div class="line">                    + size);</div><div class="line">        <span class="comment">//头部节点</span></div><div class="line">        Entry&lt;E&gt; e = header;</div><div class="line">        <span class="comment">//判断遍历的方向</span></div><div class="line">        <span class="keyword">if</span> (index &lt; (size &gt;&gt; <span class="number">1</span>)) &#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= index; i++)</div><div class="line">                e = e.next;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = size; i &gt; index; i--)</div><div class="line">                e = e.previous;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> e;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<p><strong>增加元素方法</strong></p>
-<ul>
-<li><p>add(E e): 把置顶元素添加到列表结尾</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">add</span><span class="params">(E e)</span> </span>&#123;</div><div class="line">  addBefore(e, header);</div><div class="line">  <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>addBefor方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> Entry&lt;E&gt; <span class="title">addBefore</span><span class="params">(E e, Entry&lt;E&gt; entry)</span> </span>&#123;</div><div class="line">        <span class="comment">//利用Entry构造函数构建一个新节点 newEntry，</span></div><div class="line">        Entry&lt;E&gt; newEntry = <span class="keyword">new</span> Entry&lt;E&gt;(e, entry, entry.previous);</div><div class="line">        <span class="comment">//修改newEntry的前后节点的引用，确保其链表的引用关系是正确的</span></div><div class="line">        newEntry.previous.next = newEntry;</div><div class="line">        newEntry.next.previous = newEntry;</div><div class="line">        <span class="comment">//容量+1</span></div><div class="line">        size++;</div><div class="line">        <span class="comment">//修改次数+1</span></div><div class="line">        modCount++;</div><div class="line">        <span class="keyword">return</span> newEntry;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<p>addBefore方法构建一个新的节点newEntry, 然后修改他的前后引用</p>
-<p>LinkedList还提供类其他的增加元素的方法:</p>
-<ul>
-<li>add(int index, E element)：在此列表中指定的位置插入指定的元素。</li>
-<li>addAll(Collection&lt;? extends E&gt; c)：添加指定 collection 中的所有元素到此列表的结尾</li>
-<li>addAll(int index, Collection&lt;? extends E&gt; c)：将指定 collection 中的所有元素从指定位置开始插入此列表。</li>
-<li>AddFirst(E e): 将指定元素插入此列表的开头。</li>
-<li>addLast(E e): 将指定元素添加到此列表的结尾。</li>
-</ul>
-</li>
-</ul>
-<p><strong>移除元素方法</strong></p>
-<ul>
-<li><p>remove(Object o) 从列表中首次出现的元素移除.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">remove</span><span class="params">(Object o)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (o==<span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">for</span> (Entry&lt;E&gt; e = header.next; e != header; e = e.next) &#123;</div><div class="line">                <span class="keyword">if</span> (e.element==<span class="keyword">null</span>) &#123;</div><div class="line">                    remove(e);</div><div class="line">                    <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">for</span> (Entry&lt;E&gt; e = header.next; e != header; e = e.next) &#123;</div><div class="line">                <span class="keyword">if</span> (o.equals(e.element)) &#123;</div><div class="line">                    remove(e);</div><div class="line">                    <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>remove(Entry<e> e) : LinkedList所有移除方法的基础</e></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> E <span class="title">remove</span><span class="params">(Entry&lt;E&gt; e)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (e == header)</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NoSuchElementException();</div><div class="line"></div><div class="line">        <span class="comment">//保留被移除的元素：要返回</span></div><div class="line">        E result = e.element;</div><div class="line">        </div><div class="line">        <span class="comment">//将该节点的前一节点的next指向该节点后节点</span></div><div class="line">        e.previous.next = e.next;</div><div class="line">        <span class="comment">//将该节点的后一节点的previous指向该节点的前节点</span></div><div class="line">        <span class="comment">//这两步就可以将该节点从链表从除去：在该链表中是无法遍历到该节点的</span></div><div class="line">        e.next.previous = e.previous;</div><div class="line">        <span class="comment">//将该节点归空</span></div><div class="line">        e.next = e.previous = <span class="keyword">null</span>;</div><div class="line">        e.element = <span class="keyword">null</span>;</div><div class="line">        size--;</div><div class="line">        modCount++;</div><div class="line">        <span class="keyword">return</span> result;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<p>其他移除方法:</p>
-<ul>
-<li>clear()： 从此列表中移除所有元素。</li>
-<li>remove()：获取并移除此列表的头（第一个元素）</li>
-<li>remove(int index)：移除此列表中指定位置处的元素</li>
-<li>remove(Objec o)：从此列表中移除首次出现的指定元素（如果存在）</li>
-<li>removeFirst()：移除并返回此列表的第一个元素</li>
-<li>removeFirstOccurrence(Object o)：从此列表中移除第一次出现的指定元素（从头部到尾部遍历列表时）</li>
-<li>removeLast()：移除并返回此列表的最后一个元素</li>
-<li>removeLastOccurrence(Object o)：从此列表中移除最后一次出现的指定元素（从头部到尾部遍历列表时）</li>
-</ul>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/03/13/Java-ArrayList/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Blue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blue的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/13/Java-ArrayList/" itemprop="url">
-                  Java-ArrayList
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-13T10:39:26+08:00">
-                2017-03-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>ArrayList是实现List接口的动态数组. 实现所有可选列表操作, 并允许null在内的所有元素.</p>
-<p>ArrayList的默认初始容量为10. 每次添加新的元素, ArrayList都会检查是否需要进行扩容操作.</p>
-<p>扩容操作是把原来的数组拷贝到新的数组中.</p>
-<p> 如果已知具体的数据量, 在构造时应该指定一个初始容量, 可以减少数据拷贝次数. </p>
-<p>在添加大量新元素前, 可以使用<code>ensureCapacity</code>操作来增加ArrayList实例的容量.</p>
-<p>ArrayList实现不是同步的. 如果多个线程同时访问一个ArrayList实例, 其中至少一个线程从结构上修改了列表, 必须保持外部同步. 最好在创建时, 保证ArrayList时同步的.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">List list = Collections.synchronizedList(<span class="keyword">new</span> ArrayList());</div></pre></td></tr></table></figure>
-<p>ArrayList底层使用数组来保存数据.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">transient</span> Object[] elementData;</div></pre></td></tr></table></figure>
-<p><code>transient</code>是Java关键字, 变量修饰符. 当对象存储时, 它的值不需要维持.</p>
-<p>Java的serialization提供了一个持久化对象实例的机制. 当持久化对象时, 可能有的对象数据成员, 不想用serialization机制保存它. 为了在一个特定的对象的一个域上关闭serialization, 可以在这个域前加上关键字<code>transient</code>. 当对象被序列化时, transient型变量的值不包括在序列号的表示中.</p>
-<p><code>Object[] elementData</code>就是ArrayList的容器. ArrayList的基本操作都是对elementData变量进行操作.</p>
-<p>ArrayList提供三个构造函数.</p>
-<ul>
-<li>ArrayList(): 默认构造器, 提供初始容量为10的空列表</li>
-<li>ArrayList(int initialCapacity): 构造一个具有指定初始容量的空列表</li>
-<li>ArrayList(Collection&lt;? extends E&gt; c): 构造一个包含指定collection的元素的列表, 这些元素时按collectin的迭代器返回的顺序排列的.</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">     * 构造一个初始容量为 10 的空列表</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ArrayList</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>(<span class="number">10</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 构造一个具有指定初始容量的空列表。</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ArrayList</span><span class="params">(<span class="keyword">int</span> initialCapacity)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>();</div><div class="line">        <span class="keyword">if</span> (initialCapacity &lt; <span class="number">0</span>)</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"Illegal Capacity: "</span></div><div class="line">                    + initialCapacity);</div><div class="line">        <span class="keyword">this</span>.elementData = <span class="keyword">new</span> Object[initialCapacity];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     *  构造一个包含指定 collection 的元素的列表，这些元素是按照该 collection 的迭代器返回它们的顺序排列的。</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ArrayList</span><span class="params">(Collection&lt;? extends E&gt; c)</span> </span>&#123;</div><div class="line">        elementData = c.toArray();</div><div class="line">        size = elementData.length;</div><div class="line">        <span class="comment">// c.toArray might (incorrectly) not return Object[] (see 6260652)</span></div><div class="line">        <span class="keyword">if</span> (elementData.getClass() != Object[].class)</div><div class="line">            elementData = Arrays.copyOf(elementData, size, Object[].class);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<p>ArrayList 提供了add(E e), add(int index, E e), AddAll(Collection&lt;? extends E&gt; c), addAll(int index, Collection&lt;? extends E&gt; c), set(int index, E e); 这五个方法实现ArrayList增加元素.</p>
-<ul>
-<li><p>add(E e): 把指定元素添加的列表尾部</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">add</span><span class="params">(E e)</span> </span>&#123;</div><div class="line">    ensureCapacity(size + <span class="number">1</span>);  <span class="comment">// Increments modCount!!</span></div><div class="line">    elementData[size++] = e;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><code>ensureCapacity()</code>方法是对ArrayList集合进行扩容操作.</p>
-</li>
-<li><p>add(int index, E e): 把指定元素插入到列表的制定位置</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> index, E element)</span> </span>&#123;</div><div class="line">        <span class="comment">//判断索引位置是否正确</span></div><div class="line">        <span class="keyword">if</span> (index &gt; size || index &lt; <span class="number">0</span>)</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IndexOutOfBoundsException(</div><div class="line">            <span class="string">"Index: "</span>+index+<span class="string">", Size: "</span>+size);</div><div class="line">        <span class="comment">//扩容检测</span></div><div class="line">        ensureCapacity(size+<span class="number">1</span>);  </div><div class="line">        <span class="comment">/*</span></div><div class="line">         * 对源数组进行复制处理（位移），从index + 1到size-index。</div><div class="line">         * 主要目的就是空出index位置供数据插入，</div><div class="line">         * 即向右移动当前位于该位置的元素以及所有后续元素。 </div><div class="line">         */</div><div class="line">        System.arraycopy(elementData, index, elementData, index + <span class="number">1</span>,</div><div class="line">                 size - index);</div><div class="line">        <span class="comment">//在指定位置赋值</span></div><div class="line">        elementData[index] = element;</div><div class="line">        size++;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>如果指定的数据集合需要大量插入操作, 推荐使用LinkedList</p>
-</li>
-<li><p>addAll(Collection&lt;? extends E&gt; c): 按照指定collection的迭代器所返回的元素顺序, 把该collection中的所有元素添加到列表的尾部.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">addAll</span><span class="params">(Collection&lt;? extends E&gt; c)</span> </span>&#123;</div><div class="line">        <span class="comment">// 将集合C转换成数组</span></div><div class="line">        Object[] a = c.toArray();</div><div class="line">        <span class="keyword">int</span> numNew = a.length;</div><div class="line">        <span class="comment">// 扩容处理，大小为size + numNew</span></div><div class="line">        ensureCapacity(size + numNew); <span class="comment">// Increments modCount</span></div><div class="line">        System.arraycopy(a, <span class="number">0</span>, elementData, size, numNew);</div><div class="line">        size += numNew;</div><div class="line">        <span class="keyword">return</span> numNew != <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>使用<code>System.arraycopy()</code>方法把c集合里面的数据复制到elementData数组中.</p>
-<p>public static void <strong>arraycopy</strong>(Object src, int srcPos, Object dest, int destPos, int length)方法的根本目的是进行数组元素的复制. 把原数组src从srcPos位置开始复制到dest数组中, 复制长度为length, 数据从dest的destPos位置开始粘贴.</p>
-</li>
-<li><p>addAll(int x, Collection&lt;? extends E&gt; c): 从指定位置开始, 把collection中的所有元素插入到列表中</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">addAll</span><span class="params">(<span class="keyword">int</span> index, Collection&lt;? extends E&gt; c)</span> </span>&#123;</div><div class="line">        <span class="comment">//判断位置是否正确</span></div><div class="line">        <span class="keyword">if</span> (index &gt; size || index &lt; <span class="number">0</span>)</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IndexOutOfBoundsException(<span class="string">"Index: "</span> + index + <span class="string">", Size: "</span></div><div class="line">                    + size);</div><div class="line">        <span class="comment">//转换成数组</span></div><div class="line">        Object[] a = c.toArray();</div><div class="line">        <span class="keyword">int</span> numNew = a.length;</div><div class="line">        <span class="comment">//ArrayList容器扩容处理</span></div><div class="line">        ensureCapacity(size + numNew); <span class="comment">// Increments modCount</span></div><div class="line">        <span class="comment">//ArrayList容器数组向右移动的位置</span></div><div class="line">        <span class="keyword">int</span> numMoved = size - index;</div><div class="line">        <span class="comment">//如果移动位置大于0，则将ArrayList容器的数据向右移动numMoved个位置，确保增加的数据能够增加</span></div><div class="line">        <span class="keyword">if</span> (numMoved &gt; <span class="number">0</span>)</div><div class="line">            System.arraycopy(elementData, index, elementData, index + numNew,</div><div class="line">                    numMoved);</div><div class="line">        <span class="comment">//添加数组</span></div><div class="line">        System.arraycopy(a, <span class="number">0</span>, elementData, index, numNew);</div><div class="line">        <span class="comment">//容器容量变大</span></div><div class="line">        size += numNew;   </div><div class="line">        <span class="keyword">return</span> numNew != <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>set(int index, E e): 用指定元素替换列表中指定位置上的元素</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> E <span class="title">set</span><span class="params">(<span class="keyword">int</span> index, E element)</span> </span>&#123;</div><div class="line">        <span class="comment">//检测插入的位置是否越界</span></div><div class="line">        RangeCheck(index);</div><div class="line"></div><div class="line">        E oldValue = (E) elementData[index];</div><div class="line">        <span class="comment">//替代</span></div><div class="line">        elementData[index] = element;</div><div class="line">        <span class="keyword">return</span> oldValue;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>ArrayList提供remove(int index), remove(Object o), removeRange(int formIndex, int toIndex), removeAll()四个方法进行元素删除</p>
-<ul>
-<li><p>remove(int index): 从列表中删除指定位置上的元素</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> E <span class="title">remove</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</div><div class="line">        <span class="comment">//位置验证</span></div><div class="line">        RangeCheck(index);</div><div class="line"></div><div class="line">        modCount++;</div><div class="line">        <span class="comment">//需要删除的元素</span></div><div class="line">        E oldValue = (E) elementData[index];   </div><div class="line">        <span class="comment">//向左移的位数</span></div><div class="line">        <span class="keyword">int</span> numMoved = size - index - <span class="number">1</span>;</div><div class="line">        <span class="comment">//若需要移动，则想左移动numMoved位</span></div><div class="line">        <span class="keyword">if</span> (numMoved &gt; <span class="number">0</span>)</div><div class="line">            System.arraycopy(elementData, index + <span class="number">1</span>, elementData, index,</div><div class="line">                    numMoved);</div><div class="line">        <span class="comment">//置空最后一个元素</span></div><div class="line">        elementData[--size] = <span class="keyword">null</span>; <span class="comment">// Let gc do its work</span></div><div class="line"></div><div class="line">        <span class="keyword">return</span> oldValue;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>remove(Object o): 删除列表中首次出现的制定元素</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">remove</span><span class="params">(Object o)</span> </span>&#123;</div><div class="line">        <span class="comment">//因为ArrayList中允许存在null，所以需要进行null判断</span></div><div class="line">        <span class="keyword">if</span> (o == <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> index = <span class="number">0</span>; index &lt; size; index++)</div><div class="line">                <span class="keyword">if</span> (elementData[index] == <span class="keyword">null</span>) &#123;</div><div class="line">                    <span class="comment">//移除这个位置的元素</span></div><div class="line">                    fastRemove(index);</div><div class="line">                    <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">                &#125;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> index = <span class="number">0</span>; index &lt; size; index++)</div><div class="line">                <span class="keyword">if</span> (o.equals(elementData[index])) &#123;</div><div class="line">                    fastRemove(index);</div><div class="line">                    <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">                &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>其中<code>fastRemove()</code>方法用于删除指定位置的元素</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">fastRemove</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</div><div class="line">        modCount++;</div><div class="line">        <span class="keyword">int</span> numMoved = size - index - <span class="number">1</span>;</div><div class="line">        <span class="keyword">if</span> (numMoved &gt; <span class="number">0</span>)</div><div class="line">            System.arraycopy(elementData, index+<span class="number">1</span>, elementData, index,</div><div class="line">                             numMoved);</div><div class="line">        elementData[--size] = <span class="keyword">null</span>; <span class="comment">// Let gc do its work</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>removeRange(int fromIndex, int toIndex): 删除列表中索引在<code>formIndex</code>(包含)和<code>toIndex</code>(不包含)之间的元素</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">removeRange</span><span class="params">(<span class="keyword">int</span> fromIndex, <span class="keyword">int</span> toIndex)</span> </span>&#123;</div><div class="line">        modCount++;</div><div class="line">        <span class="keyword">int</span> numMoved = size - toIndex;</div><div class="line">        System</div><div class="line">                .arraycopy(elementData, toIndex, elementData, fromIndex,</div><div class="line">                        numMoved);</div><div class="line"></div><div class="line">        <span class="comment">// Let gc do its work</span></div><div class="line">        <span class="keyword">int</span> newSize = size - (toIndex - fromIndex);</div><div class="line">        <span class="keyword">while</span> (size != newSize)</div><div class="line">            elementData[--size] = <span class="keyword">null</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>removeAll(): 继承自AbstractCollectin方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">removeAll</span><span class="params">(Collection&lt;?&gt; c)</span> </span>&#123;</div><div class="line">        <span class="keyword">boolean</span> modified = <span class="keyword">false</span>;</div><div class="line">        Iterator&lt;?&gt; e = iterator();</div><div class="line">        <span class="keyword">while</span> (e.hasNext()) &#123;</div><div class="line">            <span class="keyword">if</span> (c.contains(e.next())) &#123;</div><div class="line">                e.remove();</div><div class="line">                modified = <span class="keyword">true</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> modified;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>每次新增元素时都需要进行容量检查判断, 如果新增元素的个数超过ArrayList的容量, 就会进行扩容操作. 使用<code>ensureCapacity</code>方法进行扩容</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ensureCapacity</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>&#123;</div><div class="line">        <span class="comment">//修改计时器</span></div><div class="line">        modCount++;</div><div class="line">        <span class="comment">//ArrayList容量大小</span></div><div class="line">        <span class="keyword">int</span> oldCapacity = elementData.length;</div><div class="line">        <span class="comment">/*</span></div><div class="line">         * 若当前需要的长度大于当前数组的长度时，进行扩容操作</div><div class="line">         */</div><div class="line">        <span class="keyword">if</span> (minCapacity &gt; oldCapacity) &#123;</div><div class="line">            Object oldData[] = elementData;</div><div class="line">            <span class="comment">//计算新的容量大小，为当前容量的1.5倍</span></div><div class="line">            <span class="keyword">int</span> newCapacity = (oldCapacity * <span class="number">3</span>) / <span class="number">2</span> + <span class="number">1</span>;</div><div class="line">            <span class="keyword">if</span> (newCapacity &lt; minCapacity)</div><div class="line">                newCapacity = minCapacity;</div><div class="line">            <span class="comment">//数组拷贝，生成新的数组</span></div><div class="line">            elementData = Arrays.copyOf(elementData, newCapacity);</div><div class="line">        &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>每次扩容1.5倍既能满足性能需求, 也不会造成很大的内存消耗.</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2181,8 +2350,8 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">52</span>
-                <span class="site-state-item-name">Artikel</span>
+                <span class="site-state-item-count">56</span>
+                <span class="site-state-item-name">posts</span>
               </a>
             </div>
           
@@ -2195,7 +2364,7 @@
             <div class="site-state-item site-state-tags">
               
                 <span class="site-state-item-count">4</span>
-                <span class="site-state-item-name">Tags</span>
+                <span class="site-state-item-name">tags</span>
               
             </div>
           
@@ -2245,7 +2414,7 @@
 
 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">

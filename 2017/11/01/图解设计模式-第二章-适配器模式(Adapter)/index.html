@@ -1,0 +1,731 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="在程序世界中, 经常会存在现有程序无法直接使用, 需要做适当的交换才能使用的情况. 这种用于填补”现有程序”和”所需程序”之间差异的设计模式就是Adapter模式
+Adapter模式有两种: 1. 类适配器模式(使用继承), 2. 对象适配器模式(使用委托)
+类适配器模式类图/Adapter-Class.png)
+对象适配器模式类图/Object-Adapter2.png)
+示例程序是一段将输入的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图解设计模式-第二章-适配器模式(Adapter)">
+<meta property="og:url" content="https://singthi4079.github.io/2017/11/01/图解设计模式-第二章-适配器模式(Adapter)/index.html">
+<meta property="og:site_name" content="Blue的博客">
+<meta property="og:description" content="在程序世界中, 经常会存在现有程序无法直接使用, 需要做适当的交换才能使用的情况. 这种用于填补”现有程序”和”所需程序”之间差异的设计模式就是Adapter模式
+Adapter模式有两种: 1. 类适配器模式(使用继承), 2. 对象适配器模式(使用委托)
+类适配器模式类图/Adapter-Class.png)
+对象适配器模式类图/Object-Adapter2.png)
+示例程序是一段将输入的">
+<meta property="og:image" content="https://singthi4079.github.io/2017/11/01/图解设计模式-第二章-适配器模式(Adapter)/Users/storm/workspace/notes/source/_posts/图解设计模式-第二章-适配器模式(Adapter">
+<meta property="og:image" content="https://singthi4079.github.io/2017/11/01/图解设计模式-第二章-适配器模式(Adapter)/Users/storm/workspace/notes/source/_posts/图解设计模式-第二章-适配器模式(Adapter">
+<meta property="og:image" content="https://singthi4079.github.io/2017/11/01/图解设计模式-第二章-适配器模式(Adapter)/Users/storm/workspace/notes/source/_posts/图解设计模式-第二章-适配器模式(Adapter">
+<meta property="og:image" content="https://singthi4079.github.io/2017/11/01/图解设计模式-第二章-适配器模式(Adapter)/Users/storm/workspace/notes/source/_posts/图解设计模式-第二章-适配器模式(Adapter">
+<meta property="og:updated_time" content="2017-11-01T13:48:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="图解设计模式-第二章-适配器模式(Adapter)">
+<meta name="twitter:description" content="在程序世界中, 经常会存在现有程序无法直接使用, 需要做适当的交换才能使用的情况. 这种用于填补”现有程序”和”所需程序”之间差异的设计模式就是Adapter模式
+Adapter模式有两种: 1. 类适配器模式(使用继承), 2. 对象适配器模式(使用委托)
+类适配器模式类图/Adapter-Class.png)
+对象适配器模式类图/Object-Adapter2.png)
+示例程序是一段将输入的">
+<meta name="twitter:image" content="https://singthi4079.github.io/2017/11/01/图解设计模式-第二章-适配器模式(Adapter)/Users/storm/workspace/notes/source/_posts/图解设计模式-第二章-适配器模式(Adapter">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://singthi4079.github.io/2017/11/01/图解设计模式-第二章-适配器模式(Adapter)/"/>
+
+
+
+
+
+  <title> 图解设计模式-第二章-适配器模式(Adapter) | Blue的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Blue的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/11/01/图解设计模式-第二章-适配器模式(Adapter)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Blue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blue的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                图解设计模式-第二章-适配器模式(Adapter)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-01T20:28:14+08:00">
+                2017-11-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在程序世界中, 经常会存在现有程序无法直接使用, 需要做适当的交换才能使用的情况. 这种用于填补”现有程序”和”所需程序”之间差异的设计模式就是<strong>Adapter模式</strong></p>
+<p>Adapter模式有两种: 1. 类适配器模式(使用继承), 2. 对象适配器模式(使用委托)</p>
+<h4 id="类适配器模式类图"><a href="#类适配器模式类图" class="headerlink" title="类适配器模式类图"></a>类适配器模式类图</h4><p><img src="/2017/11/01/图解设计模式-第二章-适配器模式(Adapter)/Users/storm/workspace/notes/source/_posts/图解设计模式-第二章-适配器模式(Adapter" alt="Adapter-Class">/Adapter-Class.png)</p>
+<h4 id="对象适配器模式类图"><a href="#对象适配器模式类图" class="headerlink" title="对象适配器模式类图"></a>对象适配器模式类图</h4><p><img src="/2017/11/01/图解设计模式-第二章-适配器模式(Adapter)/Users/storm/workspace/notes/source/_posts/图解设计模式-第二章-适配器模式(Adapter" alt="Object-Adapter2">/Object-Adapter2.png)</p>
+<p>示例程序是一段将输入的字符串显示为(Hello)或者<code>*Hello*</code>的程序. 分别使用类适配器模式和对象适配器模式实现.</p>
+<h3 id="类适配器模式"><a href="#类适配器模式" class="headerlink" title="类适配器模式"></a>类适配器模式</h3><p>类图:</p>
+<p><img src="/2017/11/01/图解设计模式-第二章-适配器模式(Adapter)/Users/storm/workspace/notes/source/_posts/图解设计模式-第二章-适配器模式(Adapter" alt="Main">/Main.png)</p>
+<h4 id="Banner类"><a href="#Banner类" class="headerlink" title="Banner类"></a>Banner类</h4><p>有将字符串用括号括起来的showWithParen方法, 和将字符串用*号括起来的showWithAster方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Banner</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> String string;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Banner</span><span class="params">(String string)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.string = string;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showWithParen</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"("</span>+string+<span class="string">")"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showWithAster</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"*"</span>+string+<span class="string">"*"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="Print接口"><a href="#Print接口" class="headerlink" title="Print接口"></a>Print接口</h4><p>假设Print接口是”需求”接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Print</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">printWeak</span><span class="params">()</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">printStrong</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="PrintBanner类"><a href="#PrintBanner类" class="headerlink" title="PrintBanner类"></a>PrintBanner类</h4><p>printBanner类扮演适配器角色, 继承了Banner类, 同时实现了Print接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PrintBanner</span> <span class="keyword">extends</span> <span class="title">Banner</span> <span class="keyword">implements</span> <span class="title">Print</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PrintBanner</span><span class="params">(String string)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(string);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printWeak</span><span class="params">()</span> </span>&#123;</div><div class="line">        showWithParen();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printStrong</span><span class="params">()</span> </span>&#123;</div><div class="line">        showWithAster();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="Main类"><a href="#Main类" class="headerlink" title="Main类"></a>Main类</h4><p>通过扮演适配器角色的PrintBanner类来显示字符串.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        Print p = <span class="keyword">new</span> PrintBanner(<span class="string">"hello"</span>);</div><div class="line">        p.printWeak();</div><div class="line">        p.printStrong();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>对于Main类的代码而言, Banner类, showWithParen方法和showWithAster方法被完全隐藏起来了. Main类并不知道PrintBanner类的具体实现. </p>
+<h3 id="使用委托实现的适配器模式"><a href="#使用委托实现的适配器模式" class="headerlink" title="使用委托实现的适配器模式"></a>使用委托实现的适配器模式</h3><p>委托是指将某个方法中的实际处理交给其他实例的方法.</p>
+<p>类图:<img src="/2017/11/01/图解设计模式-第二章-适配器模式(Adapter)/Users/storm/workspace/notes/source/_posts/图解设计模式-第二章-适配器模式(Adapter" alt="Object-Adapter">/Object-Adapter.png)</p>
+<h4 id="Banner类-1"><a href="#Banner类-1" class="headerlink" title="Banner类"></a>Banner类</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Banner</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> String string;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Banner</span><span class="params">(String string)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.string = string;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showWithParen</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"("</span>+string+<span class="string">")"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showWithAster</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"*"</span>+string+<span class="string">"*"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="Print类"><a href="#Print类" class="headerlink" title="Print类"></a>Print类</h4><p>这里把Print改成类, 由于Java中一个类不能同时继承两个类. </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Print</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">printWeak</span><span class="params">()</span></span>;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">printStrong</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="PrintBanner类-1"><a href="#PrintBanner类-1" class="headerlink" title="PrintBanner类"></a>PrintBanner类</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PrintBanner</span> <span class="keyword">extends</span> <span class="title">Print</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> Banner banner;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PrintBanner</span><span class="params">(String string)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.banner = <span class="keyword">new</span> Banner(string);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printWeak</span><span class="params">()</span> </span>&#123;</div><div class="line">        banner.showWithParen();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printStrong</span><span class="params">()</span> </span>&#123;</div><div class="line">        banner.showWithAster();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="Main类-1"><a href="#Main类-1" class="headerlink" title="Main类"></a>Main类</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        Print p = <span class="keyword">new</span> PrintBanner(<span class="string">"hello"</span>);</div><div class="line">        p.printWeak();</div><div class="line">        p.printStrong();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="Adatper模式中的角色"><a href="#Adatper模式中的角色" class="headerlink" title="Adatper模式中的角色"></a>Adatper模式中的角色</h3><ul>
+<li><p>Target(对象)</p>
+<p>负责定义所需的方法. 即示例程序中的Print接口和Print类</p>
+</li>
+<li><p>Client(请求者)</p>
+<p>负责使用Target角色所定义的方法进行具体处理. Main类</p>
+</li>
+<li><p>Adaptee(被适配)</p>
+<p>Adaptee是一个豉油既定方法的角色, Banner类. 如果Adaptee中的方法和Target角色的方法相同, 就不需要Adapter角色了</p>
+</li>
+<li><p>Adapter(适配)</p>
+<p>使用Adapter角色的方法来满足Target角色的需求, 这是Adapter模式的目的. PrintBanner类</p>
+</li>
+</ul>
+<h3 id="什么时候使用适配器模式"><a href="#什么时候使用适配器模式" class="headerlink" title="什么时候使用适配器模式"></a>什么时候使用适配器模式</h3><p>Adapter模式会对现有的类进行适配, 生成新的类. 通过该模式可以很方便的创建需要的方法群.</p>
+<ol>
+<li>没有现成的代码</li>
+<li>版本升级和兼容.</li>
+</ol>
+<p>当Adapter角色和Target角色的功能完全不同时, Adapter模式无法使用.</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/31/图解设计模式第一章-Iterator模式/" rel="next" title="图解设计模式第一章-Iterator模式">
+                <i class="fa fa-chevron-left"></i> 图解设计模式第一章-Iterator模式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/02/图解设计模式-第三章-TemplateMethod模式/" rel="prev" title="图解设计模式-第三章-TemplateMethod模式">
+                图解设计模式-第三章-TemplateMethod模式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Blue" />
+          <p class="site-author-name" itemprop="name">Blue</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">56</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#类适配器模式类图"><span class="nav-number">1.</span> <span class="nav-text">类适配器模式类图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对象适配器模式类图"><span class="nav-number">2.</span> <span class="nav-text">对象适配器模式类图</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类适配器模式"><span class="nav-number"></span> <span class="nav-text">类适配器模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Banner类"><span class="nav-number">1.</span> <span class="nav-text">Banner类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Print接口"><span class="nav-number">2.</span> <span class="nav-text">Print接口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PrintBanner类"><span class="nav-number">3.</span> <span class="nav-text">PrintBanner类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Main类"><span class="nav-number">4.</span> <span class="nav-text">Main类</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用委托实现的适配器模式"><span class="nav-number"></span> <span class="nav-text">使用委托实现的适配器模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Banner类-1"><span class="nav-number">1.</span> <span class="nav-text">Banner类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Print类"><span class="nav-number">2.</span> <span class="nav-text">Print类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PrintBanner类-1"><span class="nav-number">3.</span> <span class="nav-text">PrintBanner类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Main类-1"><span class="nav-number">4.</span> <span class="nav-text">Main类</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Adatper模式中的角色"><span class="nav-number"></span> <span class="nav-text">Adatper模式中的角色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么时候使用适配器模式"><span class="nav-number"></span> <span class="nav-text">什么时候使用适配器模式</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Blue</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

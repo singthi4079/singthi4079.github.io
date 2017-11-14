@@ -1,0 +1,793 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="根据实例原型, 实例模型来生成新的实例, 这就是Prototype模式.
+Java可以使用clone创建实例的副本. 
+Prototype模式类图:
+
+示例程序示例程序的功能是将字符串放入方框中下石出来或者加上下划线显示出来. 
+类和接口一览表
+
+
+
+名字
+说明
+
+
+
+
+Product
+声明了抽象方法use和createClone的接口
+
+
+Manager
+调用createClone方法复制实例的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图解设计模式-第六章-Prototype模式">
+<meta property="og:url" content="https://singthi4079.github.io/2017/11/06/图解设计模式-第六章-Prototype模式/index.html">
+<meta property="og:site_name" content="Blue的博客">
+<meta property="og:description" content="根据实例原型, 实例模型来生成新的实例, 这就是Prototype模式.
+Java可以使用clone创建实例的副本. 
+Prototype模式类图:
+
+示例程序示例程序的功能是将字符串放入方框中下石出来或者加上下划线显示出来. 
+类和接口一览表
+
+
+
+名字
+说明
+
+
+
+
+Product
+声明了抽象方法use和createClone的接口
+
+
+Manager
+调用createClone方法复制实例的">
+<meta property="og:image" content="https://singthi4079.github.io/2017/11/06/图解设计模式-第六章-Prototype模式/Users/storm/workspace/notes/source/_posts/图解设计模式-第五章-Prototype模式/Prototype-Main.png">
+<meta property="og:image" content="https://singthi4079.github.io/2017/11/06/图解设计模式-第六章-Prototype模式/Users/storm/workspace/notes/source/_posts/图解设计模式-第五章-Prototype模式/Prototype-Simple.png">
+<meta property="og:updated_time" content="2017-11-07T12:27:52.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="图解设计模式-第六章-Prototype模式">
+<meta name="twitter:description" content="根据实例原型, 实例模型来生成新的实例, 这就是Prototype模式.
+Java可以使用clone创建实例的副本. 
+Prototype模式类图:
+
+示例程序示例程序的功能是将字符串放入方框中下石出来或者加上下划线显示出来. 
+类和接口一览表
+
+
+
+名字
+说明
+
+
+
+
+Product
+声明了抽象方法use和createClone的接口
+
+
+Manager
+调用createClone方法复制实例的">
+<meta name="twitter:image" content="https://singthi4079.github.io/2017/11/06/图解设计模式-第六章-Prototype模式/Users/storm/workspace/notes/source/_posts/图解设计模式-第五章-Prototype模式/Prototype-Main.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://singthi4079.github.io/2017/11/06/图解设计模式-第六章-Prototype模式/"/>
+
+
+
+
+
+  <title> 图解设计模式-第六章-Prototype模式 | Blue的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Blue的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/11/06/图解设计模式-第六章-Prototype模式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Blue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blue的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                图解设计模式-第六章-Prototype模式
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-06T20:00:48+08:00">
+                2017-11-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>根据实例原型, 实例模型来生成新的实例, 这就是Prototype模式.</p>
+<p>Java可以使用clone创建实例的副本. </p>
+<p>Prototype模式类图:</p>
+<p><img src="/2017/11/06/图解设计模式-第六章-Prototype模式/Users/storm/workspace/notes/source/_posts/图解设计模式-第五章-Prototype模式/Prototype-Main.png" alt="Prototype-Main"></p>
+<h3 id="示例程序"><a href="#示例程序" class="headerlink" title="示例程序"></a>示例程序</h3><p>示例程序的功能是将字符串放入方框中下石出来或者加上下划线显示出来. </p>
+<p>类和接口一览表</p>
+<table>
+<thead>
+<tr>
+<th>名字</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Product</td>
+<td>声明了抽象方法use和createClone的接口</td>
+</tr>
+<tr>
+<td>Manager</td>
+<td>调用createClone方法复制实例的类</td>
+</tr>
+<tr>
+<td>MessageBox</td>
+<td>将字符串放入方框并显示出来的类. 实现了use方法和createClone方法</td>
+</tr>
+<tr>
+<td>UnderlinePen</td>
+<td>给字符串加上下划线并显示出来的类. 实现了use方法和createClone方法</td>
+</tr>
+<tr>
+<td>Main</td>
+<td>测试类</td>
+</tr>
+</tbody>
+</table>
+<p>实例程序类图:</p>
+<p><img src="/2017/11/06/图解设计模式-第六章-Prototype模式/Users/storm/workspace/notes/source/_posts/图解设计模式-第五章-Prototype模式/Prototype-Simple.png" alt="Prototype-Simple"></p>
+<h4 id="Product接口"><a href="#Product接口" class="headerlink" title="Product接口"></a>Product接口</h4><p>Product接口是复制功能的接口, 继承了java.lang.Cloneable接口. 实现了该接口的实例可以调用clone方法来自动复制实例.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Product</span> <span class="keyword">extends</span> <span class="title">Cloneable</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">void</span> <span class="title">use</span><span class="params">(String s)</span></span>;</div><div class="line">  <span class="function">Product <span class="title">createClone</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="Manager类"><a href="#Manager类" class="headerlink" title="Manager类"></a>Manager类</h4><p>Manager类使用Product接口来复制实例.</p>
+<p>showcase字段是java.util.HashMap类型. register方法将接收到的Product接口实例注册到showcase中.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Manager</span> </span>&#123;</div><div class="line">  <span class="keyword">private</span> HashMap showcase = <span class="keyword">new</span> HashMap();</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">register</span><span class="params">(String name, Product proto)</span> </span>&#123;</div><div class="line">    showcase.put(name, proto);</div><div class="line">  &#125;</div><div class="line">  <span class="function"><span class="keyword">public</span> Product <span class="title">create</span><span class="params">(String protoName)</span> </span>&#123;</div><div class="line">    Product p = (Product) showcase.get(protoName);</div><div class="line">    <span class="keyword">return</span> p.createClone();</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="MessageBox类"><a href="#MessageBox类" class="headerlink" title="MessageBox类"></a>MessageBox类</h4><p>MessageBox类实现了Product接口. decochar字段保存了装饰方框那样的环绕字符串的字符. use方法会使用decochar字段中保存的字符把要显示的字符串框起来. createClone方法永远复制自己, 内部调用clone方法. 在复制时, 原来实例中的字段的值会被复制到新的实例中. 只有类自己(或子类)能够调用clone方法.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MessageBox</span> <span class="keyword">implements</span> <span class="title">Product</span> </span>&#123;</div><div class="line">  <span class="keyword">private</span> <span class="keyword">char</span> decochar;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="title">MessageBox</span><span class="params">(<span class="keyword">char</span> decochar)</span> </span>&#123;</div><div class="line">    <span class="keyword">this</span>.decochar = decochar;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">use</span><span class="params">(String s)</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> length = s.getBytes().length;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;length+<span class="number">4</span>; i++) &#123;</div><div class="line">      System.out.print(decochar);</div><div class="line">    &#125;</div><div class="line">    System.out.println();</div><div class="line">    System.out.println(decochar + <span class="string">" "</span> + s + <span class="string">" "</span> + decochar);</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;length+<span class="number">4</span>; i++) &#123;</div><div class="line">      System.out.print(decochar);</div><div class="line">    &#125;</div><div class="line">    System.out.println();</div><div class="line">  &#125;</div><div class="line">  <span class="function"><span class="keyword">public</span> Product <span class="title">createClone</span><span class="params">()</span> </span>&#123;</div><div class="line">    Product p = <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">      p = (Product) clone();</div><div class="line">    &#125; <span class="keyword">catch</span> (CloneNotSupportedException e) &#123;</div><div class="line">      e.printStackTrace();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> p;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="UnderlinePen类"><a href="#UnderlinePen类" class="headerlink" title="UnderlinePen类"></a>UnderlinePen类</h4><p>ulchar字段保存的是修饰下划线样式的字符. </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UnderlinePen</span> <span class="keyword">implements</span> <span class="title">Product</span> </span>&#123;</div><div class="line">  <span class="keyword">private</span> <span class="keyword">char</span> ulchar;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="title">UnderlinePen</span><span class="params">(<span class="keyword">char</span> ulchar)</span> </span>&#123;</div><div class="line">    <span class="keyword">this</span>.ulchar = ulchar;</div><div class="line">  &#125;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">use</span><span class="params">(String s)</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> length = s.getBytes().length;</div><div class="line">    System.out.println(<span class="string">"\""</span> + s + <span class="string">"\""</span>);</div><div class="line">    System.out.print(<span class="string">" "</span>);</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;length; i++) &#123;</div><div class="line">      System.out.print(ulchar);</div><div class="line">    &#125;</div><div class="line">    System.out.println();</div><div class="line">  &#125;</div><div class="line">  <span class="function"><span class="keyword">public</span> Product <span class="title">createClone</span><span class="params">()</span> </span>&#123;</div><div class="line">    Product p = <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">      p = (Product) clone();</div><div class="line">    &#125; <span class="keyword">catch</span> (CloneNotSupportedException e) &#123;</div><div class="line">      e.printStackTrace();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> p;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="Main类"><a href="#Main类" class="headerlink" title="Main类"></a>Main类</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> class <span class="title">Main</span><span class="params">()</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">    Manager manager = <span class="keyword">new</span> Manager();</div><div class="line">    UnderlinePen upen = <span class="keyword">new</span> UnderlinePen(<span class="string">"~"</span>);</div><div class="line">    MessageBox mbox = <span class="keyword">new</span> MessageBox(<span class="string">"*"</span>);</div><div class="line">    MessageBox sbox = <span class="keyword">new</span> MessageBox(<span class="string">"/"</span>);</div><div class="line">    manager.register(<span class="string">"strong message"</span>, upen);</div><div class="line">    manager.register(<span class="string">"warning box"</span>, mbox);</div><div class="line">    manager.register(<span class="string">"slash box"</span>, sbox);</div><div class="line">    </div><div class="line">    Product p1 = manager.create(<span class="string">"strong message"</span>);</div><div class="line">    p1.user(<span class="string">"Hello, world."</span>);</div><div class="line">    </div><div class="line">    Product p2 = manager.create(<span class="string">"warning box"</span>);</div><div class="line">    p2.user(<span class="string">"Hello, world."</span>);</div><div class="line">    </div><div class="line">    Product p3 = manager.create(<span class="string">"slash box"</span>);</div><div class="line">    p3.user(<span class="string">"Hello, world."</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="Prototype模式中的角色"><a href="#Prototype模式中的角色" class="headerlink" title="Prototype模式中的角色"></a>Prototype模式中的角色</h3><ul>
+<li><p>Prototype(原型)</p>
+<p>Product角色服装定义用于复制现有实例来生产新实例的方法.</p>
+</li>
+<li><p>ConcretePrototype(具体原型)</p>
+<p>ConcretePrototype角色复制实现复制现有实例并生成新实例的方法.</p>
+</li>
+<li><p>Client(使用者)</p>
+<p>Client角色复制使用复制实例的方法生成新实例</p>
+</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/04/图解设计模式-第五章-Singleton模式/" rel="next" title="图解设计模式-第五章-Singleton模式">
+                <i class="fa fa-chevron-left"></i> 图解设计模式-第五章-Singleton模式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/07/图解设计模式-第七章-Builder模式/" rel="prev" title="图解设计模式-第七章-Builder模式">
+                图解设计模式-第七章-Builder模式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Blue" />
+          <p class="site-author-name" itemprop="name">Blue</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">63</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#示例程序"><span class="nav-number">1.</span> <span class="nav-text">示例程序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Product接口"><span class="nav-number">1.1.</span> <span class="nav-text">Product接口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Manager类"><span class="nav-number">1.2.</span> <span class="nav-text">Manager类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MessageBox类"><span class="nav-number">1.3.</span> <span class="nav-text">MessageBox类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UnderlinePen类"><span class="nav-number">1.4.</span> <span class="nav-text">UnderlinePen类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Main类"><span class="nav-number">1.5.</span> <span class="nav-text">Main类</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Prototype模式中的角色"><span class="nav-number">2.</span> <span class="nav-text">Prototype模式中的角色</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Blue</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

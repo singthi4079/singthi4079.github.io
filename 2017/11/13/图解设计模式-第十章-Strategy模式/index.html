@@ -1,0 +1,757 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="无论什么程序, 其目的都是解决问题, 为了解决问题, 需要编写特定的算法. 使用Strategy模式可以整体地替换算法的实现部分. 
+能整体地替换算法, 以不同的算法解决同一个问题, 这种模式就是Strategy模式.
+Strategy模式类图
+
+示例程序示例程序的功能是让电脑玩”猜拳”游戏.
+第一种策略是: 如果这局猜拳获胜, 纳闷下一局也出一样的手势.
+第二种策略是: 根据上一局的手势从概率上">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图解设计模式-第十章-Strategy模式">
+<meta property="og:url" content="https://singthi4079.github.io/2017/11/13/图解设计模式-第十章-Strategy模式/index.html">
+<meta property="og:site_name" content="Blue的博客">
+<meta property="og:description" content="无论什么程序, 其目的都是解决问题, 为了解决问题, 需要编写特定的算法. 使用Strategy模式可以整体地替换算法的实现部分. 
+能整体地替换算法, 以不同的算法解决同一个问题, 这种模式就是Strategy模式.
+Strategy模式类图
+
+示例程序示例程序的功能是让电脑玩”猜拳”游戏.
+第一种策略是: 如果这局猜拳获胜, 纳闷下一局也出一样的手势.
+第二种策略是: 根据上一局的手势从概率上">
+<meta property="og:image" content="https://singthi4079.github.io/2017/11/13/图解设计模式-第十章-Strategy模式/Users/storm/workspace/notes/source/_posts/图解设计模式-第十章-Strategy模式/Strategy-Main.png">
+<meta property="og:image" content="https://singthi4079.github.io/2017/11/13/图解设计模式-第十章-Strategy模式/Users/storm/workspace/notes/source/_posts/图解设计模式-第十章-Strategy模式/Strategy-Simple.png">
+<meta property="og:updated_time" content="2017-11-13T14:06:28.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="图解设计模式-第十章-Strategy模式">
+<meta name="twitter:description" content="无论什么程序, 其目的都是解决问题, 为了解决问题, 需要编写特定的算法. 使用Strategy模式可以整体地替换算法的实现部分. 
+能整体地替换算法, 以不同的算法解决同一个问题, 这种模式就是Strategy模式.
+Strategy模式类图
+
+示例程序示例程序的功能是让电脑玩”猜拳”游戏.
+第一种策略是: 如果这局猜拳获胜, 纳闷下一局也出一样的手势.
+第二种策略是: 根据上一局的手势从概率上">
+<meta name="twitter:image" content="https://singthi4079.github.io/2017/11/13/图解设计模式-第十章-Strategy模式/Users/storm/workspace/notes/source/_posts/图解设计模式-第十章-Strategy模式/Strategy-Main.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://singthi4079.github.io/2017/11/13/图解设计模式-第十章-Strategy模式/"/>
+
+
+
+
+
+  <title> 图解设计模式-第十章-Strategy模式 | Blue的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Blue的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/11/13/图解设计模式-第十章-Strategy模式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Blue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blue的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                图解设计模式-第十章-Strategy模式
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-13T20:58:33+08:00">
+                2017-11-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>无论什么程序, 其目的都是解决问题, 为了解决问题, 需要编写特定的算法. 使用Strategy模式可以整体地替换算法的实现部分. </p>
+<p>能整体地替换算法, 以不同的算法解决同一个问题, 这种模式就是Strategy模式.</p>
+<p><strong>Strategy模式类图</strong></p>
+<p><img src="/2017/11/13/图解设计模式-第十章-Strategy模式/Users/storm/workspace/notes/source/_posts/图解设计模式-第十章-Strategy模式/Strategy-Main.png" alt="Strategy-Main"></p>
+<h3 id="示例程序"><a href="#示例程序" class="headerlink" title="示例程序"></a>示例程序</h3><p>示例程序的功能是让电脑玩”猜拳”游戏.</p>
+<p>第一种策略是: 如果这局猜拳获胜, 纳闷下一局也出一样的手势.</p>
+<p>第二种策略是: 根据上一局的手势从概率上计算出下一局的手势.</p>
+<h4 id="类和接口一览表"><a href="#类和接口一览表" class="headerlink" title="类和接口一览表"></a>类和接口一览表</h4><table>
+<thead>
+<tr>
+<th>名字</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hand</td>
+<td>表示猜拳游戏中的”手势”的类</td>
+</tr>
+<tr>
+<td>Strategy</td>
+<td>表示猜拳游戏中的策略的类</td>
+</tr>
+<tr>
+<td>WinningStrategy</td>
+<td>表示第一种策略的类</td>
+</tr>
+<tr>
+<td>ProbStrategy</td>
+<td>表示第二种策略的类</td>
+</tr>
+<tr>
+<td>Player</td>
+<td>表示进行猜拳游戏的选手的类</td>
+</tr>
+<tr>
+<td>Main</td>
+<td>测试类</td>
+</tr>
+</tbody>
+</table>
+<h4 id="示例程序类图"><a href="#示例程序类图" class="headerlink" title="示例程序类图"></a>示例程序类图</h4><p><img src="/2017/11/13/图解设计模式-第十章-Strategy模式/Users/storm/workspace/notes/source/_posts/图解设计模式-第十章-Strategy模式/Strategy-Simple.png" alt="Strategy-Simple"></p>
+<h4 id="Hand类"><a href="#Hand类" class="headerlink" title="Hand类"></a>Hand类</h4><p>用int表示所出的手势: 0表示石头, 1表示剪刀, 2表示布, 并将值保存在handValue字段中.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(<span class="keyword">this</span>.handValue+!)%<span class="number">3</span> == h.handValue</div></pre></td></tr></table></figure>
+<p>这个表达式表示: 如果this的手势值加上1后是h的手势值(例如: 如果this的手势是石头, 而h是剪刀, 或是this的手势是剪刀, 而h的是布, 或者this的手势是布, 而h的手势是石头), 那么判断this获胜.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Hand</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> HANDVALUE_GUU = <span class="number">0</span>;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> HANDVALUE_CHO = <span class="number">1</span>;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> HANDVALUE_PAA = <span class="number">2</span>;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Hand[] hand = &#123;</div><div class="line">            <span class="keyword">new</span> Hand(HANDVALUE_GUU),</div><div class="line">            <span class="keyword">new</span> Hand(HANDVALUE_CHO),</div><div class="line">            <span class="keyword">new</span> Hand(HANDVALUE_PAA)</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String[] name = &#123;</div><div class="line">            <span class="string">"石头"</span>, <span class="string">"剪刀"</span>, <span class="string">"布"</span></div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> handValue;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Hand</span><span class="params">(<span class="keyword">int</span> handValue)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.handValue = handValue;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Hand <span class="title">getHand</span><span class="params">(<span class="keyword">int</span> handValue)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> hand[handValue];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isStrongerThen</span><span class="params">(Hand h)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> fight(h) == <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isWeakerThen</span><span class="params">(Hand h)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> fight(h) == -<span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">fight</span><span class="params">(Hand h)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (<span class="keyword">this</span> == h) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> ((<span class="keyword">this</span>.handValue + <span class="number">1</span>)%<span class="number">3</span> == h.handValue) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> name[handValue];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="Stategy接口"><a href="#Stategy接口" class="headerlink" title="Stategy接口"></a>Stategy接口</h4><p>定义了猜拳策略的抽象方法的接口. </p>
+<p>study方法的作用是学习”上一局的手势是否获胜了”. </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Strategy</span> </span>&#123;</div><div class="line">    <span class="function">Hand <span class="title">nextHand</span><span class="params">()</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">study</span><span class="params">(<span class="keyword">boolean</span> win)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="WinningStrategy类"><a href="#WinningStrategy类" class="headerlink" title="WinningStrategy类"></a>WinningStrategy类</h4><p>这个类的策略是: 如果上一局的手势获胜了, 则下一局的手势就与上一局相同. </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WinningStrategy</span> <span class="keyword">implements</span> <span class="title">Strategy</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> Random random;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> won = <span class="keyword">false</span>;</div><div class="line">    <span class="keyword">private</span> Hand prevHand;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">WinningStrategy</span><span class="params">(<span class="keyword">int</span> seed)</span> </span>&#123;</div><div class="line">        random = <span class="keyword">new</span> Random(seed);</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Hand <span class="title">nextHand</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (!won)</div><div class="line">            prevHand = Hand.getHand(random.nextInt(<span class="number">3</span>));</div><div class="line">        <span class="keyword">return</span> prevHand;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">study</span><span class="params">(<span class="keyword">boolean</span> win)</span> </span>&#123;</div><div class="line">        won = win;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="ProbStrategy类"><a href="#ProbStrategy类" class="headerlink" title="ProbStrategy类"></a>ProbStrategy类</h4><p>这个类的策略是: 每种手势出现的概率会根据以前的猜拳结果二改变. </p>
+<p>history字段是一个表, 用来根据过去的胜负来进行概率计算. 它是一个二维数组, 每个数组下标的意思如下:</p>
+<p><code>history[上一句出的手势][这一局出的手势]</code></p>
+<p>这个表达式的值越大, 表示过去的胜率越高. </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProbStrategy</span> <span class="keyword">implements</span> <span class="title">Strategy</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> Random random;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> prevHandValue = <span class="number">0</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> currentHandValue = <span class="number">0</span>;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span>[][] history = &#123;</div><div class="line">            &#123;<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, &#125;,</div><div class="line">            &#123;<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, &#125;,</div><div class="line">            &#123;<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, &#125;,</div><div class="line">    &#125;;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ProbStrategy</span><span class="params">(<span class="keyword">int</span> seed)</span> </span>&#123;</div><div class="line">        random = <span class="keyword">new</span> Random(seed);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Hand <span class="title">nextHand</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> bet = random.nextInt(getSum(currentHandValue));</div><div class="line">        <span class="keyword">int</span> handValue = <span class="number">0</span>;</div><div class="line">        <span class="keyword">if</span> (bet &lt; history[currentHandValue][<span class="number">0</span>]) &#123;</div><div class="line">            handValue = <span class="number">0</span>;</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (bet &lt; history[currentHandValue][<span class="number">0</span>] + history[currentHandValue][<span class="number">1</span>]) &#123;</div><div class="line">            handValue = <span class="number">1</span>;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            handValue = <span class="number">2</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        prevHandValue = currentHandValue;</div><div class="line">        currentHandValue = handValue;</div><div class="line">        <span class="keyword">return</span> Hand.getHand(handValue);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">getSum</span><span class="params">(<span class="keyword">int</span> currentHandValue)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">3</span>; i++) &#123;</div><div class="line">            sum += history[currentHandValue][i];</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> sum;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">study</span><span class="params">(<span class="keyword">boolean</span> win)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (win) &#123;</div><div class="line">            history[prevHandValue][currentHandValue]++;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            history[prevHandValue][(currentHandValue+<span class="number">1</span>)%<span class="number">3</span>]++;</div><div class="line">            history[prevHandValue][(currentHandValue+<span class="number">2</span>)%<span class="number">3</span>]++;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="Player类"><a href="#Player类" class="headerlink" title="Player类"></a>Player类</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Player</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> String name;</div><div class="line">    <span class="keyword">private</span> Strategy strategy;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> winCount;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> loseCount;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> gameCount;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Player</span><span class="params">(String name, Strategy strategy)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.name = name;</div><div class="line">        <span class="keyword">this</span>.strategy = strategy;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> Hand <span class="title">nextHand</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> strategy.nextHand();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">win</span><span class="params">()</span> </span>&#123;</div><div class="line">        strategy.study(<span class="keyword">true</span>);</div><div class="line">        winCount++;</div><div class="line">        gameCount++;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">lose</span><span class="params">()</span> </span>&#123;</div><div class="line">        strategy.study(<span class="keyword">false</span>);</div><div class="line">        loseCount++;</div><div class="line">        gameCount++;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">even</span><span class="params">()</span> </span>&#123;</div><div class="line">        gameCount++;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"["</span> + name + <span class="string">":"</span> + gameCount + <span class="string">" games, "</span> + winCount + <span class="string">" win, "</span> + loseCount + <span class="string">" lose]"</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="Main类"><a href="#Main类" class="headerlink" title="Main类"></a>Main类</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> seed1 = Integer.parseInt(<span class="string">"314"</span>);</div><div class="line">        <span class="keyword">int</span> seed2 = Integer.parseInt(<span class="string">"15"</span>);</div><div class="line"></div><div class="line">        Player player1 = <span class="keyword">new</span> Player(<span class="string">"Taro"</span>, <span class="keyword">new</span> WinningStrategy(seed1));</div><div class="line">        Player player2 = <span class="keyword">new</span> Player(<span class="string">"Hana"</span>, <span class="keyword">new</span> ProbStrategy(seed2));</div><div class="line"></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">1000</span>; i++) &#123;</div><div class="line">            Hand nextHand1 = player1.nextHand();</div><div class="line">            Hand nextHand2 = player2.nextHand();</div><div class="line"></div><div class="line">            <span class="keyword">if</span> (nextHand1.isStrongerThen(nextHand2)) &#123;</div><div class="line">                System.out.println(<span class="string">"Winner: "</span> + player1);</div><div class="line">                player1.win();</div><div class="line">                player2.lose();</div><div class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nextHand2.isStrongerThen(nextHand1)) &#123;</div><div class="line">                System.out.println(<span class="string">"Winner:"</span> + player2);</div><div class="line">                player1.lose();</div><div class="line">                player2.win();</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                System.out.println(<span class="string">"Even...."</span>);</div><div class="line">                player1.even();</div><div class="line">                player2.even();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        System.out.println(<span class="string">"Total result: "</span>);</div><div class="line">        System.out.println(player1.toString());</div><div class="line">        System.out.println(player2.toString());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="Strategy模式中的角色"><a href="#Strategy模式中的角色" class="headerlink" title="Strategy模式中的角色"></a>Strategy模式中的角色</h3><ul>
+<li><p>Strategy(策略)</p>
+<p>负责决定实现策略所必需的接口</p>
+</li>
+<li><p>ConcreteStrategy</p>
+<p>负责实现Strategy角色的接口, 即负责实现具体的策略.</p>
+</li>
+<li><p>Context(上下文)</p>
+<p>负责使用Strategy角色</p>
+</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/09/图解设计模式-第九章-Bridge模式/" rel="next" title="图解设计模式-第九章-Bridge模式">
+                <i class="fa fa-chevron-left"></i> 图解设计模式-第九章-Bridge模式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Blue" />
+          <p class="site-author-name" itemprop="name">Blue</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">63</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#示例程序"><span class="nav-number">1.</span> <span class="nav-text">示例程序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#类和接口一览表"><span class="nav-number">1.1.</span> <span class="nav-text">类和接口一览表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#示例程序类图"><span class="nav-number">1.2.</span> <span class="nav-text">示例程序类图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hand类"><span class="nav-number">1.3.</span> <span class="nav-text">Hand类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Stategy接口"><span class="nav-number">1.4.</span> <span class="nav-text">Stategy接口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#WinningStrategy类"><span class="nav-number">1.5.</span> <span class="nav-text">WinningStrategy类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ProbStrategy类"><span class="nav-number">1.6.</span> <span class="nav-text">ProbStrategy类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Player类"><span class="nav-number">1.7.</span> <span class="nav-text">Player类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Main类"><span class="nav-number">1.8.</span> <span class="nav-text">Main类</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Strategy模式中的角色"><span class="nav-number">2.</span> <span class="nav-text">Strategy模式中的角色</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Blue</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

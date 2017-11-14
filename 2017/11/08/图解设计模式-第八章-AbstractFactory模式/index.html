@@ -145,8 +145,8 @@ Link
 
 Tray
 抽象零件: 表示含有Link和Tr">
-<meta property="og:image" content="https://singthi4079.github.io/2017/11/08/图解设计模式-第八章-AbstractFactory模式/Users/storm/workspace/notes/source/_posts/图解设计模式-第八章-AbstractFactory模式/AbstractFactory-Main.png">
-<meta property="og:image" content="https://singthi4079.github.io/2017/11/08/图解设计模式-第八章-AbstractFactory模式/Users/storm/workspace/notes/source/_posts/图解设计模式-第八章-AbstractFactory模式/AbstractFactory-Simple.png">
+<meta property="og:image" content="https://singthi4079.github.io/Users/storm/workspace/notes/source/_posts/图解设计模式-第八章-AbstractFactory模式/AbstractFactory-Main.png">
+<meta property="og:image" content="https://singthi4079.github.io/Users/storm/workspace/notes/source/_posts/图解设计模式-第八章-AbstractFactory模式/AbstractFactory-Simple.png">
 <meta property="og:updated_time" content="2017-11-08T13:40:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="图解设计模式-第八章-AbstractFactory模式">
@@ -177,7 +177,7 @@ Link
 
 Tray
 抽象零件: 表示含有Link和Tr">
-<meta name="twitter:image" content="https://singthi4079.github.io/2017/11/08/图解设计模式-第八章-AbstractFactory模式/Users/storm/workspace/notes/source/_posts/图解设计模式-第八章-AbstractFactory模式/AbstractFactory-Main.png">
+<meta name="twitter:image" content="https://singthi4079.github.io/Users/storm/workspace/notes/source/_posts/图解设计模式-第八章-AbstractFactory模式/AbstractFactory-Main.png">
 
 
 
@@ -277,7 +277,7 @@ Tray
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Home
+            Startseite
           </a>
         </li>
       
@@ -287,7 +287,7 @@ Tray
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archives
+            Archiv
           </a>
         </li>
       
@@ -364,7 +364,7 @@ Tray
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-08T20:23:35+08:00">
                 2017-11-08
@@ -404,7 +404,7 @@ Tray
       
         <p>抽象工厂模式并不关心零件的具体实现, 而是只关心接口. 仅适用改接口将零件组装成产品.</p>
 <p>抽象工厂模式类图:</p>
-<p><img src="/2017/11/08/图解设计模式-第八章-AbstractFactory模式/Users/storm/workspace/notes/source/_posts/图解设计模式-第八章-AbstractFactory模式/AbstractFactory-Main.png" alt="AbstractFactory-Main"></p>
+<p><img src="/Users/storm/workspace/notes/source/_posts/图解设计模式-第八章-AbstractFactory模式/AbstractFactory-Main.png" alt="AbstractFactory-Main"></p>
 <h3 id="示例程序"><a href="#示例程序" class="headerlink" title="示例程序"></a>示例程序</h3><p>示例程序的功能是将带有层次关系的链接的集合制作成HTML文件. </p>
 <h4 id="类的一览表"><a href="#类的一览表" class="headerlink" title="类的一览表"></a>类的一览表</h4><table>
 <thead>
@@ -456,7 +456,7 @@ Tray
 </tr>
 </tbody>
 </table>
-<h4 id="示例程序类图"><a href="#示例程序类图" class="headerlink" title="示例程序类图"></a>示例程序类图</h4><p><img src="/2017/11/08/图解设计模式-第八章-AbstractFactory模式/Users/storm/workspace/notes/source/_posts/图解设计模式-第八章-AbstractFactory模式/AbstractFactory-Simple.png" alt="AbstractFactory-Simple"></p>
+<h4 id="示例程序类图"><a href="#示例程序类图" class="headerlink" title="示例程序类图"></a>示例程序类图</h4><p><img src="/Users/storm/workspace/notes/source/_posts/图解设计模式-第八章-AbstractFactory模式/AbstractFactory-Simple.png" alt="AbstractFactory-Simple"></p>
 <h4 id="Item类"><a href="#Item类" class="headerlink" title="Item类"></a>Item类</h4><p>Link类和Tray类的父类. 使得Link类和Tray类具有可替换性. caption字段表示项目的标题. </p>
 <p>makeHTML方法是抽象方法, 需要子类实现这个方法. 返回HTML文件的内容.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Item</span> </span>&#123;</div><div class="line">    <span class="keyword">protected</span> String caption;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Item</span><span class="params">(String caption)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.caption = caption;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> String <span class="title">makeHTML</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -589,10 +589,10 @@ Tray
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Table of Contents
+            Inhaltsverzeichnis
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
-            Overview
+            Übersicht
           </li>
         </ul>
       
@@ -613,7 +613,7 @@ Tray
             <div class="site-state-item site-state-posts">
               <a href="/archives">
                 <span class="site-state-item-count">63</span>
-                <span class="site-state-item-name">posts</span>
+                <span class="site-state-item-name">Artikel</span>
               </a>
             </div>
           
@@ -626,7 +626,7 @@ Tray
             <div class="site-state-item site-state-tags">
               
                 <span class="site-state-item-count">4</span>
-                <span class="site-state-item-name">tags</span>
+                <span class="site-state-item-name">Tags</span>
               
             </div>
           
@@ -692,7 +692,7 @@ Tray
 
 
 <div class="powered-by">
-  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">

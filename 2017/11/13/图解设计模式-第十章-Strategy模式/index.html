@@ -105,8 +105,8 @@ Strategy模式类图
 示例程序示例程序的功能是让电脑玩”猜拳”游戏.
 第一种策略是: 如果这局猜拳获胜, 纳闷下一局也出一样的手势.
 第二种策略是: 根据上一局的手势从概率上">
-<meta property="og:image" content="https://singthi4079.github.io/2017/11/13/图解设计模式-第十章-Strategy模式/Users/storm/workspace/notes/source/_posts/图解设计模式-第十章-Strategy模式/Strategy-Main.png">
-<meta property="og:image" content="https://singthi4079.github.io/2017/11/13/图解设计模式-第十章-Strategy模式/Users/storm/workspace/notes/source/_posts/图解设计模式-第十章-Strategy模式/Strategy-Simple.png">
+<meta property="og:image" content="https://singthi4079.github.io/Users/storm/workspace/notes/source/_posts/图解设计模式-第十章-Strategy模式/Strategy-Main.png">
+<meta property="og:image" content="https://singthi4079.github.io/Users/storm/workspace/notes/source/_posts/图解设计模式-第十章-Strategy模式/Strategy-Simple.png">
 <meta property="og:updated_time" content="2017-11-13T14:06:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="图解设计模式-第十章-Strategy模式">
@@ -117,7 +117,7 @@ Strategy模式类图
 示例程序示例程序的功能是让电脑玩”猜拳”游戏.
 第一种策略是: 如果这局猜拳获胜, 纳闷下一局也出一样的手势.
 第二种策略是: 根据上一局的手势从概率上">
-<meta name="twitter:image" content="https://singthi4079.github.io/2017/11/13/图解设计模式-第十章-Strategy模式/Users/storm/workspace/notes/source/_posts/图解设计模式-第十章-Strategy模式/Strategy-Main.png">
+<meta name="twitter:image" content="https://singthi4079.github.io/Users/storm/workspace/notes/source/_posts/图解设计模式-第十章-Strategy模式/Strategy-Main.png">
 
 
 
@@ -217,7 +217,7 @@ Strategy模式类图
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Home
+            Startseite
           </a>
         </li>
       
@@ -227,7 +227,7 @@ Strategy模式类图
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archives
+            Archiv
           </a>
         </li>
       
@@ -304,7 +304,7 @@ Strategy模式类图
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-13T20:58:33+08:00">
                 2017-11-13
@@ -345,7 +345,7 @@ Strategy模式类图
         <p>无论什么程序, 其目的都是解决问题, 为了解决问题, 需要编写特定的算法. 使用Strategy模式可以整体地替换算法的实现部分. </p>
 <p>能整体地替换算法, 以不同的算法解决同一个问题, 这种模式就是Strategy模式.</p>
 <p><strong>Strategy模式类图</strong></p>
-<p><img src="/2017/11/13/图解设计模式-第十章-Strategy模式/Users/storm/workspace/notes/source/_posts/图解设计模式-第十章-Strategy模式/Strategy-Main.png" alt="Strategy-Main"></p>
+<p><img src="/Users/storm/workspace/notes/source/_posts/图解设计模式-第十章-Strategy模式/Strategy-Main.png" alt="Strategy-Main"></p>
 <h3 id="示例程序"><a href="#示例程序" class="headerlink" title="示例程序"></a>示例程序</h3><p>示例程序的功能是让电脑玩”猜拳”游戏.</p>
 <p>第一种策略是: 如果这局猜拳获胜, 纳闷下一局也出一样的手势.</p>
 <p>第二种策略是: 根据上一局的手势从概率上计算出下一局的手势.</p>
@@ -383,7 +383,7 @@ Strategy模式类图
 </tr>
 </tbody>
 </table>
-<h4 id="示例程序类图"><a href="#示例程序类图" class="headerlink" title="示例程序类图"></a>示例程序类图</h4><p><img src="/2017/11/13/图解设计模式-第十章-Strategy模式/Users/storm/workspace/notes/source/_posts/图解设计模式-第十章-Strategy模式/Strategy-Simple.png" alt="Strategy-Simple"></p>
+<h4 id="示例程序类图"><a href="#示例程序类图" class="headerlink" title="示例程序类图"></a>示例程序类图</h4><p><img src="/Users/storm/workspace/notes/source/_posts/图解设计模式-第十章-Strategy模式/Strategy-Simple.png" alt="Strategy-Simple"></p>
 <h4 id="Hand类"><a href="#Hand类" class="headerlink" title="Hand类"></a>Hand类</h4><p>用int表示所出的手势: 0表示石头, 1表示剪刀, 2表示布, 并将值保存在handValue字段中.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(<span class="keyword">this</span>.handValue+!)%<span class="number">3</span> == h.handValue</div></pre></td></tr></table></figure>
 <p>这个表达式表示: 如果this的手势值加上1后是h的手势值(例如: 如果this的手势是石头, 而h是剪刀, 或是this的手势是剪刀, 而h的是布, 或者this的手势是布, 而h的手势是石头), 那么判断this获胜.</p>
@@ -504,10 +504,10 @@ Strategy模式类图
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Table of Contents
+            Inhaltsverzeichnis
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
-            Overview
+            Übersicht
           </li>
         </ul>
       
@@ -528,7 +528,7 @@ Strategy模式类图
             <div class="site-state-item site-state-posts">
               <a href="/archives">
                 <span class="site-state-item-count">63</span>
-                <span class="site-state-item-name">posts</span>
+                <span class="site-state-item-name">Artikel</span>
               </a>
             </div>
           
@@ -541,7 +541,7 @@ Strategy模式类图
             <div class="site-state-item site-state-tags">
               
                 <span class="site-state-item-count">4</span>
-                <span class="site-state-item-name">tags</span>
+                <span class="site-state-item-name">Tags</span>
               
             </div>
           
@@ -607,7 +607,7 @@ Strategy模式类图
 
 
 <div class="powered-by">
-  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">

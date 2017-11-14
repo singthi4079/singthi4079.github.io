@@ -99,9 +99,9 @@ HashMap实现了Map接口, 继承AbstractMap. Map接口定义了key映射到valu
 定义
 HashMap实现了Map接口, 继承AbstractMap. Map接口定义了key映射到value的规则. 
 1public class HashMap&amp;lt;K,V&amp;gt; extend">
-<meta property="og:image" content="https://singthi4079.github.io/2017/03/14/Java-HashMap/Users/storm/workspace/notes/source/_posts/Java-HashMap/HashMap-数据结构.png">
-<meta property="og:image" content="https://singthi4079.github.io/2017/03/14/Java-HashMap/Users/storm/workspace/notes/source/_posts/Java-HashMap/HashMap-table1.jpg">
-<meta property="og:image" content="https://singthi4079.github.io/2017/03/14/Java-HashMap/Users/storm/workspace/notes/source/_posts/Java-HashMap/HashMap-table2.jpg">
+<meta property="og:image" content="https://singthi4079.github.io/Users/storm/workspace/notes/source/_posts/Java-HashMap/HashMap-数据结构.png">
+<meta property="og:image" content="https://singthi4079.github.io/Users/storm/workspace/notes/source/_posts/Java-HashMap/HashMap-table1.jpg">
+<meta property="og:image" content="https://singthi4079.github.io/Users/storm/workspace/notes/source/_posts/Java-HashMap/HashMap-table2.jpg">
 <meta property="og:updated_time" content="2017-03-14T12:57:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java-HashMap">
@@ -109,7 +109,7 @@ HashMap实现了Map接口, 继承AbstractMap. Map接口定义了key映射到valu
 定义
 HashMap实现了Map接口, 继承AbstractMap. Map接口定义了key映射到value的规则. 
 1public class HashMap&amp;lt;K,V&amp;gt; extend">
-<meta name="twitter:image" content="https://singthi4079.github.io/2017/03/14/Java-HashMap/Users/storm/workspace/notes/source/_posts/Java-HashMap/HashMap-数据结构.png">
+<meta name="twitter:image" content="https://singthi4079.github.io/Users/storm/workspace/notes/source/_posts/Java-HashMap/HashMap-数据结构.png">
 
 
 
@@ -209,7 +209,7 @@ HashMap实现了Map接口, 继承AbstractMap. Map接口定义了key映射到valu
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Home
+            Startseite
           </a>
         </li>
       
@@ -219,7 +219,7 @@ HashMap实现了Map接口, 继承AbstractMap. Map接口定义了key映射到valu
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archives
+            Archiv
           </a>
         </li>
       
@@ -296,7 +296,7 @@ HashMap实现了Map接口, 继承AbstractMap. Map接口定义了key映射到valu
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-14T19:59:35+08:00">
                 2017-03-14
@@ -353,7 +353,7 @@ HashMap实现了Map接口, 继承AbstractMap. Map接口定义了key映射到valu
 <p><strong>数据结构</strong></p>
 <p>Java最常用的两种结构是数组和引用, 几乎所有的数据结构都可以利用这两种来组合实现</p>
 <p>HashMap实际上是一个链表散列, 数据结构如下:</p>
-<p><img src="/2017/03/14/Java-HashMap/Users/storm/workspace/notes/source/_posts/Java-HashMap/HashMap-数据结构.png" alt="HashMap-数据结构"></p>
+<p><img src="/Users/storm/workspace/notes/source/_posts/Java-HashMap/HashMap-数据结构.png" alt="HashMap-数据结构"></p>
 <p>上图看出HashMap底层有用数组实现, 数组中每一项都是一条链. initialCapacity表示数组的长度</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">HashMap</span><span class="params">(<span class="keyword">int</span> initialCapacity, <span class="keyword">float</span> loadFactor)</span> </span>&#123;</div><div class="line">        <span class="comment">//初始容量不能&lt;0</span></div><div class="line">        <span class="keyword">if</span> (initialCapacity &lt; <span class="number">0</span>)</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"Illegal initial capacity: "</span></div><div class="line">                    + initialCapacity);</div><div class="line">        <span class="comment">//初始容量不能 &gt; 最大容量值，HashMap的最大容量值为2^30</span></div><div class="line">        <span class="keyword">if</span> (initialCapacity &gt; MAXIMUM_CAPACITY)</div><div class="line">            initialCapacity = MAXIMUM_CAPACITY;</div><div class="line">        <span class="comment">//负载因子不能 &lt; 0</span></div><div class="line">        <span class="keyword">if</span> (loadFactor &lt;= <span class="number">0</span> || Float.isNaN(loadFactor))</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"Illegal load factor: "</span></div><div class="line">                    + loadFactor);</div><div class="line"></div><div class="line">        <span class="comment">// 计算出大于 initialCapacity 的最小的 2 的 n 次方值。</span></div><div class="line">        <span class="keyword">int</span> capacity = <span class="number">1</span>;</div><div class="line">        <span class="keyword">while</span> (capacity &lt; initialCapacity)</div><div class="line">            capacity &lt;&lt;= <span class="number">1</span>;</div><div class="line">        </div><div class="line">        <span class="keyword">this</span>.loadFactor = loadFactor;</div><div class="line">        <span class="comment">//设置HashMap的容量极限，当HashMap的容量达到该极限时就会进行扩容操作</span></div><div class="line">        threshold = (<span class="keyword">int</span>) (capacity * loadFactor);</div><div class="line">        <span class="comment">//初始化table数组</span></div><div class="line">        table = <span class="keyword">new</span> Entry[capacity];</div><div class="line">        init();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>每次新建一个HashMap时, 都会初始化一个table数组, 元素为Entry节点</p>
@@ -381,9 +381,9 @@ HashMap实现了Map接口, 继承AbstractMap. Map接口定义了key映射到valu
 <p>HashMap的底层数组长度总是2的n次方(<code>capacity &lt;&lt;= 1;</code>), 当length为2的n次方时, h&amp;(length-1)相当于对length取模, 而怯速度比直接取模快得多.</p>
 <p><code>h&amp;(length – 1)</code>除了取模运算外, 还负责均匀分布table数据和充分利用空间</p>
 <p>假设length=16(2^n) 和 15, h=5,6,7</p>
-<p><img src="/2017/03/14/Java-HashMap/Users/storm/workspace/notes/source/_posts/Java-HashMap/HashMap-table1.jpg" alt="HashMap-table1"></p>
+<p><img src="/Users/storm/workspace/notes/source/_posts/Java-HashMap/HashMap-table1.jpg" alt="HashMap-table1"></p>
 <p>当n=15时, 6和7的结果一样, 表示他们在table的存储位置相同, 产生了碰撞, 6,7会在一个位置形成链表, 导致查询速度下降. 看看0-15的结果:</p>
-<p><img src="/2017/03/14/Java-HashMap/Users/storm/workspace/notes/source/_posts/Java-HashMap/HashMap-table2.jpg" alt="HashMap-table2"></p>
+<p><img src="/Users/storm/workspace/notes/source/_posts/Java-HashMap/HashMap-table2.jpg" alt="HashMap-table2"></p>
 <p>表中看出总共发生了8次碰撞, 同时浪费空间非常大</p>
 <p>而当length = 16时，length – 1 = 15 即1111，那么进行低位&amp;运算时，值总是与原来hash值相同，而进行高位运算时，其值等于其低位值。所以说当length = 2^n时，不同的hash值发生碰撞的概率比较小，这样就会使得数据在table数组中分布较均匀，查询速度也较快.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">addEntry</span><span class="params">(<span class="keyword">int</span> hash, K key, V value, <span class="keyword">int</span> bucketIndex)</span> </span>&#123;</div><div class="line">        <span class="comment">//获取bucketIndex处的Entry</span></div><div class="line">        Entry&lt;K, V&gt; e = table[bucketIndex];</div><div class="line">        <span class="comment">//将新创建的 Entry 放入 bucketIndex 索引处，并让新的 Entry 指向原来的 Entry </span></div><div class="line">        table[bucketIndex] = <span class="keyword">new</span> Entry&lt;K, V&gt;(hash, key, value, e);</div><div class="line">        <span class="comment">//若HashMap中元素的个数超过极限了，则容量扩大两倍</span></div><div class="line">        <span class="keyword">if</span> (size++ &gt;= threshold)</div><div class="line">            resize(<span class="number">2</span> * table.length);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -501,7 +501,7 @@ HashMap实现了Map接口, 继承AbstractMap. Map接口定义了key映射到valu
             <div class="site-state-item site-state-posts">
               <a href="/archives">
                 <span class="site-state-item-count">63</span>
-                <span class="site-state-item-name">posts</span>
+                <span class="site-state-item-name">Artikel</span>
               </a>
             </div>
           
@@ -514,7 +514,7 @@ HashMap实现了Map接口, 继承AbstractMap. Map接口定义了key映射到valu
             <div class="site-state-item site-state-tags">
               
                 <span class="site-state-item-count">4</span>
-                <span class="site-state-item-name">tags</span>
+                <span class="site-state-item-name">Tags</span>
               
             </div>
           
@@ -564,7 +564,7 @@ HashMap实现了Map接口, 继承AbstractMap. Map接口定义了key映射到valu
 
 
 <div class="powered-by">
-  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">

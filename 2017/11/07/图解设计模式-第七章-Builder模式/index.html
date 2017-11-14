@@ -115,9 +115,9 @@ Builder模式类图:
 Builder类中定义了决定文档结构的方法, Director类使用改方法编写一个具体的文档. 
 Builder是抽象类, 它并没有进行任何实际的处理. 仅仅声明了抽象方法. 
 TextBuil">
-<meta property="og:image" content="https://singthi4079.github.io/Users/storm/workspace/notes/source/_posts/图解设计模式-第七章-Builder模式/Builder-Main.png">
-<meta property="og:image" content="https://singthi4079.github.io/Users/storm/workspace/notes/source/_posts/图解设计模式-第七章-Builder模式/Builder-Simple.png">
-<meta property="og:updated_time" content="2017-11-07T13:39:32.000Z">
+<meta property="og:image" content="https://singthi4079.github.io/2017/11/07/图解设计模式-第七章-Builder模式/Builder-Main.png">
+<meta property="og:image" content="https://singthi4079.github.io/2017/11/07/图解设计模式-第七章-Builder模式/Builder-Simple.png">
+<meta property="og:updated_time" content="2017-11-14T01:56:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="图解设计模式-第七章-Builder模式">
 <meta name="twitter:description" content="Builder模式用于组装具有复杂结构的实例.
@@ -132,7 +132,7 @@ Builder模式类图:
 Builder类中定义了决定文档结构的方法, Director类使用改方法编写一个具体的文档. 
 Builder是抽象类, 它并没有进行任何实际的处理. 仅仅声明了抽象方法. 
 TextBuil">
-<meta name="twitter:image" content="https://singthi4079.github.io/Users/storm/workspace/notes/source/_posts/图解设计模式-第七章-Builder模式/Builder-Main.png">
+<meta name="twitter:image" content="https://singthi4079.github.io/2017/11/07/图解设计模式-第七章-Builder模式/Builder-Main.png">
 
 
 
@@ -359,7 +359,7 @@ TextBuil">
       
         <p>Builder模式用于组装具有复杂结构的实例.</p>
 <p>Builder模式类图:</p>
-<p><img src="/Users/storm/workspace/notes/source/_posts/图解设计模式-第七章-Builder模式/Builder-Main.png" alt="Builder-Main"></p>
+<img src="/2017/11/07/图解设计模式-第七章-Builder模式/Builder-Main.png" alt="Builder-Main" title="Builder-Main">
 <h3 id="示例程序"><a href="#示例程序" class="headerlink" title="示例程序"></a>示例程序</h3><p>示例程序的功能是使用Builder模式编写”文档”. 文档具有以下结构:</p>
 <ul>
 <li>含有一个标题</li>
@@ -401,7 +401,7 @@ TextBuil">
 </tr>
 </tbody>
 </table>
-<h4 id="示例程序类图"><a href="#示例程序类图" class="headerlink" title="示例程序类图"></a>示例程序类图</h4><p><img src="/Users/storm/workspace/notes/source/_posts/图解设计模式-第七章-Builder模式/Builder-Simple.png" alt="Builder-Simple"></p>
+<h4 id="示例程序类图"><a href="#示例程序类图" class="headerlink" title="示例程序类图"></a>示例程序类图</h4><img src="/2017/11/07/图解设计模式-第七章-Builder模式/Builder-Simple.png" alt="Builder-Simple" title="Builder-Simple">
 <h4 id="Builder类"><a href="#Builder类" class="headerlink" title="Builder类"></a>Builder类</h4><p>makeTitle, makeString. makeItems方法分别是编写标题, 字符串, 条目的方法. close方法是完成文档的编写.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Builder</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">makeTitle</span><span class="params">(String title)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">makeString</span><span class="params">(String str)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">makeItems</span><span class="params">(String[] items)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h4 id="Director类"><a href="#Director类" class="headerlink" title="Director类"></a>Director类</h4><p>Director类使用Builder类中声明的方法来编写文档.</p>

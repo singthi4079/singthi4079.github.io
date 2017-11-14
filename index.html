@@ -328,7 +328,6 @@
 <p>能整体地替换算法, 以不同的算法解决同一个问题, 这种模式就是Strategy模式.</p>
 <p><strong>Strategy模式类图</strong></p>
 <img src="/2017/11/13/图解设计模式-第十章-Strategy模式/Strategy-Main.png" alt="Strategy-Main" title="Strategy-Main">
-<p><img src="/Users/storm/workspace/notes/source/_posts/图解设计模式-第十章-Strategy模式/Strategy-Main.png" alt="Strategy-Main"></p>
 <h3 id="示例程序"><a href="#示例程序" class="headerlink" title="示例程序"></a>示例程序</h3><p>示例程序的功能是让电脑玩”猜拳”游戏.</p>
 <p>第一种策略是: 如果这局猜拳获胜, 纳闷下一局也出一样的手势.</p>
 <p>第二种策略是: 根据上一局的手势从概率上计算出下一局的手势.</p>
@@ -366,7 +365,7 @@
 </tr>
 </tbody>
 </table>
-<h4 id="示例程序类图"><a href="#示例程序类图" class="headerlink" title="示例程序类图"></a>示例程序类图</h4><p><img src="/Users/storm/workspace/notes/source/_posts/图解设计模式-第十章-Strategy模式/Strategy-Simple.png" alt="Strategy-Simple"></p>
+<h4 id="示例程序类图"><a href="#示例程序类图" class="headerlink" title="示例程序类图"></a>示例程序类图</h4><img src="/2017/11/13/图解设计模式-第十章-Strategy模式/Strategy-Simple.png" alt="Strategy-Simple" title="Strategy-Simple">
 <h4 id="Hand类"><a href="#Hand类" class="headerlink" title="Hand类"></a>Hand类</h4><p>用int表示所出的手势: 0表示石头, 1表示剪刀, 2表示布, 并将值保存在handValue字段中.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(<span class="keyword">this</span>.handValue+!)%<span class="number">3</span> == h.handValue</div></pre></td></tr></table></figure>
 <p>这个表达式表示: 如果this的手势值加上1后是h的手势值(例如: 如果this的手势是石头, 而h是剪刀, 或是this的手势是剪刀, 而h的是布, 或者this的手势是布, 而h的手势是石头), 那么判断this获胜.</p>
@@ -528,7 +527,7 @@
 </li>
 </ul>
 <p>Bridge模式类图:</p>
-<p><img src="/Users/storm/workspace/notes/source/_posts/图解设计模式-第九章-Bridge模式/Bridge-Main.png" alt="Bridge-Main"></p>
+<img src="/2017/11/09/图解设计模式-第九章-Bridge模式/Bridge-Main.png" alt="Bridge-Main" title="Bridge-Main">
 <h3 id="示例程序"><a href="#示例程序" class="headerlink" title="示例程序"></a>示例程序</h3><p>功能是 显示一些东西.</p>
 <p>类的一览表:</p>
 <table>
@@ -568,7 +567,7 @@
 </tbody>
 </table>
 <p>实例程序类图:</p>
-<p><img src="/Users/storm/workspace/notes/source/_posts/图解设计模式-第九章-Bridge模式/Bridge-Simple.png" alt="Bridge-Simple"></p>
+<img src="/2017/11/09/图解设计模式-第九章-Bridge模式/Bridge-Simple.png" alt="Bridge-Simple" title="Bridge-Simple">
 <h4 id="Display类"><a href="#Display类" class="headerlink" title="Display类"></a>Display类</h4><p>负责显示一些东西的类. impl字段中保存的是实现Display类的具体功能的实例. impl字段即是类的两个层次结构的”桥梁”.</p>
 <p>open是显示前的处理</p>
 <p>print是显示处理</p>
@@ -718,7 +717,7 @@
           
             <p>抽象工厂模式并不关心零件的具体实现, 而是只关心接口. 仅适用改接口将零件组装成产品.</p>
 <p>抽象工厂模式类图:</p>
-<p><img src="/Users/storm/workspace/notes/source/_posts/图解设计模式-第八章-AbstractFactory模式/AbstractFactory-Main.png" alt="AbstractFactory-Main"></p>
+<img src="/2017/11/08/图解设计模式-第八章-AbstractFactory模式/AbstractFactory-Main.png" alt="AbstractFactory-Main" title="AbstractFactory-Main">
 <h3 id="示例程序"><a href="#示例程序" class="headerlink" title="示例程序"></a>示例程序</h3><p>示例程序的功能是将带有层次关系的链接的集合制作成HTML文件. </p>
 <h4 id="类的一览表"><a href="#类的一览表" class="headerlink" title="类的一览表"></a>类的一览表</h4><table>
 <thead>
@@ -770,7 +769,7 @@
 </tr>
 </tbody>
 </table>
-<h4 id="示例程序类图"><a href="#示例程序类图" class="headerlink" title="示例程序类图"></a>示例程序类图</h4><p><img src="/Users/storm/workspace/notes/source/_posts/图解设计模式-第八章-AbstractFactory模式/AbstractFactory-Simple.png" alt="AbstractFactory-Simple"></p>
+<h4 id="示例程序类图"><a href="#示例程序类图" class="headerlink" title="示例程序类图"></a>示例程序类图</h4><img src="/2017/11/08/图解设计模式-第八章-AbstractFactory模式/AbstractFactory-Simple.png" alt="AbstractFactory-Simple" title="AbstractFactory-Simple">
 <h4 id="Item类"><a href="#Item类" class="headerlink" title="Item类"></a>Item类</h4><p>Link类和Tray类的父类. 使得Link类和Tray类具有可替换性. caption字段表示项目的标题. </p>
 <p>makeHTML方法是抽象方法, 需要子类实现这个方法. 返回HTML文件的内容.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Item</span> </span>&#123;</div><div class="line">    <span class="keyword">protected</span> String caption;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Item</span><span class="params">(String caption)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.caption = caption;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> String <span class="title">makeHTML</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -928,7 +927,7 @@
           
             <p>Builder模式用于组装具有复杂结构的实例.</p>
 <p>Builder模式类图:</p>
-<p><img src="/Users/storm/workspace/notes/source/_posts/图解设计模式-第七章-Builder模式/Builder-Main.png" alt="Builder-Main"></p>
+<img src="/2017/11/07/图解设计模式-第七章-Builder模式/Builder-Main.png" alt="Builder-Main" title="Builder-Main">
 <h3 id="示例程序"><a href="#示例程序" class="headerlink" title="示例程序"></a>示例程序</h3><p>示例程序的功能是使用Builder模式编写”文档”. 文档具有以下结构:</p>
 <ul>
 <li>含有一个标题</li>
@@ -970,7 +969,7 @@
 </tr>
 </tbody>
 </table>
-<h4 id="示例程序类图"><a href="#示例程序类图" class="headerlink" title="示例程序类图"></a>示例程序类图</h4><p><img src="/Users/storm/workspace/notes/source/_posts/图解设计模式-第七章-Builder模式/Builder-Simple.png" alt="Builder-Simple"></p>
+<h4 id="示例程序类图"><a href="#示例程序类图" class="headerlink" title="示例程序类图"></a>示例程序类图</h4><img src="/2017/11/07/图解设计模式-第七章-Builder模式/Builder-Simple.png" alt="Builder-Simple" title="Builder-Simple">
 <h4 id="Builder类"><a href="#Builder类" class="headerlink" title="Builder类"></a>Builder类</h4><p>makeTitle, makeString. makeItems方法分别是编写标题, 字符串, 条目的方法. close方法是完成文档的编写.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Builder</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">makeTitle</span><span class="params">(String title)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">makeString</span><span class="params">(String str)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">makeItems</span><span class="params">(String[] items)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h4 id="Director类"><a href="#Director类" class="headerlink" title="Director类"></a>Director类</h4><p>Director类使用Builder类中声明的方法来编写文档.</p>
@@ -1114,7 +1113,7 @@
             <p>根据实例原型, 实例模型来生成新的实例, 这就是Prototype模式.</p>
 <p>Java可以使用clone创建实例的副本. </p>
 <p>Prototype模式类图:</p>
-<p><img src="/Users/storm/workspace/notes/source/_posts/图解设计模式-第五章-Prototype模式/Prototype-Main.png" alt="Prototype-Main"></p>
+<img src="/2017/11/06/图解设计模式-第六章-Prototype模式/Prototype-Main.png" alt="Prototype-Main" title="Prototype-Main">
 <h3 id="示例程序"><a href="#示例程序" class="headerlink" title="示例程序"></a>示例程序</h3><p>示例程序的功能是将字符串放入方框中下石出来或者加上下划线显示出来. </p>
 <p>类和接口一览表</p>
 <table>
@@ -1148,7 +1147,7 @@
 </tbody>
 </table>
 <p>实例程序类图:</p>
-<p><img src="/Users/storm/workspace/notes/source/_posts/图解设计模式-第五章-Prototype模式/Prototype-Simple.png" alt="Prototype-Simple"></p>
+<img src="/2017/11/06/图解设计模式-第六章-Prototype模式/Prototype-Simple.png" alt="Prototype-Simple" title="Prototype-Simple">
 <h4 id="Product接口"><a href="#Product接口" class="headerlink" title="Product接口"></a>Product接口</h4><p>Product接口是复制功能的接口, 继承了java.lang.Cloneable接口. 实现了该接口的实例可以调用clone方法来自动复制实例.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Product</span> <span class="keyword">extends</span> <span class="title">Cloneable</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">void</span> <span class="title">use</span><span class="params">(String s)</span></span>;</div><div class="line">  <span class="function">Product <span class="title">createClone</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h4 id="Manager类"><a href="#Manager类" class="headerlink" title="Manager类"></a>Manager类</h4><p>Manager类使用Product接口来复制实例.</p>

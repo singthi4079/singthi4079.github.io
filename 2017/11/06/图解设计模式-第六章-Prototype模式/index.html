@@ -133,9 +133,9 @@ Product
 
 Manager
 调用createClone方法复制实例的">
-<meta property="og:image" content="https://singthi4079.github.io/Users/storm/workspace/notes/source/_posts/图解设计模式-第五章-Prototype模式/Prototype-Main.png">
-<meta property="og:image" content="https://singthi4079.github.io/Users/storm/workspace/notes/source/_posts/图解设计模式-第五章-Prototype模式/Prototype-Simple.png">
-<meta property="og:updated_time" content="2017-11-07T12:27:52.000Z">
+<meta property="og:image" content="https://singthi4079.github.io/2017/11/06/图解设计模式-第六章-Prototype模式/Prototype-Main.png">
+<meta property="og:image" content="https://singthi4079.github.io/2017/11/06/图解设计模式-第六章-Prototype模式/Prototype-Simple.png">
+<meta property="og:updated_time" content="2017-11-14T01:57:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="图解设计模式-第六章-Prototype模式">
 <meta name="twitter:description" content="根据实例原型, 实例模型来生成新的实例, 这就是Prototype模式.
@@ -159,7 +159,7 @@ Product
 
 Manager
 调用createClone方法复制实例的">
-<meta name="twitter:image" content="https://singthi4079.github.io/Users/storm/workspace/notes/source/_posts/图解设计模式-第五章-Prototype模式/Prototype-Main.png">
+<meta name="twitter:image" content="https://singthi4079.github.io/2017/11/06/图解设计模式-第六章-Prototype模式/Prototype-Main.png">
 
 
 
@@ -387,7 +387,7 @@ Manager
         <p>根据实例原型, 实例模型来生成新的实例, 这就是Prototype模式.</p>
 <p>Java可以使用clone创建实例的副本. </p>
 <p>Prototype模式类图:</p>
-<p><img src="/Users/storm/workspace/notes/source/_posts/图解设计模式-第五章-Prototype模式/Prototype-Main.png" alt="Prototype-Main"></p>
+<img src="/2017/11/06/图解设计模式-第六章-Prototype模式/Prototype-Main.png" alt="Prototype-Main" title="Prototype-Main">
 <h3 id="示例程序"><a href="#示例程序" class="headerlink" title="示例程序"></a>示例程序</h3><p>示例程序的功能是将字符串放入方框中下石出来或者加上下划线显示出来. </p>
 <p>类和接口一览表</p>
 <table>
@@ -421,7 +421,7 @@ Manager
 </tbody>
 </table>
 <p>实例程序类图:</p>
-<p><img src="/Users/storm/workspace/notes/source/_posts/图解设计模式-第五章-Prototype模式/Prototype-Simple.png" alt="Prototype-Simple"></p>
+<img src="/2017/11/06/图解设计模式-第六章-Prototype模式/Prototype-Simple.png" alt="Prototype-Simple" title="Prototype-Simple">
 <h4 id="Product接口"><a href="#Product接口" class="headerlink" title="Product接口"></a>Product接口</h4><p>Product接口是复制功能的接口, 继承了java.lang.Cloneable接口. 实现了该接口的实例可以调用clone方法来自动复制实例.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Product</span> <span class="keyword">extends</span> <span class="title">Cloneable</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">void</span> <span class="title">use</span><span class="params">(String s)</span></span>;</div><div class="line">  <span class="function">Product <span class="title">createClone</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h4 id="Manager类"><a href="#Manager类" class="headerlink" title="Manager类"></a>Manager类</h4><p>Manager类使用Product接口来复制实例.</p>

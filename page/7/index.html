@@ -194,7 +194,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            Home
           </a>
         </li>
       
@@ -204,7 +204,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -237,6 +237,229 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2016/12/14/cnetos7_jenkins_git/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Blue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blue的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/12/14/cnetos7_jenkins_git/" itemprop="url">
+                  CentOS 7 Jenkins Git Tomcat 构建Java持续部署环境
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-14T00:00:00+08:00">
+                2016-12-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="必须软件安装"><a href="#必须软件安装" class="headerlink" title="必须软件安装"></a>必须软件安装</h3><ol>
+<li><p>安装JDK</p>
+<ul>
+<li>下载需要的JDK版本的rpm包</li>
+<li>执行 <code>rpm -ivh jdk-**.rpm</code> 命令, JDK会安装到<code>/usr/java/</code>目录下</li>
+<li>验证安装是否成功, 执行<code>java</code>, <code>javac</code></li>
+<li>配置环境变量, 在<code>/etc/profile</code>文件最后添加<ul>
+<li><code>export JAVA_HOME=/usr/java/jdk**</code></li>
+<li><code>export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar</code></li>
+<li><code>export PATH=$PATH:$JAVA_HOME/bin</code></li>
+</ul>
+</li>
+<li>执行<code>source /etc/profile</code> 使修改生效</li>
+</ul>
+</li>
+<li><p>安装GIT</p>
+<ul>
+<li><code>yum -y install git</code> 安装git</li>
+<li><code>git --version</code> 验证git是否安装成功</li>
+</ul>
+</li>
+<li><p>配置Maven</p>
+<ul>
+<li>下载maven, 保存在任意位置, 如: <code>workspace/tools/maven</code>目录下</li>
+<li>修改<code>/etc/profile</code>文件，添加<code>MAVEN_HOME</code><ul>
+<li><code>export MAVEN_HOME=/workspace/tools/maven</code></li>
+<li><code>export PATH=$PATH:$JAVA_HOME/bin:$MAVEN_HOME/bin</code></li>
+</ul>
+</li>
+<li><code>mvn -version</code> 验证Maven是否安装成功</li>
+</ul>
+</li>
+<li><p>安装Jenkins</p>
+<p>CentOS 默认的软件源中是没有Jenkins的，需要添加第三方的软件源.</p>
+<ul>
+<li>执行<code>wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo</code></li>
+<li>执行<code>rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key</code></li>
+<li>执行<code>yum -y install jenkins</code> 安装<code>jenkins</code></li>
+</ul>
+</li>
+</ol>
+<h3 id="配置jenkins"><a href="#配置jenkins" class="headerlink" title="配置jenkins"></a>配置jenkins</h3><ol>
+<li><p>启动 Jenkins</p>
+<p><code>service jenkins start</code></p>
+</li>
+<li><p>设置开机启动</p>
+<p><code>chkconfig jenkins on</code></p>
+</li>
+<li><p>jenkins 默认使用的是8080端口, 在浏览器中输入<code>ip:8080</code>打开jenkins</p>
+</li>
+<li><p><code>/etc/sysconfig/jenkins</code> 这个文件是jenkins的配置文件</p>
+</li>
+<li><p>第一次在浏览器中打开jenkins 时需要在<code>/var/lib/jenkins/secrets/initalAdminPassword</code>文件中复制密码</p>
+</li>
+<li><p>第二步是安装插件, 可以选择默认的插件, 也可以不选择按住插件</p>
+</li>
+<li><p>如果插件安装失败, 可以手动安装</p>
+<ol>
+<li>在<code>系统管理-&gt;管理插件-&gt;可选插件</code>, 中选择需要安装的插件</li>
+<li>或者到<code>http://updates.jenkins-ci.org/download/plugins/</code>去下载插件, 在<code>系统管理-&gt;管理插件-&gt;高级</code>中上传插件 <img src="/2016/12/14/cnetos7_jenkins_git/jenkins_plugin_add.png" alt="jenkins_plugin_add"></li>
+</ol>
+</li>
+<li><p>在<code>系统管理-&gt;管理插件-&gt;Global Tool Configuration</code>中配置JDK、GIT、Maven</p>
+<ol>
+<li><p>配置JDK和GIT</p>
+<p><img src="/2016/12/14/cnetos7_jenkins_git/jenkins_jdk.png" alt="jenkins_jdk"></p>
+</li>
+<li><p>配置Maven<img src="/2016/12/14/cnetos7_jenkins_git/jenkins_maven.png" alt="jenkins_maven"></p>
+</li>
+<li>推荐插件: <ol>
+<li><a href="http://wiki.jenkins-ci.org/display/JENKINS/Git+Plugin" target="_blank" rel="external">Git plugin</a></li>
+<li><a href="http://wiki.jenkins-ci.org/display/JENKINS/Github+Plugin" target="_blank" rel="external">GitHub plugin</a></li>
+<li><a href="http://wiki.jenkins-ci.org/display/JENKINS/M2+Release+Plugin" target="_blank" rel="external">Maven Release Plug-in Plug-in</a></li>
+<li><a href="https://wiki.jenkins-ci.org/display/JENKINS/Structs+plugin" target="_blank" rel="external">Structs Plugin</a></li>
+<li><a href="http://wiki.jenkins-ci.org/display/JENKINS/SSH+Credentials+Plugin" target="_blank" rel="external">SSH Credentials Plugin</a></li>
+<li><a href="http://wiki.jenkins-ci.org/display/JENKINS/SCM+API+Plugin" target="_blank" rel="external">SCM API Plugin</a></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="新建Item"><a href="#新建Item" class="headerlink" title="新建Item"></a>新建Item</h3><p>经过上面的步骤, 环境基本部署完成, 现在可以新建一个项目试试是否可以做到持续部署.x</p>
+<ol>
+<li><p>新建Item</p>
+<p> <img src="/2016/12/14/cnetos7_jenkins_git/jenkins_add_item.png" alt="jenkins_add_item"></p>
+</li>
+<li><p>配置项目的基本信息, 可以根据个人需要选择是否废弃旧的构建 <img src="/2016/12/14/cnetos7_jenkins_git/jenkins_item_general.png" alt="jenkins_item_general"></p>
+</li>
+<li><p>由于需要持续集成发布,需要在git有代码变更时自动构建项目, 所以使用在源码管理这里选择git, 只需要在<code>Repository URL</code> 中输入git仓库地址</p>
+<p><img src="/2016/12/14/cnetos7_jenkins_git/jenkins_item_code.png" alt="jenkins_item_code"></p>
+</li>
+<li><p>在构建触发器中勾选<code>Poll SCM</code>, 这里指定多长时间检索git仓库中的代码是否有更新, 如果有更新, 就会将代码clone到本地, 从新发布. 这里设置为每两分钟检索一次<code>*/2 * * * *</code><img src="/2016/12/14/cnetos7_jenkins_git/jenkins_item_tigger_build.png" alt="jenkins_item_tigger_build"></p>
+</li>
+<li><p>在Pre Steps 中选择<code>Invoke top-level Maven targets</code>, 并选择对应的Maven版本, 在Goals中输入<code>clean install</code></p>
+<p><img src="/2016/12/14/cnetos7_jenkins_git/jenkins_item_preSteps.png" alt="jenkins_item_preSteps"></p>
+</li>
+<li><p>Build 中输入<code>clean package -DskipTests -P prod</code> <img src="/2016/12/14/cnetos7_jenkins_git/jenkins_add_item_build.png" alt="jenkins_add_item_build"></p>
+</li>
+<li><p>在Post Steps中选择Execute shell, 在这里执行关闭tomcat, 将war包复制到tomcat中, 启动tomcat的任务 <img src="/2016/12/14/cnetos7_jenkins_git/jenkins_item_postSteps1.png" alt="jenkins_item_postSteps1"> <img src="/2016/12/14/cnetos7_jenkins_git/jenkins_item_postSteps.png" alt="jenkins_item_postSteps"></p>
+</li>
+<li><p>最后点击保存按钮即可</p>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -284,7 +507,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-19T12:47:41+08:00">
                 2016-11-19
@@ -432,7 +655,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-19T12:17:14+08:00">
                 2016-11-19
@@ -561,7 +784,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-13T11:00:21+08:00">
                 2016-11-13
@@ -727,7 +950,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-12T16:06:25+08:00">
                 2016-11-12
@@ -1027,8 +1250,8 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">64</span>
-                <span class="site-state-item-name">Artikel</span>
+                <span class="site-state-item-count">65</span>
+                <span class="site-state-item-name">posts</span>
               </a>
             </div>
           
@@ -1041,7 +1264,7 @@
             <div class="site-state-item site-state-tags">
               
                 <span class="site-state-item-count">4</span>
-                <span class="site-state-item-name">Tags</span>
+                <span class="site-state-item-name">tags</span>
               
             </div>
           
@@ -1091,7 +1314,7 @@
 
 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">

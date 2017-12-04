@@ -194,7 +194,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            Home
           </a>
         </li>
       
@@ -204,7 +204,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -237,6 +237,170 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/03/01/Java对象初始化/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Blue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blue的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/01/Java对象初始化/" itemprop="url">
+                  Java对象初始化
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-01T09:45:55+08:00">
+                2017-03-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Java对象初始化"><a href="#Java对象初始化" class="headerlink" title="Java对象初始化"></a>Java对象初始化</h2><p>Java中一个对象在被使用前必须要被正确的初始化, 这是Java规范规定的.</p>
+<h3 id="Java对象何时被初始化"><a href="#Java对象何时被初始化" class="headerlink" title="Java对象何时被初始化"></a>Java对象何时被初始化</h3><p>Java对象在被创建的时候初始化. Java中有两种行为会引起对象的创建.</p>
+<ol>
+<li><p>显式对象创建: 通过<code>new</code>关键字调用一个类的构造函数.</p>
+</li>
+<li><p>隐式对象创建</p>
+<ul>
+<li><p>加载一个包含String字面量的类或者接口会引起一个新的String对象被创建. 如果包含相同字面量的String对象已经存在虚拟机内(JVM会在内存中为所有碰到的String字面量维护一个列表. 程序中使用相同字面量的都会指向同一个String对象)</p>
+</li>
+<li><p>自动封装机制可能会引起一个原子类型的包装类对象被创建</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Wrapper</span> </span>&#123;</div><div class="line">  <span class="keyword">private</span> Integer iWrapper = <span class="number">1</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>String 连接符也可能引起新的String或者StringBuilder对象被创建. 同时还可能引起原子类型的包装对象呗创建.</p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="Java如何初始化对象"><a href="#Java如何初始化对象" class="headerlink" title="Java如何初始化对象"></a>Java如何初始化对象</h3><p>当对象被创建后, JVM会为其分配内存, 用于存放对象实例变量和从父类继承过来的实例变量. 即使从父类继承过来的实例变量可能被隐藏也会分配空间. 在分配内存的同时, 实例变量会被富裕默认值.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span> </span>&#123;</div><div class="line">	<span class="keyword">int</span> i = <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"> </div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bar</span> <span class="keyword">extends</span> <span class="title">Foo</span> </span>&#123;</div><div class="line">	<span class="keyword">int</span> i = <span class="number">1</span>;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String... args)</span> </span>&#123;</div><div class="line">		Foo foo = <span class="keyword">new</span> Bar();</div><div class="line">		System.out.println(foo.i);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>在main方法中，我们用Foo引用一个Bar对象，如果实例变量与方法一样，允许被覆盖，那么打印的结果应该是1，但是实际的结果确是0。<br>但是如果我们在Bar的方法中直接使用i，那么用的会是Bar对象自己定义的实例变量i，这就是隐藏，Bar对象中的i把Foo对象中的i给隐藏了，这条规则对于静态变量同样适用。</p>
+</blockquote>
+<p>内存分配完成后, 虚拟机会开始对新创建的对象执行初始化操作. Java中有三种执行对象初始化的结构. 分别是: 实例初始化器, 实例变量初始化器, 构造函数</p>
+<ol>
+<li><p>构造函数</p>
+<p>每个类至少有一个构造函数, 如果没有显式定义构造函数, Java编译器会自动生成一个无参构造函数. 在生成的字节码中, 构造函数被命名为<init> 方法</init></p>
+<p>在一个对象被初始化前, 它的超类必须被初始化. 除Object对象之外的所欲对象构造函数的第一条语句必须时父类的构造函数的调用语句, 或者事类中定义的其他构造函数.如果我们即没有调用其他的构造函数, 也没有显式调用超类的构造函数, 那么编译器会为我们自动生成一个对超类构造函数的调用指令.</p>
+</li>
+<li><p>实例变量初始化器和实例初始化器</p>
+<p>在定义实例变量时, 对变量进行赋值, 赋值语句就是实例变量初始化器.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InstanceVariableInitializer</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> i = <span class="number">1</span>;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> j = i + <span class="number">1</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在构造函数执行之前会先完成这些初始化操作.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InstanceInitializer</span> </span>&#123;</div><div class="line"> </div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> i = <span class="number">1</span>;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> j;</div><div class="line"> </div><div class="line">	&#123;</div><div class="line">		j = <span class="number">2</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">	j = <span class="number">2</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这段代码被称作实例初始化器. 会在构造函数执行前被执行.</p>
+<p>一个实例变量在对象初始化过程中被赋值的过程: </p>
+<ol>
+<li>JVM为一个对象分配完内存后, 为每个实例变量赋予默认值.</li>
+<li>在实例变量初始化器中被赋值</li>
+<li>在实例初始化器中被赋值</li>
+<li>在构造函数中被赋值</li>
+</ol>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -284,7 +448,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-01T00:21:14+08:00">
                 2017-03-01
@@ -425,7 +589,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-28T15:12:58+08:00">
                 2017-02-28
@@ -570,7 +734,7 @@
               
                 
                 <a class="post-title-link" href="/2017/02/24/Java继承/" itemprop="url">
-                  Unbenannt
+                  Untitled
                 </a>
               
             
@@ -584,7 +748,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-24T16:35:27+08:00">
                 2017-02-24
@@ -814,7 +978,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-24T11:22:08+08:00">
                 2017-02-24
@@ -982,7 +1146,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-13T19:48:27+08:00">
                 2017-02-13
@@ -1128,7 +1292,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-08T15:21:43+08:00">
                 2017-02-08
@@ -1440,7 +1604,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-23T00:00:00+08:00">
                 2017-01-23
@@ -1611,7 +1775,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-17T00:00:00+08:00">
                 2017-01-17
@@ -1740,7 +1904,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-07T00:00:00+08:00">
                 2017-01-07
@@ -1906,229 +2070,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2016/12/14/cnetos7_jenkins_git/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Blue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blue的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/12/14/cnetos7_jenkins_git/" itemprop="url">
-                  CentOS 7 Jenkins Git Tomcat 构建Java持续部署环境
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-14T00:00:00+08:00">
-                2016-12-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="必须软件安装"><a href="#必须软件安装" class="headerlink" title="必须软件安装"></a>必须软件安装</h3><ol>
-<li><p>安装JDK</p>
-<ul>
-<li>下载需要的JDK版本的rpm包</li>
-<li>执行 <code>rpm -ivh jdk-**.rpm</code> 命令, JDK会安装到<code>/usr/java/</code>目录下</li>
-<li>验证安装是否成功, 执行<code>java</code>, <code>javac</code></li>
-<li>配置环境变量, 在<code>/etc/profile</code>文件最后添加<ul>
-<li><code>export JAVA_HOME=/usr/java/jdk**</code></li>
-<li><code>export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar</code></li>
-<li><code>export PATH=$PATH:$JAVA_HOME/bin</code></li>
-</ul>
-</li>
-<li>执行<code>source /etc/profile</code> 使修改生效</li>
-</ul>
-</li>
-<li><p>安装GIT</p>
-<ul>
-<li><code>yum -y install git</code> 安装git</li>
-<li><code>git --version</code> 验证git是否安装成功</li>
-</ul>
-</li>
-<li><p>配置Maven</p>
-<ul>
-<li>下载maven, 保存在任意位置, 如: <code>workspace/tools/maven</code>目录下</li>
-<li>修改<code>/etc/profile</code>文件，添加<code>MAVEN_HOME</code><ul>
-<li><code>export MAVEN_HOME=/workspace/tools/maven</code></li>
-<li><code>export PATH=$PATH:$JAVA_HOME/bin:$MAVEN_HOME/bin</code></li>
-</ul>
-</li>
-<li><code>mvn -version</code> 验证Maven是否安装成功</li>
-</ul>
-</li>
-<li><p>安装Jenkins</p>
-<p>CentOS 默认的软件源中是没有Jenkins的，需要添加第三方的软件源.</p>
-<ul>
-<li>执行<code>wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo</code></li>
-<li>执行<code>rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key</code></li>
-<li>执行<code>yum -y install jenkins</code> 安装<code>jenkins</code></li>
-</ul>
-</li>
-</ol>
-<h3 id="配置jenkins"><a href="#配置jenkins" class="headerlink" title="配置jenkins"></a>配置jenkins</h3><ol>
-<li><p>启动 Jenkins</p>
-<p><code>service jenkins start</code></p>
-</li>
-<li><p>设置开机启动</p>
-<p><code>chkconfig jenkins on</code></p>
-</li>
-<li><p>jenkins 默认使用的是8080端口, 在浏览器中输入<code>ip:8080</code>打开jenkins</p>
-</li>
-<li><p><code>/etc/sysconfig/jenkins</code> 这个文件是jenkins的配置文件</p>
-</li>
-<li><p>第一次在浏览器中打开jenkins 时需要在<code>/var/lib/jenkins/secrets/initalAdminPassword</code>文件中复制密码</p>
-</li>
-<li><p>第二步是安装插件, 可以选择默认的插件, 也可以不选择按住插件</p>
-</li>
-<li><p>如果插件安装失败, 可以手动安装</p>
-<ol>
-<li>在<code>系统管理-&gt;管理插件-&gt;可选插件</code>, 中选择需要安装的插件</li>
-<li>或者到<code>http://updates.jenkins-ci.org/download/plugins/</code>去下载插件, 在<code>系统管理-&gt;管理插件-&gt;高级</code>中上传插件 <img src="/2016/12/14/cnetos7_jenkins_git/jenkins_plugin_add.png" alt="jenkins_plugin_add"></li>
-</ol>
-</li>
-<li><p>在<code>系统管理-&gt;管理插件-&gt;Global Tool Configuration</code>中配置JDK、GIT、Maven</p>
-<ol>
-<li><p>配置JDK和GIT</p>
-<p><img src="/2016/12/14/cnetos7_jenkins_git/jenkins_jdk.png" alt="jenkins_jdk"></p>
-</li>
-<li><p>配置Maven<img src="/2016/12/14/cnetos7_jenkins_git/jenkins_maven.png" alt="jenkins_maven"></p>
-</li>
-<li>推荐插件: <ol>
-<li><a href="http://wiki.jenkins-ci.org/display/JENKINS/Git+Plugin" target="_blank" rel="external">Git plugin</a></li>
-<li><a href="http://wiki.jenkins-ci.org/display/JENKINS/Github+Plugin" target="_blank" rel="external">GitHub plugin</a></li>
-<li><a href="http://wiki.jenkins-ci.org/display/JENKINS/M2+Release+Plugin" target="_blank" rel="external">Maven Release Plug-in Plug-in</a></li>
-<li><a href="https://wiki.jenkins-ci.org/display/JENKINS/Structs+plugin" target="_blank" rel="external">Structs Plugin</a></li>
-<li><a href="http://wiki.jenkins-ci.org/display/JENKINS/SSH+Credentials+Plugin" target="_blank" rel="external">SSH Credentials Plugin</a></li>
-<li><a href="http://wiki.jenkins-ci.org/display/JENKINS/SCM+API+Plugin" target="_blank" rel="external">SCM API Plugin</a></li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-<h3 id="新建Item"><a href="#新建Item" class="headerlink" title="新建Item"></a>新建Item</h3><p>经过上面的步骤, 环境基本部署完成, 现在可以新建一个项目试试是否可以做到持续部署.x</p>
-<ol>
-<li><p>新建Item</p>
-<p> <img src="/2016/12/14/cnetos7_jenkins_git/jenkins_add_item.png" alt="jenkins_add_item"></p>
-</li>
-<li><p>配置项目的基本信息, 可以根据个人需要选择是否废弃旧的构建 <img src="/2016/12/14/cnetos7_jenkins_git/jenkins_item_general.png" alt="jenkins_item_general"></p>
-</li>
-<li><p>由于需要持续集成发布,需要在git有代码变更时自动构建项目, 所以使用在源码管理这里选择git, 只需要在<code>Repository URL</code> 中输入git仓库地址</p>
-<p><img src="/2016/12/14/cnetos7_jenkins_git/jenkins_item_code.png" alt="jenkins_item_code"></p>
-</li>
-<li><p>在构建触发器中勾选<code>Poll SCM</code>, 这里指定多长时间检索git仓库中的代码是否有更新, 如果有更新, 就会将代码clone到本地, 从新发布. 这里设置为每两分钟检索一次<code>*/2 * * * *</code><img src="/2016/12/14/cnetos7_jenkins_git/jenkins_item_tigger_build.png" alt="jenkins_item_tigger_build"></p>
-</li>
-<li><p>在Pre Steps 中选择<code>Invoke top-level Maven targets</code>, 并选择对应的Maven版本, 在Goals中输入<code>clean install</code></p>
-<p><img src="/2016/12/14/cnetos7_jenkins_git/jenkins_item_preSteps.png" alt="jenkins_item_preSteps"></p>
-</li>
-<li><p>Build 中输入<code>clean package -DskipTests -P prod</code> <img src="/2016/12/14/cnetos7_jenkins_git/jenkins_add_item_build.png" alt="jenkins_add_item_build"></p>
-</li>
-<li><p>在Post Steps中选择Execute shell, 在这里执行关闭tomcat, 将war包复制到tomcat中, 启动tomcat的任务 <img src="/2016/12/14/cnetos7_jenkins_git/jenkins_item_postSteps1.png" alt="jenkins_item_postSteps1"> <img src="/2016/12/14/cnetos7_jenkins_git/jenkins_item_postSteps.png" alt="jenkins_item_postSteps"></p>
-</li>
-<li><p>最后点击保存按钮即可</p>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2178,8 +2119,8 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">64</span>
-                <span class="site-state-item-name">Artikel</span>
+                <span class="site-state-item-count">65</span>
+                <span class="site-state-item-name">posts</span>
               </a>
             </div>
           
@@ -2192,7 +2133,7 @@
             <div class="site-state-item site-state-tags">
               
                 <span class="site-state-item-count">4</span>
-                <span class="site-state-item-name">Tags</span>
+                <span class="site-state-item-name">tags</span>
               
             </div>
           
@@ -2242,7 +2183,7 @@
 
 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">

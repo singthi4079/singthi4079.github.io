@@ -247,6 +247,216 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/10/31/图解设计模式第一章-Iterator模式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Blue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blue的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/10/31/图解设计模式第一章-Iterator模式/" itemprop="url">
+                  图解设计模式第一章-Iterator模式
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-31T21:09:09+08:00">
+                2017-10-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Iterator模式用于在数据集合中按照顺序遍历集合.</p>
+<p>Iterator模式类图:</p>
+<p><img src="/Users/storm/workspace/notes/source/_posts/图解设计模式第一章-Iterator模式/Iterator.png" alt="Iterator"></p>
+<ul>
+<li><p>Iterator(迭代器)</p>
+<p>定义按顺序逐个遍历元素的接口. 定义了hasNext和next方法. hasNext方法用于判断是否存在下一个元素, next方法用于获取该元素</p>
+</li>
+<li><p>ConcreteIterator(具体的迭代器)</p>
+<p>负责实现Iterator角色锁定义的接口. 包含了遍历集合所必需的信息.</p>
+</li>
+<li><p>Aggregate(集合)</p>
+<p>负责定义创建Iterator角色的接口. 这个接口只有一个方法, 会查创建”按顺序访问保存在我内部元素的人”. 定义了iterator方法</p>
+</li>
+<li><p>ConcreteAggragate(具体的集合)</p>
+<p>负责实现Aggragate接口所定义的接口. 会创建具体的Iterator角色. </p>
+</li>
+</ul>
+<h3 id="示例程序"><a href="#示例程序" class="headerlink" title="示例程序"></a>示例程序</h3><p>示例程序的作用是将书(Book)放置到书架(BookShelf)中, 并将书的名字按顺序显示出来.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">名字</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Aggregate</td>
+<td style="text-align:center">表示集合的接口</td>
+</tr>
+<tr>
+<td style="text-align:center">Iterator</td>
+<td style="text-align:center">遍历集合的接口</td>
+</tr>
+<tr>
+<td style="text-align:center">Book</td>
+<td style="text-align:center">表示书的类</td>
+</tr>
+<tr>
+<td style="text-align:center">BookShelf</td>
+<td style="text-align:center">表示书架的类</td>
+</tr>
+<tr>
+<td style="text-align:center">BookShelfIterator</td>
+<td style="text-align:center">遍历书架的类</td>
+</tr>
+<tr>
+<td style="text-align:center">Main</td>
+<td style="text-align:center">测试程序行为的类</td>
+</tr>
+</tbody>
+</table>
+<p>示例程序类图:</p>
+<p><img src="/Users/storm/workspace/notes/source/_posts/图解设计模式第一章-Iterator模式/Iterator-Concrete.png" alt="Iterator-Concrete"></p>
+<p>代码实现:</p>
+<blockquote>
+<p>Aggregate接口</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Arrgegate接口是所要遍历的集合的接口, 实现了这个接口的类将成为一个可以保存多个元素的集合, 就像数组一样</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Aggregate</span> </span>&#123;</div><div class="line">    <span class="function">Iterator <span class="title">iterator</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>Iterator接口</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 用于遍历集合中元素的, 起作用相当于循环语句中的循环变量.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Iterator</span> </span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 判断是否存在下一个元素</div><div class="line">     * 存在下一个元素返回true, 不存在返回false</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 获取下一个元素</div><div class="line">     * 为了能够在下次调用next方法时正确的返回下一个元素, 这个方法还隐含将迭代器移动到下一个元素的处理.</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function">Object <span class="title">next</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>Book类</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 表示书的类, 只有一个getName方法, 返回书的名字</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Book</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> String name;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Book</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.name = name;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> name;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>BookShelf类</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 表示书架的类, 作为集合处理, 实现Aggregate接口.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BookShelf</span> <span class="keyword">implements</span> <span class="title">Aggregate</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> Book[] books;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> last = <span class="number">0</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BookShelf</span><span class="params">(<span class="keyword">int</span> maxSize)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.books = <span class="keyword">new</span> Book[maxSize];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> Book <span class="title">getBookAt</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> books[index];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">appendBook</span><span class="params">(Book book)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.books[last] = book;</div><div class="line">        last++;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getLength</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> last;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Iterator <span class="title">iterator</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> BookShelfIterator(<span class="keyword">this</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>BookShelfIterator类</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 遍历书架的类</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BookShelfIterator</span> <span class="keyword">implements</span> <span class="title">Iterator</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> BookShelf bookShelf;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> index;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BookShelfIterator</span><span class="params">(BookShelf bookShelf)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.bookShelf = bookShelf;</div><div class="line">        <span class="keyword">this</span>.index = <span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> index &lt; bookShelf.getLength();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">next</span><span class="params">()</span> </span>&#123;</div><div class="line">        Book book = bookShelf.getBookAt(index);</div><div class="line">        index++;</div><div class="line">        <span class="keyword">return</span> book;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>Main类</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        BookShelf bookShelf = <span class="keyword">new</span> BookShelf(<span class="number">4</span>);</div><div class="line">        bookShelf.appendBook(<span class="keyword">new</span> Book(<span class="string">"Around the World in 80 Days"</span>));</div><div class="line">        bookShelf.appendBook(<span class="keyword">new</span> Book(<span class="string">"Bible"</span>));</div><div class="line">        bookShelf.appendBook(<span class="keyword">new</span> Book(<span class="string">"Cinderella"</span>));</div><div class="line">        bookShelf.appendBook(<span class="keyword">new</span> Book(<span class="string">"Daddy Long legs"</span>));</div><div class="line"></div><div class="line">        Iterator it = bookShelf.iterator();</div><div class="line">        <span class="keyword">while</span> (it.hasNext()) &#123;</div><div class="line">            Book book = (Book) it.next();</div><div class="line">            System.out.println(book.getName());</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="为什么要使用Iterator"><a href="#为什么要使用Iterator" class="headerlink" title="为什么要使用Iterator"></a>为什么要使用Iterator</h4><p>引入Iterator后, 可以将遍历与实现分离. 看如下代码:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">while</span> (it.hasNext()) &#123;</div><div class="line">	Book book = (Book) it.next();</div><div class="line">	System.out.println(book.getName());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里的while循环不依赖于BookShelf的实现. </p>
+<h4 id="next方法"><a href="#next方法" class="headerlink" title="next方法"></a>next方法</h4><p>next方法表示: 返回当前元素, 并指向下一个元素</p>
+<p>可以根据一个ConcreteAggregate角色编写多个ConcreteIterator角色</p>
+<p>遍历的方法是多种多样的:</p>
+<ul>
+<li>从最后开始向前遍历</li>
+<li>即可以前向后遍历, 也可以从后向前遍历</li>
+<li>指定下标进行”跳跃式”遍历</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/10/25/Java高并发程序设计读书笔记-并发模式与算法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1821,152 +2031,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/10/12/Java高并发程序设计读书笔记-JDK并发包-读写锁/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Blue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blue的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/10/12/Java高并发程序设计读书笔记-JDK并发包-读写锁/" itemprop="url">
-                  Java高并发程序设计读书笔记-JDK并发包-读写锁
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-12T22:27:20+08:00">
-                2017-10-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>ReadWriteLock是JDK5提供的读写分离锁. 读写分离锁可以有效的减少锁竞争, 提升性能.</p>
-<p>读写锁允许多个线程同时读, 写写操作和读写操作相互等待和持有锁.</p>
-<p>读写锁访问约束情况</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th style="text-align:center">读</th>
-<th style="text-align:center">写</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>读</td>
-<td style="text-align:center">非阻塞</td>
-<td style="text-align:center">阻塞</td>
-</tr>
-<tr>
-<td>写</td>
-<td style="text-align:center">阻塞</td>
-<td style="text-align:center">阻塞</td>
-</tr>
-</tbody>
-</table>
-<p>使用读写锁示例:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReadWriteLockDemo</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Lock lock = <span class="keyword">new</span> ReentrantLock();</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> ReentrantReadWriteLock readWriteLock = <span class="keyword">new</span> ReentrantReadWriteLock();</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Lock readLock = readWriteLock.readLock();</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Lock writeLock = readWriteLock.writeLock();</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> value;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">handleRead</span><span class="params">(Lock lock)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            lock.lock(); <span class="comment">// 模拟读操作</span></div><div class="line">            Thread.sleep(<span class="number">1000</span>); <span class="comment">// 读操作耗时越多, 读写锁优势就越明显</span></div><div class="line">            <span class="keyword">return</span> value;</div><div class="line">        &#125; <span class="keyword">finally</span> &#123;</div><div class="line">            lock.unlock();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleWrite</span><span class="params">(Lock lock, <span class="keyword">int</span> index)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            lock.lock();<span class="comment">// 模拟写操作</span></div><div class="line">            Thread.sleep(<span class="number">1000</span>);</div><div class="line">            value = index;</div><div class="line">        &#125; <span class="keyword">finally</span> &#123;</div><div class="line">            lock.unlock();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</div><div class="line">        <span class="keyword">final</span> ReadWriteLockDemo demo = <span class="keyword">new</span> ReadWriteLockDemo();</div><div class="line"></div><div class="line">        Runnable readRunnable = <span class="keyword">new</span> Runnable() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    demo.handleRead(readLock);</div><div class="line">                    demo.handleRead(lock);</div><div class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line"></div><div class="line">        Runnable writeRunnable = <span class="keyword">new</span> Runnable() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    demo.handleWrite(writeLock, <span class="keyword">new</span> Random().nextInt());</div><div class="line">                    demo.handleWrite(lock, <span class="keyword">new</span> Random().nextInt());</div><div class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2016,7 +2080,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">63</span>
+                <span class="site-state-item-count">64</span>
                 <span class="site-state-item-name">Artikel</span>
               </a>
             </div>

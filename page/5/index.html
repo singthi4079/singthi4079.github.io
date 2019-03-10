@@ -194,7 +194,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Home
+            Startseite
           </a>
         </li>
       
@@ -204,7 +204,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archives
+            Archiv
           </a>
         </li>
       
@@ -237,6 +237,786 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/03/21/Java-线程创建与启动/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Blue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blue的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/21/Java-线程创建与启动/" itemprop="url">
+                  Java-线程创建与启动
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-21T09:53:37+08:00">
+                2017-03-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong>定义线程</strong></p>
+<ol>
+<li>扩展Thread类: 重写Thread类的<code>run()</code>方法</li>
+<li>实现Runnable接口: 实现接口中的<code>run()</code>方法</li>
+</ol>
+<p><strong>实例化</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Thread(Runnable target)</div><div class="line">Thread(Runnable target, String name)</div><div class="line">Thread(ThreadGroup group, Runnable target)</div><div class="line">Thread(ThreadGroup group, Runnable target, String name)</div><div class="line">Thread(ThreadGroup group, Runnable target, String name, <span class="keyword">long</span> stackSize)</div></pre></td></tr></table></figure>
+<p><strong>启动线程</strong></p>
+<p>调用线程的Thread对象的<code>start()</code>方法, 而不是<code>run()</code>方法.</p>
+<p>在调用<code>start()</code>方法之前: 线程处于新状态中, 新状态指有一个Thread对象, 但还没有一个真正的线程</p>
+<p><strong>例子</strong></p>
+<ol>
+<li>实现Runnable接口</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/** </span></div><div class="line">* 实现Runnable接口的类 </div><div class="line">*/ </div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">DoSomething</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123; </div><div class="line">    <span class="keyword">private</span> String name; </div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DoSomething</span><span class="params">(String name)</span> </span>&#123; </div><div class="line">        <span class="keyword">this</span>.name = name; </div><div class="line">    &#125; </div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123; </div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123; </div><div class="line">            <span class="keyword">for</span> (<span class="keyword">long</span> k = <span class="number">0</span>; k &lt; <span class="number">100000000</span>; k++) ; </div><div class="line">            System.out.println(name + <span class="string">": "</span> + i); </div><div class="line">        &#125; </div><div class="line">    &#125; </div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/** </span></div><div class="line">* 测试Runnable类实现的多线程程序 </div><div class="line">* </div><div class="line">*/ </div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestRunnable</span> </span>&#123; </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123; </div><div class="line">        DoSomething ds1 = <span class="keyword">new</span> DoSomething(<span class="string">"阿三"</span>); </div><div class="line">        DoSomething ds2 = <span class="keyword">new</span> DoSomething(<span class="string">"李四"</span>); </div><div class="line"></div><div class="line">        Thread t1 = <span class="keyword">new</span> Thread(ds1); </div><div class="line">        Thread t2 = <span class="keyword">new</span> Thread(ds2); </div><div class="line"></div><div class="line">        t1.start(); </div><div class="line">        t2.start(); </div><div class="line">    &#125; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li>继承Thread类</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/** </span></div><div class="line">* 测试扩展Thread类实现的多线程程序 </div><div class="line">* </div><div class="line">*/ </div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestThread</span> <span class="keyword">extends</span> <span class="title">Thread</span></span>&#123; </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TestThread</span><span class="params">(String name)</span> </span>&#123; </div><div class="line">        <span class="keyword">super</span>(name); </div><div class="line">    &#125; </div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123; </div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i&lt;<span class="number">5</span>;i++)&#123; </div><div class="line">            <span class="keyword">for</span>(<span class="keyword">long</span> k= <span class="number">0</span>; k &lt;<span class="number">100000000</span>;k++); </div><div class="line">            System.out.println(<span class="keyword">this</span>.getName()+<span class="string">" :"</span>+i); </div><div class="line">        &#125; </div><div class="line">    &#125; </div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123; </div><div class="line">        Thread t1 = <span class="keyword">new</span> TestThread(<span class="string">"阿三"</span>); </div><div class="line">        Thread t2 = <span class="keyword">new</span> TestThread(<span class="string">"李四"</span>); </div><div class="line">        t1.start(); </div><div class="line">        t2.start(); </div><div class="line">    &#125; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>1、线程的名字，一个运行中的线程总是有名字的，名字有两个来源，一个是虚拟机自己给的名字，一个是你自己的定的名字。在没有指定线程名字的情况下，虚拟机总会为线程指定名字，并且主线程的名字总是mian，非主线程的名字不确定。</p>
+<p>2、线程都可以设置名字，也可以获取线程的名字，连主线程也不例外。</p>
+<p>3、获取当前线程的对象的方法是：Thread.currentThread()；</p>
+<p>4、在上面的代码中，只能保证：每个线程都将启动，每个线程都将运行直到完成。一系列线程以某种顺序启动并不意味着将按该顺序执行。对于任何一组启动的线程来说，调度程序不能保证其执行次序，持续时间也无法保证。</p>
+<p>5、当线程目标run()方法结束时该线程完成。</p>
+<p>6、一旦线程启动，它就永远不能再重新启动。只有一个新的线程可以被启动，并且只能一次。一个可运行的线程或死线程可以被重新启动。</p>
+<p>7、线程的调度是JVM的一部分，在一个CPU的机器上上，实际上一次只能运行一个线程。一次只有一个线程栈执行。JVM线程调度程序决定实际运行哪个处于可运行状态的线程。</p>
+<p>众多可运行线程中的某一个会被选中做为当前线程。可运行线程被选择运行的顺序是没有保障的。</p>
+<p>8、尽管通常采用队列形式，但这是没有保障的。队列形式是指当一个线程完成“一轮”时，它移到可运行队列的尾部等待，直到它最终排队到该队列的前端为止，它才能被再次选中。事实上，我们把它称为可运行池而不是一个可运行队列，目的是帮助认识线程并不都是以某种有保障的顺序排列唱呢个一个队列的事实。</p>
+<p>9、尽管我们没有无法控制线程调度程序，但可以通过别的方式来影响线程调度的方式。</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/03/21/Java-多线程概念/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Blue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blue的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/21/Java-多线程概念/" itemprop="url">
+                  Java-多线程概念
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-21T09:37:22+08:00">
+                2017-03-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>现在的操作系统是对任务操作系统, 多线程是实现多任务的一种方式</p>
+<p>进程是指一个内存中运行的应用程序, 每个进程都有自己独立的一块内存空间.一个进程中可以启动多个线程.</p>
+<p>线程是指进程中的一个执行流程, 一个进程可运行多个线程. 线程总是属于某个进程, 进程中的多个线程共享进程的内存.</p>
+<p>Java中, “线程”指两件事:</p>
+<ol>
+<li>java.lang.Thread类的一个实例</li>
+<li>线程执行</li>
+</ol>
+<p>使用java.lang.Thread类或者java.lang.Runnable接口编写代码来定义, 实例化和启动新线程.</p>
+<p>每一个线程都有一个调用栈, 即使不在程序中创建任何新的线程, 线程也在后台运行着.</p>
+<p>main()方法运行在主线程内.</p>
+<p>一旦创建一个新的线程, 就产生一个新的调用栈</p>
+<p>线程分两类: 用户线程, 守候线程</p>
+<p>守候线程一般由操作系统或用户自己创建.</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/03/19/Java-TreeMap/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Blue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blue的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/19/Java-TreeMap/" itemprop="url">
+                  Java-TreeMap
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-19T19:27:05+08:00">
+                2017-03-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>红黑树是一颗二叉树, 具备二叉树的所有特性, 而且还是一颗自平衡的二叉树.</p>
+<p>红黑树就是节点是红色或者黑色的平衡二叉树. 必须遵循一下规则:</p>
+<ol>
+<li>每个节点都只能是红色或者黑色</li>
+<li>根节点是黑色</li>
+<li>每个叶节点(NIL节点, 空节点)都是黑色</li>
+<li>如果一个节点是红色, 则它两个字节点都是黑色, 一条路径上不能出现相邻的两个红色节点</li>
+<li>从任一节点到其每个叶子的所有路径都包含相同数目的黑色节点</li>
+</ol>
+<p><strong>TreeMap定义</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TreeMap</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">extends</span> <span class="title">AbstractMap</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt;</span></div><div class="line">    <span class="keyword">implements</span> <span class="title">NavigableMap</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt;, <span class="title">Cloneable</span>, <span class="title">java</span>.<span class="title">io</span>.<span class="title">Serializable</span></div></pre></td></tr></table></figure>
+<p>TreeMap继承AbstractMap, 实现NavigableMap, Cloneable, Serializable接口. NavigableMap意味着它支持一系列的导航方法, 具备针对给定搜索目标返回最接近匹配项的导航方法.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//比较器，因为TreeMap是有序的，通过comparator接口我们可以对TreeMap的内部排序进行精密的控制</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">final</span> Comparator&lt;? <span class="keyword">super</span> K&gt; comparator;</div><div class="line"><span class="comment">//TreeMap红-黑节点，为TreeMap的内部类</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">transient</span> Entry&lt;K,V&gt; root = <span class="keyword">null</span>;</div><div class="line"><span class="comment">//容器大小</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">transient</span> <span class="keyword">int</span> size = <span class="number">0</span>;</div><div class="line"><span class="comment">//TreeMap修改次数</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">transient</span> <span class="keyword">int</span> modCount = <span class="number">0</span>;</div><div class="line"><span class="comment">//红黑树的节点颜色--红色</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">boolean</span> RED = <span class="keyword">false</span>;</div><div class="line"><span class="comment">//红黑树的节点颜色--黑色</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">boolean</span> BLACK = <span class="keyword">true</span>;</div></pre></td></tr></table></figure>
+<p>对于叶子节点Entry是TreeMap的内部类, 它有几个重要的属性:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//键</span></div><div class="line">K key;</div><div class="line"><span class="comment">//值</span></div><div class="line">V value;</div><div class="line"><span class="comment">//左孩子</span></div><div class="line">Entry&lt;K,V&gt; left = <span class="keyword">null</span>;</div><div class="line"><span class="comment">//右孩子</span></div><div class="line">Entry&lt;K,V&gt; right = <span class="keyword">null</span>;</div><div class="line"><span class="comment">//父亲</span></div><div class="line">Entry&lt;K,V&gt; parent;</div><div class="line"><span class="comment">//颜色</span></div><div class="line"><span class="keyword">boolean</span> color = BLACK;</div></pre></td></tr></table></figure>
+<p><strong>put方法</strong></p>
+<p>对于新节点插入有以下三个关键点:</p>
+<ol>
+<li>插入新节点总是红色节点</li>
+<li>如果插入节点的父节点是黑色, 能维持性质</li>
+<li>如果插入节点的父节点是红色, 破坏了性质, 古插入算法就算通过重新着色或旋转, 来维持性质</li>
+</ol>
+<p>新增节点过程:</p>
+<ol>
+<li><p>根节点</p>
+<p>如果新插入的节点N没有父节点, 直接当作根节点插入即可, 同时把颜色设置为黑色</p>
+</li>
+<li><p>父节点为黑色</p>
+<p>这种情况新节点N同样直接插入, 同时颜色为红色. 根据规则四它会存在两个黑色的叶子节点, 值为null. 同时由于新增节点N是红色, 所以通过它的字节点的路径依然会保存着相同的黑色节点数, 同样满足规则5</p>
+</li>
+<li><p>如果父节点P或P的兄弟节点U都是红色</p>
+<p>这种情况直接插入会出现不平衡现象. P, U节点变黑, G节点变红. 这是由于经过节点P,U的路径都必须经过G所以这些路径上的黑色节点数还是相同的. 但是G节点的父节点也是红色, 这时需要将G节点当做新节点递归处理</p>
+</li>
+<li><p>若父节点P是红色, 叔父节点U是黑色或者缺失, 且新增节点N为P节点的右孩子</p>
+<p>这种情况下对新增节点N,P进行左旋. 这里产生的结果其实并没有完成, 还不是平衡的</p>
+</li>
+<li><p>若父节点P是红色, 叔父节点U是黑色或者缺失, 且新增节点N为P节点的左孩子</p>
+<p>这种情况可能是因为4产生的, 也可能不是. 对于这种情况先已P节点为中心进行右旋转, 在旋转后产生的树种, 节点P是节点N, G的父节点. 违反了规则4, 所以将P,G节点的颜色进行交换. 使之满足规范.开始时所有的路径都需要经过G其他们的黑色节点数一样，但是现在所有的路径改为经过P，且P为整棵树的唯一黑色节点，所以调整后的树同样满足规范5。</p>
+</li>
+</ol>
+<p>put方法的实现主要分为两个步骤:</p>
+<ol>
+<li>构建排序二叉树</li>
+<li>平衡二叉树</li>
+</ol>
+<p>对于排序二叉树的创建, 添加节点的过程如下:</p>
+<ol>
+<li>以根节点为初始节点进行检索</li>
+<li>与当前节点进行比对, 若果新增节点较大, 则以当前节点的右节点作为新的当前节点. 否则当前节点的左子节点作为新的当前节点</li>
+<li>循环递归2步骤, 直掉知道检索出合适的叶子节点为止</li>
+<li>将新增节点与3步骤中找到的节点比对, 如果新节点较大, 则添加右子节点, 否则添加为左子节点</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> V <span class="title">put</span><span class="params">(K key, V value)</span> </span>&#123;</div><div class="line"><span class="comment">//用t表示二叉树的当前节点</span></div><div class="line"> Entry&lt;K,V&gt; t = root;</div><div class="line"> <span class="comment">//t为null表示一个空树，即TreeMap中没有任何元素，直接插入</span></div><div class="line"> <span class="keyword">if</span> (t == <span class="keyword">null</span>) &#123;</div><div class="line">     <span class="comment">//比较key值，个人觉得这句代码没有任何意义，空树还需要比较、排序？</span></div><div class="line">     compare(key, key); <span class="comment">// type (and possibly null) check</span></div><div class="line">     <span class="comment">//将新的key-value键值对创建为一个Entry节点，并将该节点赋予给root</span></div><div class="line">        root = <span class="keyword">new</span> Entry&lt;&gt;(key, value, <span class="keyword">null</span>);</div><div class="line">        <span class="comment">//容器的size = 1，表示TreeMap集合中存在一个元素</span></div><div class="line">        size = <span class="number">1</span>;</div><div class="line">        <span class="comment">//修改次数 + 1</span></div><div class="line">        modCount++;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">int</span> cmp;     <span class="comment">//cmp表示key排序的返回结果</span></div><div class="line">    Entry&lt;K,V&gt; parent;   <span class="comment">//父节点</span></div><div class="line">    <span class="comment">// split comparator and comparable paths</span></div><div class="line">    Comparator&lt;? <span class="keyword">super</span> K&gt; cpr = comparator;    <span class="comment">//指定的排序算法</span></div><div class="line">    <span class="comment">//如果cpr不为空，则采用既定的排序算法进行创建TreeMap集合</span></div><div class="line">    <span class="keyword">if</span> (cpr != <span class="keyword">null</span>) &#123;</div><div class="line">        <span class="keyword">do</span> &#123;</div><div class="line">            parent = t;      <span class="comment">//parent指向上次循环后的t</span></div><div class="line">            <span class="comment">//比较新增节点的key和当前节点key的大小</span></div><div class="line">            cmp = cpr.compare(key, t.key);</div><div class="line">            <span class="comment">//cmp返回值小于0，表示新增节点的key小于当前节点的key，则以当前节点的左子节点作为新的当前节点</span></div><div class="line">            <span class="keyword">if</span> (cmp &lt; <span class="number">0</span>)</div><div class="line">                t = t.left;</div><div class="line">            <span class="comment">//cmp返回值大于0，表示新增节点的key大于当前节点的key，则以当前节点的右子节点作为新的当前节点</span></div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (cmp &gt; <span class="number">0</span>)</div><div class="line">                t = t.right;</div><div class="line">            <span class="comment">//cmp返回值等于0，表示两个key值相等，则新值覆盖旧值，并返回新值</span></div><div class="line">            <span class="keyword">else</span></div><div class="line">                <span class="keyword">return</span> t.setValue(value);</div><div class="line">        &#125; <span class="keyword">while</span> (t != <span class="keyword">null</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//如果cpr为空，则采用默认的排序算法进行创建TreeMap集合</span></div><div class="line">    <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">if</span> (key == <span class="keyword">null</span>)     <span class="comment">//key值为空抛出异常</span></div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();</div><div class="line">        <span class="comment">/* 下面处理过程和上面一样 */</span></div><div class="line">        Comparable&lt;? <span class="keyword">super</span> K&gt; k = (Comparable&lt;? <span class="keyword">super</span> K&gt;) key;</div><div class="line">        <span class="keyword">do</span> &#123;</div><div class="line">            parent = t;</div><div class="line">            cmp = k.compareTo(t.key);</div><div class="line">            <span class="keyword">if</span> (cmp &lt; <span class="number">0</span>)</div><div class="line">                t = t.left;</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (cmp &gt; <span class="number">0</span>)</div><div class="line">                t = t.right;</div><div class="line">            <span class="keyword">else</span></div><div class="line">                <span class="keyword">return</span> t.setValue(value);</div><div class="line">        &#125; <span class="keyword">while</span> (t != <span class="keyword">null</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//将新增节点当做parent的子节点</span></div><div class="line">    Entry&lt;K,V&gt; e = <span class="keyword">new</span> Entry&lt;&gt;(key, value, parent);</div><div class="line">    <span class="comment">//如果新增节点的key小于parent的key，则当做左子节点</span></div><div class="line">    <span class="keyword">if</span> (cmp &lt; <span class="number">0</span>)</div><div class="line">        parent.left = e;</div><div class="line">  <span class="comment">//如果新增节点的key大于parent的key，则当做右子节点</span></div><div class="line">    <span class="keyword">else</span></div><div class="line">        parent.right = e;</div><div class="line">    <span class="comment">/* </span></div><div class="line">     *  上面已经完成了排序二叉树的的构建，将新增节点插入该树中的合适位置</div><div class="line">     *  下面fixAfterInsertion()方法就是对这棵树进行调整、平衡，具体过程参考上面的五种情况</div><div class="line">     */</div><div class="line">    fixAfterInsertion(e);</div><div class="line">    <span class="comment">//TreeMap元素数量 + 1</span></div><div class="line">    size++;</div><div class="line">    <span class="comment">//TreeMap容器修改次数 + 1</span></div><div class="line">    modCount++;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>进行修复工作:调整的过程务必会涉及到红黑树的左旋、右旋、着色三个基本操作</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 新增节点后的修复操作</div><div class="line"> * x 表示新增节点</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">fixAfterInsertion</span><span class="params">(Entry&lt;K,V&gt; x)</span> </span>&#123;</div><div class="line">    x.color = RED;    <span class="comment">//新增节点的颜色为红色</span></div><div class="line"></div><div class="line">    <span class="comment">//循环 直到 x不是根节点，且x的父节点不为红色</span></div><div class="line">    <span class="keyword">while</span> (x != <span class="keyword">null</span> &amp;&amp; x != root &amp;&amp; x.parent.color == RED) &#123;</div><div class="line">        <span class="comment">//如果X的父节点（P）是其父节点的父节点（G）的左节点</span></div><div class="line">        <span class="keyword">if</span> (parentOf(x) == leftOf(parentOf(parentOf(x)))) &#123;</div><div class="line">            <span class="comment">//获取X的叔节点(U)</span></div><div class="line">            Entry&lt;K,V&gt; y = rightOf(parentOf(parentOf(x)));</div><div class="line">            <span class="comment">//如果X的叔节点（U） 为红色（情况三）</span></div><div class="line">            <span class="keyword">if</span> (colorOf(y) == RED) &#123;     </div><div class="line">                <span class="comment">//将X的父节点（P）设置为黑色</span></div><div class="line">                setColor(parentOf(x), BLACK);</div><div class="line">                <span class="comment">//将X的叔节点（U）设置为黑色</span></div><div class="line">                setColor(y, BLACK);</div><div class="line">                <span class="comment">//将X的父节点的父节点（G）设置红色</span></div><div class="line">                setColor(parentOf(parentOf(x)), RED);</div><div class="line">                x = parentOf(parentOf(x));</div><div class="line">            &#125;</div><div class="line">            <span class="comment">//如果X的叔节点（U为黑色）；这里会存在两种情况（情况四、情况五）</span></div><div class="line">            <span class="keyword">else</span> &#123;   </div><div class="line">                <span class="comment">//如果X节点为其父节点（P）的右子树，则进行左旋转（情况四）</span></div><div class="line">                <span class="keyword">if</span> (x == rightOf(parentOf(x))) &#123;</div><div class="line">                    <span class="comment">//将X的父节点作为X</span></div><div class="line">                    x = parentOf(x);</div><div class="line">                    <span class="comment">//右旋转</span></div><div class="line">                    rotateLeft(x);</div><div class="line">                &#125;</div><div class="line">                <span class="comment">//（情况五）</span></div><div class="line">               <span class="comment">//将X的父节点（P）设置为黑色</span></div><div class="line">                setColor(parentOf(x), BLACK);</div><div class="line">                <span class="comment">//将X的父节点的父节点（G）设置红色</span></div><div class="line">                setColor(parentOf(parentOf(x)), RED);</div><div class="line">                <span class="comment">//以X的父节点的父节点（G）为中心右旋转</span></div><div class="line">                rotateRight(parentOf(parentOf(x)));</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//如果X的父节点（P）是其父节点的父节点（G）的右节点</span></div><div class="line">        <span class="keyword">else</span> &#123;</div><div class="line">            <span class="comment">//获取X的叔节点（U）</span></div><div class="line">            Entry&lt;K,V&gt; y = leftOf(parentOf(parentOf(x)));</div><div class="line">          <span class="comment">//如果X的叔节点（U） 为红色（情况三）</span></div><div class="line">            <span class="keyword">if</span> (colorOf(y) == RED) &#123;</div><div class="line">                <span class="comment">//将X的父节点（P）设置为黑色</span></div><div class="line">                setColor(parentOf(x), BLACK);</div><div class="line">                <span class="comment">//将X的叔节点（U）设置为黑色</span></div><div class="line">                setColor(y, BLACK);</div><div class="line">                <span class="comment">//将X的父节点的父节点（G）设置红色</span></div><div class="line">                setColor(parentOf(parentOf(x)), RED);</div><div class="line">                x = parentOf(parentOf(x));</div><div class="line">            &#125;</div><div class="line">          <span class="comment">//如果X的叔节点（U为黑色）；这里会存在两种情况（情况四、情况五）</span></div><div class="line">            <span class="keyword">else</span> &#123;</div><div class="line">                <span class="comment">//如果X节点为其父节点（P）的右子树，则进行左旋转（情况四）</span></div><div class="line">                <span class="keyword">if</span> (x == leftOf(parentOf(x))) &#123;</div><div class="line">                    <span class="comment">//将X的父节点作为X</span></div><div class="line">                    x = parentOf(x);</div><div class="line">                   <span class="comment">//右旋转</span></div><div class="line">                    rotateRight(x);</div><div class="line">                &#125;</div><div class="line">                <span class="comment">//（情况五）</span></div><div class="line">                <span class="comment">//将X的父节点（P）设置为黑色</span></div><div class="line">                setColor(parentOf(x), BLACK);</div><div class="line">                <span class="comment">//将X的父节点的父节点（G）设置红色</span></div><div class="line">                setColor(parentOf(parentOf(x)), RED);</div><div class="line">                <span class="comment">//以X的父节点的父节点（G）为中心右旋转</span></div><div class="line">                rotateLeft(parentOf(parentOf(x)));</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//将根节点G强制设置为黑色</span></div><div class="line">    root.color = BLACK;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>左旋: rotateLeft()</p>
+<p>所谓左旋转，就是将新增节点（N）当做其父节点（P），将其父节点P当做新增节点（N）的左子节点。即：G.left —&gt; N ,N.left —&gt; P。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">rotateLeft</span><span class="params">(Entry&lt;K,V&gt; p)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (p != <span class="keyword">null</span>) &#123;</div><div class="line">        <span class="comment">//获取P的右子节点，其实这里就相当于新增节点N（情况四而言）</span></div><div class="line">        Entry&lt;K,V&gt; r = p.right;</div><div class="line">        <span class="comment">//将R的左子树设置为P的右子树</span></div><div class="line">        p.right = r.left;</div><div class="line">        <span class="comment">//若R的左子树不为空，则将P设置为R左子树的父亲</span></div><div class="line">        <span class="keyword">if</span> (r.left != <span class="keyword">null</span>)</div><div class="line">            r.left.parent = p;</div><div class="line">        <span class="comment">//将P的父亲设置R的父亲</span></div><div class="line">        r.parent = p.parent;</div><div class="line">        <span class="comment">//如果P的父亲为空，则将R设置为跟节点</span></div><div class="line">        <span class="keyword">if</span> (p.parent == <span class="keyword">null</span>)</div><div class="line">            root = r;</div><div class="line">        <span class="comment">//如果P为其父节点（G）的左子树，则将R设置为P父节点(G)左子树</span></div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (p.parent.left == p)</div><div class="line">            p.parent.left = r;</div><div class="line">        <span class="comment">//否则R设置为P的父节点（G）的右子树</span></div><div class="line">        <span class="keyword">else</span></div><div class="line">            p.parent.right = r;</div><div class="line">        <span class="comment">//将P设置为R的左子树</span></div><div class="line">        r.left = p;</div><div class="line">        <span class="comment">//将R设置为P的父节点</span></div><div class="line">        p.parent = r;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>右旋：rotateRight()</p>
+<p>所谓右旋转即，P.right —&gt; G、G.parent —&gt; P</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">rotateRight</span><span class="params">(Entry&lt;K,V&gt; p)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (p != <span class="keyword">null</span>) &#123;</div><div class="line">        <span class="comment">//将L设置为P的左子树</span></div><div class="line">        Entry&lt;K,V&gt; l = p.left;</div><div class="line">        <span class="comment">//将L的右子树设置为P的左子树</span></div><div class="line">        p.left = l.right;</div><div class="line">        <span class="comment">//若L的右子树不为空，则将P设置L的右子树的父节点</span></div><div class="line">        <span class="keyword">if</span> (l.right != <span class="keyword">null</span>) </div><div class="line">            l.right.parent = p;</div><div class="line">        <span class="comment">//将P的父节点设置为L的父节点</span></div><div class="line">        l.parent = p.parent;</div><div class="line">        <span class="comment">//如果P的父节点为空，则将L设置根节点</span></div><div class="line">        <span class="keyword">if</span> (p.parent == <span class="keyword">null</span>)</div><div class="line">            root = l;</div><div class="line">        <span class="comment">//若P为其父节点的右子树，则将L设置为P的父节点的右子树</span></div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (p.parent.right == p)</div><div class="line">            p.parent.right = l;</div><div class="line">        <span class="comment">//否则将L设置为P的父节点的左子树</span></div><div class="line">        <span class="keyword">else</span> </div><div class="line">            p.parent.left = l;</div><div class="line">        <span class="comment">//将P设置为L的右子树</span></div><div class="line">        l.right = p;</div><div class="line">        <span class="comment">//将L设置为P的父节点</span></div><div class="line">        p.parent = l;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/03/15/Java-HashTable/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Blue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blue的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/15/Java-HashTable/" itemprop="url">
+                  Java-HashTable
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-15T14:01:41+08:00">
+                2017-03-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>HashTable的定义:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Hashtable</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">extends</span> <span class="title">Dictionary</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">implements</span> <span class="title">Map</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt;, <span class="title">Cloneable</span>, <span class="title">java</span>.<span class="title">io</span>.<span class="title">Serializable</span></span></div></pre></td></tr></table></figure>
+<p>HashTable继承Dictionary类, 实现Map接口, Dictionary类是任何可将键映射到相应值的类的抽象父类. 任何一个Dictionary对象中, 每个键至多与一个值相关联.</p>
+<p>HashTable采用”拉链法”实现哈希表, 定义有几个重要参数: table, count, threshold, loadFactor, modCount.</p>
+<ul>
+<li>table: 为一个Entry[]数组类型, Entry表示”拉链”的节点,  每个Entry表示一个键值对, 哈希表的”key-value键值对”, 都是存储在Entry数组中</li>
+<li>count: HashTable的大小, 指容器中包含Entry键值对的数量</li>
+<li>threshold: HashTable的阈值, 用于判断是否需要调整HashTable的容量. threshold＝容量*负载因子</li>
+<li>loadFactory: 负载因子</li>
+<li>modCount: 用于实现”fail-fast”机制(快速失败).</li>
+</ul>
+<p>快速失败是在并发集合中, 其进行迭代操作时, 如果其他线程对其进行结构性的修改, 这时迭代器立马感知到, 并抛出<code>ConcurrentModificationException</code>异常.</p>
+<p><strong>构造方法</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">Hashtable</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>(<span class="number">11</span>, <span class="number">0.75f</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>默认构造容量为11, 负载因子为0.75</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">Hashtable</span><span class="params">(<span class="keyword">int</span> initialCapacity)</span> </span>&#123;</div><div class="line">    <span class="keyword">this</span>(initialCapacity, <span class="number">0.75f</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>指定初始化容量和默认负载因子</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">Hashtable</span><span class="params">(<span class="keyword">int</span> initialCapacity, <span class="keyword">float</span> loadFactor)</span> </span>&#123;</div><div class="line">        <span class="comment">//验证初始容量</span></div><div class="line">        <span class="keyword">if</span> (initialCapacity &lt; <span class="number">0</span>)</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"Illegal Capacity: "</span>+</div><div class="line">                                               initialCapacity);</div><div class="line">        <span class="comment">//验证加载因子</span></div><div class="line">        <span class="keyword">if</span> (loadFactor &lt;= <span class="number">0</span> || Float.isNaN(loadFactor))</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"Illegal Load: "</span>+loadFactor);</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (initialCapacity==<span class="number">0</span>)</div><div class="line">            initialCapacity = <span class="number">1</span>;</div><div class="line"></div><div class="line">        <span class="keyword">this</span>.loadFactor = loadFactor;</div><div class="line"></div><div class="line">        <span class="comment">//初始化table，获得大小为initialCapacity的table数组</span></div><div class="line">        table = <span class="keyword">new</span> Entry[initialCapacity];</div><div class="line">        <span class="comment">//计算阀值</span></div><div class="line">        threshold = (<span class="keyword">int</span>)Math.min(initialCapacity * loadFactor, MAX_ARRAY_SIZE + <span class="number">1</span>);</div><div class="line">        <span class="comment">//初始化HashSeed值</span></div><div class="line">        initHashSeedAsNeeded(initialCapacity);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>initHashSeedAsNeeded方法用于初始化hashSeed参数, 其中hashSeed用于计算key的hash值, 它与key的hashCode进行按位异或运算. </p>
+<p>hashSeed是一个与实例相关的随机值, 主要用来解决hash冲突.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">hash</span><span class="params">(Object k)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> hashSeed ^ k.hashCode();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>构造一个与给定的 Map 具有相同映射关系的新哈希表</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">Hashtable</span><span class="params">(Map&lt;? extends K, ? extends V&gt; t)</span> </span>&#123;</div><div class="line">    <span class="comment">//设置table容器大小，其值==t.size * 2 + 1</span></div><div class="line">    <span class="keyword">this</span>(Math.max(<span class="number">2</span>*t.size(), <span class="number">11</span>), <span class="number">0.75f</span>);</div><div class="line">    putAll(t);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>put方法</strong></p>
+<p>put方法将指定key映射到此哈希表中的指定value. 这里的key和value都不能为空</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> V <span class="title">put</span><span class="params">(K key, V value)</span> </span>&#123;</div><div class="line">        <span class="comment">// 确保value不为null</span></div><div class="line">        <span class="keyword">if</span> (value == <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">/*</span></div><div class="line">         * 确保key在table[]是不重复的</div><div class="line">         * 处理过程：</div><div class="line">         * 1、计算key的hash值，确认在table[]中的索引位置</div><div class="line">         * 2、迭代index索引位置，如果该位置处的链表中存在一个一样的key，则替换其value，返回旧值</div><div class="line">         */</div><div class="line">        Entry tab[] = table;</div><div class="line">        <span class="keyword">int</span> hash = hash(key);    <span class="comment">//计算key的hash值</span></div><div class="line">        <span class="keyword">int</span> index = (hash &amp; <span class="number">0x7FFFFFFF</span>) % tab.length;     <span class="comment">//确认该key的索引位置</span></div><div class="line">        <span class="comment">//迭代，寻找该key，替换</span></div><div class="line">        <span class="keyword">for</span> (Entry&lt;K,V&gt; e = tab[index] ; e != <span class="keyword">null</span> ; e = e.next) &#123;</div><div class="line">            <span class="keyword">if</span> ((e.hash == hash) &amp;&amp; e.key.equals(key)) &#123;</div><div class="line">                V old = e.value;</div><div class="line">                e.value = value;</div><div class="line">                <span class="keyword">return</span> old;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        modCount++;</div><div class="line">        <span class="keyword">if</span> (count &gt;= threshold) &#123;  <span class="comment">//如果容器中的元素数量已经达到阀值，则进行扩容操作</span></div><div class="line">            rehash();</div><div class="line">            tab = table;</div><div class="line">            hash = hash(key);</div><div class="line">            index = (hash &amp; <span class="number">0x7FFFFFFF</span>) % tab.length;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">// 在索引位置处插入一个新的节点</span></div><div class="line">        Entry&lt;K,V&gt; e = tab[index];</div><div class="line">        tab[index] = <span class="keyword">new</span> Entry&lt;&gt;(hash, key, value, e);</div><div class="line">        <span class="comment">//容器中元素+1</span></div><div class="line">        count++;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li>计算key的hash值</li>
+<li>根据hash值获得key在table数组中的索引位置</li>
+<li>迭代key处的Entry链表, 如果链表存在一个相同的key对象, 直接替换value</li>
+<li>不存在相同的key, 把key-value节点插入到改index索引位置</li>
+</ol>
+<blockquote>
+<ol>
+<li><p>在put方法中, 如果要向table[]中添加元素, 会先进行容量的校验. 如果容量达到阈值, 会进行扩容处理</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">&gt;    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">rehash</span><span class="params">()</span> </span>&#123;</div><div class="line">&gt;            <span class="keyword">int</span> oldCapacity = table.length;</div><div class="line">&gt;            <span class="comment">//元素</span></div><div class="line">&gt;            Entry&lt;K,V&gt;[] oldMap = table;</div><div class="line">&gt;</div><div class="line">&gt;            <span class="comment">//新容量=旧容量 * 2 + 1</span></div><div class="line">&gt;            <span class="keyword">int</span> newCapacity = (oldCapacity &lt;&lt; <span class="number">1</span>) + <span class="number">1</span>;</div><div class="line">&gt;            <span class="keyword">if</span> (newCapacity - MAX_ARRAY_SIZE &gt; <span class="number">0</span>) &#123;</div><div class="line">&gt;                <span class="keyword">if</span> (oldCapacity == MAX_ARRAY_SIZE)</div><div class="line">&gt;                    <span class="keyword">return</span>;</div><div class="line">&gt;                newCapacity = MAX_ARRAY_SIZE;</div><div class="line">&gt;            &#125;</div><div class="line">&gt;</div><div class="line">&gt;            <span class="comment">//新建一个size = newCapacity 的HashTable</span></div><div class="line">&gt;            Entry&lt;K,V&gt;[] newMap = <span class="keyword">new</span> Entry[];</div><div class="line">&gt;</div><div class="line">&gt;            modCount++;</div><div class="line">&gt;            <span class="comment">//重新计算阀值</span></div><div class="line">&gt;            threshold = (<span class="keyword">int</span>)Math.min(newCapacity * loadFactor, MAX_ARRAY_SIZE + <span class="number">1</span>);</div><div class="line">&gt;            <span class="comment">//重新计算hashSeed</span></div><div class="line">&gt;            <span class="keyword">boolean</span> rehash = initHashSeedAsNeeded(newCapacity);</div><div class="line">&gt;</div><div class="line">&gt;            table = newMap;</div><div class="line">&gt;            <span class="comment">//将原来的元素拷贝到新的HashTable中</span></div><div class="line">&gt;            <span class="keyword">for</span> (<span class="keyword">int</span> i = oldCapacity ; i-- &gt; <span class="number">0</span> ;) &#123;</div><div class="line">&gt;                <span class="keyword">for</span> (Entry&lt;K,V&gt; old = oldMap[i] ; old != <span class="keyword">null</span> ; ) &#123;</div><div class="line">&gt;                    Entry&lt;K,V&gt; e = old;</div><div class="line">&gt;                    old = old.next;</div><div class="line">&gt;</div><div class="line">&gt;                    <span class="keyword">if</span> (rehash) &#123;</div><div class="line">&gt;                        e.hash = hash(e.key);</div><div class="line">&gt;                    &#125;</div><div class="line">&gt;                    <span class="keyword">int</span> index = (e.hash &amp; <span class="number">0x7FFFFFFF</span>) % newCapacity;</div><div class="line">&gt;                    e.next = newMap[index];</div><div class="line">&gt;                    newMap[index] = e;</div><div class="line">&gt;                &#125;</div><div class="line">&gt;            &#125;</div><div class="line">&gt;        &#125;</div><div class="line">&gt;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+</blockquote>
+<p>&gt;</p>
+<blockquote>
+<ol>
+<li><p>计算索引时<code>hash &amp; 0x7FFFFFFF</code>这一步是为了把负数转换为正数, </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt;    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">hash</span><span class="params">(Object k)</span> </span>&#123;</div><div class="line">&gt;        <span class="keyword">return</span> hashSeed ^ k.hashCode();</div><div class="line">&gt;    &#125;</div><div class="line">&gt;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+</blockquote>
+<p><strong>HashTable与HashMap的区别</strong></p>
+<ol>
+<li>HashTable基于Dictionary类, HashMap基于AbstractMap.</li>
+<li>HashMap可以允许存在一个null的key和任意个null的value, 但HashTable的key和value都不允许为null</li>
+<li>HashTable的方法是同步的, 而HashMap的方法不是同步的.</li>
+</ol>
+<p>Collections类存在一个静态方法: <code>synchronizedMap()</code>这个方法创建了一个线程安全的Map对象, 并把它作为一个封装对象来返回. 所以通过Collections类的synchronizedMap方法是可以我们你同步访问潜在的HashMap</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/03/15/Java-HashSet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Blue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blue的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/15/Java-HashSet/" itemprop="url">
+                  Java-HashSet
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-15T11:02:59+08:00">
+                2017-03-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>HashSet是基于HashMap来实现的, 底层采用HashMap来保存元素.</p>
+<p><strong>HashSet定义</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HashSet</span>&lt;<span class="title">E</span>&gt; <span class="keyword">extends</span> <span class="title">AbstractSet</span>&lt;<span class="title">E</span>&gt; <span class="keyword">implements</span> <span class="title">Set</span>&lt;<span class="title">E</span>&gt;, <span class="title">Cloneable</span>, <span class="title">java</span>.<span class="title">io</span>.<span class="title">Serializable</span></span></div></pre></td></tr></table></figure>
+<p>Set接口是一种不包含重复元素的Collection, 它维持自己的内部排序, 所以随机访问没有任何意义.</p>
+<p><strong>基本属性</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//基于HashMap实现，底层使用HashMap保存所有元素</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">transient</span> HashMap&lt;E,Object&gt; map;</div><div class="line"></div><div class="line"><span class="comment">//定义一个Object对象作为HashMap的value</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Object PRESENT = <span class="keyword">new</span> Object();</div></pre></td></tr></table></figure>
+<p><strong>构造函数</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 默认构造函数</div><div class="line"> * 初始化一个空的HashMap，并使用默认初始容量为16和加载因子0.75。</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">HashSet</span><span class="params">()</span> </span>&#123;</div><div class="line">    map = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 构造一个包含指定 collection 中的元素的新 set。</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">HashSet</span><span class="params">(Collection&lt;? extends E&gt; c)</span> </span>&#123;</div><div class="line">    map = <span class="keyword">new</span> HashMap&lt;&gt;(Math.max((<span class="keyword">int</span>) (c.size()/.<span class="number">75f</span>) + <span class="number">1</span>, <span class="number">16</span>));</div><div class="line">    addAll(c);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 构造一个新的空 set，其底层 HashMap 实例具有指定的初始容量和指定的加载因子</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">HashSet</span><span class="params">(<span class="keyword">int</span> initialCapacity, <span class="keyword">float</span> loadFactor)</span> </span>&#123;</div><div class="line">    map = <span class="keyword">new</span> HashMap&lt;&gt;(initialCapacity, loadFactor);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 构造一个新的空 set，其底层 HashMap 实例具有指定的初始容量和默认的加载因子（0.75）。</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">HashSet</span><span class="params">(<span class="keyword">int</span> initialCapacity)</span> </span>&#123;</div><div class="line">   map = <span class="keyword">new</span> HashMap&lt;&gt;(initialCapacity);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 在API中我没有看到这个构造函数，今天看源码才发现（原来访问权限为包权限，不对外公开的）</div><div class="line"> * 以指定的initialCapacity和loadFactor构造一个新的空链接哈希集合。</div><div class="line"> * dummy 为标识 该构造函数主要作用是对LinkedHashSet起到一个支持作用</div><div class="line"> */</div><div class="line">HashSet(<span class="keyword">int</span> initialCapacity, <span class="keyword">float</span> loadFactor, <span class="keyword">boolean</span> dummy) &#123;</div><div class="line">   map = <span class="keyword">new</span> LinkedHashMap&lt;&gt;(initialCapacity, loadFactor);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>HashSet所有的构造函数都会构造一个新的HashMap.</p>
+<p>由于HashSet是基于HashMap实现, 所以HashSet的方法实现过程很简单</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> Iterator&lt;E&gt; <span class="title">iterator</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> map.keySet().iterator();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><code>iterator</code>方法返回set中元素的迭代器, 返回元素的顺序不是特定的. 底层调用HashMap的keySet返回所有的key.</p>
+<p>HashSet中所有元素都保存在HashMap的key中, value使用PRESENT对象.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">contains</span><span class="params">(Object o)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> map.containsKey(o);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><code>contains</code>方法判断某个元素是否存在于HashSet中, 判断是否满足以下关系:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(o == <span class="keyword">null</span> ? e==<span class="keyword">null</span>:o.equals(e));</div></pre></td></tr></table></figure>
+<p>底层调用<code>containsKey</code>方法判断HashMap的key值是否为空</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">add</span><span class="params">(E e)</span> </span>&#123;</div><div class="line">  <span class="keyword">return</span> map.put(e, PRESENT)==<span class="keyword">null</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">clone</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            HashSet&lt;E&gt; newSet = (HashSet&lt;E&gt;) <span class="keyword">super</span>.clone();</div><div class="line">            newSet.map = (HashMap&lt;E, Object&gt;) map.clone();</div><div class="line">            <span class="keyword">return</span> newSet;</div><div class="line">        &#125; <span class="keyword">catch</span> (CloneNotSupportedException e) &#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> InternalError();</div><div class="line">        &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>clone返回此 <code>HashSet</code> 实例的浅表副本：并没有复制这些元素本身</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -284,7 +1064,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-14T19:59:35+08:00">
                 2017-03-14
@@ -459,7 +1239,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-13T19:04:47+08:00">
                 2017-03-13
@@ -639,7 +1419,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-13T10:39:26+08:00">
                 2017-03-13
@@ -820,7 +1600,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-10T14:46:04+08:00">
                 2017-03-10
@@ -958,7 +1738,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-09T10:28:12+08:00">
                 2017-03-09
@@ -1064,801 +1844,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/03/08/Java内部类/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Blue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blue的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/08/Java内部类/" itemprop="url">
-                  Java内部类
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-08T16:13:52+08:00">
-                2017-03-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>内部类是指在一个外部类内部再定义一个类. 内部类作为外部类的一个成员, 依附于外部类存在.</p>
-<p>内部类可以是静态的, 可以用<code>protected</code>和<code>private</code>修饰. 内部类有以下几类: 成员内部类, 局部内部类, 静态内部类, 匿名内部类.</p>
-<p>内部类的共性:</p>
-<ol>
-<li>内部类也是一个独立的类, 在编译后内部类被编译成独立的.class文件.</li>
-<li>内部类不能用普通的方式访问</li>
-<li>内部类被声明为静态的, 就不能访问外部类的成员变量, 只能访问外部类的静态成员变量</li>
-<li>外部类不能直接访问内部类的成员, 需要通过内部类对象访问</li>
-</ol>
-<p>内部类可以自由的访问外部类的成员变量, 不管是否是<code>private</code>的</p>
-<p>因为当外部类的对象创建内部类对象时, 内部类会得到一个外部类对象的引用, 通过这个引用, 可以访问外部类对象的全部状态.</p>
-<ol>
-<li>编译器自动为内部类创建一个外部类的成员变量, 这个变量指向外部类对象的.</li>
-<li>编译器自动为内部类的构造方法添加一个外部类类型的参数. 并在构造方法中为外部类类型的成员变量赋值.</li>
-<li>调用内部类的构造函数初始化内部类对象时, 默认传入外部类的引用.</li>
-</ol>
-<p><strong>使用内部类的原因</strong></p>
-<ul>
-<li><p>内部类方法可以访问外部类定义的所有成员变量, 包括私有成员变量</p>
-</li>
-<li><p>对同一个包中其他类隐藏</p>
-</li>
-<li><p>实现多重继承</p>
-</li>
-<li><p>回调函数(匿名内部类比较便捷)</p>
-<p>多重继承的例子:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Example1</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">name</span><span class="params">()</span></span>&#123;</div><div class="line">       <span class="keyword">return</span> <span class="string">"liutao"</span>;</div><div class="line">   &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Example2</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">age</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="number">25</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainExample</span> </span>&#123;</div><div class="line"></div><div class="line">   <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">test1</span> <span class="keyword">extends</span> <span class="title">Example1</span></span>&#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">name</span><span class="params">()</span></span>&#123;</div><div class="line">          <span class="keyword">return</span> <span class="keyword">super</span>.name();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">test2</span> <span class="keyword">extends</span> <span class="title">Example2</span> </span>&#123;</div><div class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">age</span><span class="params">()</span></span>&#123;</div><div class="line">         <span class="keyword">return</span> <span class="keyword">super</span>.age();</div><div class="line">       &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">public</span> String <span class="title">name</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> test1().name(); </div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">age</span><span class="params">()</span></span>&#123;</div><div class="line">       <span class="keyword">return</span> <span class="keyword">new</span> test2().age();</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</div><div class="line">       MainExample mi=<span class="keyword">new</span> MainExample();</div><div class="line">       System.out.println(<span class="string">"姓名:"</span>+mi.name());</div><div class="line">       System.out.println(<span class="string">"年龄:"</span>+mi.age());</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="成员内部类"><a href="#成员内部类" class="headerlink" title="成员内部类"></a>成员内部类</h3><p>在一个类中直接定义内部类, 成员内部类和普通成员没什么区别. 成员内部类不能含有static的变量和方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Outer</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> i = <span class="number">1</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> j = <span class="number">10</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> k = <span class="number">20</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">outer_f1</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">outer_f2</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line"></div><div class="line">    <span class="comment">// 成员内部类中，不能定义静态成员</span></div><div class="line">    <span class="comment">// 成员内部类中，可以访问外部类的所有成员</span></div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Inner</span> </span>&#123;</div><div class="line">        <span class="comment">// static int inner_i = 100;//内部类中不允许定义静态变量</span></div><div class="line">        <span class="keyword">int</span> j = <span class="number">100</span>; <span class="comment">// 内部类和外部类的实例变量可以共存</span></div><div class="line">        <span class="keyword">int</span> inner_i = <span class="number">1</span>;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">void</span> <span class="title">inner_f1</span><span class="params">()</span> </span>&#123;</div><div class="line">            System.out.println(i);</div><div class="line">            <span class="comment">// 在内部类中访问内部类自己的变量直接用变量名</span></div><div class="line">            System.out.println(j);</div><div class="line">            <span class="comment">// 在内部类中访问内部类自己的变量也可以用this.变量名</span></div><div class="line">            System.out.println(<span class="keyword">this</span>.j);</div><div class="line">            <span class="comment">// 在内部类中访问外部类中与内部类同名的实例变量用外部类名.this.变量名</span></div><div class="line">            System.out.println(Outer.<span class="keyword">this</span>.j);</div><div class="line">            <span class="comment">// 如果内部类中没有与外部类同名的变量，则可以直接用变量名访问外部类变量</span></div><div class="line">            System.out.println(k);</div><div class="line">            outer_f1();</div><div class="line">            outer_f2();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 外部类的非静态方法访问成员内部类</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">outer_f3</span><span class="params">()</span> </span>&#123;</div><div class="line">        Inner inner = <span class="keyword">new</span> Inner();</div><div class="line">        inner.inner_f1();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 外部类的静态方法访问成员内部类，与在外部类外部访问成员内部类一样</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">outer_f4</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// step1 建立外部类对象</span></div><div class="line">        Outer out = <span class="keyword">new</span> Outer();</div><div class="line">        <span class="comment">// step2 根据外部类对象建立内部类对象</span></div><div class="line">        Inner inner = out.new Inner();</div><div class="line">        <span class="comment">// step3 访问内部类的方法</span></div><div class="line">        inner.inner_f1();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="comment">//outer_f4();//该语句的输出结果和下面三条语句的输出结果一样</span></div><div class="line">        <span class="comment">// 如果要直接创建内部类的对象，不能想当然地认为只需加上外围类Outer的名字，</span></div><div class="line">        <span class="comment">// 就可以按照通常的样子生成内部类的对象，而是必须使用此外围类的一个对象来</span></div><div class="line">        <span class="comment">// 创建其内部类的一个对象：</span></div><div class="line">        <span class="comment">// Outer.Inner outin = out.new Inner()</span></div><div class="line">        <span class="comment">// 因此，除非你已经有了外围类的一个对象，否则不可能生成内部类的对象。因为此</span></div><div class="line">        <span class="comment">// 内部类的对象会悄悄地链接到创建它的外围类的对象。如果你用的是静态的内部类，</span></div><div class="line">        <span class="comment">// 那就不需要对其外围类对象的引用。</span></div><div class="line">        Outer out = <span class="keyword">new</span> Outer();</div><div class="line">        Outer.Inner outin = out.new Inner();</div><div class="line">        outin.inner_f1();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="局部内部类"><a href="#局部内部类" class="headerlink" title="局部内部类"></a>局部内部类</h3><p>在方法中定义的类称为局部内部类. 和局部变量类似,  只能访问当前代码块内的常量, 和外部类的所有成员.</p>
-<blockquote>
-<ol>
-<li>局部内部类只能在定义该内部类的方法实例化, 不能在此方法外对其实例化</li>
-<li>局部内部类对象不能使用该内部类所在方法的非final局部变量</li>
-</ol>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Outer</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> s = <span class="number">100</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> out_i = <span class="number">1</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">(<span class="keyword">final</span> <span class="keyword">int</span> k)</span> </span>&#123;</div><div class="line">        <span class="keyword">final</span> <span class="keyword">int</span> s = <span class="number">200</span>;</div><div class="line">        <span class="keyword">int</span> i = <span class="number">1</span>;</div><div class="line">        <span class="keyword">final</span> <span class="keyword">int</span> j = <span class="number">10</span>;</div><div class="line"></div><div class="line">        <span class="comment">// 定义在方法内部</span></div><div class="line">        <span class="class"><span class="keyword">class</span> <span class="title">Inner</span> </span>&#123;</div><div class="line">            <span class="keyword">int</span> s = <span class="number">300</span>;<span class="comment">// 可以定义与外部类同名的变量</span></div><div class="line"></div><div class="line">            <span class="comment">// static int m = 20;//不可以定义静态变量</span></div><div class="line">            Inner(<span class="keyword">int</span> k) &#123;</div><div class="line">                inner_f(k);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="keyword">int</span> inner_i = <span class="number">100</span>;</div><div class="line"></div><div class="line">            <span class="function"><span class="keyword">void</span> <span class="title">inner_f</span><span class="params">(<span class="keyword">int</span> k)</span> </span>&#123;</div><div class="line">                <span class="comment">// 如果内部类没有与外部类同名的变量，在内部类中可以直接访问外部类的实例变量</span></div><div class="line">                System.out.println(out_i);</div><div class="line">                <span class="comment">// 可以访问外部类的局部变量(即方法内的变量)，但是变量必须是final的</span></div><div class="line">                System.out.println(j);</div><div class="line">                <span class="comment">// System.out.println(i);</span></div><div class="line">                <span class="comment">// 如果内部类中有与外部类同名的变量，直接用变量名访问的是内部类的变量</span></div><div class="line">                System.out.println(s);</div><div class="line">                <span class="comment">// 用this.变量名访问的也是内部类变量</span></div><div class="line">                System.out.println(<span class="keyword">this</span>.s);</div><div class="line">                <span class="comment">// 用外部类名.this.内部类变量名访问的是外部类变量</span></div><div class="line">                System.out.println(Outer.<span class="keyword">this</span>.s);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">new</span> Inner(k);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="comment">// 访问局部内部类必须先有外部类对象</span></div><div class="line">        Outer out = <span class="keyword">new</span> Outer();</div><div class="line">        out.f(<span class="number">3</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="静态内部类"><a href="#静态内部类" class="headerlink" title="静态内部类"></a>静态内部类</h3><p>普通内部类对象隐含一个指向外部类对象的引用. 而静态内部类不是这样的</p>
-<ol>
-<li>不需要外部类的对象就可以创建静态内部类的对象</li>
-<li>不能从静态内部类的对象访问非静态的外部类对象</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Outer</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> i = <span class="number">1</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> j = <span class="number">10</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">outer_f1</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">outer_f2</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line"></div><div class="line">    <span class="comment">// 静态内部类可以用public,protected,private修饰</span></div><div class="line">    <span class="comment">// 静态内部类中可以定义静态或者非静态的成员</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Inner</span> </span>&#123;</div><div class="line">        <span class="keyword">static</span> <span class="keyword">int</span> inner_i = <span class="number">100</span>;</div><div class="line">        <span class="keyword">int</span> inner_j = <span class="number">200</span>;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">inner_f1</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="comment">// 静态内部类只能访问外部类的静态成员(包括静态变量和静态方法)</span></div><div class="line">            System.out.println(<span class="string">"Outer.i"</span> + i);</div><div class="line">            outer_f1();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">void</span> <span class="title">inner_f2</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="comment">// 静态内部类不能访问外部类的非静态成员(包括非静态变量和非静态方法)</span></div><div class="line">            <span class="comment">// System.out.println("Outer.i"+j);</span></div><div class="line">            <span class="comment">// outer_f2();</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">outer_f3</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// 外部类访问内部类的静态成员：内部类.静态成员</span></div><div class="line">        System.out.println(Inner.inner_i);</div><div class="line">        Inner.inner_f1();</div><div class="line">        <span class="comment">// 外部类访问内部类的非静态成员:实例化内部类即可</span></div><div class="line">        Inner inner = <span class="keyword">new</span> Inner();</div><div class="line">        inner.inner_f2();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="keyword">new</span> Outer().outer_f3();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>静态内部类的实例可以通过这样创建</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Outer.Inner in = <span class="keyword">new</span> Outer.Inner();</div></pre></td></tr></table></figure>
-<h3 id="匿名内部类"><a href="#匿名内部类" class="headerlink" title="匿名内部类"></a>匿名内部类</h3><p>什么时候需要使用匿名内部类:</p>
-<ul>
-<li>只用到类的一个实例</li>
-<li>类定义后马上用刀</li>
-<li>类非常小</li>
-<li>给类命名并不会导致你的代码更容易被理解</li>
-</ul>
-<p>原则:</p>
-<ul>
-<li>匿名内部类不能有构造方法</li>
-<li>不能定义任何静态成员变量, 方法, 类</li>
-<li>不能使用public, protected, private, static</li>
-<li>只能创建一个实例</li>
-<li>匿名内部类事局部内部类</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/03/08/Java接口和抽象类/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Blue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blue的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/08/Java接口和抽象类/" itemprop="url">
-                  Java接口和抽象类
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-08T15:12:22+08:00">
-                2017-03-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Java接口和抽象类"><a href="#Java接口和抽象类" class="headerlink" title="Java接口和抽象类"></a>Java接口和抽象类</h2><h3 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h3><p>抽象方法是一种特殊的方法, 只有声明, 没有具体的实现. 抽象的方法声明:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">fun</span><span class="params">()</span></span>;</div></pre></td></tr></table></figure>
-<p>抽象方法必须用<code>abstract</code>关键字修饰, 如果一个类有抽象方法, 这个类就是抽象类, 抽象类必须在class前用<code>abstract</code>关键字修饰. <strong>由于抽象类中有没有具体实现的方法, 所以不能创建抽象类的实例</strong>.</p>
-<p>含有抽象方法的类称为抽象类, 并不是抽象类只能有抽象方法, 它和普通类一样, 可以有成员变量和普通的成员方法.</p>
-<p>抽象类和普通类的主要区别:</p>
-<ol>
-<li>抽象方法必须为public 或者 protected. 默认情况下默认是public</li>
-<li>抽象类不能创建对象.</li>
-<li>如果一个类继承一个抽象类, 子类必须实现抽象类的抽象方法.</li>
-</ol>
-<h3 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h3><p>接口是对行为的抽象. 接口的定义:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IntefaceName</span> </span>&#123;</div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>接口可以含有变量和方法. 接口中的变量被隐式的指定为<code>public static final</code>变量. 方法会被隐式的制定为<code>public abstract</code>方法.</p>
-<p>接口中的方法必须是<code>public</code>的.</p>
-<p>接口中的方法必须是抽象的.</p>
-<p><strong>抽象类和接口的区别</strong></p>
-<ol>
-<li>语法上:<ul>
-<li>抽象类可以提供成员方法的实现细节, 而接口中只能存在public abstract方法</li>
-<li>抽象类中的成员变量可以是各种类型的, 而接口中的成员变量只能是public static final类型的</li>
-<li>接口中布恩感有静态代码块和静态方法. 抽象类可以有</li>
-<li>一个类只能继承一个抽象类, 可以实现多个接口</li>
-</ul>
-</li>
-<li>设计上<ul>
-<li>抽象类是类的抽象, 接口是对行为的抽象. 继承是一种”是不是”的关系, 接口是一种”有没有”的关系</li>
-<li>抽象类作为很多子类的父类, 是一种模板式设计. 接口是一种行为规范, 是辐射式设计.</li>
-</ul>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/03/04/Java-泛型/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Blue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blue的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/04/Java-泛型/" itemprop="url">
-                  Java-泛型
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-04T20:24:09+08:00">
-                2017-03-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>泛型本质上是提供类型的”类型参数”, 也被称为参数化类型或参数多态. 使用泛型的Java程序和普通的Java程序基本相同, 只是多了参数化的类型同时少了一些类型转换.</p>
-<p>实际上使用泛型的程序首先被转化为一般不带泛型的Java程序再进行处理. 编译器自动完成转化, 具体步骤:</p>
-<ol>
-<li><p>把参数化类型的类型参数擦除</p>
-</li>
-<li><p>把类型变量用”上限”取代, 通常是Object. 类型变量指的是: 实例域, 本地方法域, 方法参数和方法返回值中用来标记类型信息的变量. 如：</p>
-<ol>
-<li>实例域: <code>A a;</code></li>
-<li>方法声明: <code>Node (A a){}</code></li>
-</ol>
-<p>A就是类型变量</p>
-</li>
-<li><p>添加类型转换并插入”桥方法”, 方便<code>overridden</code>能够正常工作</p>
-</li>
-</ol>
-<p>使用泛型的特点:</p>
-<ol>
-<li>类型安全. 泛型的主要目标就是提高类型安全</li>
-<li>消除强制类型转换.</li>
-<li>向后兼容.</li>
-<li>层次清晰, 恪守规范. 泛型主要是在编译器层面实现的, 对JVM是透明的</li>
-<li>性能收益.</li>
-</ol>
-<p><strong>带泛型的类</strong></p>
-<p>一个普通的类:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Box</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> String object;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">set</span><span class="params">(String object)</span> </span>&#123; <span class="keyword">this</span>.object = object; &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">get</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> object; &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这个类不好的地方在于Box里只能放入String类型的元素, 如果需要放入Integer等其他元素时, 需要重写一个Box, 代码不能复用.</p>
-<p>使用泛型可以解决这个问题:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Box</span>&lt;<span class="title">T</span>&gt; </span>&#123;</div><div class="line">    <span class="comment">// T stands for "Type"</span></div><div class="line">    <span class="keyword">private</span> T t;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">set</span><span class="params">(T t)</span> </span>&#123; <span class="keyword">this</span>.t = t; &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> T <span class="title">get</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> t; &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>可以把T替换为任何一个类型:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Box&lt;Integer&gt; integerBox = <span class="keyword">new</span> Box&lt;Integer&gt;();</div><div class="line">Box&lt;Double&gt; doubleBox = <span class="keyword">new</span> Box&lt;Double&gt;();</div><div class="line">Box&lt;String&gt; stringBox = <span class="keyword">new</span> Box&lt;String&gt;();</div></pre></td></tr></table></figure>
-<p><strong>泛型方法</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Pair</span>&lt;<span class="title">K</span>, <span class="title">V</span>&gt; </span>&#123;</div><div class="line">    <span class="keyword">private</span> K key;</div><div class="line">    <span class="keyword">private</span> V value;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Pair</span><span class="params">(K key, V value)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.key = key;</div><div class="line">        <span class="keyword">this</span>.value = value;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setKey</span><span class="params">(K key)</span> </span>&#123; <span class="keyword">this</span>.key = key; &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setValue</span><span class="params">(V value)</span> </span>&#123; <span class="keyword">this</span>.value = value; &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> K <span class="title">getKey</span><span class="params">()</span>   </span>&#123; <span class="keyword">return</span> key; &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> V <span class="title">getValue</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> value; &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><strong>边界符</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T extends Comparable&lt;T&gt;&gt; <span class="function"><span class="keyword">int</span> <span class="title">countGreaterThan</span><span class="params">(T[] anArray, T elem)</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span> (T e : anArray)</div><div class="line">        <span class="keyword">if</span> (e.compareTo(elem) &gt; <span class="number">0</span>)</div><div class="line">            ++count;</div><div class="line">    <span class="keyword">return</span> count;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><strong>通配符</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">CovariantReader</span>&lt;<span class="title">T</span>&gt; </span>&#123;</div><div class="line">    <span class="function">T <span class="title">readCovariant</span><span class="params">(List&lt;? extends T&gt; list)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> list.get(<span class="number">0</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">f2</span><span class="params">()</span> </span>&#123;</div><div class="line">    CovariantReader&lt;Fruit&gt; fruitReader = <span class="keyword">new</span> CovariantReader&lt;Fruit&gt;();</div><div class="line">    Fruit f = fruitReader.readCovariant(fruit);</div><div class="line">    Fruit a = fruitReader.readCovariant(apples);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">    f2();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这样就相当与告诉编译器， fruitReader的readCovariant方法接受的参数只要是满足Fruit的子类就行(包括Fruit自身)，这样子类和父类之间的关系也就关联上了</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/03/03/Java枚举-Enum/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Blue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blue的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/03/Java枚举-Enum/" itemprop="url">
-                  Java枚举-Enum
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-03T15:38:33+08:00">
-                2017-03-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>如果需要描绘彩虹的七种颜色, Java程序中通常使用常量定义方式来实现.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">Public <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">RainbowColor</span> </span>&#123; </div><div class="line">   </div><div class="line">   <span class="comment">// 红橙黄绿青蓝紫七种颜色的常量定义</span></div><div class="line">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> RED = <span class="number">0</span>; </div><div class="line">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> ORANGE = <span class="number">1</span>; </div><div class="line">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> YELLOW = <span class="number">2</span>; </div><div class="line">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> GREEN = <span class="number">3</span>; </div><div class="line">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> CYAN = <span class="number">4</span>; </div><div class="line">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> BLUE = <span class="number">5</span>; </div><div class="line">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> PURPLE = <span class="number">6</span>; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>使用的时候，你可以在程序中直接引用这些常量。但是，这种方式还是存在着一些问题。</p>
-<ol>
-<li><p>类型不安全</p>
-<p>由于颜色常量的对应值是整数形，所以程序执行过程中很有可能给颜色变量传入一个任意的整数值，导致出现错误。</p>
-</li>
-<li><p>没有命名空间</p>
-<p>由于颜色常量只是类的属性，当你使用的时候不得不通过类来访问。</p>
-</li>
-<li><p>一致性差</p>
-<p>因为整形枚举属于编译期常量，所以编译过程完成后，所有客户端和服务器端引用的地方，会直接将整数值写入。这样，当你修改旧的枚举整数值后或者增加新的枚举值后，所有引用地方代码都需要重新编译，否则运行时刻就会出现错误。</p>
-</li>
-<li><p>类型无指意性</p>
-<p>由于颜色枚举值仅仅是一些无任何含义的整数值，如果在运行期调试时候，你就会发现日志中有很多魔术数字，但除了程序员本身，其他人很难明白其奥秘。</p>
-</li>
-</ol>
-<p>定义Enum类型语法:</p>
-<p>enum 关键字加上名称和大括号包含起来的枚举值体即可</p>
-<p><code>enum RainbowColor { RED, ORANGE, YELLOW, GREEN, CYAN, BLUE, PURPLE }</code></p>
-<p>Enum 类型默认实现 Comparable 和 Serializable 接口.</p>
-<p>Enum类型使用:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 定义一周七天的枚举类型			</span></div><div class="line"> <span class="keyword">public</span> <span class="keyword">enum</span> WeekDayEnum &#123; Mon, Tue, Wed, Thu, Fri, Sat, Sun &#125; </div><div class="line"></div><div class="line"> <span class="comment">// 读取当天的信息</span></div><div class="line"> WeekDayEnum today = readToday(); </div><div class="line"> </div><div class="line"> <span class="comment">// 根据日期来选择进行活动</span></div><div class="line"> <span class="keyword">switch</span>(today) &#123; </div><div class="line">  Mon: <span class="keyword">do</span> something; <span class="keyword">break</span>; </div><div class="line">  Tue: <span class="keyword">do</span> something; <span class="keyword">break</span>; </div><div class="line">  Wed: <span class="keyword">do</span> something; <span class="keyword">break</span>; </div><div class="line">  Thu: <span class="keyword">do</span> something; <span class="keyword">break</span>; </div><div class="line">  Fri: <span class="keyword">do</span> something; <span class="keyword">break</span>; </div><div class="line">  Sat: play sports game; <span class="keyword">break</span>; </div><div class="line">  Sun: have a rest; <span class="keyword">break</span>; </div><div class="line"> &#125;</div></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 定义 RSS(Really Simple Syndication) 种子的枚举类型</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">enum</span> NewsRSSFeedEnum &#123; </div><div class="line">   <span class="comment">// 雅虎头条新闻 RSS 种子</span></div><div class="line">   YAHOO_TOP_STORIES(<span class="string">"http://rss.news.yahoo.com/rss/topstories"</span>), </div><div class="line">   </div><div class="line">   <span class="comment">//CBS 头条新闻 RSS 种子</span></div><div class="line">   CBS_TOP_STORIES(<span class="string">"http://feeds.cbsnews.com/CBSNewsMain?format=xml"</span>), </div><div class="line">   </div><div class="line">   <span class="comment">// 洛杉矶时报头条新闻 RSS 种子</span></div><div class="line">   LATIMES_TOP_STORIES(<span class="string">"http://feeds.latimes.com/latimes/news?format=xml"</span>); </div><div class="line">       </div><div class="line">   <span class="comment">// 枚举对象的 RSS 地址的属性</span></div><div class="line">   <span class="keyword">private</span> String rss_url; </div><div class="line">       </div><div class="line">   <span class="comment">// 枚举对象构造函数</span></div><div class="line">   <span class="function"><span class="keyword">private</span> <span class="title">NewsRSSFeedEnum</span><span class="params">(String rss)</span> </span>&#123; </div><div class="line">       <span class="keyword">this</span>.rss_url = rss; </div><div class="line">   &#125; </div><div class="line">       </div><div class="line">   <span class="comment">// 枚举对象获取 RSS 地址的方法</span></div><div class="line">   <span class="function"><span class="keyword">public</span> String <span class="title">getRssURL</span><span class="params">()</span> </span>&#123; </div><div class="line">       <span class="keyword">return</span> <span class="keyword">this</span>.rss_url; </div><div class="line">   &#125; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>用 Enum 时候有几个地方需要注意:</p>
-<ol>
-<li>enum 类型不支持 public 和 protected 修饰符的构造方法，因此构造函数一定要是 private 或 friendly 的。也正因为如此，所以枚举对象是无法在程序中通过直接调用其构造方法来初始化的。</li>
-<li>定义 enum 类型时候，如果是简单类型，那么最后一个枚举值后不用跟任何一个符号；但如果有定制方法，那么最后一个枚举值与后面代码要用分号’;’隔开，不能用逗号或空格。</li>
-<li>由于 enum 类型的值实际上是通过运行期构造出对象来表示的，所以在 cluster 环境下，每个虚拟机都会构造出一个同义的枚举对象。因而在做比较操作时候就需要注意，如果直接通过使用等号 ( ‘ == ’ ) 操作符，这些看似一样的枚举值一定不相等，因为这不是同一个对象实例。</li>
-</ol>
-<p>向枚举中添加新方法:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">enum</span> Color &#123;  </div><div class="line">    RED(<span class="string">"红色"</span>, <span class="number">1</span>), GREEN(<span class="string">"绿色"</span>, <span class="number">2</span>), BLANK(<span class="string">"白色"</span>, <span class="number">3</span>), YELLO(<span class="string">"黄色"</span>, <span class="number">4</span>);  </div><div class="line">    <span class="comment">// 成员变量  </span></div><div class="line">    <span class="keyword">private</span> String name;  </div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> index;  </div><div class="line">    <span class="comment">// 构造方法  </span></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Color</span><span class="params">(String name, <span class="keyword">int</span> index)</span> </span>&#123;  </div><div class="line">        <span class="keyword">this</span>.name = name;  </div><div class="line">        <span class="keyword">this</span>.index = index;  </div><div class="line">    &#125;  </div><div class="line">    <span class="comment">// 普通方法  </span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getName</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;  </div><div class="line">        <span class="keyword">for</span> (Color c : Color.values()) &#123;  </div><div class="line">            <span class="keyword">if</span> (c.getIndex() == index) &#123;  </div><div class="line">                <span class="keyword">return</span> c.name;  </div><div class="line">            &#125;  </div><div class="line">        &#125;  </div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;  </div><div class="line">    &#125;  </div><div class="line">    <span class="comment">// get set 方法  </span></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;  </div><div class="line">        <span class="keyword">return</span> name;  </div><div class="line">    &#125;  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;  </div><div class="line">        <span class="keyword">this</span>.name = name;  </div><div class="line">    &#125;  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getIndex</span><span class="params">()</span> </span>&#123;  </div><div class="line">        <span class="keyword">return</span> index;  </div><div class="line">    &#125;  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setIndex</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;  </div><div class="line">        <span class="keyword">this</span>.index = index;  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>实现接口:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Behaviour</span> </span>&#123;  </div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>;  </div><div class="line">    <span class="function">String <span class="title">getInfo</span><span class="params">()</span></span>;  </div><div class="line">&#125;  </div><div class="line"><span class="keyword">public</span> <span class="keyword">enum</span> Color implements Behaviour&#123;  </div><div class="line">    RED(<span class="string">"红色"</span>, <span class="number">1</span>), GREEN(<span class="string">"绿色"</span>, <span class="number">2</span>), BLANK(<span class="string">"白色"</span>, <span class="number">3</span>), YELLO(<span class="string">"黄色"</span>, <span class="number">4</span>);  </div><div class="line">    <span class="comment">// 成员变量  </span></div><div class="line">    <span class="keyword">private</span> String name;  </div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> index;  </div><div class="line">    <span class="comment">// 构造方法  </span></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Color</span><span class="params">(String name, <span class="keyword">int</span> index)</span> </span>&#123;  </div><div class="line">        <span class="keyword">this</span>.name = name;  </div><div class="line">        <span class="keyword">this</span>.index = index;  </div><div class="line">    &#125;  </div><div class="line"><span class="comment">//接口方法  </span></div><div class="line">    <span class="meta">@Override</span>  </div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getInfo</span><span class="params">()</span> </span>&#123;  </div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.name;  </div><div class="line">    &#125;  </div><div class="line">    <span class="comment">//接口方法  </span></div><div class="line">    <span class="meta">@Override</span>  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span> </span>&#123;  </div><div class="line">        System.out.println(<span class="keyword">this</span>.index+<span class="string">":"</span>+<span class="keyword">this</span>.name);  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2017/03/02/Java-String/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Blue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blue的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/02/Java-String/" itemprop="url">
-                  Java String
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-02T16:31:19+08:00">
-                2017-03-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>String 不是基本数据类型, 而是一个对象, 并且是不可变的对象. String 类被定义为final, 即不能被继承. 字符串对象在初始化之前, 它的值为null. “”, null, new String()三者的区别.</p>
-<ol>
-<li>null表示String 还没有new, 对象的引用还没有创建, 也没有分配内存空间</li>
-<li>“”, new String()说明已经new了一个对象. 只是内部为空</li>
-</ol>
-<p>在进行String连接操作(+)时, 连接操作最开始时如果是字符串常量, 编译后会把尽可能多的字符串常量连接起来, 形成新的字符串常量与后续连接.</p>
-<p>字符串连接是从左向右依次进行, 对于不同的字符串, 首先以最左边的字符串为参数创建StringBuilder对象, 然后依次对右边进行append操作. 最后把StringBuilder对象通过toString()方法转换成String对象. 中间存在多个字符串常量时不会自动拼接.</p>
-<p><strong>当使用+进行多个字符串连接时，实际上是产生了一个StringBuilder对象和一个String对象。</strong></p>
-<p>常用方法:</p>
-<ol>
-<li>字符串比较<ul>
-<li>equals 判断内容是否相同</li>
-<li>compareTo 判断字符串的大小关系</li>
-<li>== 判断内容与地址是否相同</li>
-<li>equalsIgnoreCase 忽略大小写的情况下判断内容是否相同</li>
-<li>reagionMatches()  对字符串中的部分内容是否相同进行比较</li>
-</ul>
-</li>
-</ol>
-<p>JVM为了提高性能和减少内存开销, 内部维护一个字符串常量池, 每创建一个字符串常量, JVM首先检查字符串常量池, 如果存在, 返回此种字符串对象的引用, 不存在就创建该字符串对象放入池中.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">String a = <span class="string">"abc"</span>;</div><div class="line">String b = <span class="string">"abc"</span>;</div><div class="line">System.out.println(a == b); <span class="comment">// true</span></div></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">String a = <span class="string">"Hello"</span>;</div><div class="line">String b = <span class="keyword">new</span> String(<span class="string">"Hello"</span>);</div><div class="line">System.out.println(a == b); <span class="comment">// false</span></div><div class="line">System.out.println(a.equals(b)); <span class="comment">// true</span></div></pre></td></tr></table></figure>
-<p>这种方式与创建字符串常量的方式不同, 当使用<code>new String(str)</code> 方式创建字符串对象时, 不管字符串常量池中是否有与此相同内容的字符串, 都会在堆内存创建新的字符串对象.</p>
-<p>intern()方法返回字符串对象在字符串常量池中的对象引用. 如果字符串常量池中没有这个字符串, 就创建一个新的字符串放到常量池中.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">String a = <span class="string">"hello"</span>;</div><div class="line">System.out.println(a == a.intern()); <span class="comment">// true</span></div><div class="line"></div><div class="line">String b = <span class="keyword">new</span> String(<span class="string">"world"</span>);</div><div class="line">String c = b.intern();</div><div class="line"></div><div class="line">System.out.println(c == b); <span class="comment">// false</span></div><div class="line"></div><div class="line">String d = <span class="string">"world"</span>;</div><div class="line">System.out.println(c == d); <span class="comment">// true</span></div></pre></td></tr></table></figure>
-<p>使用StringBuffer处理字符串时, 如果对字符串进行修改操作, 并不会产生一个新的字符串对象.</p>
-<p>在修改时StringBuffer都是修改自身, 而String 类则是产生一个新的对象.</p>
-<p>StringBuffer必须通过构造方法进行初始化.</p>
-<p>StringBuilder也是一个可变的字符串对象, 和StringBuffer不同在于它是线程不安全的. 所以StringBuilder比StringBuffer速度快.</p>
-<p>可以通过Java的反射机制修改String的内容</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">stringReflection</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line"></div><div class="line">    String s = <span class="string">"Hello World"</span>;</div><div class="line"></div><div class="line">    System.out.println(<span class="string">"s = "</span> + s); <span class="comment">//Hello World</span></div><div class="line"></div><div class="line">    <span class="comment">//获取String类中的value字段</span></div><div class="line">    Field valueField = String.class.getDeclaredField(<span class="string">"value"</span>);</div><div class="line"></div><div class="line">    <span class="comment">//改变value属性的访问权限</span></div><div class="line">    valueField.setAccessible(<span class="keyword">true</span>);</div><div class="line"></div><div class="line">    <span class="keyword">char</span>[] value = (<span class="keyword">char</span>[]) valueField.get(s);</div><div class="line"></div><div class="line">    <span class="comment">//改变value所引用的数组中的第5个字符</span></div><div class="line">    value[<span class="number">5</span>] = <span class="string">'_'</span>;</div><div class="line"></div><div class="line">    System.out.println(<span class="string">"s = "</span> + s); <span class="comment">//Hello_World</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1908,8 +1893,8 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">65</span>
-                <span class="site-state-item-name">posts</span>
+                <span class="site-state-item-count">70</span>
+                <span class="site-state-item-name">Artikel</span>
               </a>
             </div>
           
@@ -1922,7 +1907,7 @@
             <div class="site-state-item site-state-tags">
               
                 <span class="site-state-item-count">4</span>
-                <span class="site-state-item-name">tags</span>
+                <span class="site-state-item-name">Tags</span>
               
             </div>
           
@@ -1963,7 +1948,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -1972,7 +1957,7 @@
 
 
 <div class="powered-by">
-  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">

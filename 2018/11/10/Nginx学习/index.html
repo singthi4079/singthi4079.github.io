@@ -1,0 +1,728 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Nginx学习在讲解如何配置 Nginx 用户和组之前，先了解一下 Nginx 中用户和组的作用 。 
+Nginx 服务是由一个主进程( master process)和多个 工作进程( worker process)组成 的 。其 中，主进程以 root 权限运行，而 工 作进程在默认情况下以 nobody 用户运行 。原因在 于 nobody 用户是一个不能登录的账号，有一个专用的 ID，可">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Blue的博客">
+<meta property="og:url" content="https://singthi4079.github.io/2018/11/10/Nginx学习/index.html">
+<meta property="og:site_name" content="Blue的博客">
+<meta property="og:description" content="Nginx学习在讲解如何配置 Nginx 用户和组之前，先了解一下 Nginx 中用户和组的作用 。 
+Nginx 服务是由一个主进程( master process)和多个 工作进程( worker process)组成 的 。其 中，主进程以 root 权限运行，而 工 作进程在默认情况下以 nobody 用户运行 。原因在 于 nobody 用户是一个不能登录的账号，有一个专用的 ID，可">
+<meta property="og:updated_time" content="2018-11-10T10:04:40.072Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Blue的博客">
+<meta name="twitter:description" content="Nginx学习在讲解如何配置 Nginx 用户和组之前，先了解一下 Nginx 中用户和组的作用 。 
+Nginx 服务是由一个主进程( master process)和多个 工作进程( worker process)组成 的 。其 中，主进程以 root 权限运行，而 工 作进程在默认情况下以 nobody 用户运行 。原因在 于 nobody 用户是一个不能登录的账号，有一个专用的 ID，可">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://singthi4079.github.io/2018/11/10/Nginx学习/"/>
+
+
+
+
+
+  <title>  | Blue的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Blue的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://singthi4079.github.io/2018/11/10/Nginx学习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Blue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blue的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-10T16:23:33+08:00">
+                2018-11-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<h2 id="Nginx学习"><a href="#Nginx学习" class="headerlink" title="Nginx学习"></a>Nginx学习</h2><p>在讲解如何配置 Nginx 用户和组之前，先了解一下 Nginx 中用户和组的作用 。 </p>
+<p>Nginx 服务是由一个主进程( master process)和多个 工作进程( worker process)组成 的 。其 中，主进程以 root 权限运行，而 工 作进程在默认情况下以 nobody 用户运行 。原因在 于 nobody 用户是一个不能登录的账号，有一个专用的 ID，可将每个运行的工作进程隔离出 来，这样即使黑客破坏了服务器程序，因其不是 root 用户，也不会影响其他数据 。 </p>
+<p>因此，为工作进程设置的执行用户权限越低，则服务器安全系数越高 。 </p>
+<p>通过 ps 命令查看当前启动的 Nginx 服务器中主进程( master process)和工作<br>进程( worker process)的用户权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ps aux | grep nginx</div></pre></td></tr></table></figure>
+<blockquote>
+<p>Nginx的进程设计思想:</p>
+<p>它由一个主进程和多个工作进程组成，主进程接收容户端请求，转交给工作进程处理，从而很好地利用多核心 CPU 的计算能力。当管理员执行 reload 命令重新加载自己直时，主进程会等待工作进程完成 工作 后再结束工作进程，然后基于新的配直重新创建工作进程，避免了工作过程中被打断的情况 。 由于整个过程中主进程没有停止，因此也不会发生漏掉客户端请求的情况 。</p>
+</blockquote>
+<p>自定义错误页</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">error_page 500 502 503 504 /50x.html;</div></pre></td></tr></table></figure>
+<p><code>error_page</code>指令用于自定义错误页面，500、502、503 和 504 指的就是HTTP 错误代码. /50x. html 用于表示当发生上述指定的任意 一 个错误时，都使用网站根目<br>录下的 50x. html 文件处理 </p>
+<p>更改晌应状态码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">error_page 404=200 /40x.html;</div></pre></td></tr></table></figure>
+<p>权限控制指令</p>
+<p> allow 用于设置允许访问的权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">allow: all; // 允许所有用户访问</div><div class="line">allow: 127.0.0.1; // 指定IP可以访问</div></pre></td></tr></table></figure>
+<p>deny 用于设置禁止访问的权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">deny: all; // 禁止所有用户访问</div><div class="line">deny: 127.0.0.1; // 指定IP禁止访问</div></pre></td></tr></table></figure>
+<p>location 前缀:</p>
+<table>
+<thead>
+<tr>
+<th>=</th>
+<th>根据其后的指定模式进行精准匹配 。 例如，在访问时要与 /html/aaa/ index. html 完全一致才会执行其后的指令块</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>~</td>
+<td>使用正则表达式完成 location 的匹配，区分大小写</td>
+</tr>
+<tr>
+<td>~*</td>
+<td>使用正则表达式完成 location 的匹配，不区分大小写</td>
+</tr>
+<tr>
+<td>^~</td>
+<td>不使用正则表达式，完成以指定模式开头的 location 匹配</td>
+</tr>
+<tr>
+<td>@</td>
+<td>用于定义 一 个 location 块，且该块不能被外部客户端所访问，只能被Nginx内部配置指令访问</td>
+</tr>
+</tbody>
+</table>
+<p>通过 location块和权限控制指令，逐一演示访问控制的几种典型使用方式。</p>
+<ol>
+<li><p>精准匹配</p>
+<p>所谓精准匹配指的就是用户访问的 URI 与指定的 URI 完全一致的情况，才会执行其后的指令块 :</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">    listen			80;</div><div class="line">    server_name		localhost:</div><div class="line">    root			html;</div><div class="line">    index 			index.html index.html;</div><div class="line">    location = /js  &#123;</div><div class="line">        allow 127.0.0.1;</div><div class="line">    &#125;</div><div class="line">    location = /admin/auth &#123;</div><div class="line">        alow 127.0.0.1;</div><div class="line">    &#125;</div><div class="line">    deny all;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/21/机器学习实战笔记/吴恩达机器学习笔记-01-监督学习(Supervised-learning)/" rel="next" title="吴恩达机器学习笔记-01-监督学习(Supervised learning)">
+                <i class="fa fa-chevron-left"></i> 吴恩达机器学习笔记-01-监督学习(Supervised learning)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/10/On-the-significance-of-boswells/" rel="prev" title="On the significance of boswells">
+                On the significance of boswells <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Blue" />
+          <p class="site-author-name" itemprop="name">Blue</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">70</span>
+                <span class="site-state-item-name">Artikel</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">Tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Nginx学习"><span class="nav-number">1.</span> <span class="nav-text">Nginx学习</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Blue</span>
+</div>
+
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

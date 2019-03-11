@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Blue">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="精通Spring 4.x读书笔记-IoC容器"/>
+  <meta property="og:description" content="" />
+  <meta property="og:site_name" content="Blue的博客"/>
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://singthi4079.github.ioundefined"/>
+  
+    <link rel="alternate" href="/atom.xml" title="Blue的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <!-- Site Title -->
+  <title>Blue的博客</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/default-banner-dark.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">精通Spring 4.x读书笔记-IoC容器</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/<your-github-username>">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:<your-email-address>">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By Blue</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2019-03-11</span>
+            <span class="time">12:43:45</span>
+          </span>
+          
+        </div>
+        <!-- Tags -->
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p><strong>概念</strong>: Ioc(Inverse of Control, 控制反转), 包括两方面的内容:</p>
+<ol>
+<li>控制</li>
+<li>反转</li>
+</ol>
+<p>某一接口具体实现类的选择控制权从调用类中移除, 转由Spring容器借由Bean配置进行控制.</p>
+<p>Martin Fowler提出DI(Dependency Injection, 依赖注入)的概念代替IoC</p>
+<p>即让调用类对某一接口实现类的依赖关系由容器或协作类注入, 以移除调用类对某一接口实现类的依赖.</p>
+<p><strong>IoC的类型: </strong></p>
+<p>构造函数注入, 属性注入, 接口注入</p>
+<ol>
+<li><p>构造函数注入: 通过调用类的构造函数, 将接口实现类通过构造函数变量传入</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MoAttack</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> GeLi geli;</div><div class="line">    <span class="comment">// 1) 注入接口实现类</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MoAttack</span><span class="params">(GeLi geli)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.geli = geli;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>属性注入: 有选择的通过Setter方法完成调用类所需的注入, 更加灵活方便</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MoAttack</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> GeLi geli;</div><div class="line">    </div><div class="line">    <span class="comment">// 属性注入方法</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setGeli</span><span class="params">(GeLi geli)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.geli = geli;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>接口注入: 将调用类所有依赖注入的方法抽取到一个接口中, 调用类通过实现该接口的相应注入方法.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ActorArrangable</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">injectGeli</span><span class="params">(GeLi geli)</span></span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MoAttack</span> <span class="keyword">implements</span> <span class="title">ActorArrangable</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> GeLi geli;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">injectGeli</span><span class="params">(GeLi geli)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.geli = geli;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>接口注入需要额外声明一个接口, 增加了类的数目, 效果和属性注入一样, 不提倡使用.</p>
+</li>
+</ol>
+<p><strong>类装载器ClassLoader: </strong></p>
+<p>工作机制: 类装载器就是寻找类的节码文件并构造出类在JVM内部表示对象的组件. Java中, 类装载器把一个类装入JVM中, 需要经过以下步骤:</p>
+<p>1) 装载: 查找和导入Class文件</p>
+<p>2) 链接: 执行校验, 准备和解析, 解析步骤是可选的</p>
+<p>​    2.1) 校验: 检查载人Class文件数据的正确性</p>
+<p>​    2.2) 准备: 给类的静态变量分配存储空间</p>
+<p>​    2.3) 解析: 将符号引入转换成直接引用</p>
+<p>3) 初始化: 对类的静态变量, 静态代码块执行初始化工作</p>
+<p>JVM运行时会产生3个ClassLoader: 根装载器, ExtClassLoader(扩展类装载器), AppClassLoader(应用类装载器).</p>
+<p>根装载器不是ClassLoader的子类. 负责装置JRE的核心类库.</p>
+<p>ExtClassLoader和AppClassLoader都是ClassLoader的子类, ExtClassLoader负责装载JRE扩展目录ext中的jar包; AppClassLoader负责装载Classpath路径下的类包.</p>
+<p>默认使用AppClassLoader装载应用程序的类.</p>
+<p>JVM装载类使用”全盘负责委托机制”.</p>
+<p><strong>全盘负责</strong>: 当一个ClassLoader装载一个类时, 除非显示使用另一个ClassLoad, 该类所依赖及引用的类也由这个ClassLoader载入;</p>
+<p><strong>委托机制</strong>: 先委托父装载器寻找目标类, 只有在找不到的情况下才从自己的类路径中查找并装载目标类. </p>
+<p><strong>资源抽象接口</strong>: Resource接口.</p>
+<p>主要方法:</p>
+<ul>
+<li>boolean exists(): 资源是否存在</li>
+<li>boolean isOpen(): 资源是否打开</li>
+<li>URL getURL() throws IOException: 如果底层资源可以表示成URL, 则该方法返回对应的URL对象</li>
+<li>InputStream getInputStream() throws IOException: 返回资源对应的输入流</li>
+</ul>
+<p>Resource的具体实现类:</p>
+<ul>
+<li>WritableResource: 可写资源接口</li>
+<li>ByteArrayResource: 二进制数组表示的资源, 可以在内存中通过程序构造</li>
+<li>ClassPathResource: 类路径下的资源</li>
+<li>FileSystemResource: 文件系统资源, 资源以文件系统路径的表示方式</li>
+<li>InputStreamResource: 以输入流返回表示的资源</li>
+<li>ServletContextResource: 负责以相对于Web应用根目录的路径加载的资源. 支持以流和URL的方式访问.</li>
+<li>UrlResource: URL封装了java.net.URL, 使用户能够访问任何可以通过URL表示的资源</li>
+<li>PathResource: Path封装了java.net.URL, java.nio.file.Patt, 文件系统资源</li>
+</ul>
+<p><strong>Spring支持的资源类型的地址前缀</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>地址前缀</th>
+<th>示例</th>
+<th>对应的资源类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>classpath:</td>
+<td>classpath: com/smart/beanfactory/beans.xml</td>
+<td>从类路径中加载资源, classpath: 和 classpath:/是等价的, 都是相对于类的跟路径. 可以是Jar或zip的类包</td>
+</tr>
+<tr>
+<td>file:</td>
+<td>file:/conf/com/smart/beanfactory/beans.xml</td>
+<td>使用UrlResource从文件系统目录中装载资源, 可以采用绝对路径或相对路径</td>
+</tr>
+<tr>
+<td>http://</td>
+<td><a href="http://www.smart.com/resource/beans.xml" target="_blank" rel="external">http://www.smart.com/resource/beans.xml</a></td>
+<td>使用UrlResource从Web服务器中装载资源</td>
+</tr>
+<tr>
+<td>ftp://</td>
+<td>ftp://www.smart.com/resource/beans.xml</td>
+<td>使用UrlResource从FTP服务器中装载资源</td>
+</tr>
+<tr>
+<td>没有前缀</td>
+<td>com/smart/beanfactory/beans.xml</td>
+<td>根据ApplicationContext的具体实现类采用对应的Resource</td>
+</tr>
+</tbody>
+</table>
+<p><strong>BeanFactory</strong>:</p>
+<p>BeanFactory提供高级IoC的配置机制, 使管理不同类型的Java对象成为可能. ApplicationContext建立在BeanFactory基础之上, 提供更多面向应用的功能.</p>
+<p><img src="/Users/storm/workspace/notes/source/_posts/精通Spring-4.x读书笔记-IoC容器/BeanFactory类继承体系.png" alt="BeanFactory类继承体系"></p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

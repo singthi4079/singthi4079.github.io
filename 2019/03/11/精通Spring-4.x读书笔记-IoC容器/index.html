@@ -100,7 +100,7 @@
           <!-- Date -->
           <span class="date-time info">On
             <span class="date">2019-03-11</span>
-            <span class="time">06:56:15</span>
+            <span class="time">11:36:51</span>
           </span>
           
         </div>
@@ -114,6 +114,12 @@
 <li>反转</li>
 </ol>
 <p>某一接口具体实现类的选择控制权从调用类中移除, 转由Spring容器借由Bean配置进行控制.</p>
+<ol>
+<li><strong>谁控制谁</strong>：在传统的开发模式下，我们都是采用直接 new 一个对象的方式来创建对象，也就是说你依赖的对象直接由你自己控制，但是有了 IOC 容器后，则直接由 IoC 容器来控制。所以“谁控制谁”，当然是 IoC 容器控制对象。</li>
+<li><strong>控制什么</strong>：控制对象。</li>
+<li><strong>为何是反转</strong>：没有 IoC 的时候我们都是在自己对象中主动去创建被依赖的对象，这是正转。但是有了 IoC 后，所依赖的对象直接由 IoC 容器创建后注入到被注入的对象中，依赖的对象由原来的主动获取变成被动接受，所以是反转。</li>
+<li><strong>哪些方面反转了</strong>：所依赖对象的获取被反转了。</li>
+</ol>
 <p>Martin Fowler提出DI(Dependency Injection, 依赖注入)的概念代替IoC</p>
 <p>即让调用类对某一接口实现类的依赖关系由容器或协作类注入, 以移除调用类对某一接口实现类的依赖.</p>
 <p><strong>IoC的类型: </strong></p>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Blue">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="Java高并发程序设计实战读书笔记-基本概念"/>
+  <meta property="og:description" content="" />
+  <meta property="og:site_name" content="Blue的博客"/>
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://singthi4079.github.ioundefined"/>
+  
+    <link rel="alternate" href="/atom.xml" title="Blue的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <!-- Site Title -->
+  <title>Blue的博客</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/default-banner-dark.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">Java高并发程序设计实战读书笔记-基本概念</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/<your-github-username>">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:<your-email-address>">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By Blue</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2019-03-15</span>
+            <span class="time">11:59:27</span>
+          </span>
+          
+        </div>
+        <!-- Tags -->
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <h3 id="同步和异步"><a href="#同步和异步" class="headerlink" title="同步和异步"></a>同步和异步</h3><p>同步和异步用来行用一次方法调用. </p>
+<p><strong>同步方法</strong>调用一旦开始, 调用者必须等待调用返回, 才能继续后续的行为.</p>
+<p><strong>异步方法</strong>调用更像一次消息传递, 一旦开始, 方法调用就回立即返回, 调用者可以继续后续的操作.</p>
+<p>同步调用类似去商场购物空调, 异步调用类似网购.</p>
+<h3 id="并发和并行"><a href="#并发和并行" class="headerlink" title="并发和并行"></a>并发和并行</h3><p>并发和并行都可以表示两个或者两个以上的任务一起执行.</p>
+<p><strong>并发</strong>表示多任务<em>交替</em>执行, 而多任务之间可能是串行的.</p>
+<p>并行**是真正意义上的”同时执行”, 多个任务同时执行.</p>
+<p>如果系统内只有一个CPU,  那就不可能实现真正的并行. 一个CPU一次只能执行一条指令.</p>
+<h3 id="临界区"><a href="#临界区" class="headerlink" title="临界区"></a>临界区</h3><p>临界区用来表示一种公共资源或者说是共享资源, 可以被多个线程使用. 例如: 打印机.</p>
+<h3 id="阻塞和非阻塞"><a href="#阻塞和非阻塞" class="headerlink" title="阻塞和非阻塞"></a>阻塞和非阻塞</h3><p>一个线程占用临界区资源, 那么所有需要这个资源的线程都必须在这个临界区中进行等待. 等待导致线程挂起, 这就是<strong>阻塞</strong>. </p>
+<p><strong>非阻塞</strong>表示没有一个线程可以妨碍其它线程的执行.</p>
+<h3 id="死锁-饥饿-活锁"><a href="#死锁-饥饿-活锁" class="headerlink" title="死锁, 饥饿, 活锁"></a>死锁, 饥饿, 活锁</h3><p>死锁, 饥饿, 活锁都是属于多线程活跃性问题.</p>
+<p><strong>死锁:</strong> 多个线程之相互占用彼此的资源, 导致没有一个线程可以继续执行, 相互等待. </p>
+<p><strong>饥饿: </strong>一个线程或多个线程由于种种原因无法获取所需的资源, 导致移植无法执行. 比如: 线程优先级太低, 而高优先级的线程不断抢占资源.</p>
+<p><strong>活锁: </strong> 由于线程秉承”谦让”的原则, 主动将资源释放给其它线程使用, 导致资源不断在两个线程之间跳动, 而没有一个线程可以拿到所有资源正常直行.</p>
+<h3 id="并发级别"><a href="#并发级别" class="headerlink" title="并发级别"></a>并发级别</h3><p>并发级别分为: 阻塞, 无饥饿, 无障碍, 无锁, 无等待</p>
+<p><strong>阻塞</strong>: 一个线程是阻塞的, 那么其他线程释放资源之前, 当前线程无法继续执行. 当使用<code>synchronize</code>关键字或者重入锁, 得到的就是阻塞线程.</p>
+<p><strong>无饥饿</strong>: 对于非公平锁(有优先级)来说, 系统允许高优先级的线程插队, 这样就可能会导致低优先级的线程饥饿.</p>
+<p><strong>无障碍</strong>: 两个线程如果是无障碍执行, 那么它们不会因为临界区的问题导致一方挂起. 对于无障碍的线程来说, 一旦检测到数据被改坏了, 就会立即对自己所做的修改进行<em>回滚</em>, 如果没有数据竞争, 那么线程顺利完成任务.</p>
+<blockquote>
+<p>一种实现无障碍的方式是<strong>一致性标记</strong>, 线程操作前, 先读取并标记, 操作完成后再读取, 检测标记是否被修改过, 如果两者一致, 表示资源访问没有冲突. 如果不一致, 表示资源被修改过, 需要重试操作.</p>
+</blockquote>
+<p><strong>无锁</strong>: 无锁并行都是无障碍的. 所有线程都可以尝试对临界区进行访问, 无锁的并发保证必然有一个线程能够在有限步内完成操作离开临界区.</p>
+<blockquote>
+<p>在无锁的调用中, 一个典型的特点就是可能会包含一个无限循环, 在这个循环中, 线程不断尝试修改临界区数据, 如果没有冲突, 修改成功. 否则继续尝试修改. 无论如何, 无锁的并行总能保证有一个线程可以胜出.</p>
+</blockquote>
+<p><strong>无等待</strong>: 要求所有线程都必须在有限步内完成操作. 这样就不会引起饥饿问题.</p>
+<blockquote>
+<p>一种典型的无等待结构是<strong>RCP(Read-Copy-Update)</strong>. 对数据的读不加控制. 但在写数据时, 先取得原始数据的副本, 接着只修改副本, 修改完成后在合适的时机写回数据</p>
+</blockquote>
+<h3 id="并行的两大定律"><a href="#并行的两大定律" class="headerlink" title="并行的两大定律"></a>并行的两大定律</h3><p><strong>Amdahl定律</strong>: 加速比定义: <code>加速比=优化前系统耗时/优化后系统耗时</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Tn=1/(F+1*(1-F)/n)</div></pre></td></tr></table></figure>
+<blockquote>
+<p>Tn表示使用n个处理器优化后的耗时</p>
+<p>F是程序中只能串行执行的比例</p>
+<p>n表示处理器个数</p>
+<p>T表示时间</p>
+</blockquote>
+<p>根据<code>Amdahl</code>定律, 使用多核CPU对系统进行优化, 优化效果取决于CPU的数量以及系统中串行化程序的比重. CPU数量越多, 串行比重越低, 则优化效果越好. 仅提升CPU数量而不降低程序中串行化比重, 也无法提升系统性能.</p>
+<p><strong>Gustafson定律</strong>: Gustafson定律试图说明处理器熟练, 串行化比重和加速比之间的关系.</p>
+<blockquote>
+<p>执行时间: a (串行时间) + b (并行时间)</p>
+<p>总执行时间: a+ n(处理器个数)*b</p>
+<p>加速比: (a+n*b)/(a+b)</p>
+<p>定义: F=a/(a+b)  (串行比例)</p>
+<p>加速比: S(n) = n - F(n-1)</p>
+</blockquote>
+<h3 id="Java内存模型-JMM"><a href="#Java内存模型-JMM" class="headerlink" title="Java内存模型(JMM)"></a>Java内存模型(JMM)</h3><p>JMM的关键技术点都是围绕着多线程的<strong>原子性</strong>, <strong>可见性</strong>, <strong>有序性</strong>建立的.</p>
+<p><strong>原子性(Atomicity)</strong>: 指一个操作是不可中断的, 一个操作一旦开始, 就不会被其他线程干扰.</p>
+<blockquote>
+<p>在32位系统中, long型数据的读写不是原子性的.(long是64位的)</p>
+</blockquote>
+<p><strong>可见性(Visibility)</strong>: 指当一个线程修改了共享数据, 其他线程能否立即知道这个修改.</p>
+<blockquote>
+<p>导致可见性问题的原因可能是:</p>
+<ol>
+<li>缓存优化或者硬件优化</li>
+<li>指令重排</li>
+<li>编辑器优化</li>
+</ol>
+</blockquote>
+<p><strong>有序性(Ordering)</strong>: 对于一个线程执行代码而言, 代码总是从先往后执行, 但在并发时, 程序的执行就可能会出现乱序. </p>
+<blockquote>
+<p>原因是因为程序在执行时, 可能会进行指令重排.</p>
+<p>指令重排可以保证串行语义一致, 但没有义务保证多线程间的语义一致</p>
+<p>为什么要指令重排?</p>
+<p>CPU在执行指令时, 采用<strong>流水线技术</strong>来执行指令. 类似:</p>
+<blockquote>
+<p>指令一: IF    ID    EX    MEM    WB</p>
+<p>指令二:          IF    ID    EX        MEN    WB</p>
+</blockquote>
+<p>流水线总是害怕中断的, 一旦中断, 所有设备都会进入一个停顿期, 再次满载又需要几个周期, 因此性能损失比较大.</p>
+<p>指令重排的目的是为了减少中断流水线</p>
+</blockquote>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

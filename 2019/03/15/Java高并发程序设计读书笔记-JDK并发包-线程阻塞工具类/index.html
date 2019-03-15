@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Blue">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="Java高并发程序设计读书笔记-JDK并发包-线程阻塞工具类"/>
+  <meta property="og:description" content="" />
+  <meta property="og:site_name" content="Blue的博客"/>
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://singthi4079.github.ioundefined"/>
+  
+    <link rel="alternate" href="/atom.xml" title="Blue的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <!-- Site Title -->
+  <title>Blue的博客</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/default-banner-dark.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">Java高并发程序设计读书笔记-JDK并发包-线程阻塞工具类</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/<your-github-username>">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:<your-email-address>">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By Blue</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2019-03-15</span>
+            <span class="time">11:59:27</span>
+          </span>
+          
+        </div>
+        <!-- Tags -->
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>LockSuport 是一个方便使用的线程阻塞工具, 可以在线程内的任意位置让线程阻塞. 和Thread.suspend()相比, 它弥补了由于resume()在前发生, 导致线程无法继续执行的情况.</p>
+<p>和Object.wait()相比, 它不需要获得某个对象的锁, 也不会抛出InterruptedException异常.</p>
+<p>LockSupport的静态方法park()方法可以阻塞当前线程. parkNanos(),parkUtil()方法, 实现了限时等待.</p>
+<p>用LockSupport解决resume()在前发生的问题</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LockSupportDemo</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Object u = <span class="keyword">new</span> Object();</div><div class="line"></div><div class="line">    <span class="keyword">static</span> ChangeObjectThread t1 = <span class="keyword">new</span> ChangeObjectThread(<span class="string">"t1"</span>);</div><div class="line">    <span class="keyword">static</span> ChangeObjectThread t2 = <span class="keyword">new</span> ChangeObjectThread(<span class="string">"t2"</span>);</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ChangeObjectThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">ChangeObjectThread</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">            <span class="keyword">super</span>.setName(name);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">synchronized</span> (u) &#123;</div><div class="line">                System.out.println(<span class="string">"in "</span> + getName());</div><div class="line">                LockSupport.park();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</div><div class="line">        t1.start();</div><div class="line">        Thread.sleep(<span class="number">100</span>);</div><div class="line">        t2.start();</div><div class="line">        LockSupport.unpark(t1);</div><div class="line">        LockSupport.unpark(t2);</div><div class="line">        t1.join();</div><div class="line">        t2.join();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>虽然还是无法保证unpark()方法发生在park()方法之后, 但是这段代码总是能正常结束.</p>
+<p>LockSupport类使用类似信号量机制. 它为每个线程准备一个许可, 如果许可可用, 那么park()函数会立即返回, 并消费这个许可. 如果许可不可用, 就会阻塞.</p>
+<p>unpark()方法使得一个许可变成可用. 但是许可不能累加, 永远只能有一个许可.</p>
+<p>LockSupport.park()还支持中断影响. 和其他接受中断的函数不同, LockSupport.park()不会抛出InterruptedException异常, 只会默默的返回.</p>
+<p>可用从Thread.interrupted()等方法获取中断标记</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LockSupportIntDemo</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Object u = <span class="keyword">new</span> Object();</div><div class="line">    <span class="keyword">static</span> ChangeObjectThread t1 = <span class="keyword">new</span> ChangeObjectThread(<span class="string">"t1"</span>);</div><div class="line">    <span class="keyword">static</span> ChangeObjectThread t2 = <span class="keyword">new</span> ChangeObjectThread(<span class="string">"t2"</span>);</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ChangeObjectThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">ChangeObjectThread</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">            <span class="keyword">super</span>.setName(name);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">synchronized</span> (u) &#123;</div><div class="line">                System.out.println(<span class="string">"in "</span>+ getName());</div><div class="line">                LockSupport.park();</div><div class="line">                <span class="keyword">if</span> (Thread.interrupted()) &#123;</div><div class="line">                    System.out.println(getName() + <span class="string">" 被中断了"</span>);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            System.out.println(getName() + <span class="string">"执行结束"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</div><div class="line">        t1.start();</div><div class="line">        Thread.sleep(<span class="number">100</span>);</div><div class="line">        t2.start();</div><div class="line">        t1.interrupt();</div><div class="line">        LockSupport.unpark(t2);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

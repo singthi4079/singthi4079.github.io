@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Blue">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="Java static"/>
+  <meta property="og:description" content="" />
+  <meta property="og:site_name" content="Blue的博客"/>
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://singthi4079.github.ioundefined"/>
+  
+    <link rel="alternate" href="/atom.xml" title="Blue的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <!-- Site Title -->
+  <title>Blue的博客</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/default-banner-dark.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">Java static</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/<your-github-username>">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:<your-email-address>">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By Blue</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2019-03-15</span>
+            <span class="time">11:59:27</span>
+          </span>
+          
+        </div>
+        <!-- Tags -->
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <h2 id="Java-static关键字"><a href="#Java-static关键字" class="headerlink" title="Java static关键字"></a>Java static关键字</h2><p>在程序中任何变量或代码都是在编译时由系统自动分配内存来存储的,  而静态就是指在编译后所分配的内存一直存在, 直到程序退出内存才会释放这个空间. 只要程序在运行, 这块内存就一直存在.</p>
+<p><code>static</code>表示<em>全局</em> 或 <em>静态</em> 的意思, 用来修饰成员变量和成员方法, 也可以形成静态的代码块. 被<code>static</code>修饰的成员变量或方法不依赖类特定的实例, 被类的所有实例共享. 只要类被加载, 虚拟机就会根据类名在运行时数据区的方法区内找到它们. </p>
+<p>static修饰的成员变量和成员方法习惯上称为静态变量和静态方法，可以直接通过类名来访问，访问语法为:</p>
+<p>类名.静态方法名(参数列表…) </p>
+<p>类名.静态变量名</p>
+<p>用static修饰的代码块表示静态代码块,当Java虚拟机(JVM)加载类时,就会执行该代码块.</p>
+<h3 id="static-变量"><a href="#static-变量" class="headerlink" title="static 变量"></a>static 变量</h3><p>被<code>static</code>修饰的变量被称为 <strong>静态变量</strong> 或 <strong>类变量</strong>, 没有被<code>static</code>修饰的变量称为<strong>实例变量</strong>. 静态变量和实例变量的区别:</p>
+<ol>
+<li>JVM只为静态变量分配一次内存, 在加载类的过程中完成内存的分配</li>
+<li>静态变量可以直接通过类名访问</li>
+<li>实例变量依赖于类的实例,</li>
+<li>每创建一个类的实例, 就会给实例变量分配一次内存</li>
+</ol>
+<h3 id="static-方法"><a href="#static-方法" class="headerlink" title="static 方法"></a>static 方法</h3><ol>
+<li>静态方法可以直接通过类名调用</li>
+<li>在静态方法中不能用<code>this</code>, <code>super</code>关键字</li>
+<li>不能在静态方法中直接访问类的实例变量和实例方法</li>
+<li>可以在静态方法中访问静态变量和静态方法</li>
+<li>static方法不依赖任何实例, 所以static方法必须被实现, 不能是abstract的</li>
+</ol>
+<h3 id="static代码块"><a href="#static代码块" class="headerlink" title="static代码块"></a>static代码块</h3><p>static代码块是在类中独立于类成员的static语句块. 可以有多个, 位置可以随意放. 不在任何方法体内, JVM加载类时就会执行静态代码块. 如果一个类中有多个静态代码块, JVM会按照它们在类中出现的先后顺序依次执行. 每个静态代码块只会执行一次.</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Blue">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="final关键字"/>
+  <meta property="og:description" content="" />
+  <meta property="og:site_name" content="Blue的博客"/>
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://singthi4079.github.ioundefined"/>
+  
+    <link rel="alternate" href="/atom.xml" title="Blue的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <!-- Site Title -->
+  <title>Blue的博客</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/default-banner-dark.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">final关键字</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/<your-github-username>">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:<your-email-address>">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By Blue</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2019-03-15</span>
+            <span class="time">11:59:27</span>
+          </span>
+          
+        </div>
+        <!-- Tags -->
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <h2 id="final关键字"><a href="#final关键字" class="headerlink" title="final关键字"></a>final关键字</h2><p>如果希望程序中的某些数据不能改变, 可以把这些数据声明为final. final是Java的关键字, 表示<em>这部分是无法修改的</em>. 不希望被改变的原因有两个: 效率, 设计. 使用到 final 的有三种情况: 数据、方法、类。</p>
+<h3 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h3><p>有时候数据的恒定不变是很有用的, 能够减轻系统运行时的负担. 这样的数据叫做<strong>常量</strong>. 常量主要用以下两种情况</p>
+<ol>
+<li>编译期常量, 永远不能改变</li>
+<li>运行期初始化时, 希望不会被改变</li>
+</ol>
+<p>编译期常量在类加载的过程就已经完成初始化, 类加载完成后时不可更改的. 只能使用基本类型, 必须在定义时初始化.</p>
+<p>运行期常量可以是基本数据类型, 也可以是引用数据类型. 基本数据类型的内容不能变, 引用数据类型的引用不能改变, 引用所指定的对象内容是可变的.</p>
+<h3 id="final方法"><a href="#final方法" class="headerlink" title="final方法"></a>final方法</h3><p>被final标注的方法都不能被继承, 重写(override). 使用final方法的原因:</p>
+<ol>
+<li>方法锁定, 防止子类修改方法</li>
+<li>提高效率</li>
+</ol>
+<p><strong>调用对象方法的执行过程</strong></p>
+<ol>
+<li><p>编译器查看对象的声明类型和方法名. 获取所有可能被调用的候选方法.</p>
+<p>假设调用<code>x.f(param)</code>, 且隐式参数<code>x</code>声明为C类的对象. <em>可能存在多个名字为f, 但参数类型不一样的方法.</em> 编译器会一一列举所有C类中名为<code>f</code>的方法和其超类中的访问属性为<code>public</code>且名为<code>f</code>的方法. 超类的私有方法不能访问.</p>
+</li>
+<li><p>编译器查看调用方法时提供的参数类型. 获得需要调用的方法名和参数类型.</p>
+<p>如果存在一个与提供的参数类型完全匹配, 就会选择这个方法. 这个过程被称为<strong>重载解析</strong>. 例如: <code>x.f(&quot;hello&quot;)</code>, 编译器会选择<code>f(String)</code>, 而不是<code>f(int)</code>. 由于允许类型转换(int -&gt; double, B -&gt; A等). 如果编译器没有找到与参数类型匹配的方法, 或者发现经过类型转换后有多个方法匹配, 就会报错.</p>
+</li>
+<li><p>如果是<code>private</code>、<code>static</code>、<code>final</code>方法或构造器, 编译器可以准确的知道该调用哪个方法, 这种方式称为<strong>静态绑定</strong>. 与之对应, 调用的方法依赖于隐式参数的实际类型, 并且在运行时实现<em>动态绑定</em></p>
+</li>
+<li><p>当程序运行, 并且采用动态绑定调用方法时, 虚拟机一定调用与<code>x</code>所引用对象的实际类型最合适的那个类的方法.s</p>
+<p>假设<code>x</code>的实际类型是D, 它是C类的子类. 如果D类定义了方法<code>f(String)</code>, 就直接调用它; 否则, 在D类的父类中寻找<code>f(String)</code>.</p>
+</li>
+</ol>
+<blockquote>
+<p>每次调用方法都要进行搜索, 时间开销大. 虚拟机预先为每个类创建了一个<strong>方法表</strong>, 其中列出所有方法的签名和实际调用的方法. 在真正调用方法的时候, 虚拟机仅查找这个表就可以了.</p>
+<p>动态绑定有一个重要的特性: 不需要对现有的代码进行修改, 就可以对程序进行扩展.</p>
+<p>覆盖方法时, 子类方法不能低于父类方法的可见性. 如果父类方法是public, 子类方法一定要声明为public.</p>
+</blockquote>
+<h3 id="final-类"><a href="#final-类" class="headerlink" title="final 类"></a>final 类</h3><p>使用final修饰的类, 表明这是最终类, 不能被其他类继承.</p>
+<p>对于 final 修饰的类来说，它的成员变量可以为 final，也可以为非 final。如果定义为 final，那么 final 数据的规则同样适合它。而它的方法则会自动的加上 final，因为 final 类是无法被继承，所以这个是默认的。</p>
+<h3 id="final参数"><a href="#final参数" class="headerlink" title="final参数"></a>final参数</h3><p>若某个参数被 final 修饰了, 则代表了该参数是不可改变的.</p>
+<p> final 修饰参数在内部类中是非常有用的，<strong>在匿名内部类中，为了保持参数的一致性，若所在的方法的形参需要被内部类里面使用时，该形参必须为 final。</strong></p>
+<h3 id="final-与-static"><a href="#final-与-static" class="headerlink" title="final 与 static"></a>final 与 static</h3><p>final 和 static 同时使用时即可修饰成员变量，也可修饰成员方法。</p>
+<p>对于成员变量，该变量一旦赋值就不能改变，我们称它为”全局常量”。可以通过类名直接访问。</p>
+<p>对于成员方法，则是不可继承和改变。可以通过类名直接访问。</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

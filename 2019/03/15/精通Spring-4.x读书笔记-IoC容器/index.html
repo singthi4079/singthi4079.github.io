@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Blue">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="精通Spring 4.x读书笔记-IoC容器"/>
+  <meta property="og:description" content="" />
+  <meta property="og:site_name" content="Blue的博客"/>
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://singthi4079.github.ioundefined"/>
+  
+    <link rel="alternate" href="/atom.xml" title="Blue的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <!-- Site Title -->
+  <title>Blue的博客</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/default-banner-dark.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">精通Spring 4.x读书笔记-IoC容器</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/<your-github-username>">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:<your-email-address>">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By Blue</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2019-03-15</span>
+            <span class="time">11:59:27</span>
+          </span>
+          
+        </div>
+        <!-- Tags -->
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p><strong>概念</strong>: Ioc(Inverse of Control, 控制反转), 包括两方面的内容:</p>
+<ol>
+<li>控制</li>
+<li>反转</li>
+</ol>
+<p>某一接口具体实现类的选择控制权从调用类中移除, 转由Spring容器借由Bean配置进行控制.</p>
+<ol>
+<li><strong>谁控制谁</strong>：在传统的开发模式下，我们都是采用直接 new 一个对象的方式来创建对象，也就是说你依赖的对象直接由你自己控制，但是有了 IOC 容器后，则直接由 IoC 容器来控制。所以“谁控制谁”，当然是 IoC 容器控制对象。</li>
+<li><strong>控制什么</strong>：控制对象。</li>
+<li><strong>为何是反转</strong>：没有 IoC 的时候我们都是在自己对象中主动去创建被依赖的对象，这是正转。但是有了 IoC 后，所依赖的对象直接由 IoC 容器创建后注入到被注入的对象中，依赖的对象由原来的主动获取变成被动接受，所以是反转。</li>
+<li><strong>哪些方面反转了</strong>：所依赖对象的获取被反转了。</li>
+</ol>
+<p>Martin Fowler提出DI(Dependency Injection, 依赖注入)的概念代替IoC</p>
+<p>即让调用类对某一接口实现类的依赖关系由容器或协作类注入, 以移除调用类对某一接口实现类的依赖.</p>
+<p><strong>IoC的类型: </strong></p>
+<p>构造函数注入, 属性注入, 接口注入</p>
+<ol>
+<li><p>构造函数注入: 通过调用类的构造函数, 将接口实现类通过构造函数变量传入</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MoAttack</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> GeLi geli;</div><div class="line">    <span class="comment">// 1) 注入接口实现类</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MoAttack</span><span class="params">(GeLi geli)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.geli = geli;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>属性注入: 有选择的通过Setter方法完成调用类所需的注入, 更加灵活方便</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MoAttack</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> GeLi geli;</div><div class="line">    </div><div class="line">    <span class="comment">// 属性注入方法</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setGeli</span><span class="params">(GeLi geli)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.geli = geli;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>接口注入: 将调用类所有依赖注入的方法抽取到一个接口中, 调用类通过实现该接口的相应注入方法.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ActorArrangable</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">injectGeli</span><span class="params">(GeLi geli)</span></span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MoAttack</span> <span class="keyword">implements</span> <span class="title">ActorArrangable</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> GeLi geli;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">injectGeli</span><span class="params">(GeLi geli)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.geli = geli;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>接口注入需要额外声明一个接口, 增加了类的数目, 效果和属性注入一样, 不提倡使用.</p>
+</li>
+</ol>
+<p><strong>类装载器ClassLoader: </strong></p>
+<p>工作机制: 类装载器就是寻找类的节码文件并构造出类在JVM内部表示对象的组件. Java中, 类装载器把一个类装入JVM中, 需要经过以下步骤:</p>
+<p>1) 装载: 查找和导入Class文件</p>
+<p>2) 链接: 执行校验, 准备和解析, 解析步骤是可选的</p>
+<p>​    2.1) 校验: 检查载人Class文件数据的正确性</p>
+<p>​    2.2) 准备: 给类的静态变量分配存储空间</p>
+<p>​    2.3) 解析: 将符号引入转换成直接引用</p>
+<p>3) 初始化: 对类的静态变量, 静态代码块执行初始化工作</p>
+<p>JVM运行时会产生3个ClassLoader: 根装载器, ExtClassLoader(扩展类装载器), AppClassLoader(应用类装载器).</p>
+<p>根装载器不是ClassLoader的子类. 负责装置JRE的核心类库.</p>
+<p>ExtClassLoader和AppClassLoader都是ClassLoader的子类, ExtClassLoader负责装载JRE扩展目录ext中的jar包; AppClassLoader负责装载Classpath路径下的类包.</p>
+<p>默认使用AppClassLoader装载应用程序的类.</p>
+<p>JVM装载类使用”全盘负责委托机制”.</p>
+<p><strong>全盘负责</strong>: 当一个ClassLoader装载一个类时, 除非显示使用另一个ClassLoad, 该类所依赖及引用的类也由这个ClassLoader载入;</p>
+<p><strong>委托机制</strong>: 先委托父装载器寻找目标类, 只有在找不到的情况下才从自己的类路径中查找并装载目标类. </p>
+<p><strong>资源抽象接口</strong>: Resource接口.</p>
+<p>主要方法:</p>
+<ul>
+<li>boolean exists(): 资源是否存在</li>
+<li>boolean isOpen(): 资源是否打开</li>
+<li>URL getURL() throws IOException: 如果底层资源可以表示成URL, 则该方法返回对应的URL对象</li>
+<li>InputStream getInputStream() throws IOException: 返回资源对应的输入流</li>
+</ul>
+<p>Resource的具体实现类:</p>
+<ul>
+<li>WritableResource: 可写资源接口</li>
+<li>ByteArrayResource: 二进制数组表示的资源, 可以在内存中通过程序构造</li>
+<li>ClassPathResource: 类路径下的资源</li>
+<li>FileSystemResource: 文件系统资源, 资源以文件系统路径的表示方式</li>
+<li>InputStreamResource: 以输入流返回表示的资源</li>
+<li>ServletContextResource: 负责以相对于Web应用根目录的路径加载的资源. 支持以流和URL的方式访问.</li>
+<li>UrlResource: URL封装了java.net.URL, 使用户能够访问任何可以通过URL表示的资源</li>
+<li>PathResource: Path封装了java.net.URL, java.nio.file.Patt, 文件系统资源</li>
+</ul>
+<p><strong>Spring支持的资源类型的地址前缀</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>地址前缀</th>
+<th>示例</th>
+<th>对应的资源类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>classpath:</td>
+<td>classpath: com/smart/beanfactory/beans.xml</td>
+<td>从类路径中加载资源, classpath: 和 classpath:/是等价的, 都是相对于类的跟路径. 可以是Jar或zip的类包</td>
+</tr>
+<tr>
+<td>file:</td>
+<td>file:/conf/com/smart/beanfactory/beans.xml</td>
+<td>使用UrlResource从文件系统目录中装载资源, 可以采用绝对路径或相对路径</td>
+</tr>
+<tr>
+<td>http://</td>
+<td><a href="http://www.smart.com/resource/beans.xml" target="_blank" rel="external">http://www.smart.com/resource/beans.xml</a></td>
+<td>使用UrlResource从Web服务器中装载资源</td>
+</tr>
+<tr>
+<td>ftp://</td>
+<td>ftp://www.smart.com/resource/beans.xml</td>
+<td>使用UrlResource从FTP服务器中装载资源</td>
+</tr>
+<tr>
+<td>没有前缀</td>
+<td>com/smart/beanfactory/beans.xml</td>
+<td>根据ApplicationContext的具体实现类采用对应的Resource</td>
+</tr>
+</tbody>
+</table>
+<p><strong>BeanFactory</strong>:</p>
+<p>BeanFactory提供高级IoC的配置机制, 使管理不同类型的Java对象成为可能. ApplicationContext建立在BeanFactory基础之上, 提供更多面向应用的功能.</p>
+<p><img src="/2019/03/15/精通Spring-4.x读书笔记-IoC容器/BeanFactory类继承体系.png" alt="BeanFactory类继承体系"></p>
+<p>XmlBeanFactory在Spring 3.2中已被废弃, 建议使用XmlBeanDefinitionReader, DefaultListableBeanFactory替代.</p>
+<p>BeanFactory最主要的方法就是getBean(String beanName) 从容器中返回特定名称的Bean.</p>
+<ul>
+<li>ListableBeanFactory: 定义了访问容器中Bean基本信息的若干方法, 如: 查看Bean的个数, 获取某一类型Bean的配置名, 查看容器中是否包括某一Bean等</li>
+<li>HierarchicalBeanFactory: 父子级联IoC的接口, 子容器可以通过接口方法访问父容器</li>
+<li>ConfigurableBeanFactory: 增强IoC容器的可定制性, 定义了设置类装载器, 属性编辑器, 容器初始化后置处理器等方法</li>
+<li>AutowireCapableBeanFactory: 定义了将容器中的Bean按某种规则(如按名称匹配, 按类型匹配)进行自动装配的方法</li>
+<li>SingletonBeanRegistry: 定义了允许在运行期向容器注册单实例Bean的方法</li>
+<li>BeanDefinitionRegistry: 提供了向容器手工注册BeanDefinition对象的方法</li>
+</ul>
+<p>通过BeanFactory启动IoC容器时, 并不会初始化配置文件中定义的Bean, 初始化动作发生在第一次调用时.</p>
+<p><strong>ApplicationContext</strong>:</p>
+<p><img src="/2019/03/15/精通Spring-4.x读书笔记-IoC容器/ApplicationContext类继承体系.png" alt="ApplicationContext类继承体系"></p>
+<ul>
+<li>ApplicationEventPublisher: 让容器拥有发布应用上下文事件的功能, 包括容器启动事件, 关闭事件. 实现ApplicationListener事件监听接口的Bean可以接收到容器事件, 并对事件进行相应处理. 在AbstractApplicationContext中存在一个ApplicationEventMulticaster, 它负责保存所有的监听器, 以便在容器产生上下文事件时通知这些事件监听者.</li>
+<li>MessageSource: 为应用提供i18n国际化消息访问功能</li>
+<li>ResourcePatternResolver: 所有ApplicationContext实现类都实现了类似于PathMatchingResourcePatternResolver的功能, 可以通过带前缀的Ant风格的资源文件路径装载Spring的配置文件</li>
+<li>LifeCycle: 提供了start()和stop()两个方法, 用于控制异步处理过程.</li>
+<li>ConfigurableApplicationContext: 扩展于ApplicationContext, 新增两个主要的方法: refresh()和close(), 让ApplicationContext具有启动, 刷新, 关闭应用上下文的能力.</li>
+</ul>
+<p>ApplicationContext在初始化应用上下文时就实例化所有单实例的Bean.</p>
+<p><strong>WebApplicationContext</strong>:</p>
+<p>WebApplicationContext是专门为Web应用准备的, 允许从相对于Web根目录的路径中装载配置文件完成初始化工作. 从WebApplicationContext中可以获得ServletContext的引用, 整个Web应用上下文对象将作为属性放置在ServletContext中, 以便Web应用环境访问Spring应用上下文.</p>
+<p>WebApplication为Bean添加了三个新的作用域: request, session, global session.</p>
+<p><img src="/2019/03/15/精通Spring-4.x读书笔记-IoC容器/WebApplication类继承体系.png" alt="WebApplication类继承体系"></p>
+<p>在上下文启动时, WebApplicationContext实例即以WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE为键放置在ServletContext的属性列表中.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">WebApplicationContext wac = (WebApplicationContext) servletContext.getAttribute(WebApplicationContext.ROOT_APPLICATION_CONTEXT_ATTRIBUTE);</div></pre></td></tr></table></figure>
+<p><img src="/2019/03/15/精通Spring-4.x读书笔记-IoC容器/Spring和Web应用上下文融合.png" alt="Spring和Web应用上下文融合"></p>
+<p>ConfigurableWebApplicatinContext扩展了WebApplicatinContext, 允许通过配置的方式实例化WebApplicatinContext, 定义了两个重要的方法</p>
+<ul>
+<li>setServletContext(ServletContext servletContext): 为Spring设置Web应用上下文, 以便两者整合</li>
+<li>setConfigLocations(String[] configLocations): 设置Spring配置文件地址, 一般情况下, 配置文件地址是相对于Web根目录的地址.</li>
+</ul>
+<p>WebApplicatinContext必须在拥有Web容器的前提下才能完成启动工作. </p>
+<p>在web.xml中配置自启动的Servlet或定义Web容器监听器(ServletContextListener), 就可以完成启动Spring Web应用上下文的工作</p>
+<p>ContextLoaderListener通过Web容器上下文参数contextConfigLocation获取Spring配置文件的位置.</p>
+<p>如果在不支持容器监听器的低版本Web容器中, 可以采用ContextLoaderServlet完成相同的工作.</p>
+<p><strong>父子容器</strong>:</p>
+<p>通过HierarchicalBeanFactory接口, Spring的Ioc容器可以建立父子层级关联的容器体系, 子容器可以访问父容器中的Bean, 但父容器不能访问子容器中的Bean.</p>
+<p>在容器内, Bean的id必须是唯一的, 但子容器可以拥有一个和父容器id相同的Bean.</p>
+<p><strong>Bean的生命周期</strong>:</p>
+<p>Spring可以从两个层面定义Bean的生命周期:</p>
+<ol>
+<li>Bean的左右范围</li>
+<li>实例化Bean时所经历的一系列阶段</li>
+</ol>
+<p><strong>BeanFactory中Bean的生命周期</strong>:</p>
+<p><img src="/2019/03/15/精通Spring-4.x读书笔记-IoC容器/BeanFactory中Bean的生命周期.png" alt="BeanFactory中Bean的生命周期"></p>
+<p>具体过程如下:</p>
+<ol>
+<li>当调用者通过getBean(beanName)向容器请求某一个Bean时, 如果容器注册了InstantiationAwareBeanPostProcessor接口, 则在实例化Bean之前, 将调用接口的postProcessBeforeInstantiation()方法</li>
+<li>根据配置情况调用Bean构造函数或工厂方法实例化Bean</li>
+<li>如果容器注册了InstantiationAwareBeanPostProcessor接口, 那么在实例化Bean之后, 调用该接口的postProcessAfterInstantiation()方法, 可以在这里对已经实例化的对象进行一些”梳妆打扮”</li>
+<li>如果Bean配置了属性信息, 那么容器在这一步着手将配置值设置到Bean对应的属性中, 不过在设置每个属性之前将先调用InstantiationAwareBeanPostProcessor接口的postProcessPropertyValues()方法</li>
+<li>调用Bean的属性设置方法设置属性值</li>
+<li>如果Bean实现了BeanNameAware接口, 将调用setBeanName()方法, 将配置文件中该Bean对应的名称设置到Bean中</li>
+<li>如果Bean实现了BeanFactoryAware接口, 将调用setBeanFactory()方法, 将BeanFactory容器实例设置到Bean中.</li>
+<li>如果BeanFactory装配了BeanPostProcessor后处理器, 将调用BeanPostProcessor的Object postProcessBeforeInitialization(Object bean, String beanName)接口方法对Bean进行加工操作. 用户可以对某些Bean进行特殊处理. BeanPostProcessor为容器提供对Bean进行后续加工的切入点, 如AOP, 动态代理等都是通过BeanPostProcessor实施.</li>
+<li>如果Bean实现了InitializingBean接口, 将调用接口的afterPropertiesSet()方法</li>
+<li>如果在<code>&lt;bean&gt;</code>中通过<code>init-method</code>属性设置初始化方法, 将执行这个方法</li>
+<li>BeanPostProcessor后处理定义了两个方法, 其一是postProcessBeforeInitialization(), 其二是postProcessAfterInitialization(Object bean, String beanName), 这个方法在此时调用, 容器再次获得对Bean进行加工处理的机会</li>
+<li>如果Bean的作用范围是prototype, 将Bean返回给调用者. 如果作用范围是singleton, 将Bean放入Spring Ioc容器缓存池, 并返回Bean的引用给调用者.</li>
+<li>当容器关闭, 如果Bean实现了DisposableBean接口, 将调用接口的destory()方法.</li>
+<li>如果通过<code>&lt;bean&gt;</code>的<code>destory-method</code>属性指定Bean的销毁方法, 则执行这个方法, 完成Bean资源的释放等操作.</li>
+</ol>
+<p><strong>ApplicationContext中Bean的生命周期</strong>:</p>
+<p>Bean在ApplicationContext中的生命周期和在BeanFactory中的生命周期类似, 不同的是:</p>
+<ul>
+<li>如果Bean实现ApplicationAware接口, 则会增加接口方法setApplicationContext()的步骤.</li>
+<li>如果配置文件中声明了工厂后处理器接口BeanFactoryPostProcessor的实现类, 则ApplicationContext在装载配置文件后, 初始化Bean实例之前将调用这些BeanFactoryPostProcessor对配置信息进行加工处理. 仅在ApplicationContext初始化时调用一次, 目的是完成配置文件的加工处理工作.</li>
+<li>ApplicationContext利用反射机制自动识别出配置文件中定义的BeanPostProcessor, InstantiationAwareBeanPostProcessor, BeanFactoryPostProcessor, 并自动注册到应用上下文中. BeanFactory需要通过调用addBeanPostProcessor()方法注册.</li>
+</ul>
+<p><img src="/2019/03/15/精通Spring-4.x读书笔记-IoC容器/ApplicationContext中Bean的生命周期.png" alt="ApplicationContext中Bean的生命周期"></p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

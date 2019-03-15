@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Blue">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="Blue的博客"/>
+  <meta property="og:description" content="" />
+  <meta property="og:site_name" content="Blue的博客"/>
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://singthi4079.github.ioundefined"/>
+  
+    <link rel="alternate" href="/atom.xml" title="Blue的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <!-- Site Title -->
+  <title>Blue的博客</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/default-banner-dark.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">Untitled Post</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/<your-github-username>">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:<your-email-address>">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By Blue</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2019-03-15</span>
+            <span class="time">11:59:27</span>
+          </span>
+          
+        </div>
+        <!-- Tags -->
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <hr>
+<h2 id="title-Java核心技术－卷1-继承"><a href="#title-Java核心技术－卷1-继承" class="headerlink" title="title:Java核心技术－卷1 继承"></a>title:Java核心技术－卷1 继承</h2><p>利用继承可以基于已存在的类构造一个新类. </p>
+<p>B类继承A类, 那么A类与B类之间存在”is-a”关系.</p>
+<p>继承语法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> <span class="keyword">extends</span> <span class="title">A</span> </span>&#123;</div><div class="line">  添加方法和域</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果父类中的方法对于子类不适用, 可以在子类覆盖(override)父类的方法, 虚拟机会调用正确的方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</div><div class="line">  <span class="keyword">private</span> String name;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSomething</span><span class="params">()</span> </span>&#123;</div><div class="line">    System.out.println(<span class="string">"Hello, "</span> + name);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> <span class="keyword">extends</span> <span class="title">A</span> </span>&#123;</div><div class="line">  <span class="comment">// 覆盖A类中的doSomething方法</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSomething</span><span class="params">()</span> </span>&#123;</div><div class="line">    System.out.println(<span class="string">"Hello, World"</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OverrideTest</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">    A a = <span class="keyword">new</span> B();</div><div class="line">    a.doSomething();  <span class="comment">// result: Hello, World</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>子类不能直接访问父类的私有域.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</div><div class="line">  <span class="keyword">private</span> String name;</div><div class="line">  </div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSomething</span><span class="params">()</span> </span>&#123;</div><div class="line">    System.out.println(<span class="string">"Hello, "</span> + name);</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = name;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> name;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> <span class="keyword">extends</span> <span class="title">A</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSomething</span><span class="params">()</span> </span>&#123;</div><div class="line">    System.out.println(<span class="string">"Hello, World! your name is "</span> + name); <span class="comment">// error: 子类不能直接访问父类的私有域</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这样也不能正常运行, 因为B类中也有getName方法, 会导致无限次调用自己</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</div><div class="line">  <span class="keyword">private</span> String name;</div><div class="line">  </div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSomething</span><span class="params">()</span> </span>&#123;</div><div class="line">    System.out.println(<span class="string">"Hello, "</span> + name);</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = name;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> name;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> <span class="keyword">extends</span> <span class="title">A</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="comment">// 这样也不能正常运行, 因为B类中也有getName方法, 会导致无限次调用自己</span></div><div class="line">    <span class="keyword">return</span> <span class="string">"your name is "</span> + getName();</div><div class="line">  &#125;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSomething</span><span class="params">()</span> </span>&#123;</div><div class="line">    </div><div class="line">    System.out.println(<span class="string">"Hello, World!"</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>需要使用<code>super</code>关键字</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</div><div class="line">  <span class="keyword">private</span> String name;</div><div class="line">  </div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSomething</span><span class="params">()</span> </span>&#123;</div><div class="line">    System.out.println(<span class="string">"Hello, "</span> + name);</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = name;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> name;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> <span class="keyword">extends</span> <span class="title">A</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="comment">// 这样也不能正常运行, 因为B类中也有getName方法, 会导致无限次调用自己</span></div><div class="line">    <span class="keyword">return</span> <span class="string">"your name is "</span> + <span class="keyword">super</span>.getName();</div><div class="line">  &#125;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSomething</span><span class="params">()</span> </span>&#123;</div><div class="line">    </div><div class="line">    System.out.println(<span class="string">"Hello, World!"</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>super 不是一个对象的引用, 不能把super赋值给另一个对象变量, 只是一个指示编译器调用父类方法的特殊关键字.</p>
+</blockquote>
+<p>可以在子类中添加域、增加方法或覆盖父类的方法,  绝对不能删除继承的任何域和方法.</p>
+<p>如果子类的构造器没有显式地调用父类的构造器, 就会自动调用父类默认(没有参数)的构造器.  如果父类没有不带参数的构造器, 并且子类的构造器中又没有显式地调用父类的其他构造器, 编译器会报错.</p>
+<p><code>this</code>的两个用途:</p>
+<ol>
+<li>引用隐式参数</li>
+<li>调用该类的其他构造器</li>
+</ol>
+<p><code>super</code>的两个用途:</p>
+<ol>
+<li>调用超类的方法</li>
+<li>调用超类的构造器</li>
+</ol>
+<p>调用构造器的语句只能作为另一个构造器的第一条语句.</p>
+<p>一个对象变量可以指示多种实际类型的现象被称为<code>多态</code>. 在运行时能够自动地选择调用哪个方法的现象称为<code>动态绑定</code>.</p>
+<p>Java中不需要将方法声明为虚拟方法. 动态绑定是默认的处理方式. 如果不希望让一个方法具有虚拟特征,  可以标记为<code>final</code>.</p>
+<p><code>is-a</code>规则的另一个表述法是<code>置换法则</code>.  表示程序中出现超类对象的地方都可以用子类对象置换.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">A a;</div><div class="line">a = <span class="keyword">new</span> A();</div><div class="line">a = <span class="keyword">new</span> B();</div></pre></td></tr></table></figure>
+<blockquote>
+<p>子类数组的引用可以转换成超类的数组的引用, 不需要强制类型转换. 如:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt; B[] bs = <span class="keyword">new</span> B[<span class="number">10</span>];</div><div class="line">&gt; A[] as = bs; <span class="comment">// 这是合法的</span></div><div class="line">&gt;</div></pre></td></tr></table></figure>
+</blockquote>
+<p>&gt;</p>
+<blockquote>
+<p>bs[i]存放的是一个B类的实例对象, 也一定是一个A类对象. 在上面的代码中, as 和 bs 引用的是同一个数组. </p>
+<p><code>as[0] = new A();</code></p>
+<p>编译器会接纳这样的赋值操作. 但是as[0] 和bs[0]引用的是同一个对象. 上面的赋值操作将一个A类的实例对象存储到bs中, 但调用了B类的方法, 而A类中不存在这个方法时, 会搅乱相邻存储空间的内容.</p>
+</blockquote>
+<p><strong>调用对象方法的执行过程</strong></p>
+<ol>
+<li><p>编译器查看对象的声明类型和方法名. 获取所有可能被调用的候选方法.</p>
+<p>假设调用<code>x.f(param)</code>, 且隐式参数<code>x</code>声明为C类的对象. <em>可能存在多个名字为f, 但参数类型不一样的方法.</em> 编译器会一一列举所有C类中名为<code>f</code>的方法和其超类中的访问属性为<code>public</code>且名为<code>f</code>的方法. 超类的私有方法不能访问.</p>
+</li>
+<li><p>编译器查看调用方法时提供的参数类型. 获得需要调用的方法名和参数类型.</p>
+<p>如果存在一个与提供的参数类型完全匹配, 就会选择这个方法. 这个过程被称为<strong>重载解析</strong>. 例如: <code>x.f(&quot;hello&quot;)</code>, 编译器会选择<code>f(String)</code>, 而不是<code>f(int)</code>. 由于允许类型转换(int -&gt; double, B -&gt; A等). 如果编译器没有找到与参数类型匹配的方法, 或者发现经过类型转换后有多个方法匹配, 就会报错.</p>
+</li>
+<li><p>如果是<code>private</code>、<code>static</code>、<code>final</code>方法或构造器, 编译器可以准确的知道该调用哪个方法, 这种方式称为<strong>静态绑定</strong>. 与之对应, 调用的方法依赖于隐式参数的实际类型, 并且在运行时实现<em>动态绑定</em></p>
+</li>
+<li><p>当程序运行, 并且采用动态绑定调用方法时, 虚拟机一定调用与<code>x</code>所引用对象的实际类型最合适的那个类的方法.s</p>
+<p>假设<code>x</code>的实际类型是D, 它是C类的子类. 如果D类定义了方法<code>f(String)</code>, 就直接调用它; 否则, 在D类的父类中寻找<code>f(String)</code>.</p>
+</li>
+</ol>
+<blockquote>
+<p>每次调用方法都要进行搜索, 时间开销大. 虚拟机预先为每个类创建了一个<strong>方法表</strong>, 其中列出所有方法的签名和实际调用的方法. 在真正调用方法的时候, 虚拟机仅查找这个表就可以了.</p>
+<p>动态绑定有一个重要的特性: 不需要对现有的代码进行修改, 就可以对程序进行扩展.</p>
+<p>覆盖方法时, 子类方法不能低于父类方法的可见性. 如果父类方法是public, 子类方法一定要声明为public.</p>
+</blockquote>
+<p>使用<code>final</code>修饰类, 这个类不能被继承.</p>
+<p>使用<code>final</code>修饰方法, 在子类不能覆盖着歌方法. final类中的所有方法都是final的.</p>
+<p>使用<code>final</code>修饰域, 构造对象后不允许修改它们的值.</p>
+<p>抽象类不能被实例化, 即不能创建抽象类的实例.</p>
+<p>任何声明为<code>private</code>的域或方法对其他类都是不可见的, 即使是子类也不能访问父类中的私有域和私有方法.</p>
+<p>如果希望父类中的某些方法或某些域可以被子类访问, 可以把这些方法或域声明为<code>protected</code></p>
+<p>声明为<code>protected</code>的域或方法, 对所有子类及同一个包中所有其他类都是可见的.</p>
+<p>4种访问修饰符:</p>
+<ol>
+<li>private: 仅本类可见;</li>
+<li>默认(不需要修饰符): 对本包可见;</li>
+<li>protected: 对本包和所有子类可见;</li>
+<li>public: 对所有类可见 </li>
+</ol>
+<p>Object类中的equals方法用于检测一个对象是否等于另一个对象. 判断两个对象是否具有相同的引用.</p>
+<p><code>Objects.equals</code>方法: <code>Objects.equals(a, b)</code>如果两个参数都是<code>null</code>, 返回true, 如果只有一个为<code>null</code>, 返回false.</p>
+<p>在子类中定义<code>equals</code>方法, 首先调用父类中的<code>equals</code>方法. 如果检测失败, 对象就不可能相等.</p>
+<p>Java语言规范要求equals方法具有下面特性:</p>
+<ol>
+<li>自反性: 对于任何非空引用x, <code>x.equals(x)</code>应该返回true</li>
+<li>对称性: 对于任何引用x和y, 当且仅当<code>y.equals(x)</code>返回true, <code>x.equals(y)</code>也应该返回true</li>
+<li>传递性: 对于任何引用x,y,z, 如果<code>x.equals(y)</code>返回true, <code>y.equals(z)</code>返回true, <code>x.equals(z)</code>也应该返回true</li>
+<li>一致性:如果x和y引用的对象没有发生任何变化, 反复调用<code>x.equals(y)</code>应该返回同样的结果</li>
+<li>对于任意非空引用x, <code>x.equals(null)</code>应该返回false</li>
+</ol>
+<p>编写一个完美的<code>equals</code>方法的建议:</p>
+<ol>
+<li><p>显式参数命名为<code>otherObject</code>, 稍后需要把它转换为另一个叫做other的变量</p>
+</li>
+<li><p>检测<code>this</code>和 <code>otherObject</code>是否引用同一个对象</p>
+<p><code>if (this == otherObject) return true;</code></p>
+</li>
+<li><p>检测<code>otherObject</code>是否为<code>null</code>, 如果为null, 返回false. 这个检测是必需的.</p>
+<p><code>if (otherObject == null) return false;</code></p>
+</li>
+<li><p>比较<code>this</code>和<code>otherObject</code>是否属于同一个类. 如果equals的语义在每个子类中有所改变, 就用<code>getCass</code>检测</p>
+<p><code>if (getClass() != otherObject.getClass()) return false;</code></p>
+<p>如果所有子类都拥有统一的语义, 就使用<code>instanceof</code>检测:</p>
+<p><code>if (!(otherObject instanceof ClassName)) return false;</code></p>
+</li>
+<li><p>将<code>otherObject</code>转换为相应的类类型变量</p>
+<p><code>ClassName other = (ClassName) otherObject;</code></p>
+</li>
+<li><p>现在开始对所有需要比较的域进行比较.</p>
+</li>
+</ol>
+<p>散列码(hash code)是由对象导出的一个整型值. 散列码是没有规律的. 如果x和y是两个不同的对象, <code>x.hashCode()</code>与<code>y.hashCode()</code>基本上不会相通.</p>
+<p><code>hashCode</code>方法定义在Object类中, 每个对象都有一个默认的散列码, 其值为对象的存储地址.</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Blue">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="Java String"/>
+  <meta property="og:description" content="" />
+  <meta property="og:site_name" content="Blue的博客"/>
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://singthi4079.github.ioundefined"/>
+  
+    <link rel="alternate" href="/atom.xml" title="Blue的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <!-- Site Title -->
+  <title>Blue的博客</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/default-banner-dark.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">Java String</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/<your-github-username>">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:<your-email-address>">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By Blue</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2019-03-15</span>
+            <span class="time">11:59:27</span>
+          </span>
+          
+        </div>
+        <!-- Tags -->
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>String 不是基本数据类型, 而是一个对象, 并且是不可变的对象. String 类被定义为final, 即不能被继承. 字符串对象在初始化之前, 它的值为null. “”, null, new String()三者的区别.</p>
+<ol>
+<li>null表示String 还没有new, 对象的引用还没有创建, 也没有分配内存空间</li>
+<li>“”, new String()说明已经new了一个对象. 只是内部为空</li>
+</ol>
+<p>在进行String连接操作(+)时, 连接操作最开始时如果是字符串常量, 编译后会把尽可能多的字符串常量连接起来, 形成新的字符串常量与后续连接.</p>
+<p>字符串连接是从左向右依次进行, 对于不同的字符串, 首先以最左边的字符串为参数创建StringBuilder对象, 然后依次对右边进行append操作. 最后把StringBuilder对象通过toString()方法转换成String对象. 中间存在多个字符串常量时不会自动拼接.</p>
+<p><strong>当使用+进行多个字符串连接时，实际上是产生了一个StringBuilder对象和一个String对象。</strong></p>
+<p>常用方法:</p>
+<ol>
+<li>字符串比较<ul>
+<li>equals 判断内容是否相同</li>
+<li>compareTo 判断字符串的大小关系</li>
+<li>== 判断内容与地址是否相同</li>
+<li>equalsIgnoreCase 忽略大小写的情况下判断内容是否相同</li>
+<li>reagionMatches()  对字符串中的部分内容是否相同进行比较</li>
+</ul>
+</li>
+</ol>
+<p>JVM为了提高性能和减少内存开销, 内部维护一个字符串常量池, 每创建一个字符串常量, JVM首先检查字符串常量池, 如果存在, 返回此种字符串对象的引用, 不存在就创建该字符串对象放入池中.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">String a = <span class="string">"abc"</span>;</div><div class="line">String b = <span class="string">"abc"</span>;</div><div class="line">System.out.println(a == b); <span class="comment">// true</span></div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">String a = <span class="string">"Hello"</span>;</div><div class="line">String b = <span class="keyword">new</span> String(<span class="string">"Hello"</span>);</div><div class="line">System.out.println(a == b); <span class="comment">// false</span></div><div class="line">System.out.println(a.equals(b)); <span class="comment">// true</span></div></pre></td></tr></table></figure>
+<p>这种方式与创建字符串常量的方式不同, 当使用<code>new String(str)</code> 方式创建字符串对象时, 不管字符串常量池中是否有与此相同内容的字符串, 都会在堆内存创建新的字符串对象.</p>
+<p>intern()方法返回字符串对象在字符串常量池中的对象引用. 如果字符串常量池中没有这个字符串, 就创建一个新的字符串放到常量池中.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">String a = <span class="string">"hello"</span>;</div><div class="line">System.out.println(a == a.intern()); <span class="comment">// true</span></div><div class="line"></div><div class="line">String b = <span class="keyword">new</span> String(<span class="string">"world"</span>);</div><div class="line">String c = b.intern();</div><div class="line"></div><div class="line">System.out.println(c == b); <span class="comment">// false</span></div><div class="line"></div><div class="line">String d = <span class="string">"world"</span>;</div><div class="line">System.out.println(c == d); <span class="comment">// true</span></div></pre></td></tr></table></figure>
+<p>使用StringBuffer处理字符串时, 如果对字符串进行修改操作, 并不会产生一个新的字符串对象.</p>
+<p>在修改时StringBuffer都是修改自身, 而String 类则是产生一个新的对象.</p>
+<p>StringBuffer必须通过构造方法进行初始化.</p>
+<p>StringBuilder也是一个可变的字符串对象, 和StringBuffer不同在于它是线程不安全的. 所以StringBuilder比StringBuffer速度快.</p>
+<p>可以通过Java的反射机制修改String的内容</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">stringReflection</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line"></div><div class="line">    String s = <span class="string">"Hello World"</span>;</div><div class="line"></div><div class="line">    System.out.println(<span class="string">"s = "</span> + s); <span class="comment">//Hello World</span></div><div class="line"></div><div class="line">    <span class="comment">//获取String类中的value字段</span></div><div class="line">    Field valueField = String.class.getDeclaredField(<span class="string">"value"</span>);</div><div class="line"></div><div class="line">    <span class="comment">//改变value属性的访问权限</span></div><div class="line">    valueField.setAccessible(<span class="keyword">true</span>);</div><div class="line"></div><div class="line">    <span class="keyword">char</span>[] value = (<span class="keyword">char</span>[]) valueField.get(s);</div><div class="line"></div><div class="line">    <span class="comment">//改变value所引用的数组中的第5个字符</span></div><div class="line">    value[<span class="number">5</span>] = <span class="string">'_'</span>;</div><div class="line"></div><div class="line">    System.out.println(<span class="string">"s = "</span> + s); <span class="comment">//Hello_World</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

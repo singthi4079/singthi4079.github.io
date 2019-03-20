@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
   <!-- Html Head Tag-->
-  <head>
+  <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="">
   <meta name="author" content="Blue">
   <!-- Open Graph Data -->
-  <meta property="og:title" content="Angular笔记-根模块"/>
-  <meta property="og:description" content="" />
-  <meta property="og:site_name" content="Blue的博客"/>
-  <meta property="og:type" content="article" />
-  <meta property="og:image" content="https://singthi4079.github.ioundefined"/>
+  <meta property="og:title" content="Angular笔记-根模块">
+  <meta property="og:description" content="">
+  <meta property="og:site_name" content="Blue的博客">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://singthi4079.github.ioundefined">
   
     <link rel="alternate" href="/atom.xml" title="Blue的博客" type="application/atom+xml">
   
@@ -100,7 +100,7 @@
           <!-- Date -->
           <span class="date-time info">On
             <span class="date">2017-01-17</span>
-            <span class="time">11:59:27</span>
+            <span class="time">15:05:29</span>
           </span>
           
         </div>
@@ -117,14 +117,14 @@
         <!-- Post Main Content -->
         <div class="post-content">
           <h2 id="Angular笔记-根模块"><a href="#Angular笔记-根模块" class="headerlink" title="Angular笔记-根模块"></a>Angular笔记-根模块</h2><p>Angular 模块类描述应用的部件是如何组合在一起的。 每个应用都至少有一个 Angular 模块，也就是<em>根</em>模块，用来<strong>引导</strong>并运行应用。 你可以为它取任何名字。常规名字是<code>AppModule</code>。</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">app.module.ts</div><div class="line"><span class="keyword">import</span> &#123; NgModule &#125;      from <span class="string">'@angular/core'</span>;</div><div class="line"><span class="keyword">import</span> &#123; BrowserModule &#125; from <span class="string">'@angular/platform-browser'</span>;</div><div class="line"><span class="keyword">import</span> &#123; AppComponent &#125;  from <span class="string">'./app.component'</span>;</div><div class="line"></div><div class="line"><span class="meta">@NgModule</span>(&#123;</div><div class="line">  imports:      [ BrowserModule ],</div><div class="line">  declarations: [ AppComponent ],</div><div class="line">  bootstrap:    [ AppComponent ]</div><div class="line">&#125;)</div><div class="line"><span class="keyword">export</span> <span class="keyword">class</span> AppModule &#123; &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">app.module.ts</span><br><span class="line"><span class="keyword">import</span> &#123; NgModule &#125;      from <span class="string">'@angular/core'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; BrowserModule &#125; from <span class="string">'@angular/platform-browser'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; AppComponent &#125;  from <span class="string">'./app.component'</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@NgModule</span>(&#123;</span><br><span class="line">  imports:      [ BrowserModule ],</span><br><span class="line">  declarations: [ AppComponent ],</span><br><span class="line">  bootstrap:    [ AppComponent ]</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> AppModule &#123; &#125;</span><br></pre></td></tr></table></figure>
 <p><code>@NgModule</code>装饰器将<code>AppModule</code>标记为 Angular 模块类（也叫<code>NgModule</code>类）。 <code>@NgModule</code>接受一个<em>元数据</em>对象，告诉 Angular 如何编译和启动应用。</p>
 <h3 id="imports-数组"><a href="#imports-数组" class="headerlink" title="imports 数组"></a><em>imports</em> 数组</h3><p>Angular 模块把特性合并成离散单元的一种方式。 当应用需要模块的特性时，将其添加到<code>imports</code>数组中。</p>
 <blockquote>
 <p><code>imports</code>数组中应该<strong>只有NgModule类</strong>。不要放置其它类型的类。</p>
 </blockquote>
 <h3 id="declarations-数组"><a href="#declarations-数组" class="headerlink" title="declarations 数组"></a><em>declarations</em> 数组</h3><p><em>每个</em>组件必须在且仅在一个<code>NgModule</code>类中声明。 通过将其列到<code>AppModule</code>模块的<code>declarations</code>数组中，告诉 Angular 哪个组件属于<code>AppModule</code>。</p>
-<h3 id="bootstrap-数组"><a href="#bootstrap-数组" class="headerlink" title="bootstrap 数组"></a><em>bootstrap</em> 数组</h3><p>通过<a href="https://angular.cn/docs/ts/latest/guide/appmodule.html#main" target="_blank" rel="external"><em>引导</em></a>根<code>AppModule</code>来启动应用。 在启动过程中，其中一步是创建列在<code>bootstrap</code>数组的组件， 并将它们每一个都插入到浏览器的DOM中。</p>
+<h3 id="bootstrap-数组"><a href="#bootstrap-数组" class="headerlink" title="bootstrap 数组"></a><em>bootstrap</em> 数组</h3><p>通过<a href="https://angular.cn/docs/ts/latest/guide/appmodule.html#main" target="_blank" rel="noopener"><em>引导</em></a>根<code>AppModule</code>来启动应用。 在启动过程中，其中一步是创建列在<code>bootstrap</code>数组的组件， 并将它们每一个都插入到浏览器的DOM中。</p>
 
         </div>
       </div>
@@ -142,7 +142,7 @@
         <p class="copyright text-muted">
           Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
           Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
-        <p class="copyright text-muted">
+        </p><p class="copyright text-muted">
           Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
         </p>
       </div>

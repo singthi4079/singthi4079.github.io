@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
   <!-- Html Head Tag-->
-  <head>
+  <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="">
   <meta name="author" content="Blue">
   <!-- Open Graph Data -->
-  <meta property="og:title" content="Java高并发程序设计实战读书笔记-基本概念"/>
-  <meta property="og:description" content="" />
-  <meta property="og:site_name" content="Blue的博客"/>
-  <meta property="og:type" content="article" />
-  <meta property="og:image" content="https://singthi4079.github.ioundefined"/>
+  <meta property="og:title" content="Java高并发程序设计实战读书笔记-基本概念">
+  <meta property="og:description" content="">
+  <meta property="og:site_name" content="Blue的博客">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://singthi4079.github.ioundefined">
   
     <link rel="alternate" href="/atom.xml" title="Blue的博客" type="application/atom+xml">
   
@@ -100,7 +100,7 @@
           <!-- Date -->
           <span class="date-time info">On
             <span class="date">2019-03-15</span>
-            <span class="time">11:59:27</span>
+            <span class="time">15:05:28</span>
           </span>
           
         </div>
@@ -139,7 +139,7 @@
 <p>一种典型的无等待结构是<strong>RCP(Read-Copy-Update)</strong>. 对数据的读不加控制. 但在写数据时, 先取得原始数据的副本, 接着只修改副本, 修改完成后在合适的时机写回数据</p>
 </blockquote>
 <h3 id="并行的两大定律"><a href="#并行的两大定律" class="headerlink" title="并行的两大定律"></a>并行的两大定律</h3><p><strong>Amdahl定律</strong>: 加速比定义: <code>加速比=优化前系统耗时/优化后系统耗时</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Tn=1/(F+1*(1-F)/n)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Tn=1/(F+1*(1-F)/n)</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>Tn表示使用n个处理器优化后的耗时</p>
 <p>F是程序中只能串行执行的比例</p>
@@ -173,6 +173,8 @@
 <blockquote>
 <p>原因是因为程序在执行时, 可能会进行指令重排.</p>
 <p>指令重排可以保证串行语义一致, 但没有义务保证多线程间的语义一致</p>
+</blockquote>
+<blockquote>
 <p>为什么要指令重排?</p>
 <p>CPU在执行指令时, 采用<strong>流水线技术</strong>来执行指令. 类似:</p>
 <blockquote>
@@ -199,7 +201,7 @@
         <p class="copyright text-muted">
           Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
           Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
-        <p class="copyright text-muted">
+        </p><p class="copyright text-muted">
           Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
         </p>
       </div>

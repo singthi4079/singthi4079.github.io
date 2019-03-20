@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
   <!-- Html Head Tag-->
-  <head>
+  <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="">
   <meta name="author" content="Blue">
   <!-- Open Graph Data -->
-  <meta property="og:title" content="Java基础-基本程序设计结构"/>
-  <meta property="og:description" content="" />
-  <meta property="og:site_name" content="Blue的博客"/>
-  <meta property="og:type" content="article" />
-  <meta property="og:image" content="https://singthi4079.github.ioundefined"/>
+  <meta property="og:title" content="Java基础-基本程序设计结构">
+  <meta property="og:description" content="">
+  <meta property="og:site_name" content="Blue的博客">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://singthi4079.github.ioundefined">
   
     <link rel="alternate" href="/atom.xml" title="Blue的博客" type="application/atom+xml">
   
@@ -100,7 +100,7 @@
           <!-- Date -->
           <span class="date-time info">On
             <span class="date">2019-03-15</span>
-            <span class="time">11:59:27</span>
+            <span class="time">15:05:28</span>
           </span>
           
         </div>
@@ -193,16 +193,16 @@
 <p>在Java中, char类型用UTF-16编码描述一个代码单元.</p>
 <h4 id="boolean-类型"><a href="#boolean-类型" class="headerlink" title="boolean 类型"></a>boolean 类型</h4><p>boolean类型有两个值: false和true. 整型值和布尔值之间不能进行相互转换.</p>
 <h4 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h4><p>Java中, 每个变量属于一种类型. 声明变量时, 变量的类型位于变量名之前.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">double</span> salary;</div><div class="line"><span class="keyword">int</span> vacationDays;</div><div class="line"><span class="keyword">long</span> earthPopulation;</div><div class="line"><span class="keyword">boolean</span> done;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> salary;</span><br><span class="line"><span class="keyword">int</span> vacationDays;</span><br><span class="line"><span class="keyword">long</span> earthPopulation;</span><br><span class="line"><span class="keyword">boolean</span> done;</span><br></pre></td></tr></table></figure>
 <p><strong>每条语句必须以分号结束</strong></p>
 <p>变量名必须是一个以字母开头的由字母或数字构成的序列；</p>
 <p>变量名大小写敏感, 长度没有限制</p>
 <p><code>$</code>不能在代码中使用这个字符,  它只用在Java编译器或其它工具生成的名字中.</p>
 <p>声明一个变量后, 必须用赋值语句初始化. 不能使用<strong>未初始化</strong>的变量</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> vac;</div><div class="line">System.out.println(vac);<span class="comment">// Java编译器认为这是错误的</span></div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> vac;</span><br><span class="line">System.out.println(vac);<span class="comment">// Java编译器认为这是错误的</span></span><br></pre></td></tr></table></figure>
 <p>赋值: <code>int var=12;</code>.  可以在任何地方声明变量, 尽量在变量第一次使用的地方声明.</p>
 <h4 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h4><p>利用<code>final</code>关键字表示常量.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">final</span> <span class="keyword">double</span> CM_PER_INCH = <span class="number">2.54</span>;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> <span class="keyword">double</span> CM_PER_INCH = <span class="number">2.54</span>;</span><br></pre></td></tr></table></figure>
 <p>关键字<code>final</code>表示这个变量只能被赋值一次.  不能在更改.  通常常量名使用全大写.</p>
 <h4 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h4><p>除法: 当除数与被除数都是整数时, 表示整数除法; 否则, 表示浮点出发.</p>
 <p>整数被0除会产生一个异常. 浮点数被0除会得到无穷大或者NaN</p>
@@ -288,7 +288,7 @@
 </tbody>
 </table>
 <h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><p>使用<code>+</code>号连接两个字符串</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">String s1 = <span class="string">"Hello, "</span>;</div><div class="line">String s2 = <span class="string">"World"</span>;</div><div class="line">String message = s1 + s2;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String s1 = <span class="string">"Hello, "</span>;</span><br><span class="line">String s2 = <span class="string">"World"</span>;</span><br><span class="line">String message = s1 + s2;</span><br></pre></td></tr></table></figure>
 <p>使用equals方法判断两个字符串是否相等.</p>
 <p><code>s1 == s2</code>只能判断两个字符串是否存放在内存的同一个位置.</p>
 <h3 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a>流程控制</h3><h4 id="条件语句"><a href="#条件语句" class="headerlink" title="条件语句"></a>条件语句</h4><p>语法: <code>if (condition) statement</code></p>
@@ -296,7 +296,7 @@
 <p>do-while语法: <code>do statement while (condition)</code></p>
 <p>for 语法: <code>for (int i=0; i&lt;10; i++) {}</code></p>
 <h4 id="switch-语句"><a href="#switch-语句" class="headerlink" title="switch 语句"></a>switch 语句</h4><p>语法: </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">switch</span>(condition) &#123;</div><div class="line">  <span class="keyword">case</span> case1:</div><div class="line">    ...</div><div class="line">      <span class="keyword">break</span>;</div><div class="line">  <span class="keyword">case</span> case2:</div><div class="line">    ...</div><div class="line">      <span class="keyword">break</span>;</div><div class="line">  <span class="keyword">default</span>:</div><div class="line">    ...</div><div class="line">      <span class="keyword">break</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span>(condition) &#123;</span><br><span class="line">  <span class="keyword">case</span> case1:</span><br><span class="line">    ...</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">  <span class="keyword">case</span> case2:</span><br><span class="line">    ...</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">  <span class="keyword">default</span>:</span><br><span class="line">    ...</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>switch语句从与选项值相匹配的case标签处开始执行, 知道遇到break语句, 或执行到switch语句的结束为止. 没有匹配的case标签, 而有default字句, 就执行default字句.</p>
 <p>如果case分支语句末尾没有break语句, 就会接着执行下一个case分支语句.</p>
 <p>case 标签可以是</p>
@@ -305,9 +305,9 @@
 <li>枚举常量</li>
 <li>Java SE 7开始, case标签可以是字符串字面量</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">String input = <span class="string">""</span>;</div><div class="line"><span class="keyword">switch</span> (input) &#123;</div><div class="line">  <span class="keyword">case</span> <span class="string">"yes"</span>:</div><div class="line">    <span class="keyword">break</span>;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">String input = <span class="string">""</span>;</span><br><span class="line"><span class="keyword">switch</span> (input) &#123;</span><br><span class="line">  <span class="keyword">case</span> <span class="string">"yes"</span>:</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="break语句"><a href="#break语句" class="headerlink" title="break语句"></a>break语句</h4><p>带标签的break语句</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">read_date:</div><div class="line"><span class="keyword">while</span> (a) &#123;</div><div class="line">  <span class="keyword">for</span> (...) &#123;</div><div class="line">    ...</div><div class="line">      <span class="keyword">if</span>(b) &#123;</div><div class="line">        <span class="keyword">break</span> read_date;</div><div class="line">      &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">read_date:</span><br><span class="line"><span class="keyword">while</span> (a) &#123;</span><br><span class="line">  <span class="keyword">for</span> (...) &#123;</span><br><span class="line">    ...</span><br><span class="line">      <span class="keyword">if</span>(b) &#123;</span><br><span class="line">        <span class="keyword">break</span> read_date;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
         </div>
       </div>
@@ -325,7 +325,7 @@
         <p class="copyright text-muted">
           Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
           Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
-        <p class="copyright text-muted">
+        </p><p class="copyright text-muted">
           Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
         </p>
       </div>

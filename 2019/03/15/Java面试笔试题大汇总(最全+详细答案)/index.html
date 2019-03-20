@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
   <!-- Html Head Tag-->
-  <head>
+  <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="">
   <meta name="author" content="Blue">
   <!-- Open Graph Data -->
-  <meta property="og:title" content="Java面试笔试题大汇总(最全+详细答案)"/>
-  <meta property="og:description" content="" />
-  <meta property="og:site_name" content="Blue的博客"/>
-  <meta property="og:type" content="article" />
-  <meta property="og:image" content="https://singthi4079.github.ioundefined"/>
+  <meta property="og:title" content="Java面试笔试题大汇总(最全+详细答案)">
+  <meta property="og:description" content="">
+  <meta property="og:site_name" content="Blue的博客">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://singthi4079.github.ioundefined">
   
     <link rel="alternate" href="/atom.xml" title="Blue的博客" type="application/atom+xml">
   
@@ -100,7 +100,7 @@
           <!-- Date -->
           <span class="date-time info">On
             <span class="date">2019-03-15</span>
-            <span class="time">11:59:27</span>
+            <span class="time">15:05:28</span>
           </span>
           
         </div>
@@ -153,7 +153,7 @@
 </table>
 <p>类的成员不写访问修饰时默认为default。默认对于同一个包中的其他类相当于公开（public），对于不是同一个包中的其他类相当于私有（private）。受保护（protected）对子类相当于公开，对不是同一包中的没有父子关系的类相当于私有。Java中，外部类的修饰符只能是public或默认，类的成员（包括内部类）的修饰符可以是以上四种。</p>
 <p>3、String 是最基本的数据类型吗？<br>答：不是。Java中的基本数据类型只有8个：byte、short、int、long、float、double、char、boolean；除了基本类型（primitive type）和枚举类型（enumeration type），剩下的都是引用类型（reference type）。<br>4、float f=3.4;是否正确？<br>答:不正确。3.4是双精度数，将双精度型（double）赋值给浮点型（float）属于下转型（down-casting，也称为窄化）会造成精度损失，因此需要强制类型转换float f =(float)3.4; 或者写成float f =3.4F;。<br>5、short s1 = 1; s1 = s1 + 1;有错吗?short s1 = 1; s1 += 1;有错吗？<br>答：对于short s1 = 1; s1 = s1 + 1;由于1是int类型，因此s1+1运算结果也是int 型，需要强制转换类型才能赋值给short型。而short s1 = 1; s1 += 1;可以正确编译，因为s1+= 1;相当于s1 = (short)(s1 + 1);其中有隐含的强制类型转换。<br>6、Java有没有goto？<br>答：goto 是Java中的保留字，在目前版本的Java中没有使用。（根据James Gosling（Java之父）编写的《The Java Programming Language》一书的附录中给出了一个Java关键字列表，其中有goto和const，但是这两个是目前无法使用的关键字，因此有些地方将其称之为保留字，其实保留字这个词应该有更广泛的意义，因为熟悉C语言的程序员都知道，在系统类库中使用过的有特殊意义的单词或单词的组合都被视为保留字）<br>7、int和Integer有什么区别？<br>答：Java是一个近乎纯洁的面向对象编程语言，但是为了编程的方便还是引入了基本数据类型，但是为了能够将这些基本数据类型当成对象操作，Java为每一个基本数据类型都引入了对应的包装类型（wrapper class），int的包装类就是Integer，从Java 5开始引入了自动装箱/拆箱机制，使得二者可以相互转换。<br>Java 为每个原始类型提供了包装类型：<br>- 原始类型: boolean，char，byte，short，int，long，float，double<br>- 包装类型：Boolean，Character，Byte，Short，Integer，Long，Float，Double</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;span style=&quot;color:#333333;&quot;&gt;class AutoUnboxingTest &#123;</div><div class="line"></div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        Integer a = new Integer(3);</div><div class="line">        Integer b = 3;                  // 将3自动装箱成Integer类型</div><div class="line">        int c = 3;</div><div class="line">        System.out.println(a == b);     // false 两个引用没有引用同一对象</div><div class="line">        System.out.println(a == c);     // true a自动拆箱成int类型再和c比较</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">&lt;/span&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;span style=&quot;color:#333333;&quot;&gt;class AutoUnboxingTest &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Integer a = new Integer(3);</span><br><span class="line">        Integer b = 3;                  // 将3自动装箱成Integer类型</span><br><span class="line">        int c = 3;</span><br><span class="line">        System.out.println(a == b);     // false 两个引用没有引用同一对象</span><br><span class="line">        System.out.println(a == c);     // true a自动拆箱成int类型再和c比较</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/span&gt;</span><br></pre></td></tr></table></figure>
 <p>最近还遇到一个面试题，也是和自动装箱和拆箱有点关系的，代码如下所示：</p>
 <p>public class Test03 {</p>
 <p>​    public static void main(String[] args) {</p>
@@ -1101,7 +1101,7 @@
 <p>}</p>
 <p>class Test {</p>
 <p>​    public static void main(String[] args) throws Exception {</p>
-<p>​        List<future<integer>&gt; list = new ArrayList&lt;&gt;();</future<integer></p>
+<p>​        List&lt;Future<integer>&gt; list = new ArrayList&lt;&gt;();</integer></p>
 <p>​        ExecutorService service = Executors.newFixedThreadPool(10);</p>
 <p>​        for(int i = 0; i &lt; 10; i++) {</p>
 <p>​            list.add(service.submit(new MyTask((int) (Math.random() * 100))));</p>
@@ -1998,7 +1998,7 @@
 <p>​    * 排序</p>
 <p>​    * @param list 待排序的数组</p>
 <p>​    */</p>
-<p>   public <t extends="" comparable<t="">&gt; void sort(T[] list);</t></p>
+<p>   public &lt;T extends Comparable<t>&gt; void sort(T[] list);</t></p>
 <p>   /**</p>
 <p>​    * 排序</p>
 <p>​    * @param list 待排序的数组</p>
@@ -2019,7 +2019,7 @@
 </ul>
 <p>public class BubbleSorter implements Sorter {</p>
 <p>​    @Override</p>
-<p>​    public <t extends="" comparable<t="">&gt; void sort(T[] list) {</t></p>
+<p>​    public &lt;T extends Comparable<t>&gt; void sort(T[] list) {</t></p>
 <p>​        boolean swapped = true;</p>
 <p>​        for (int i = 1, len = list.length; i &lt; len &amp;&amp; swapped; ++i) {</p>
 <p>​            swapped = false;</p>
@@ -2053,7 +2053,7 @@
 <p>答：折半查找，也称二分查找、二分搜索，是一种在有序数组中查找某一特定元素的搜索算法。搜素过程从数组的中间元素开始，如果中间元素正好是要查找的元素，则搜素过程结束；如果某一特定元素大于或者小于中间元素，则在数组大于或小于中间元素的那一半中查找，而且跟开始一样从中间元素开始比较。如果在某一步骤数组已经为空，则表示找不到指定的元素。这种搜索算法每一次比较都使搜索范围缩小一半，其时间复杂度是O(logN)。</p>
 <p>import java.util.Comparator;</p>
 <p>public class MyUtil {</p>
-<p>   public static <t extends="" comparable<t="">&gt; int binarySearch(T[] x, T key) {</t></p>
+<p>   public static &lt;T extends Comparable<t>&gt; int binarySearch(T[] x, T key) {</t></p>
 <p>​      return binarySearch(x, 0, x.length- 1, key);</p>
 <p>   }</p>
 <p>   // 使用循环实现的二分查找</p>
@@ -2076,7 +2076,7 @@
 <p>​      return -1;</p>
 <p>   }</p>
 <p>   // 使用递归实现的二分查找</p>
-<p>   private static<t extends="" comparable<t="">&gt; int binarySearch(T[] x, int low, int high, T key) {</t></p>
+<p>   private static&lt;T extends Comparable<t>&gt; int binarySearch(T[] x, int low, int high, T key) {</t></p>
 <p>​      if(low &lt;= high) {</p>
 <p>​        int mid = low + ((high -low) &gt;&gt; 1);</p>
 <p>​        if(key.compareTo(x[mid])== 0) {</p>
@@ -2126,7 +2126,7 @@
 <p>String basePath = request.getScheme() + “://“ + request.getServerName() + “:” + request.getServerPort() + path + “/“;</p>
 <p>%&gt;</p>
 <p>&lt;!DOCTYPE html&gt;</p>
-<html><br><br>  <head><br><br>​    <base href="<%=basePath%>"><br><br>​    <title>首页</title><br><br>​    <style type="text/css"><br><br>​        * { font-family: “Arial”; }<br><br>​    </style><br><br>  </head><br><br>  <body><br><br>​    <h1>Hello, World!</h1><br><br>​    <hr><br><br>​    <h2>Current time is: &lt;%= new java.util.Date().toString() %&gt;</h2><br><br>  </body><br><br></html>
+<html><br><br>  <head><meta name="generator" content="Hexo 3.8.0"><br><br>​    <base href="<%=basePath%>"><br><br>​    <title>首页</title><br><br>​    <style type="text/css"><br><br>​        * { font-family: “Arial”; }<br><br>​    </style><br><br>  </head><br><br>  <body><br><br>​    <h1>Hello, World!</h1><br><br>​    <hr><br><br>​    <h2>Current time is: &lt;%= new java.util.Date().toString() %&gt;</h2><br><br>  </body><br><br></html>
 
 <p>对应的Java代码：</p>
 <p>package org.apache.jsp;</p>
@@ -2137,10 +2137,10 @@
 <p>​        implements org.apache.jasper.runtime.JspSourceDependent {</p>
 <p>​    private static final javax.servlet.jsp.JspFactory _jspxFactory = javax.servlet.jsp.JspFactory</p>
 <p>​            .getDefaultFactory();</p>
-<p>​    private static java.util.Map<java.lang.string, java.lang.long=""> _jspx_dependants;</java.lang.string,></p>
+<p>​    private static java.util.Map&lt;java.lang.String, java.lang.Long&gt; _jspx_dependants;</p>
 <p>​    private javax.el.ExpressionFactory _el_expressionfactory;</p>
 <p>​    private org.apache.tomcat.InstanceManager _jsp_instancemanager;</p>
-<p>​    public java.util.Map<java.lang.string, java.lang.long=""> getDependants() {</java.lang.string,></p>
+<p>​    public java.util.Map&lt;java.lang.String, java.lang.Long&gt; getDependants() {</p>
 <p>​        return _jspx_dependants;</p>
 <p>​    }</p>
 <p>​    public void _jspInit() {</p>
@@ -2185,7 +2185,7 @@
 <p>​            out.write(“\r\n”);</p>
 <p>​            out.write(“&lt;!DOCTYPE html&gt;\r\n”);</p>
 <p>​            out.write(“<html>\r\n”);</html></p>
-<p>​            out.write(“  <head>\r\n”);</head></p>
+<p>​            out.write(“  <head><meta name="generator" content="Hexo 3.8.0">\r\n”);</head></p>
 <p>​            out.write(“    &lt;base href=\””);</p>
 <p>​            out.print(basePath);</p>
 <p>​            out.write(“\”&gt;\r\n”);</p>
@@ -2433,40 +2433,34 @@
 <p>108、web.xml文件中可以配置哪些内容？</p>
 <p>答：web.xml用于配置Web应用的相关信息，如：监听器（listener）、过滤器（filter）、 Servlet、相关参数、会话超时时间、安全验证方式、错误页面等，下面是一些开发中常见的配置：</p>
 <p>①配置Spring上下文加载监听器加载Spring配置文件并创建IoC容器：</p>
- <context-param>
-
+<p> <context-param></context-param></p>
 <p>​     <param-name>contextConfigLocation</param-name></p>
 <p>​    <param-value>classpath:applicationContext.xml</param-value></p>
-<p>  </p></context-param><p></p>
+<p>  </p>
   <listener><br><br>​     <listener-class><br><br>​       org.springframework.web.context.ContextLoaderListener<br><br>​     </listener-class><br><br>  </listener>
 
 <p>②配置Spring的OpenSessionInView过滤器来解决延迟加载和Hibernate会话关闭的矛盾：</p>
  <filter><br><br>​      <filter-name>openSessionInView</filter-name><br><br>​      <filter-class><br><br>​         org.springframework.orm.hibernate3.support.OpenSessionInViewFilter<br><br>​      </filter-class><br><br>  </filter>
 
-  <filter-mapping>
-
+<p>  <filter-mapping></filter-mapping></p>
 <p>​      <filter-name>openSessionInView</filter-name></p>
 <p>​      <url-pattern>/*</url-pattern></p>
-<p>  </p></filter-mapping><p></p>
+<p>  </p>
 <p>③配置会话超时时间为10分钟：</p>
- <session-config>
-
+<p> <session-config></session-config></p>
 <p>​      <session-timeout>10</session-timeout></p>
-<p>  </p></session-config><p></p>
+<p>  </p>
 <p>④配置404和Exception的错误页面：</p>
- <error-page>
-
+<p> <error-page></error-page></p>
 <p>​      <error-code>404</error-code></p>
 <p>​      <location>/error.jsp</location></p>
-<p>  </p></error-page><p></p>
-  <error-page>
-
+<p>  </p>
+<p>  <error-page></error-page></p>
 <p>​      <exception-type>java.lang.Exception</exception-type></p>
 <p>​      <location>/error.jsp</location></p>
-<p>  </p></error-page><p></p>
+<p>  </p>
 <p>⑤配置安全认证方式：</p>
-<security-constraint>
-
+<p><security-constraint></security-constraint></p>
 <p>​      <web-resource-collection></web-resource-collection></p>
 <p>​          <web-resource-name>ProtectedArea</web-resource-name></p>
 <p>​          <url-pattern>/admin/*</url-pattern></p>
@@ -2476,15 +2470,13 @@
 <p>​      <auth-constraint></auth-constraint></p>
 <p>​          <role-name>admin</role-name></p>
 <p>​      </p>
-<p>  </p></security-constraint><p></p>
-  <login-config>
-
+<p>  </p>
+<p>  <login-config></login-config></p>
 <p>​      <auth-method>BASIC</auth-method></p>
-<p>  </p></login-config><p></p>
-  <security-role>
-
+<p>  </p>
+<p>  <security-role></security-role></p>
 <p>​      <role-name>admin</role-name></p>
-<p>  </p></security-role><p></p>
+<p>  </p>
 <p>​    说明：对Servlet（小服务）、Listener（监听器）和Filter（过滤器）等Web组件的配置，Servlet 3规范提供了基于注解的配置方式，可以分别使用@WebServlet、@WebListener、@WebFilter注解进行配置。</p>
 <p>​    补充：如果Web提供了有价值的商业信息或者是敏感数据，那么站点的安全性就是必须考虑的问题。安全认证是实现安全性的重要手段，认证就是要解决“Are you who you say you are?”的问题。认证的方式非常多，简单说来可以分为三类：</p>
 <p>​    A. What you know? — 口令</p>
@@ -2492,7 +2484,7 @@
 <p>​    C. Who you are? — 指纹识别、虹膜识别</p>
 <p>​    在Tomcat中可以通过建立安全套接字层（Secure Socket Layer, SSL）以及通过基本验证或表单验证来实现对安全性的支持。</p>
 <p>109、你的项目中使用过哪些JSTL标签？</p>
-<p>答：项目中主要使用了JSTL的核心标签库，包括<c:if>、<c:choose>、<c: when="">、<c: otherwise="">、<c:foreach>等，主要用于构造循环和分支结构以控制显示逻辑。</c:foreach></c:></c:></c:choose></c:if></p>
+<p>答：项目中主要使用了JSTL的核心标签库，包括&lt;c:if&gt;、&lt;c:choose&gt;、&lt;c: when&gt;、&lt;c: otherwise&gt;、&lt;c:forEach&gt;等，主要用于构造循环和分支结构以控制显示逻辑。</p>
 <p>​    说明：虽然JSTL标签库提供了core、sql、fmt、xml等标签库，但是实际开发中建议只使用核心标签库（core），而且最好只使用分支和循环标签并辅以表达式语言（EL），这样才能真正做到数据显示和业务逻辑的分离，这才是最佳实践。</p>
 <p>110、使用标签库有什么好处？如何自定义JSP标签？</p>
 <p>答：使用标签库的好处包括以下几个方面：</p>
@@ -2555,7 +2547,7 @@
 <p>String basePath = request.getScheme() + “://“ + request.getServerName() + “:” + request.getServerPort() + path + “/“;</p>
 <p>%&gt;</p>
 <p>&lt;!DOCTYPE html&gt;</p>
-<html><br><br>  <head><br><br>​    <base href="<%=basePath%>"><br><br>​    <title>首页</title><br><br>​    <style type="text/css"><br><br>​        * { font-family: “Arial”; font-size:72px; }<br><br>​    </style><br><br>  </head><br><br>  <body><br><br>​    <my:time format="yyyy-MM-dd" backcolor="blue" forecolor="yellow"><br><br>  </my:time></body><br><br></html>
+<html><br><br>  <head><meta name="generator" content="Hexo 3.8.0"><br><br>​    <base href="<%=basePath%>"><br><br>​    <title>首页</title><br><br>​    <style type="text/css"><br><br>​        * { font-family: “Arial”; font-size:72px; }<br><br>​    </style><br><br>  </head><br><br>  <body><br><br>​    &lt;my:time format=”yyyy-MM-dd” backColor=”blue” foreColor=”yellow”/&gt;<br><br>  </body><br><br></html>
 
 <p>​    提示：如果要将自定义的标签库发布成JAR文件，需要将标签库描述文件（tld文件）放在JAR文件的META-INF目录下，可以JDK中的jar工具完成JAR文件的生成。</p>
 <p>111、说一下表达式语言（EL）的隐式对象及其作用。</p>
@@ -2616,7 +2608,7 @@
 <p>上传页面index.jsp：</p>
 <p>&lt;%@ page pageEncoding=”utf-8”%&gt;</p>
 <p>&lt;!DOCTYPE html&gt;</p>
-<html><br><br><head><br><br><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><br><br><title>Photo Upload</title><br><br></head><br><br><body><br><br><h1>Select your photo and upload</h1><br><br><hr><br><br><div style="color:red;font-size:14px;">${hint}</div><br><br><form action="UploadServlet" method="post" enctype="multipart/form-data"><br><br>​    Photo file: <input type="file" name="photo"><br><br>​    <input type="submit" value="Upload"><br><br></form><br><br></body><br><br></html>
+<html><br><br><head><meta name="generator" content="Hexo 3.8.0"><br><br><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><br><br><title>Photo Upload</title><br><br></head><br><br><body><br><br><h1>Select your photo and upload</h1><br><br><hr><br><br><div style="color:red;font-size:14px;">${hint}</div><br><br><form action="UploadServlet" method="post" enctype="multipart/form-data"><br><br>​    Photo file: <input type="file" name="photo"><br><br>​    <input type="submit" value="Upload"><br><br></form><br><br></body><br><br></html>
 
 <p>支持上传的Servlet：</p>
 <p>package com.jackfrued.servlet;</p>
@@ -2655,14 +2647,13 @@
 <p>116、服务器收到用户提交的表单数据，到底是调用Servlet的doGet()还是doPost()方法？</p>
 <p>答：HTML的<form>元素有一个method属性，用来指定提交表单的方式，其值可以是get或post。我们自定义的Servlet一般情况下会重写doGet()或doPost()两个方法之一或全部，如果是GET请求就调用doGet()方法，如果是POST请求就调用doPost()方法，那为什么为什么这样呢？我们自定义的Servlet通常继承自HttpServlet，HttpServlet继承自GenericServlet并重写了其中的service()方法，这个方法是Servlet接口中定义的。HttpServlet重写的service()方法会先获取用户请求的方法，然后根据请求方法调用doGet()、doPost()、doPut()、doDelete()等方法，如果在自定义Servlet中重写了这些方法，那么显然会调用重写过的（自定义的）方法，这显然是对模板方法模式的应用（如果不理解，请参考阎宏博士的《Java与模式》一书的第37章）。当然，自定义Servlet中也可以直接重写service()方法，那么不管是哪种方式的请求，都可以通过自己的代码进行处理，这对于不区分请求方法的场景比较合适。</form></p>
 <p>117、JSP中的静态包含和动态包含有什么区别？</p>
-<p>答：静态包含是通过JSP的include指令包含页面，动态包含是通过JSP标准动作<jsp:forward>包含页面。静态包含是编译时包含，如果包含的页面不存在则会产生编译错误，而且两个页面的”contentType”属性应保持一致，因为两个页面会合二为一，只产生一个class文件，因此被包含页面发生的变动再包含它的页面更新前不会得到更新。动态包含是运行时包含，可以向被包含的页面传递参数，包含页面和被包含页面是独立的，会编译出两个class文件，如果被包含的页面不存在，不会产生编译错误，也不影响页面其他部分的执行。代码如下所示：</jsp:forward></p>
+<p>答：静态包含是通过JSP的include指令包含页面，动态包含是通过JSP标准动作<a href="jsp:forward" target="_blank" rel="noopener">jsp:forward</a>包含页面。静态包含是编译时包含，如果包含的页面不存在则会产生编译错误，而且两个页面的”contentType”属性应保持一致，因为两个页面会合二为一，只产生一个class文件，因此被包含页面发生的变动再包含它的页面更新前不会得到更新。动态包含是运行时包含，可以向被包含的页面传递参数，包含页面和被包含页面是独立的，会编译出两个class文件，如果被包含的页面不存在，不会产生编译错误，也不影响页面其他部分的执行。代码如下所示：</p>
 <p>&lt;%– 静态包含 –%&gt;</p>
 <p>&lt;%@ include file=”…” %&gt;</p>
 <p>&lt;%– 动态包含 –%&gt;</p>
-<jsp:include page="...">
-
-<p>​    <jsp:param name="..." value="..."></jsp:param></p>
-<p></p></jsp:include><p></p>
+<p>&lt;jsp:include page=”…”&gt;</p>
+<p>​    &lt;jsp:param name=”…” value=”…” /&gt;</p>
+<p>&lt;/jsp:include&gt;</p>
 <p>118、Servlet中如何获取用户提交的查询参数或表单数据？</p>
 <p>答：可以通过请求对象（HttpServletRequest）的getParameter()方法通过参数名获得参数值。如果有包含多个值的参数（例如复选框），可以通过请求对象的getParameterValues()方法获得。当然也可以通过请求对象的getParameterMap()获得一个参数名和参数值的映射（Map）。</p>
 <p>119、Servlet中如何获取用户配置的初始化参数以及服务器上下文参数？</p>
@@ -2690,7 +2681,7 @@
 <p>125、介绍一下你了解的Java领域的Web Service框架。</p>
 <p>答：Java领域的Web Service框架很多，包括Axis2（Axis的升级版本）、Jersey（RESTful的Web Service框架）、CXF（XFire的延续版本）、Hessian、Turmeric、JBoss SOA等，其中绝大多数都是开源框架。</p>
 <p>​    提示：面试被问到这类问题的时候一定选择自己用过的最熟悉的作答，如果之前没有了解过就应该在面试前花一些时间了解其中的两个，并比较其优缺点，这样才能在面试时给出一个漂亮的答案。</p>
-<p>这部分主要是开源Java EE框架方面的内容，包括Hibernate、MyBatis、Spring、Spring MVC等，由于Struts 2已经是明日黄花，在这里就不讨论Struts 2的面试题，如果需要了解相关内容，可以参考<a href="http://blog.csdn.net/tanggao1314/article/details/50617990" target="_blank" rel="external">Java程序员面试题集（86-115）。</a></p>
+<p>这部分主要是开源Java EE框架方面的内容，包括Hibernate、MyBatis、Spring、Spring MVC等，由于Struts 2已经是明日黄花，在这里就不讨论Struts 2的面试题，如果需要了解相关内容，可以参考<a href="http://blog.csdn.net/tanggao1314/article/details/50617990" target="_blank" rel="noopener">Java程序员面试题集（86-115）。</a></p>
 <p>126、什么是ORM？</p>
 <p>答：对象关系映射（Object-Relational Mapping，简称ORM）是一种为了解决程序的面向对象模型与数据库的关系模型互不匹配问题的技术；简单的说，ORM是通过使用描述对象和数据库之间映射的元数据（在Java中可以用XML或者是注解），将程序中的对象自动持久化到关系数据库中或者将关系数据库表中的行转换成Java对象，其本质上就是将数据从一种形式转换到另外一种形式。</p>
 <p>127、持久层设计要考虑的问题有哪些？你用过的持久层框架有哪些？</p>
@@ -2818,7 +2809,7 @@
 <p>import java.util.HashMap;</p>
 <p>import java.util.Map;</p>
 <p>public class MyThreadLocal<t> {</t></p>
-<p>​    private Map<thread, t=""> map = Collections.synchronizedMap(new HashMap<thread, t="">());</thread,></thread,></p>
+<p>​    private Map&lt;Thread, T&gt; map = Collections.synchronizedMap(new HashMap&lt;Thread, T&gt;());</p>
 <p>​    public void set(T newValue) {</p>
 <p>​        map.put(Thread.currentThread(), newValue);</p>
 <p>​    }</p>
@@ -2956,8 +2947,7 @@
 <p>​    说明：自动装配没有自定义装配方式那么精确，而且不能自动装配简单属性（基本类型、字符串等），在使用时应注意。</p>
 <p>152、Spring中如何使用注解来配置Bean？有哪些相关的注解？</p>
 <p>答：首先需要在Spring配置文件中增加如下配置：</p>
-<context:component-scan base-package="org.example">
-
+<p>&lt;context:component-scan base-package=”org.example”/&gt;</p>
 <p>然后可以用@Component、@Controller、@Service、@Repository注解来标注需要由Spring IoC容器进行对象托管的类。这几个注解没有本质区别，只不过@Controller通常用于控制器，@Service通常用于业务逻辑类，@Repository通常用于仓储类（例如我们的DAO实现类），普通的类用@Component来标注。</p>
 <p><strong>153、Spring支持的事务管理类型有哪些？你在项目中使用哪种方式？</strong><br>答：Spring支持编程式事务管理和声明式事务管理。许多Spring框架的用户选择声明式事务管理，因为这种方式和应用程序的关联较少，因此更加符合轻量级容器的概念。声明式事务管理要优于编程式事务管理，尽管在灵活性方面它弱于编程式事务管理，因为编程式事务允许你通过代码控制业务。</p>
 <p>事务分为全局事务和局部事务。全局事务由应用服务器管理，需要底层服务器JTA支持（如WebLogic、WildFly等）。局部事务和底层采用的持久化方案有关，例如使用JDBC进行持久化时，需要使用Connetion对象来操作事务；而采用Hibernate进行持久化时，需要使用Session对象来操作事务。</p>
@@ -2997,13 +2987,13 @@
 <p>&lt;?xml version=”1.0” encoding=”UTF-8”?&gt;</p>
  <beans xmlns="http://www.springframework.org/schema/beans" ​="" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p" xsi:schemalocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 
-​     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"><br><br>​     <context:component-scan base-package="com.jackfrued"><br><br>​     <bean id="propertyConfig" ​="" class="org.springframework.beans.factory.config.
+​     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"><br><br>​     &lt;context:component-scan base-package=”com.jackfrued”/&gt;<br><br>​     <bean id="propertyConfig" ​="" class="org.springframework.beans.factory.config.
 
   PropertyPlaceholderConfigurer"><br><br>​         <property name="location"><br><br>​             <value>jdbc.properties</value><br><br>​         </property><br><br>​     </bean><br><br>​     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"><br><br>​         <property name="driverClassName"><br><br>​             <value>${db.driver}</value><br><br>​         </property><br><br>​         <property name="url"><br><br>​             <value>${db.url}</value><br><br>​         </property><br><br>​         <property name="username"><br><br>​             <value>${db.username}</value><br><br>​         </property><br><br>​         <property name="password"><br><br>​             <value>${db.password}</value><br><br>​         </property><br><br>​     </bean><br><br>​     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate"><br><br>​         <property name="dataSource"><br><br>​             <ref bean="dataSource"><br><br>​         </ref></property><br><br>​     </bean><br><br>​     <!-- JDBC事务管理器 --><br><br>​     <bean id="transactionManager" ​="" class="org.springframework.jdbc.datasource.
 
 ​       DataSourceTransactionManager" 　scope="singleton"><br><br>​         <property name="dataSource"><br><br>​             <ref bean="dataSource"><br><br>​         </ref></property><br><br>​     </bean><br><br>​     <!-- 声明事务模板 --><br><br>​     <bean id="transactionTemplate" ​="" class="org.springframework.transaction.support.
 
-   TransactionTemplate"><br><br>​         <property name="transactionManager"><br><br>​             <ref bean="transactionManager"><br><br>​         </ref></property><br><br>​     </bean><br><br></context:component-scan></beans>
+   TransactionTemplate"><br><br>​         <property name="transactionManager"><br><br>​             <ref bean="transactionManager"><br><br>​         </ref></property><br><br>​     </bean><br><br></beans>
 
 <p>package com.jackfrued.dao.impl;</p>
 <p>import org.springframework.beans.factory.annotation.Autowired;</p>
@@ -3061,7 +3051,7 @@
 
 ​           http://www.springframework.org/schema/tx
 
-​           http://www.springframework.org/schema/tx/spring-tx-3.2.xsd"><br><br>​    <!-- 配置由Spring IoC容器托管的对象对应的被注解的类所在的包 --><br><br>​    <context:component-scan base-package="com.jackfrued"><br><br>​    <!-- 配置通过自动生成代理实现AOP功能 --><br><br>​    <aop:aspectj-autoproxy><br><br>​    <!-- 配置数据库连接池 (DBCP) --><br><br>​    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" ​="" destroy-method="close"><br><br>​        <!-- 配置驱动程序类 --><br><br>​        <property name="driverClassName" value="com.mysql.jdbc.Driver"><br><br>​        <!-- 配置连接数据库的URL --><br><br>​        <property name="url" value="jdbc:mysql://localhost:3306/myweb"><br><br>​        <!-- 配置访问数据库的用户名 --><br><br>​        <property name="username" value="root"><br><br>​        <!-- 配置访问数据库的口令 --><br><br>​        <property name="password" value="123456"><br><br>​        <!-- 配置最大连接数 --><br><br>​        <property name="maxActive" value="150"><br><br>​        <!-- 配置最小空闲连接数 --><br><br>​        <property name="minIdle" value="5"><br><br>​        <!-- 配置最大空闲连接数 --><br><br>​        <property name="maxIdle" value="20"><br><br>​        <!-- 配置初始连接数 --><br><br>​        <property name="initialSize" value="10"><br><br>​        <!-- 配置连接被泄露时是否生成日志 --><br><br>​        <property name="logAbandoned" value="true"><br><br>​        <!-- 配置是否删除超时连接 --><br><br>​        <property name="removeAbandoned" value="true"><br><br>​        <!-- 配置删除超时连接的超时门限值(以秒为单位) --><br><br>​        <property name="removeAbandonedTimeout" value="120"><br><br>​        <!-- 配置超时等待时间(以毫秒为单位) --><br><br>​        <property name="maxWait" value="5000"><br><br>​        <!-- 配置空闲连接回收器线程运行的时间间隔(以毫秒为单位) --><br><br>​        <property name="timeBetweenEvictionRunsMillis" value="300000"><br><br>​        <!-- 配置连接空闲多长时间后(以毫秒为单位)被断开连接 --><br><br>​        <property name="minEvictableIdleTimeMillis" value="60000"><br><br>​    </property></property></property></property></property></property></property></property></property></property></property></property></property></property></bean><br><br>​    <!-- 配置Spring提供的支持注解ORM映射的Hibernate会话工厂 --><br><br>​    <bean id="sessionFactory" ​="" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean"><br><br>​        <!-- 通过setter注入数据源属性 --><br><br>​        <property name="dataSource" ref="dataSource"><br><br>​        <!-- 配置实体类所在的包 --><br><br>​        <property name="packagesToScan" value="com.jackfrued.entity"><br><br>​        <!-- 配置Hibernate的相关属性 --><br><br>​        <property name="hibernateProperties"><br><br>​            <!-- 在项目调试完成后要删除show_sql和format_sql属性否则对性能有显著影响 --><br><br>​            <value><br><br>​                hibernate.dialect=org.hibernate.dialect.MySQL5Dialect<br><br>​            </value><br><br>​        </property><br><br>​    </property></property></bean><br><br>​    <!-- 配置Spring提供的Hibernate事务管理器 --><br><br>​    <bean id="transactionManager" ​="" class="org.springframework.orm.hibernate3.HibernateTransactionManager"><br><br>​        <!-- 通过setter注入Hibernate会话工厂 --><br><br>​        <property name="sessionFactory" ref="sessionFactory"><br><br>​    </property></bean><br><br>​    <!-- 配置基于注解配置声明式事务 --><br><br>​    <tx:annotation-driven><br><br></tx:annotation-driven></aop:aspectj-autoproxy></context:component-scan></beans>
+​           http://www.springframework.org/schema/tx/spring-tx-3.2.xsd"><br><br>​    <!-- 配置由Spring IoC容器托管的对象对应的被注解的类所在的包 --><br><br>​    &lt;context:component-scan base-package=”com.jackfrued” /&gt;<br><br>​    <!-- 配置通过自动生成代理实现AOP功能 --><br><br>​    &lt;aop:aspectj-autoproxy /&gt;<br><br>​    <!-- 配置数据库连接池 (DBCP) --><br><br>​    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" ​="" destroy-method="close"><br><br>​        <!-- 配置驱动程序类 --><br><br>​        <property name="driverClassName" value="com.mysql.jdbc.Driver"><br><br>​        <!-- 配置连接数据库的URL --><br><br>​        <property name="url" value="jdbc:mysql://localhost:3306/myweb"><br><br>​        <!-- 配置访问数据库的用户名 --><br><br>​        <property name="username" value="root"><br><br>​        <!-- 配置访问数据库的口令 --><br><br>​        <property name="password" value="123456"><br><br>​        <!-- 配置最大连接数 --><br><br>​        <property name="maxActive" value="150"><br><br>​        <!-- 配置最小空闲连接数 --><br><br>​        <property name="minIdle" value="5"><br><br>​        <!-- 配置最大空闲连接数 --><br><br>​        <property name="maxIdle" value="20"><br><br>​        <!-- 配置初始连接数 --><br><br>​        <property name="initialSize" value="10"><br><br>​        <!-- 配置连接被泄露时是否生成日志 --><br><br>​        <property name="logAbandoned" value="true"><br><br>​        <!-- 配置是否删除超时连接 --><br><br>​        <property name="removeAbandoned" value="true"><br><br>​        <!-- 配置删除超时连接的超时门限值(以秒为单位) --><br><br>​        <property name="removeAbandonedTimeout" value="120"><br><br>​        <!-- 配置超时等待时间(以毫秒为单位) --><br><br>​        <property name="maxWait" value="5000"><br><br>​        <!-- 配置空闲连接回收器线程运行的时间间隔(以毫秒为单位) --><br><br>​        <property name="timeBetweenEvictionRunsMillis" value="300000"><br><br>​        <!-- 配置连接空闲多长时间后(以毫秒为单位)被断开连接 --><br><br>​        <property name="minEvictableIdleTimeMillis" value="60000"><br><br>​    </property></property></property></property></property></property></property></property></property></property></property></property></property></property></bean><br><br>​    <!-- 配置Spring提供的支持注解ORM映射的Hibernate会话工厂 --><br><br>​    <bean id="sessionFactory" ​="" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean"><br><br>​        <!-- 通过setter注入数据源属性 --><br><br>​        <property name="dataSource" ref="dataSource"><br><br>​        <!-- 配置实体类所在的包 --><br><br>​        <property name="packagesToScan" value="com.jackfrued.entity"><br><br>​        <!-- 配置Hibernate的相关属性 --><br><br>​        <property name="hibernateProperties"><br><br>​            <!-- 在项目调试完成后要删除show_sql和format_sql属性否则对性能有显著影响 --><br><br>​            <value><br><br>​                hibernate.dialect=org.hibernate.dialect.MySQL5Dialect<br><br>​            </value><br><br>​        </property><br><br>​    </property></property></bean><br><br>​    <!-- 配置Spring提供的Hibernate事务管理器 --><br><br>​    <bean id="transactionManager" ​="" class="org.springframework.orm.hibernate3.HibernateTransactionManager"><br><br>​        <!-- 通过setter注入Hibernate会话工厂 --><br><br>​        <property name="sessionFactory" ref="sessionFactory"><br><br>​    </property></bean><br><br>​    <!-- 配置基于注解配置声明式事务 --><br><br>​    &lt;tx:annotation-driven /&gt;<br><br></beans>
 
 <p>package com.jackfrued.dao;</p>
 <p>import java.io.Serializable;</p>
@@ -3081,7 +3071,7 @@
 <p>*/</p>
 </li>
 </ul>
-<p>public interface BaseDao <e, k="" extends="" serializable=""> {</e,></p>
+<p>public interface BaseDao &lt;E, K extends Serializable&gt; {</p>
 <p>​    /**</p>
 <p>​     * 新增</p>
 <p>​     * @param entity 业务实体对象</p>
@@ -3157,8 +3147,8 @@
 <p>*/</p>
 </li>
 </ul>
-<p>public abstract class BaseDaoAdapter<e, k="" extends="" serializable=""> implements</e,></p>
-<p>​        BaseDao<e, k=""> {</e,></p>
+<p>public abstract class BaseDaoAdapter&lt;E, K extends Serializable&gt; implements</p>
+<p>​        BaseDao&lt;E, K&gt; {</p>
 <p>​    @Override</p>
 <p>​    public K save(E entity) {</p>
 <p>​        return null;</p>
@@ -3226,7 +3216,7 @@
 </li>
 </ul>
 <p>@SuppressWarnings(value = {“unchecked”})</p>
-<p>public abstract class BaseDaoHibernateImpl<e, k="" extends="" serializable=""> extends BaseDaoAdapter<e, k=""> {</e,></e,></p>
+<p>public abstract class BaseDaoHibernateImpl&lt;E, K extends Serializable&gt; extends BaseDaoAdapter&lt;E, K&gt; {</p>
 <p>​    @Autowired</p>
 <p>​    protected SessionFactory sessionFactory;</p>
 <p>​    private Class&lt;?&gt; entityClass;       // 业务实体的类对象</p>
@@ -3474,7 +3464,7 @@
 <p>*/</p>
 </li>
 </ul>
-<p>public interface DeptDao extends BaseDao<dept, integer=""> {</dept,></p>
+<p>public interface DeptDao extends BaseDao&lt;Dept, Integer&gt; {</p>
 <p>​    /**</p>
 <p>​     * 分页查询顶级部门</p>
 <p>​     * @param page 页码</p>
@@ -3491,7 +3481,7 @@
 <p>import com.jackfrued.dao.DeptDao;</p>
 <p>import com.jackfrued.entity.Dept;</p>
 <p>@Repository</p>
-<p>public class DeptDaoImpl extends BaseDaoHibernateImpl<dept, integer=""> implements DeptDao {</dept,></p>
+<p>public class DeptDaoImpl extends BaseDaoHibernateImpl&lt;Dept, Integer&gt; implements DeptDao {</p>
 <p>​    private static final String HQL_FIND_TOP_DEPT = “ from Dept as d where d.superiorDept is null “;</p>
 <p>​    @Override</p>
 <p>​    public QueryResult<dept> findTopDeptByPage(int page, int size) {</dept></p>
@@ -3696,11 +3686,10 @@
 <p>}</p>
 <p>154、如何在Web项目中配置Spring的IoC容器？</p>
 <p>答：如果需要在Web项目中使用Spring的IoC容器，可以在Web项目配置文件web.xml中做出如下配置：</p>
-<context-param>
-
+<p><context-param></context-param></p>
 <p>​    <param-name>contextConfigLocation</param-name></p>
 <p>​    <param-value>classpath:applicationContext.xml</param-value></p>
-<p></p></context-param><p></p>
+<p></p>
 <listener><br><br>​    <listener-class><br><br>​        org.springframework.web.context.ContextLoaderListener<br><br>​    </listener-class><br><br></listener>
 
 <p>​    155、如何在Web项目中配置Spring MVC？</p>
@@ -3733,13 +3722,11 @@
 <p>DBCP配置：</p>
 <bean id="dataSource" ​="" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"><br><br>​    <property name="driverClassName" value="${jdbc.driverClassName}"><br><br>​    <property name="url" value="${jdbc.url}"><br><br>​    <property name="username" value="${jdbc.username}"><br><br>​    <property name="password" value="${jdbc.password}"><br><br></property></property></property></property></bean>
 
-<context:property-placeholder location="jdbc.properties">
-
+<p>&lt;context:property-placeholder location=”jdbc.properties”/&gt;</p>
 <p>C3P0配置：</p>
 <bean id="dataSource" ​="" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close"><br><br>​    <property name="driverClass" value="${jdbc.driverClassName}"><br><br>​    <property name="jdbcUrl" value="${jdbc.url}"><br><br>​    <property name="user" value="${jdbc.username}"><br><br>​    <property name="password" value="${jdbc.password}"><br><br></property></property></property></property></bean>
 
-<context:property-placeholder location="jdbc.properties">
-
+<p>&lt;context:property-placeholder location=”jdbc.properties”/&gt;</p>
 <p>​    提示： DBCP的详细配置在第153题中已经完整的展示过了。</p>
 <p>158、如何配置配置事务增强？</p>
 <p>答：</p>
@@ -3756,9 +3743,9 @@
 
 ​     http://www.springframework.org/schema/aop
 
-​     http://www.springframework.org/schema/aop/spring-aop.xsd"><br><br>  <!-- this is the service object that we want to make transactional --><br><br>  <bean id="fooService" class="x.y.service.DefaultFooService"><br><br>  <!-- the transactional advice --><br><br>  <tx:advice id="txAdvice" transaction-manager="txManager"><br><br>  <!-- the transactional semantics... --><br><br>  <tx:attributes><br><br>​    <!-- all methods starting with 'get' are read-only --><br><br>​    <tx:method name="get*" read-only="true"><br><br>​    <!-- other methods use the default transaction settings (see below) --><br><br>​    <tx:method name="*"><br><br>  </tx:method></tx:method></tx:attributes><br><br>  </tx:advice><br><br>  <!-- ensure that the above transactional advice runs for any execution
+​     http://www.springframework.org/schema/aop/spring-aop.xsd"><br><br>  <!-- this is the service object that we want to make transactional --><br><br>  <bean id="fooService" class="x.y.service.DefaultFooService"><br><br>  <!-- the transactional advice --><br><br>  &lt;tx:advice id=”txAdvice” transaction-manager=”txManager”&gt;<br><br>  <!-- the transactional semantics... --><br><br>  <a href="tx:attributes" target="_blank" rel="noopener">tx:attributes</a><br><br>​    <!-- all methods starting with 'get' are read-only --><br><br>​    &lt;tx:method name=”get<em>“ read-only=”true”/&gt;<br><br>​    <!-- other methods use the default transaction settings (see below) --><br><br>​    &lt;tx:method name=”</em>“/&gt;<br><br>  &lt;/tx:attributes&gt;<br><br>  &lt;/tx:advice&gt;<br><br>  <!-- ensure that the above transactional advice runs for any execution
 
-​    of an operation defined by the FooService interface --><br><br>  <aop:config><br><br>  <aop:pointcut id="fooServiceOperation" ​="" expression="execution(* x.y.service.FooService.*(..))"><br><br>  <aop:advisor advice-ref="txAdvice" pointcut-ref="fooServiceOperation"><br><br>  </aop:advisor></aop:pointcut></aop:config><br><br>  <!-- don't forget the DataSource --><br><br>  <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" ​="" destroy-method="close"><br><br>  <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"><br><br>  <property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl"><br><br>  <property name="username" value="scott"><br><br>  <property name="password" value="tiger"><br><br>  </property></property></property></property></bean><br><br>  <!-- similarly, don't forget the PlatformTransactionManager --><br><br>  <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"><br><br>  <property name="dataSource" ref="dataSource"><br><br>  </property></bean><br><br>  <!-- other <bean/> definitions here --><br><br></bean></beans>
+​    of an operation defined by the FooService interface --><br><br>  <a href="aop:config" target="_blank" rel="noopener">aop:config</a><br><br>  &lt;aop:pointcut id=”fooServiceOperation”<br><br>​    expression=”execution(<em> x.y.service.FooService.</em>(..))”/&gt;<br><br>  &lt;aop:advisor advice-ref=”txAdvice” pointcut-ref=”fooServiceOperation”/&gt;<br><br>  &lt;/aop:config&gt;<br><br>  <!-- don't forget the DataSource --><br><br>  <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" ​="" destroy-method="close"><br><br>  <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"><br><br>  <property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl"><br><br>  <property name="username" value="scott"><br><br>  <property name="password" value="tiger"><br><br>  </property></property></property></property></bean><br><br>  <!-- similarly, don't forget the PlatformTransactionManager --><br><br>  <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"><br><br>  <property name="dataSource" ref="dataSource"><br><br>  </property></bean><br><br>  <!-- other <bean/> definitions here --><br><br></bean></beans>
 
 <p>159、选择使用Spring框架的原因（Spring框架为企业级开发带来的好处有哪些）？</p>
 <p>答：可以从以下几个方面作答：</p>
@@ -3896,18 +3883,18 @@
 <p><strong>168、什么是XSS攻击？什么是SQL注入攻击？什么是CSRF攻击？</strong><br>答：<br>- XSS（Cross Site Script，跨站脚本攻击）是向网页中注入恶意脚本在用户浏览网页时在用户浏览器中执行恶意脚本的攻击方式。跨站脚本攻击分有两种形式：反射型攻击（诱使用户点击一个嵌入恶意脚本的链接以达到攻击的目标，目前有很多攻击者利用论坛、微博发布含有恶意脚本的URL就属于这种方式）和持久型攻击（将恶意脚本提交到被攻击网站的数据库中，用户浏览网页时，恶意脚本从数据库中被加载到页面执行，QQ邮箱的早期版本就曾经被利用作为持久型跨站脚本攻击的平台）。XSS虽然不是什么新鲜玩意，但是攻击的手法却不断翻新，防范XSS主要有两方面：消毒（对危险字符进行转义）和HttpOnly（防范XSS攻击者窃取Cookie数据）。<br>- SQL注入攻击是注入攻击最常见的形式（此外还有OS注入攻击（Struts 2的高危漏洞就是通过OGNL实施OS注入攻击导致的）），当服务器使用请求参数构造SQL语句时，恶意的SQL被嵌入到SQL中交给数据库执行。SQL注入攻击需要攻击者对数据库结构有所了解才能进行，攻击者想要获得表结构有多种方式：（1）如果使用开源系统搭建网站，数据库结构也是公开的（目前有很多现成的系统可以直接搭建论坛，电商网站，虽然方便快捷但是风险是必须要认真评估的）；（2）错误回显（如果将服务器的错误信息直接显示在页面上，攻击者可以通过非法参数引发页面错误从而通过错误信息了解数据库结构，Web应用应当设置友好的错误页，一方面符合最小惊讶原则，一方面屏蔽掉可能给系统带来危险的错误回显信息）；（3）盲注。防范SQL注入攻击也可以采用消毒的方式，通过正则表达式对请求参数进行验证，此外，参数绑定也是很好的手段，这样恶意的SQL会被当做SQL的参数而不是命令被执行，JDBC中的PreparedStatement就是支持参数绑定的语句对象，从性能和安全性上都明显优于Statement。<br>- CSRF攻击（Cross Site Request Forgery，跨站请求伪造）是攻击者通过跨站请求，以合法的用户身份进行非法操作（如转账或发帖等）。CSRF的原理是利用浏览器的Cookie或服务器的Session，盗取用户身份，其原理如下图所示。防范CSRF的主要手段是识别请求者的身份，主要有以下几种方式：（1）在表单中添加令牌（token）；（2）验证码；（3）检查请求头中的Referer（前面提到防图片盗链接也是用的这种方式）。令牌和验证都具有一次消费性的特征，因此在原理上一致的，但是验证码是一种糟糕的用户体验，不是必要的情况下不要轻易使用验证码，目前很多网站的做法是如果在短时间内多次提交一个表单未获得成功后才要求提供验证码，这样会获得较好的用户体验。</p>
 <p><img src="http://img.blog.csdn.net/20150414123625761" alt="这里写图片描述"></p>
 <blockquote>
-<p><strong>补充：</strong>防火墙的架设是Web安全的重要保障，<a href="http://www.modsecurity.org/" target="_blank" rel="external">ModSecurity</a>是开源的Web防火墙中的佼佼者。企业级防火墙的架设应当有两级防火墙，Web服务器和部分应用服务器可以架设在两级防火墙之间的DMZ，而数据和资源服务器应当架设在第二级防火墙之后。</p>
+<p><strong>补充：</strong>防火墙的架设是Web安全的重要保障，<a href="http://www.modsecurity.org/" target="_blank" rel="noopener">ModSecurity</a>是开源的Web防火墙中的佼佼者。企业级防火墙的架设应当有两级防火墙，Web服务器和部分应用服务器可以架设在两级防火墙之间的DMZ，而数据和资源服务器应当架设在第二级防火墙之后。</p>
 </blockquote>
 <p><strong>169. 什么是领域模型(domain model)？贫血模型(anaemic domain model)和充血模型(rich domain model)有什么区别？</strong><br>答：领域模型是领域内的概念类或现实世界中对象的可视化表示，又称为概念模型或分析对象模型，它专注于分析问题领域本身，发掘重要的业务领域概念，并建立业务领域概念之间的关系。贫血模型是指使用的领域对象中只有setter和getter方法（POJO），所有的业务逻辑都不包含在领域对象中而是放在业务逻辑层。有人将我们这里说的贫血模型进一步划分成失血模型（领域对象完全没有业务逻辑）和贫血模型（领域对象有少量的业务逻辑），我们这里就不对此加以区分了。充血模型将大多数业务逻辑和持久化放在领域对象中，业务逻辑（业务门面）只是完成对业务逻辑的封装、事务和权限等的处理。下面两张图分别展示了贫血模型和充血模型的分层架构。</p>
 <p>贫血模型<br><img src="http://img.blog.csdn.net/20150414123848158" alt="这里写图片描述"></p>
 <p>充血模型<br><img src="http://img.blog.csdn.net/20150414123813701" alt="这里写图片描述"></p>
-<p>贫血模型下组织领域逻辑通常使用事务脚本模式，让每个过程对应用户可能要做的一个动作，每个动作由一个过程来驱动。也就是说在设计业务逻辑接口的时候，每个方法对应着用户的一个操作，这种模式有以下几个有点：<br>- 它是一个大多数开发者都能够理解的简单过程模型（适合国内的绝大多数开发者）。<br>- 它能够与一个使用行数据入口或表数据入口的简单数据访问层很好的协作。<br>- 事务边界的显而易见，一个事务开始于脚本的开始，终止于脚本的结束，很容易通过代理（或切面）实现声明式事务。<br>然而，事务脚本模式的缺点也是很多的，随着领域逻辑复杂性的增加，系统的复杂性将迅速增加，程序结构将变得极度混乱。开源中国社区上有一篇很好的译文<a href="http://www.oschina.net/translate/how-anaemic-domain-models-cause-bad-software" target="_blank" rel="external">《贫血领域模型是如何导致糟糕的软件产生》</a>对这个问题做了比较细致的阐述。</p>
+<p>贫血模型下组织领域逻辑通常使用事务脚本模式，让每个过程对应用户可能要做的一个动作，每个动作由一个过程来驱动。也就是说在设计业务逻辑接口的时候，每个方法对应着用户的一个操作，这种模式有以下几个有点：<br>- 它是一个大多数开发者都能够理解的简单过程模型（适合国内的绝大多数开发者）。<br>- 它能够与一个使用行数据入口或表数据入口的简单数据访问层很好的协作。<br>- 事务边界的显而易见，一个事务开始于脚本的开始，终止于脚本的结束，很容易通过代理（或切面）实现声明式事务。<br>然而，事务脚本模式的缺点也是很多的，随着领域逻辑复杂性的增加，系统的复杂性将迅速增加，程序结构将变得极度混乱。开源中国社区上有一篇很好的译文<a href="http://www.oschina.net/translate/how-anaemic-domain-models-cause-bad-software" target="_blank" rel="noopener">《贫血领域模型是如何导致糟糕的软件产生》</a>对这个问题做了比较细致的阐述。</p>
 <p><strong>170. 谈一谈测试驱动开发（TDD）的好处以及你的理解。</strong><br>答：TDD是指在编写真正的功能实现代码之前先写测试代码，然后根据需要重构实现代码。在JUnit的作者Kent Beck的大作《测试驱动开发：实战与模式解析》（Test-Driven Development: by Example）一书中有这么一段内容：“消除恐惧和不确定性是编写测试驱动代码的重要原因”。因为编写代码时的恐惧会让你小心试探，让你回避沟通，让你羞于得到反馈，让你变得焦躁不安，而TDD是消除恐惧、让Java开发者更加自信更加乐于沟通的重要手段。TDD会带来的好处可能不会马上呈现，但是你在某个时候一定会发现，这些好处包括：<br>- 更清晰的代码 — 只写需要的代码<br>- 更好的设计<br>- 更出色的灵活性 — 鼓励程序员面向接口编程<br>- 更快速的反馈 — 不会到系统上线时才知道bug的存在</p>
 <blockquote>
 <p><strong>补充：</strong>敏捷软件开发的概念已经有很多年了，而且也部分的改变了软件开发这个行业，TDD也是敏捷开发所倡导的。</p>
 </blockquote>
 <p>TDD可以在多个层级上应用，包括单元测试（测试一个类中的代码）、集成测试（测试类之间的交互）、系统测试（测试运行的系统）和系统集成测试（测试运行的系统包括使用的第三方组件）。TDD的实施步骤是：红（失败测试）- 绿（通过测试） - 重构。<br>在使用TDD开发时，经常会遇到需要被测对象需要依赖其他子系统的情况，但是你希望将测试代码跟依赖项隔离，以保证测试代码仅仅针对当前被测对象或方法展开，这时候你需要的是测试替身。测试替身可以分为四类：<br>- 虚设替身：只传递但是不会使用到的对象，一般用于填充方法的参数列表<br>- 存根替身：总是返回相同的预设响应，其中可能包括一些虚设状态<br>- 伪装替身：可以取代真实版本的可用版本（比真实版本还是会差很多）<br>- 模拟替身：可以表示一系列期望值的对象，并且可以提供预设响应<br>Java世界中实现模拟替身的第三方工具非常多，包括EasyMock、Mockito、jMock等。</p>
-</context:property-placeholder></context:property-placeholder></context:component-scan>
+
         </div>
       </div>
     </div>
@@ -3924,7 +3911,7 @@
         <p class="copyright text-muted">
           Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
           Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
-        <p class="copyright text-muted">
+        </p><p class="copyright text-muted">
           Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
         </p>
       </div>

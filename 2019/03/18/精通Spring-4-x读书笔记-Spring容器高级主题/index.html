@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Blue">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="精通Spring 4.x读书笔记-Spring容器高级主题">
+  <meta property="og:description" content="">
+  <meta property="og:site_name" content="Blue的博客">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://singthi4079.github.ioundefined">
+  
+    <link rel="alternate" href="/atom.xml" title="Blue的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <!-- Site Title -->
+  <title>Blue的博客</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/default-banner-dark.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">精通Spring 4.x读书笔记-Spring容器高级主题</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/<your-github-username>">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:<your-email-address>">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By Blue</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2019-03-18</span>
+            <span class="time">15:05:28</span>
+          </span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Spring/">#Spring</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p><strong>Spring容器技术内幕</strong>:<br>Spring的AbstractApplication是ApplicationContext的抽象实现类, 该抽象类的refresh()方法定义了Spring容器在加载配置为文件后的各项处理过程, 这个处理过程刻画了Spring容器启动时所执行的各项操作.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 初始化BeanFactory</span></span><br><span class="line">ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();</span><br><span class="line">...</span><br><span class="line"><span class="comment">// 2. 调用工厂后处理器</span></span><br><span class="line">invokeBeanFactoryPostProcessors);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 注册Bean后处理器</span></span><br><span class="line">registerBeanPostProcessors();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 4. 初始化消息源</span></span><br><span class="line">initMessageSource();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 5. 初始化应用上下文事件广播器</span></span><br><span class="line">initApplicationEventMulticaster();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 6. 初始化其他特殊的Bean, 由具体子类实现</span></span><br><span class="line">onRefresh();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 7. 注册事件监听器</span></span><br><span class="line">registerListeners();;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 8. 初始化所有单实例Bean, 使用懒加载的Bean除外</span></span><br><span class="line">finishBeanFactoryInitalization(beanFactory);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 9. 完成刷新并发布容器刷新事件</span></span><br><span class="line">finishRefresh();</span><br></pre></td></tr></table></figure></p>
+<p>1) 初始化BeanFactory: 根据配置文件实例化BeanFactory, 在obtainFreshBeanFactory()方法中, 先调用refreshBeanFactory()方法刷新BeanFactory, 然后调用getBeanFactory()方法获取BeanFactory,  这两个方法由子类实现. 这一步, Spring将配置文件的信息装入容器的Bean定义注册表(BeanDefinitionRegistry)中, 此时Bean还未初始化.</p>
+<p>2) 调用工厂后处理器: 根据反射机制从BeanDefinitionRegistry中找出所有实现BeanFactoryPostProcessor接口的Bean, 并调用其postProcessBeanFactory()接口方法.</p>
+<p>3) 注册Bean后处理器: 根据反射机制从BeanDefinitionRegistry中找出所有实现了BeanPostProcessor接口的Bean, 井它们注册到容器Bean后处理器的注册表中</p>
+<p>4) 初始化消息源: 初始化容器的国际化消息资源</p>
+<p>5) 初始化应用上下文事件广播器</p>
+<p>6) 初始化其他特殊的Bean: 钩子方法, 子类可以借助这个方法执行一些特殊的操作, 如AbstractRefreshableWebApplicationContext就使用该方法执行初始化ThemeSource的操作.</p>
+<p>7) 注册事件监听器</p>
+<p>8) 初始化所有单实例Bean, 使用懒加载的Bean除外: 初始化Bean后, 将它们放入Spring容器的缓存池中</p>
+<p>9) 发布上下文刷新事件: 创建上下文刷新事件, 事件广播器负责将这些事件广播到每个注册的事件监听器中.</p>
+<p><img src="/2019/03/18/精通Spring-4-x读书笔记-Spring容器高级主题/IoC的流水线.png" alt="IoC的流水线"></p>
+<p><strong>Spring容器从家走配置文件到创建一个完整的Bean的作业流程及参与的角色</strong>:</p>
+<p>1) ResourceLoader 从存储介质中加载Spring配置信息, 并使用Resource表示这个配置文件资源</p>
+<p>2) BeanDefinitionReader读取Resource所指向的配置文件资源, 然后解析配置文件. 文件中的每个<code>&lt;bean&gt;</code>解析成一个BeanDefinition对象, 并保存在BeanDefinitionRegistry中.</p>
+<p>3) 容器扫描BeanDefinitionRegistry中的BeanDefinition, 使用反射机制识别Bean工厂后处理器, 然后调用这些Bean工厂后处理器对BeanDefinitionRegistry中的BeanDefinition进行加工处理. 主要完成以下两项工作:</p>
+<p>​    3.1) 对使用占位符的<code>&lt;bean&gt;</code>元素标签进行解析, 得到最终的配置值. 得到成品BeanDefinition对象</p>
+<p>​    3.2) 对BeanDefinitionRegistry中的BeanDefinition对象进行扫描, 通过反射机制找到所有属性编辑器的Bean(实现java.beans.PropertyEditor的Bean), 自动将它们注册到Spring容器的属性编辑器注册表中(PropertyEditorRegistry)</p>
+<p>4) Spring容器从那个BeanDifinitionRegistry中取出加工后的BeanDefinition, 调用InstantiationStrategy进行Bean实例化</p>
+<p>5) 实例化Bean时, Spring容器使用BeanWrapper对Bean进行封装. BeanWrapper提供了很多以反射机制操作Bean的方法, 结合该Bean的BeanDefinition及容器中的属性编辑器, 完成Bean属性注入工作</p>
+<p>6) 利用容器中注册的Bean后处理器(实现BeanPostProcessor的Bean)对已完成属性设置工作的Bean进程后续加工, 直接装配出一个准备就绪的Bean</p>
+<p><strong>BeanDifinition</strong>:</p>
+<p>BeanDefinition是<code>&lt;bean&gt;</code>元素标签在容器中的内部表示.</p>
+<p><img src="/2019/03/18/精通Spring-4-x读书笔记-Spring容器高级主题/BeanDifinition继承体系.png" alt="BeanDifinition继承体系"></p>
+<p>RootBeanDefinition对应一般性的<code>&lt;bean&gt;</code>标签, 配置文件中可以定义父bean和子bean, 父bean用RootBeanDefinition, 子bean用ChildBeanDefinition表示.</p>
+<p>AbstractBeanDefinition对两者共同的信息进行抽象.</p>
+<p>BeanDefinition只在容器启动时加载并解析, 除非容器刷新或重启, 这些信息度不会改变.</p>
+<p>可以通过编程的方式在运行期调整BeanDefinition的定义:</p>
+<p>​    1) 利用BeanDefinitionReader读取承载配置信息的Resource, 通过XML解析器解析配置信息的DOM对象, 简单地为每个bean生成对应的BeanDefinition对象. 这里生成的是半成品BeanDefinition, 配置文件中的占位符还没有解析.</p>
+<p>​    2) 利用容器中注册的BeanFactoryPostProcessor对BeanDefinition加工, 将占位符解析为最终的实际值, 成为成品的BeanDefinition.</p>
+<p><strong>InstantiationStrategy</strong>:</p>
+<p>负责根据BeanDefinition对象创建Bean实例. 策略模式. 方便采用不同的实例化策略.</p>
+<p><img src="/2019/03/18/精通Spring-4-x读书笔记-Spring容器高级主题/InstantiationStrategy类继承体系.png" alt="InstantiationStrategy类继承体系"></p>
+<p>SimpleInstantiationStrategy最常用的实例化策略, 利用Bean实现类的默认构造函数, 带参构造函数, 工厂方法创建Bean实例.</p>
+<p>CglibSubclassingInstantiationStrategy扩展SimpleInstantiationStrategy, 为需要进行方法注入的Bean提供支持. 利用CGLib类库为Bean动态生成子类, 在子类生成方法注入的逻辑, 使用动态生成的子类创建Bean实例.</p>
+<p>InstantiationStrategy相当于new的功能, 但不会参与Bean属性的设置工作, 属性填充由BeanWrapper完成.</p>
+<p><strong>BeanWrapper</strong>:</p>
+<p>Spring委托BeanWrapper完成Bean属性的填充工作.</p>
+<p><img src="/2019/03/18/精通Spring-4-x读书笔记-Spring容器高级主题/BeanWrapper类继承体系.png" alt="BeanWrapper类继承体系"></p>
+<p>PropertyAccessor接口定义了各种方法Bean属性的方法.</p>
+<p>PropertyEditorRegistry是属性编辑器注册表.</p>
+<p>BeanWrapperImpl有三重身份:</p>
+<ul>
+<li>Bean包裹器</li>
+<li>属性访问器</li>
+<li>属性编辑器注册表</li>
+</ul>
+<p>Bean实例内部封装了 被封装的待处理的Bean, 一套用于设置Bean属性的属性编辑器.</p>
+<p>Spring主程序从BeanDefinition中获取Bean属性的配置信息PropertyValue, 并使用属性编辑器对PropertyValue进行转换以得到Bean的属性值. </p>
+<p><strong>属性编辑器</strong>:</p>
+<p>任何实现<code>java.beans.PropertyEditor</code>接口的类都是书香编辑器. 主要功能是将外部的设置值转换为JVM内部的对应类型, 就是一个类型转化器.</p>
+<p>JavaBean规范通过<code>java.beans.PropertyEditor</code>定义了设置JavaBean属性的方法, 通过BeanInfo描述了JavaBean的哪些属性是可定制的, 还描述了可定制属性与PropertyEditor的对应关系.</p>
+<p>BeanInfo与JavaBean之间的对应关系通过二者之间的命名规范确立. 对应的JavaBean的BeanInfo采用如下命名规范: <code>&lt;Bean&gt;BeanInfo</code>. 如Car对应的BeanInfo为CarBeanInfo.</p>
+<p>PropertyEditorManager管理默认属性编辑器, 保存着一些常见类型的属性编辑器, 可以通过BeanInfo显示指定属性编辑器, IDE将自动使用PropertyEditorManager中注册的对应默认属性编辑器.</p>
+<p><strong>PropertyEditor</strong>: 属性编辑器的接口, 规定将外部设置值转换为内部JavaBean属性值的转换接口方法, 主要方法:</p>
+<ul>
+<li>Object getValue(): 方法属性的当前值, 基本类型被封装对应封装类.</li>
+<li>void setValue(Object newValeu): 设置属性的值, 基本类型以封装类传入</li>
+<li>String getAsText(): 将属性对象用字符串表示, 以便外部属性编辑器以可视化的方式显示, 默认返回null, 表示不能以字符串表示</li>
+<li>void setAsText(String text): 用一个字符串更新属性的内部值, 一般从外部属性编辑器传入</li>
+<li>String[] getTags(): 返回表示有效属性值的字符串数组(boolean属性对应的有效Tag为true和false), 默认返回null.</li>
+<li>String getJavaInitializationString(): 为属性提供一个表示初始值的字符串, 属性编辑器以此作为属性的默认值.</li>
+</ul>
+<p>PropertyEditorSupport实现了PropertyEditor接口并提供了默认实现, 一般情况下, 可以通过扩展这个方便类设计自己的属性编辑器.</p>
+<p><strong>BeanInfo</strong>: 描述了JavaBean的哪些属性可以编辑及对应的属性编辑器, 每个属性对应一个属性描述器PropertyDescriptor. PropertyDescriptor的构造函数有两个入参: </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PropertyDescriptor(String propertyName, Class beanClass);</span><br></pre></td></tr></table></figure>
+<p>PropertyDescriptor还有一个setPropertyEditorClass(Class propertyEditorClass)方法用于为JavaBean属性指定编辑器.</p>
+<p>PropertyEditorRegistrySupport中为常见属性类型提供类默认的属性编辑器.</p>
+<table>
+<thead>
+<tr>
+<th>类别</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>基本数据类型</td>
+<td>分为几个小类<br>1. 基本数据类型<br>2. 基本数据类型封装类<br>3. 两个基本数据类型的数组, char[]和byte[]<br>4. 大数类, BigDecimal和BigInteger</td>
+</tr>
+<tr>
+<td>集合类</td>
+<td>Collection, Set, SortedSet, List, SortedMap</td>
+</tr>
+<tr>
+<td>资源类</td>
+<td>Class, Class[], File, InputStream, Local, Properties, Resource[], URL</td>
+</tr>
+</tbody>
+</table>
+<p>PropertyEditorRegistrySupport有两个用于保存属性编辑器的Map类型变量:</p>
+<ul>
+<li>defaultEditors: 保存默认类型的属性编辑器, 元素的键为属性类型, 值为对应的属性编辑器实例</li>
+<li>customEditors: 保存用户自定义的属性编辑器.</li>
+</ul>
+<p><strong>使用外部属性文件</strong>:</p>
+<p>PropertyPlaceholderConfigurer能够使Bean在配置时引用外部属性文件, 它实现了BeanFactoryPostProcessorBean接口, 是一个Bean工厂后处理器.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 引入jdbc.properties属性文件 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"</span> <span class="attr">p.location</span>=<span class="string">"classpath:com/smart/placeholder/jdbc.properties"</span> <span class="attr">p.fileEncoding</span>=<span class="string">"utf-8"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"dataSource"</span> <span class="attr">class</span>=<span class="string">"org.apache.commons.dbcp.BasicDataSource"</span> <span class="attr">destroy-method</span>=<span class="string">"close"</span> <span class="attr">p.driverClassName</span>=<span class="string">"$&#123;driverClassName&#125;"</span> <span class="attr">p.url</span>=<span class="string">"$&#123;url&#125;"</span> <span class="attr">p.username</span>=<span class="string">"$&#123;username&#125;"</span> <span class="attr">p.password</span>=<span class="string">"$&#123;password&#125;"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p>其他属性:</p>
+<ul>
+<li>locations: 只有一个属性文件时使用location, 多个属性文件是通过locations属性设置, 类似配置List一样</li>
+<li>fileEncoding: 属性文件的编码格式</li>
+<li>order: 指定有限顺序</li>
+<li>placeholderPrefix: 根据需要使用其他的前缀符, 默认为”${“</li>
+<li>placeholderSubffix: 占位符后缀, 默认为”}”</li>
+</ul>
+<p>使用<code>&lt;context:property-placeholder&gt;</code>引用属性文件:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">context:property-placeholder</span> <span class="attr">location</span>=<span class="string">"classpath: resources/jdbc.properties"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p>相当于在Spring容器中定义了一个PropertyPlaceholderConfigurer的Bean. </p>
+<p><strong>使用加密的属性文件</strong>:</p>
+<p>PropertyPlaceholderConfigurer继承自PropertyResourceCoufingurer类, 后者有几个protected方法, 用于在属性使用前对属性列表中的属性进行转换:</p>
+<ul>
+<li>void converProperties(Properties props): 属性文件中的所有属性值都封装在props中, 覆盖此方法, 可以对所有属性进行转换处理</li>
+<li>String converProperty(String propertyName, String propertyValue): 加载属性文件并读取文件中的每个属性时, 都会调用这个方法.</li>
+<li>String converPropertyValue(String originalValue): 和上面的方法类似, 只是没有传入属性名</li>
+</ul>
+<p>可以扩展PropertyPlaceholderConfigurer覆盖相应的属性转换方法, 可以支持加密版的属性文件</p>
+<p><strong>引用Bean的属性值</strong>:</p>
+<p>在配置文件中引用另一个Bean的属性值, 可以通过类似<code>#{beanName.beanprop}</code>的方式引用另一个Bean 的值.</p>
+<p><strong>容器事件</strong>:</p>
+<p>Spring的ApplicationContext能够发布事件并允许注册相应的事件监听器. Java通过java.util.EventObject类和java.util.EventListener接口描述事件和监听器, 某个组件或框剪需要事件发布和监听器机制, 都需要通过扩展它们进行定义.</p>
+<ul>
+<li>事件源: 事件的产生者, 任何一个EventObject都必须拥有一个事件源</li>
+<li>事件监听器注册表: 保存事件监听器, 当事件源产生事件时, 通知这些位于事件监听器注册表中的监听器</li>
+<li>事件广播器: 事件和事件监听器沟通的桥梁, 负责把事件通知给监听器</li>
+</ul>
+<p><img src="/2019/03/18/精通Spring-4-x读书笔记-Spring容器高级主题/事件体系.png" alt="事件体系"></p>
+<p><strong>Spring事件类结构</strong>:</p>
+<p>ApplicationEvent的唯一构造函数是ApplicationEvent(Object source), 通过source指定事件源, 它有两个子类:</p>
+<ul>
+<li>ApplicationContextEvent: 容器事件, 有4个子类, 分别表示容器启动, 刷新, 停止, 关闭事件</li>
+<li>RequestHandleEvent: 与Web应用相关的事件, 当一个HTTP请求被处理后, 产生该事件. 只有在web.xml中定义了DispatcherServlet时才会产生该事件, 有两个子类, 分别表示Servlet及Portlet的请求事件.</li>
+</ul>
+<p><img src="/2019/03/18/精通Spring-4-x读书笔记-Spring容器高级主题/Spring事件类结构.png" alt="Spring事件类结构"></p>
+<p><strong>事件监听器接口</strong>:</p>
+<p>Spring的事件监听器都继承自ApplicationListener接口</p>
+<p><img src="/2019/03/18/精通Spring-4-x读书笔记-Spring容器高级主题/Spring事件监听器接口.png" alt="Spring事件监听器接口"></p>
+<p>ApplicationListener接口只有一个方法: onApplicationEvent(E event), 接受ApplicationEvent事件对象, 在该方法中响应处理逻辑.</p>
+<p>SmartApplicationListener接口有两个方法:</p>
+<ul>
+<li>boolean supportsEventType(Class&lt;? extends ApplicationEvent&gt; eventType): 指定监听器支持哪种类型的容器事件, 只会响应该类型事件</li>
+<li>boolean supportsSourceType(Class&lt;?&gt; sourceType): 指定监听器仅对哪种事件源对象做出响应</li>
+</ul>
+<p>GenericApplicationListener接口增强了对泛型事件类型的支持, supportsEventType()方法参数不仅限于ApplicationEvent子类型, 采用可解析类型ResolvableType.</p>
+<p>通过ResolvableType可以很容易获取到泛型的实际类型信息, 包括获取类级, 字段级别, 方法返回值, 构造器参数, 数组组件类型的泛型信息.</p>
+<p>GenericApplicationListener定义了两个方法:</p>
+<ul>
+<li>boolean supportsEventType(ResolvableType eventType): 指定监听器是否实际支持给定的事件类型, 即只会响应该类型事件</li>
+<li>boolean supportsSourceType(Class&lt;?&gt; sourceType): 指定监听器仅响应何种事件源对象</li>
+</ul>
+<p>当容器事件发生时, 容器将调用事件广播器将事件通知给事件监听器, 事件监听器分别对事件进行响应, Spring为事件广播器定义了接口并提供实现类.</p>
+<p><img src="/2019/03/18/精通Spring-4-x读书笔记-Spring容器高级主题/Spring事件广播器类结构.png" alt="Spring事件广播器类结构"></p>
+<p><strong>解构Spring事件体系的具体实现</strong>:</p>
+<p>Spring在ApplicationContext接口的抽象实现类AbstractApplicationContext中完成了事件体系的搭建. AbstractApplicationContext拥有一个applicationEventMulticaster成员变量, 提供容器监听器注册表. AbstractApplicationContext在refresh()这个容器启动方法中通过以下3步搭建事件的基础设施.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 5. 初始化应用上下文事件广播器</span></span><br><span class="line">initApplicationEventMulticaster();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 7. 注册事件监听器</span></span><br><span class="line">registerListeners();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 9. 完成刷新并发布容器刷新事件</span></span><br><span class="line">finishRefresh();</span><br></pre></td></tr></table></figure>
+<p>用户可以在配置文件中为容器定义一个自定义的事件广播器, 只要实现ApplicationEventMulticaster即可. Spring会通过反射机制将其注册成容器的事件广播器. </p>
+<p>Spring根据反射机制, 从BeanDefinitionRegistry中找出所有实现<code>org.springframework.context.ApplicationListener</code>的Bean, 将它们注册成为容器的事件监听器. 添加到事件监听器注册表中.</p>
+<p>容器启动完成, 调用事件发布接口向容器中所有的监听器发布事件.</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        </p><p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

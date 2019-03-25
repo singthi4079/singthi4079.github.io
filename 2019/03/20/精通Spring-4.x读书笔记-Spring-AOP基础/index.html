@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Blue">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="精通Spring 4.x读书笔记-Spring AOP基础">
+  <meta property="og:description" content="">
+  <meta property="og:site_name" content="Blue的博客">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://singthi4079.github.ioundefined">
+  
+    <link rel="alternate" href="/atom.xml" title="Blue的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <!-- Site Title -->
+  <title>Blue的博客</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/default-banner-dark.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">精通Spring 4.x读书笔记-Spring AOP基础</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/<your-github-username>">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:<your-email-address>">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By Blue</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2019-03-20</span>
+            <span class="time">22:09:10</span>
+          </span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Spring/">#Spring</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>AOP(Aspect Oriented Programing) 面向切面编程.</p>
+<p><img src="/2019/03/20/精通Spring-4.x读书笔记-Spring-AOP基础/横向抽取.png" alt="横向抽取"></p>
+<p>上图中可以看出, AOP希望将这些分散在各个业务逻辑代码中的相同代码通过横向切割的方式抽取到一个独立的模块中. </p>
+<p>如何将这些独立的逻辑融合到业务逻辑中以完成和原来一样的业务流程, 正是AOP要解决的主要问题.</p>
+<p><strong>AOP术语</strong>:</p>
+<ol>
+<li><p>连接点(Jointpoint)</p>
+<p>特定点是程序执行的某个特定位置, 如类开始初始化前, 类初始化后, 类的某个方法调用前/调用后, 方法抛出异常后. 一个类或一段程序代码拥有一些具有边界性质的特定点, 这些代码中的特定点就被称为”连接点”. </p>
+<p>Spring仅支持方法的链接点,  即仅能在方法调用前, 方法调用后, 覆盖那份抛出异常时及方法调用前后这些程序执行点织入增强.</p>
+<p>连接点由两个信息确定: 一是用方法表示的程序执行点, 二是用相对位置表示的方位.</p>
+<p>Spring使用切点对执行点进行定位, 而方位则在增强类型中定义.</p>
+</li>
+<li><p>切点(Pointcut)</p>
+<p>AOP通过切点定位特定的接连点. </p>
+<p>借助数据库查询的概念来理解切点和连接点的关系: 连接点相当于数据库中的记录, 而切点相当于查询条件.</p>
+<p>切点和连接点不是一对一的关系, 一个切点可以匹配多个连接点.</p>
+<p>Spring中, 切点通过org.springframework.aop.Pointcut接口进行描述, 使用类和方法作为连接点的查询条件, Spring AOP的规则解析引擎负责解析切点所设定的查询条件,  找到对应的连接点. </p>
+<p>切点之定位到某个方法上, 要定位到具体的连接点, 还需要提供方位信息.</p>
+</li>
+<li><p>增强(Advice)</p>
+<p>增强是织入目标类连接点上的一段代码程序. Spring 中, 增强除了用于描述一段程序代码外, 还拥有执行点的方位. 结合执行点的方位和切点, 就可以找到特定的连接. Spring提供的增强接口都方位名: BeforeAdvice, AfterReturningAdvice, ThrowsAdvice等. </p>
+</li>
+<li><p>目标对象(Target): 增强逻辑的织入目标类. </p>
+</li>
+<li><p>引介(Introduction): 一种特殊的增强, 为类添加一些属性和方法. 即使一个业务类原本没有实现某个接口, 通过AOP的引介功能, 可以动态地为该业务类添加接口的实现逻辑, 让业务类称为这个接口的实现类.</p>
+</li>
+<li><p>织入(Weaving)</p>
+<p>将增强添加到目标类的具体连接点上的过程. AOP有3种织入方式:</p>
+<p>1) 编译期织入: 要求使用特殊的Java编译器</p>
+<p>2) 类装载期织入: 要求使用特殊的类装载器</p>
+<p>3) 动态代理织入: 在运行期为目标类添加增强生成子类的方式</p>
+<p>Spring采用动态代理织入, 二AspectJ采用编译期织入和类装载期织入</p>
+</li>
+<li><p>代理(Proxy)</p>
+<p>一个类被AOP织入增强后, 就产生了一个结果类, 它融合了原类和增强逻辑的代理类. 根据不同的代理方式, 代理类即可能是和原类具有相同接口的类, 也可能是原类的子类.</p>
+</li>
+<li><p>切面(Aspect)</p>
+<p>切面由切点和增强(引介)组成, 即包括横切逻辑的定义, 页包括连接点的定义.  Spring AOP负责将切面所定义的横切逻辑织入切面所指定的连接点中.</p>
+</li>
+</ol>
+<p><strong>基础知识</strong>:</p>
+<p>Spring AOP使用两种代理机制: JDK动态代理, CGLib的动态代理.</p>
+<p>JDK本身只提供接口的代理, 不支持类的代理.</p>
+<p>Java提供的动态代理技术, 允许开发者在运行期创建接口的代理实例. 主要涉及java.lang.reflect包中的Proxy和InvocationHandler. </p>
+<p>可以通过实现InvocationHandler接口定义横切逻辑, 并通过反射机制调用目标类的代码, 动态地将横切逻辑和业务逻辑编织在一起.</p>
+<p>Proxy利用InvocationHandler动态创建一个符号某一接口的实例, 生产目标类代理对象. </p>
+<p>使用步骤:</p>
+<ol>
+<li>实现InvocationHandler接口, 该接口定义了一个invoke(Object proxy, Method method, Object[] args)方法, 其中, proxy是最终生成的代理实例, 一般不会用到; method是被代理目标实例的某个具体方法; args是被代理实例某个方法的入参.</li>
+<li>在构造函数里通过target传入希望被代理的目标对象; 在InvocationHandler接口方法invoke(Object proxy, Method method, Object[] args)里, 将目标实例传递给method.invoke()方法, 并调用目标实例的方法.</li>
+</ol>
+<p>通过Proxy的newProxyInstance()静态方法为编织了业务类逻辑和横切逻辑的handler创建一个代理实例. 第一个参数为类加载器, 第二个参数为创建代理实例所需实现的一组接口, 第三个参数是整合了业务逻辑和横切逻辑的编织器对象.</p>
+<p>CGLib采用底层的字节码技术, 可以为一个类创建子类, 在子类中采用方法拦截的技术拦截所有父类方法的调用并顺势织入横切逻辑. </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CglibProxy</span> <span class="keyword">implements</span> <span class="title">MethodInterceptor</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> Enhancer enhancer = <span class="keyword">new</span> Enhancer();</span><br><span class="line">  <span class="function"><span class="keyword">public</span> Object <span class="title">getProxy</span><span class="params">(Class clazz)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 设置需要创建子类的类</span></span><br><span class="line">    enhancer.setSuperclass(clazz);</span><br><span class="line">    enhancer.setCallback(<span class="keyword">this</span>);</span><br><span class="line">    <span class="comment">// 通过字节码技术动态创建子类实例</span></span><br><span class="line">    <span class="keyword">return</span> enhancer.create();</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 拦截父类所有方法的调用</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> Object <span class="title">intercept</span><span class="params">(Object obj, Method method, Object[] args, MethodProxy proxy)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">    <span class="comment">// 横切逻辑1</span></span><br><span class="line">    ....</span><br><span class="line">    <span class="comment">// 通过代理类调用父类中的方法</span></span><br><span class="line">    Object result = proxy.invokeSuper(obj, args);</span><br><span class="line">    <span class="comment">// 横切逻辑2</span></span><br><span class="line">    ....</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过getProxy(Class clazz)方法为一个类创建动态代理对象, 该代理对象通过扩展clazz实现代理. 在代理对象中, 织入横切逻辑. intercept(Object obj, Method method, Object[] args, MethodProxy proxy)是CGLib定义的Interceptor接口方法, 拦截所有目标类方法的调用. obj表示目标类的实例, method为目标类方法反射对象, args为方法的动态入参, proxy为代理类实例.</p>
+<p><strong>创建增强类</strong>:</p>
+<p>Spring使用增强类定义横切逻辑, 同时由于Spring只支持方法连接点, 增强还包括在方法的哪一点加入横切代码的方位信息, 所以增强即包含横切逻辑, 又包含部分连接点的信息.</p>
+<p>Spring支持5种类型的增强.</p>
+<p><img src="/2019/03/20/精通Spring-4.x读书笔记-Spring-AOP基础/增强接口继承关系图.png" alt="增强接口继承关系图"></p>
+<p>按照增强在目标类方法中的连接点位置, 可分为以下5类:</p>
+<ul>
+<li>前置增强: BeforeAdvice. MethodBeforeAdvice是目前可用的前置增强, 在目标方法执行前执行前实施增强.</li>
+<li>后置增强: AfterReturningAdvice代表后置增强, 在目标方法执行后实施增强</li>
+<li>环绕增强: MethodInterceptor代表环绕增强, 表示在目标方法执行前后实施增强</li>
+<li>异常抛出增强: ThrowsAdvice代表异常抛出增强, 在目标方法抛出异常后实施增强</li>
+<li>引介增强: IntroductionInterceptor代表引介增强, 在目标类中添加一些新的方法和属性.</li>
+</ul>
+<p>通过实现这些接口方法, 并在接口方法中定义横切逻辑, 就可以将它们织入目标类方法的相应连接点位置.</p>
+<p>ProxyFactory内部使用JDK或者CGLib动态代理技术将增强应用到目标类中的.</p>
+<p>Spring定义了<code>org.springframework.aop.framework.AopProxy</code>接口, 并提供了两个final类型的实现类</p>
+<p><img src="/2019/03/20/精通Spring-4.x读书笔记-Spring-AOP基础/AopProxy类结构.png" alt="AopProxy类结构"></p>
+<p>如果通过ProxyFactory的setInterfaces(Class[] interfaces)方法指定目标接口进行代理, 则ProxyFactory使用JdkDynamicAopProxy. 如果针对类的代理, 则使用Cglib2AopProxy.</p>
+<p>ProxyFactory通过addAdvice(Advice)方法添加一个增强, 用户可以使用该方法添加多个增强. 多个增强形成一个增强链, 调用顺序和添加顺序一致.</p>
+<p>通过Spring配置声明代理:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"greetingAdvice"</span> <span class="attr">class</span>=<span class="string">"com.smart.advice.GreetingBeforeAdvice"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"target"</span> <span class="attr">class</span>=<span class="string">"com.smart.advice.NaiveWaiter"</span>/&gt;</span></span><br><span class="line">&lt;bean id="waiter" class="org.springframework.aop.framework.ProxyFactoryBean" p:proxyInterfaces="com.smart.advice.Waiter" // 指定代理的接口, 如果是多个接口, 使用&lt;list&gt;元素</span><br><span class="line">p:interceptorNames="greetingAdvice" // 指定使用的增强</span><br><span class="line">p:target-ref="target" // 指定对哪个Bean进行处理</span><br><span class="line">/&gt;</span><br></pre></td></tr></table></figure>
+<p>ProxyFactory实现了FactoryBean, 负责为其他Bean创建代理实例, 内部使用ProxyFactory实现, 几个常用的配置:</p>
+<ul>
+<li>target: 代理的目标对象</li>
+<li>proxyInterfaces: 代理所实现的接口, 还有一个别名属性interfaces</li>
+<li>interceptorNames: 需要织入目标对象的Bean列表, 采用Bean名称指定. 这些Bean必须实现MethodInterceptor或Advisor的Bean, 配置中的顺序对应调用的顺序</li>
+<li>singleton: 返回的代理是否是单实例, 默认为单实例</li>
+<li>optimize: 为true时, 强制使用CGLib动态代理. 对应singleton的代理, 推荐使用CGLib, 其他作用域的代理, 推荐使用JDK动态代理. CGLib创建代理速度慢, 但创建出来的代理对象运行效率高, JDK正好相反</li>
+<li>proxyTargetClass: 是否对类进行代理(而不是对接口进行代理), 为true时, 使用CGLib动态代理.</li>
+</ul>
+<p>通过实现AfterReturningAdvice来定义后置增强的逻辑, 接口仅定义一个方法afterRetruning(Object returnObj, Method method, Object[] args, Object obj) throws Throwable.</p>
+<ul>
+<li>retrunObj: 目标实例方法返回的结果</li>
+<li>method: 目标类的方法</li>
+<li>args: 目标实例方法的入参</li>
+<li>obj: 目标类实例</li>
+</ul>
+<p>如果后置增强抛出异常, 该异常为目标方法声明的异常, 该异常归并到目标方法中, 如果不是目标方法声明的异常, 则Spring将其转为运行期异常抛出 </p>
+<p>环绕增强运行在目标类方法调用前后织入横切逻辑, 综合实现了前置, 后置增强的功能</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GreetingInterceptor</span> <span class="keyword">implements</span> <span class="title">MethodInterceptor</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 截获目标类方法的执行, 并在前后添加横切逻辑</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(MethodInvocation invocation)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">    Object[] args = invocation.getArguments(); <span class="comment">// 目标方法入参</span></span><br><span class="line">    String clientName = (String) args[<span class="number">0</span>];</span><br><span class="line">    <span class="comment">// 方法执行前调用</span></span><br><span class="line">    .....</span><br><span class="line">    <span class="comment">// 通过反射机制调用目标方法</span></span><br><span class="line">    Object obj = invocation.proceed();</span><br><span class="line">    <span class="comment">// 方法执行后调用</span></span><br><span class="line">    ......</span><br><span class="line">    <span class="keyword">return</span> obj;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>直接使用MethodInterceptor作为环绕增强的接口. 唯一接口方法Object invoke(MethodInvocation invocation) throws Throwable. </p>
+<p>MethodInvocation封装了目标方法, 入参数组, 目标方法所在的实例对象.</p>
+<p>异常抛出增强最适合的应用场景时事务管理, 当参与事务的DAO发生异常时, 事务管理器必须回滚事务.</p>
+<p>ThrowsAdvice异常抛出增强接口没有定义任何方法, 是一个标签接口, 在运行期Spring使用反射机制自行判断, 必须采用以下签名形式定义异常抛出的增强方法.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">afterThrowing</span><span class="params">([Method method, Object[] args, Object target], Throwable)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>方法名必须是<code>afterThrowing</code>, 前三个入参method, args, target是可选的. 最后一个入参是Throwable或其子类</p>
+<p>可以在同一个异常抛出增强中定义多个afterThrowing()方法, 当目标类方法抛出异常时, Spring会自动选用最匹配的增强方法.</p>
+<p>引介增强为目标类创建新的方法和属性, 引介增强的连接点是类级别的, 而非方法级别的. 可以为目标类创建实现某接口的代理. </p>
+<p>通过扩展DelegatingIntroductionInterceptor类自定义引介增强类.</p>
+<p><strong>创建切面</strong>:</p>
+<p>增强提供了连接单方位信息, 如织入到方法前面, 后面等, 而切点进一步描述了织入哪些类的哪些方法上.</p>
+<p>Pointcut由ClassFilter和MethodMatcher构成, 通过ClassFilter定位某些特定的类, 通过MethodMatcher定位到某些特定的方法上.</p>
+<p><img src="/2019/03/20/精通Spring-4.x读书笔记-Spring-AOP基础/Pointcut类关系图.png" alt="Pointcut类关系图"></p>
+<p>ClassFilter只定义了一个方法matches(Class clazz), 其参数代表呗检测类, 该方法判别呗检测的类是否匹配过滤条件.</p>
+<p>Spring支持两种放匹配器:</p>
+<ul>
+<li>静态方法匹配器: 仅对方法名签名(包括方法名, 入参类型, 顺序)进行匹配, 只判别一次</li>
+<li>动态方法匹配: 会在运行期坚持方法入参的值, 每次调用方法都会必须判别</li>
+</ul>
+<p>方法匹配器的类型有isRuntime()方法返回值决定, false表示静态方法匹配器, true表示动态方法匹配器</p>
+<p>Spring提供6种类型的切点:</p>
+<ul>
+<li>静态方法切点: StaticMethodMatcherPointcut静态方法切丁的抽象基类, 默认情况下它匹配所有类. NameMatchMethodPointcut提供简单的字符串匹配方法签名, AbstractRegexpMethodPointcut使用正则表达式匹配方法签名</li>
+<li>动态方法切点: DynamicMethodMatcherPointcut动态方法切点的抽象基类, 默认匹配所有类</li>
+<li>注解切点: AnnotationMatchingPointcut表示注解切点</li>
+<li>表达式切点: ExpressionPointcut接口为支持AspectJ切点表达式语法而定义的接口</li>
+<li>流程切点: ControlFlowPointcut实现类表示控制流程切点. 根据程序执行堆栈的信息查看目标方法是否由某一个方法直接或间接发起调用的, 以此判断是否为匹配的连接点</li>
+<li>复合切点: ComposablePointcut为创建多个切点二提供方便操作类. 它所有的方法都返回ComposablePointcut类, 这样就可以使用连接表达式对切点进行操作.</li>
+</ul>
+<p>切点仅代表目标类连接点的部分信息(类和方法的定位), 仅有切点无法制作出一个切面, 必须结合增强才能制作切面. </p>
+<p>Spring使用<code>org.springframework.aop.Advisor</code>接口代表切面. 切面可以分为三类:</p>
+<ul>
+<li>Advisor: 一般切面, 仅包含一个Advice, 它代表的横切连接点是所有目标类的所有方法, 一般不使用</li>
+<li>PointcutAdvisor: 有切点的切面, 包含Advice和Pointcut两个类, 可以通过类, 方法名, 方法方位定义切面的连接点</li>
+<li>IntroductionAdvisor: 引介切面, 应用于类层面上, 使用ClassFilter定义</li>
+</ul>
+<p><img src="/2019/03/20/精通Spring-4.x读书笔记-Spring-AOP基础/切面类继承关系.png" alt="切面类继承关系"></p>
+<p>PoincutAdvisor主要实现类:</p>
+<p><img src="/2019/03/20/精通Spring-4.x读书笔记-Spring-AOP基础/PointcutAdvisor实现类体系.png" alt="PointcutAdvisor实现类体系"></p>
+<ul>
+<li>DefaultPointcutAdvisor: 最常用的切面, 可以通过任意Pointcut和Advice定义一个切面, 不支持引介切面, 通过扩展这个类实现自定义切面</li>
+<li>NameMatchMethodPointcutAdvisor: 可以定义按方法名定义切点的切面</li>
+<li>RegexpMathodPointcutAdvisor: 对于按正则表达式匹配方法名进行切点定义的切面, 通过扩展该实现类实现操作. 允许使用正则表达式模式串定义匹配的切点, 内部通过JdkRegexpMethodPointcut构造出正则表达式方法名切点</li>
+<li>StaticMethodMatcherPointcutAdvisor: 精通方法匹配器切点定义的切面, 默认情况下匹配所有目标类</li>
+<li>AspectJExpressionPointcutAdvisor: 用于AspectJ切点表达式定义切点的切面</li>
+<li>AspectJPointcutAdvisor: 用于AspectJ预防定义切点的切面</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GreetingAdvisor</span> <span class="keyword">extends</span> <span class="title">StaticMethodMatcherPointcutAdvisor</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 切点方法匹配规则</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">matches</span><span class="params">(Method method, Class clazz)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"greetTo,"</span>.equals(method.getName());</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 切点类匹配规则</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> ClassFilter <span class="title">getClassFilter</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ClassFilter() &#123;</span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">matches</span><span class="params">(Class clazz)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Waiter.class.isAssignableFrom(clazz);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Advisor还需要一个增强类的配合</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GreetingBeforeAdvice</span> <span class="keyword">implements</span> <span class="title">MethodBeforeAdvice</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">before</span><span class="params">(Method method, Object[] args, Object obj)</span> throw Throwable </span>&#123;</span><br><span class="line">    <span class="comment">// 横切逻辑</span></span><br><span class="line">    ....</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用Spring配置定义切面: </p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"greetingAdvice"</span> <span class="attr">class</span>=<span class="string">"com.smart.advisor.GreetingBeforeAdvice"</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 向切面注入一个前置增强 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"greetingAdvisor"</span> <span class="attr">class</span>=<span class="string">"com.smart.advisor.GreetingAdvisor"</span> <span class="attr">p:advice-ref</span>=<span class="string">"greetingAdvice"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>自动创建代理</strong>:</p>
+<p>Spring提供了自动代理机制, 使用BeanPostProcessor让容器自动生成代理.</p>
+<p>这些基于BeanPostProcessor的自动代理创建器的实现类, 将根据一些规则自动在容器实例化Bean时为匹配的Bean生成代理:</p>
+<ul>
+<li>基于Bean匹配名规则的自动代理创建器: 允许为一组特定配置名的Bean自动创建代理实例, 实现类名BeanNameAutoProxyCreator</li>
+<li>基于Advisor匹配机制的自动代理创建器: 对容器中所有的Advisor进行扫描, 自动将这些切面应用到匹配的Bean中(为目标Bean创建代理实例). 实现类为DefaultAdvisorAutoProxyCreator</li>
+<li>基于Bean中AspectJ注解标签的自动代理创建器: 为包含AspectJ注解的Bean自动代理创建实例, 实现类为AnnotationAwareAspectJAutoProxyCreator</li>
+</ul>
+<p><img src="/2019/03/20/精通Spring-4.x读书笔记-Spring-AOP基础/自动代理创建器实现类的类继承图.png" alt="自动代理创建器实现类的类继承图"></p>
+<p>在容器实例化Bean时, BeanPostProcessor将对它进行加工处理, 所以, 自动代理创建器有机会对满足匹配规则的Bean自动创建代理对象</p>
+<p>通过BeanNameAutoProxyCreator创建代理对象</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"greetingAdvice"</span> <span class="attr">class</span>=<span class="string">"com.smart.GreetingBeforeAdvice"</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 只有一个Bean名称, 直接使用value属性配置,可以通过&lt;list&gt;子元素设置多个Bean名称 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.aop.fremework.autoproxy.BeanNameAutoCreator"</span> <span class="attr">p:beanNames</span>=<span class="string">"*er"</span> <span class="attr">p:interceporNames</span>=<span class="string">"greetingAdvice"</span> <span class="attr">p:</span> <span class="attr">optimize</span>=<span class="string">"true"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p>beanNames属性指定一组需要自动代理的Bean名称, 可以使用<code>*</code>通配符.</p>
+<p>interceporNames属性指定一个或多个增强Bean的名称</p>
+<p>optimize属性设置为true, 强制使用CGLib动态代理技术</p>
+<p>DefaultAdvisorAutoProxyCreator能够扫描容器中的Advisor, 并将Advisor自动织入匹配的目标Bean中, 即为匹配的目标Bean自动创建代理.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p>通过在配置文件中用DefaultAdvisorAutoProxyCreator定义一个Bean, 它负责将容器中的Advisor织入匹配的目标Bean中.</p>
+<p>JDK动态代理中通过接口实现方法拦截, 必须确保要拦截的目标方法在接口中有定义, 否则将无法实现拦截.</p>
+<p>CGLib动态代理中通过动态生成代理子类来实现方法拦截, 必须确保要拦截的目标方法可被子类方法, 也就是目标方法必须定义为非final, 非私有实例方法.</p>
+<p>在方法内部之间调用的时候, 不会使用被增强的代理类, 而是直接调用未被增强原类的方法.</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        </p><p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

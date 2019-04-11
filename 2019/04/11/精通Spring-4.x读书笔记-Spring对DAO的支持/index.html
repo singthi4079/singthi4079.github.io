@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Blue">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="精通Spring 4.x读书笔记-Spring对DAO的支持">
+  <meta property="og:description" content="">
+  <meta property="og:site_name" content="Blue的博客">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://singthi4079.github.ioundefined">
+  
+    <link rel="alternate" href="/atom.xml" title="Blue的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <!-- Site Title -->
+  <title>Blue的博客</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/default-banner-dark.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">精通Spring 4.x读书笔记-Spring对DAO的支持</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/<your-github-username>">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:<your-email-address>">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By Blue</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2019-04-11</span>
+            <span class="time">07:25:26</span>
+          </span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Spring/">#Spring</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <h2 id="Spring对DAO的支持"><a href="#Spring对DAO的支持" class="headerlink" title="Spring对DAO的支持"></a>Spring对DAO的支持</h2><h3 id="Spring的DAO理念"><a href="#Spring的DAO理念" class="headerlink" title="Spring的DAO理念"></a>Spring的DAO理念</h3><p>DAO(Data Access Object)是用于访问数据的对象. DAO不但屏蔽了数据存储的最终介质的不同, 页屏蔽了具体的实现技术的不同.</p>
+<p><img src="/2019/04/11/精通Spring-4.x读书笔记-Spring对DAO的支持/业务层通过DAO接口访问数据.png" alt="业务层通过DAO接口访问数据"></p>
+<p>提供DAO层的抽象可以带来一些好处: 首先可以更容易的构造模拟对象, 方便单元测试的开展; 其次, 在使用切面时会有更多的选择, 即可以使用JDK动态代理有可以使用CGLib动态代理</p>
+<p>Spring本质上希望以统一的方式整合底层的持久化技术, 即以统一的方式进行调用及事务管理, 避免让具体的实现侵入到业务层的代码中.</p>
+<p>每种持久化技术都有各自的异常体系, 所以Spring提供了统一的异常体系, 使不同异常体系的阻抗得以消弭, 方便定义出和具体实现技术无关的DAO接口, 以及整合到相同的事务管理体系中</p>
+<h3 id="统一的异常体系"><a href="#统一的异常体系" class="headerlink" title="统一的异常体系"></a>统一的异常体系</h3><p>Spring提供了一套和实现技术无关的, 面线DAO层语法的异常体系, 并通过转换器将不同持久化技术的异常转换为Spring的异常</p>
+<h4 id="Spring的DAO异常体系"><a href="#Spring的DAO异常体系" class="headerlink" title="Spring的DAO异常体系"></a>Spring的DAO异常体系</h4><p>Spring的异常体系都是建立在运行期异常的基础上, 开发者可以根据需要捕捉感兴趣的异常.</p>
+<p>Spring在org.springframework.dao包中提供了一套完备优雅的DAO异常体系, 这些异常都是继承于DataAccessException, 而DataAccessException本身又继承于NestedRuntimeException, NestedRuntimeException异常以嵌套的方式封装了源异常.</p>
+<p>虽然不同持久化技术的特定异常被转换到Spring的DAO异常体系中, 但原始的异常信息并不会丢失, 可以通过getCause()方法获取原始的异常信息.</p>
+<p><img src="/2019/04/11/精通Spring-4.x读书笔记-Spring对DAO的支持/Spring DAO异常体系.png" alt="Spring DAO异常体系"></p>
+<p>这里仅列出DataAccessException异常类下的子类</p>
+<p></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">异常</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">CleanupFailureDataAccessException</td>
+<td>DAO操作成功执行, 但在释放数据资源时发生异常, 如关闭Connection时发生异常</td>
+</tr>
+<tr>
+<td style="text-align:center">ConcurrencyFailureException</td>
+<td>在进行并非数据操作时发生异常, 如乐观锁无法获取, 悲观锁无法获取, 死锁引发的失败等</td>
+</tr>
+<tr>
+<td style="text-align:center">DataAccessResourceFailureException</td>
+<td>访问数据资源时失败, 如无法获取数据链接, 无法获取Hibernate的会话等</td>
+</tr>
+<tr>
+<td style="text-align:center">DataRetrievalFailureException</td>
+<td>获取数据失败, 如找不到对应主键的数据, 使用了错误的列索引等</td>
+</tr>
+<tr>
+<td style="text-align:center">DataSourceLookupFailureException</td>
+<td>无法从JNDI中查找到数据源</td>
+</tr>
+<tr>
+<td style="text-align:center">DataIntegrityVoilationException</td>
+<td>当数据操作违反了数据一致性限制时抛出的异常, 如插入重复的主键, 引用不存在的外键等</td>
+</tr>
+<tr>
+<td style="text-align:center">InvalidDataAccessApiUsageException</td>
+<td>不正确的调用某一持久化技术时抛出的异常, 如在Spring JDBC中查询对象, 在调用前必须进行编译操作, 如果忘记这项操作则会产生该异常. 这种异常不是由底层数据资源产生的, 而是由不正确的使用持久化技术产生的</td>
+</tr>
+<tr>
+<td style="text-align:center">InvalidDataAccessResourceUsageException</td>
+<td>在访问数据源时使用了不正确的方法所抛出的异常, 如SQL语句错误将抛出该异常</td>
+</tr>
+<tr>
+<td style="text-align:center">PermissionDeniedDataAccessException</td>
+<td>数据访问时由于权限不足引发的异常</td>
+</tr>
+<tr>
+<td style="text-align:center">UncategorizedDataAccessException</td>
+<td>其他为分类的异常都归到该异常中</td>
+</tr>
+</tbody>
+</table>
+<h4 id="JDBC的异常转换器"><a href="#JDBC的异常转换器" class="headerlink" title="JDBC的异常转换器"></a>JDBC的异常转换器</h4><p>传统的JDBC API在发生几乎所有的数据操作问题时都会抛出相同的SQLException, 它将异常的细节性信息封装在异常属性中.</p>
+<p>SQLException拥有两个属性: </p>
+<ul>
+<li>错误码: 通过getErrorCode()方法返回, 类型是int</li>
+<li>SQL状态码: 标准的错误代码, 通过getSQLState()方法返回, 类型是String, 由5个字符组成</li>
+</ul>
+<p>Spring根据错误码和SQL状态码信息将SQLException译成Spring DAO的异常体系所对应的异常.</p>
+<p>SQLErrorCodeSQLExceptionTranslator和SQLStateSQLExceptionTranslator分别负责处理SQLException中的错误码和SQL状态码的翻译工作</p>
+<h3 id="统一数据访问模板"><a href="#统一数据访问模板" class="headerlink" title="统一数据访问模板"></a>统一数据访问模板</h3><p>Spring为支持的持久化技术分别提供了模板访问的方式, 降低了使用各种持久化技术的难度, 大幅度提高了开发效率</p>
+<h4 id="使用模板和回调机制"><a href="#使用模板和回调机制" class="headerlink" title="使用模板和回调机制"></a>使用模板和回调机制</h4><p>JDBC数据访问操作按以下流程进行:</p>
+<ol>
+<li>准备资源</li>
+<li>启动事务</li>
+<li>在事务中执行具体的数据访问操作</li>
+<li>提交/回滚事务</li>
+<li>关闭资源, 处理异常</li>
+</ol>
+<p>Spring将相同的数据访问流程固化到模板类中, 并将数据访问中固定和变化的部分分开, 同时保证模板类是线程安全的, 以便多个数据访问现场共享同一个模板实例.</p>
+<p>固定的部分在模板类中已经准备好, 变化的部分通过回调接口开发出来, 用于定义具体数据访问和结果返回的操作</p>
+<p>只要编写好回调接口, 并调用模板类进行数据访问, 就可以得到预想的结果: 数据访问成功执行, 前置和后置的样本化工作按顺序正确执行.</p>
+<p><img src="/2019/04/11/精通Spring-4.x读书笔记-Spring对DAO的支持/Spring DAO模板和回调.png" alt="Spring DAO模板和回调"></p>
+<h4 id="Spring为不同持久化技术提供的模板类"><a href="#Spring为不同持久化技术提供的模板类" class="headerlink" title="Spring为不同持久化技术提供的模板类"></a>Spring为不同持久化技术提供的模板类</h4><table>
+<thead>
+<tr>
+<th style="text-align:center">ORM持久化技术</th>
+<th style="text-align:center">模板类</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">JDBC</td>
+<td style="text-align:center">org.springframework.jdbc.core.JdbcTemplate</td>
+</tr>
+<tr>
+<td style="text-align:center">Hibernate X.0</td>
+<td style="text-align:center">org.springframework.orm.hibernateX.HibernateTemplate</td>
+</tr>
+<tr>
+<td style="text-align:center">JPA</td>
+<td style="text-align:center">org.springframework.orm.jpa.JpaTemplate</td>
+</tr>
+<tr>
+<td style="text-align:center">JDO</td>
+<td style="text-align:center">org.springframework.orm.jdo.JdoTemplate</td>
+</tr>
+</tbody>
+</table>
+<p>如果直接使用模板类, 则一般需要在DAO中定义一个目标对象并提供数据资源. Spring为每种持久化技术都提供类支持类, 支持类中已经完成了这样的功能. 只需要扩展这些支持类, 就可以直接编写实际的数据访问逻辑</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">ORM持久化技术</th>
+<th style="text-align:center">支持类</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">JDBC</td>
+<td style="text-align:center">org.springframework.jdbc.core.JdbcDaoSupport</td>
+</tr>
+<tr>
+<td style="text-align:center">Hibernate X.0</td>
+<td style="text-align:center">org.springframework.orm.HibernateX.HibernateDaoSupport</td>
+</tr>
+<tr>
+<td style="text-align:center">JPA</td>
+<td style="text-align:center">org.springframework.orm.jpa.JpaDaoSuppert</td>
+</tr>
+<tr>
+<td style="text-align:center">JDO</td>
+<td style="text-align:center">org.springframework.orm.jdo.JdoDaoSupport</td>
+</tr>
+</tbody>
+</table>
+<p>这些支持类都继承于dao.support.DaoSupport类, DaoSupport类实现了InitializingBean接口, 在afterPropertiesSet()接口方法中检查模板对象和数据源是否被正确设置, 否则将抛出异常.</p>
+<h3 id="数据源"><a href="#数据源" class="headerlink" title="数据源"></a>数据源</h3><p>Spring中不但可以通过JNDI获取应用服务器的数据源, 也可以直接在Spring容器中配置数据源, 还可以通过代码的方式创建数据源, 以便进行无容器依赖的单元测试</p>
+<h4 id="配置一个数据源"><a href="#配置一个数据源" class="headerlink" title="配置一个数据源"></a>配置一个数据源</h4><p>Spring包含两个数据源的实现类包: 1. Apache的DBCP; 2. C3P0. 配置文件中利用两者中的任何一个配置数据源</p>
+<ol>
+<li><p>DBCP数据源</p>
+<p>一个依赖Jakarta commons-pool对象池机制的数据库连接池</p>
+<p>配置MySQL数据源的片段</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"dataSource"</span> <span class="attr">class</span>=<span class="string">"org.apache.commons.dbcp.BasicDataSource"</span> <span class="attr">destroy-method</span>=<span class="string">"close"</span> <span class="attr">p:driverClassName</span>=<span class="string">"com.mysql.jdbc.Driver"</span> <span class="attr">p:url</span>=<span class="string">"jdbc:mysql://localhost:3306/sampledb"</span> <span class="attr">p:username</span>=<span class="string">"root"</span> <span class="attr">p:password</span>=<span class="string">"1234"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p>BasicDataSource提供了close()方法关闭数据源. 必须设定destroy-method=”close”属性, 在容器关闭时, 数据源也能正常关闭.</p>
+<p>对于MySQL数据源, 如果数据源设置不当, 可能发生经典的”8小时问题”. 原因是MySQL在默认情况下如果发现一个连接空闲时间超过8小时, 将会在数据端自动关闭这个连接. 数据源并不指定这个连接已经被数据库关闭了, 当它将这个无用的连接返回给某个DAO时, DAO会报无法获取Connection的异常.</p>
+<p>如果采用DBCP默认配置, testOnBorrow属性为true, 数据源在将连接交给DAO前, 事先检测这个连接是否是好的, 如果连接有问题, 会取另一个连接给DAO, 就可以避免”8小时问题”. 但是高并发的应用中会带来性能问题.</p>
+<p>推荐将testOnBorrow设置为false, 将testWhileIdle设置为true, 再设置好timeBetweenEvictionRunsMillis值. 这样, DBCP将通过一个后台现场定时地对空闲连接进行检测, 当发现无用连接时, 会清除掉. 只要将timeBetweenEvictionRunsMillis的值设置小于8小时, 就可以避免”8小时问题”.</p>
+<p><strong>常用属性</strong>:</p>
+<p>|             属性              |     默认值     |                             说明                             |<br>| :—————————: | :————: | :———————————————————-: |<br>|       defaultAutoCommit       |      true      |            连接池创建的连接的默认auto-commit状态             |<br>|        defaultReadOnly        |    驱动默认    | 连接池创建的连接默认read-only状态. 如果没有设置, 则setReadOnly()方法将不会被调用 |<br>|  defaultTransactionIsolation  |    驱动默认    | 连接池创建的连接默认的TransactionIsolation状态, 可选值: NONE, READ_COMMITTED, READ_UNCOMMITTED, REPEATABLE_READ, SERIALIZABLE |<br>|          initialSize          |       0        |         初始化连接: 连接池启动时创建的初始化连接数量         |<br>|           maxActive           |       8        | 最大活动连接: 连接池在同一时间能够分配的最大轰动连接数量. 如果设为非正数, 表示不限制 |<br>|            MaxIdle            |       8        | 最大空闲连接: 连接池中运行保存空闲状态的最大连接数量, 超过的空闲连接将被释放. 设为负数, 表示不限制 |<br>|            minIdle            |       0        | 最小空闲连接: 连接池中运行保存空闲状态的最小连接数量低于这个数将会创建新的连接, 设为0表示不创建 |<br>|            maxWait            |      无限      | 最大等待时间: 当没有可用连接时, 连接池等待连接被归还的最大时间(毫秒), 超过时间抛出异常. 设为-1表示无限等待 |<br>|        validationQuery        |    无默认值    | SQL查询语句, 在将连接返回给调用者之前, 用此SQL验证从连接池取出的连接释放可用. 如指定, 则查询必须时SQL SELECT, 并必须至少返回一行记录. 在MySQL中可以设置为”select 1”, 在Oracle中可以设置为”select 1 from dual” |<br>|         testOnBorrow          |      true      | 指明是否在从连接池中取出连接前进行检验, 如果检验失败, 则去除该连接并取另一个新的连接. 如果设为true, validationQuery参数必须设置 |<br>|         testOnReturn          |     false      | 指明是否在归还到连接池前进行校验, 如果为true, validationQuery参数必须设置 |<br>|         testWhileIdle         |     false      | 指明连接是否被空闲连接回收器(如果有)进行校验. 如果检验失败, 该连接会被从连接池中去除. 如果为true, validationQuery必须设置 |<br>| timeBetweenEvictionRunsMillis |       -1       | 空闲连接回收器线程运行的周期(毫秒). 如为负数, 则不运行空闲连接回收器线程. 启用该参数时, validationQuery必须设置 |<br>|    numTestsPerEvictionRun     |       3        |         在每次空闲连接回收器线程运行时检查的连接数量         |<br>|  minEvictableIdleTimeMillis   | 1000 <em> 60 </em> 30 |  连接在被空闲连接回收器回收前已经在连接池中的空闲时间(毫秒)  |<br>|    poolPreparedStatements     |     false      | 开启连接池的prepared statement池功能. 为true时, 所有CallableStatement和PreparedStatement都会被缓存 |<br>|   maxOpenPreparedStatements   |     无限制     | PreparedStatement池能够同时分配的打开的statements的最大数量, 0表示不限制 |<br>|        removeAbandoned        |     false      | 标记是否删除泄露的连接. 如果为true, 那么”存在泄露嫌疑”的连接可能被连接池主动清除. 这个机制在(getNumIdle() &lt; 2) and (getNumActive() &gt; getMaxActive() - 3)条件满足时被触发. |<br>|    removeAbandonedTimeout     |      300       |               泄露的连接可以被回收的超时值(秒)               |<br>|         logAbandoned          |     false      | 标记当Statement或连接被泄露时是否打印程序的stack traces日志. 被泄露的Statements和连接的日志添加在每个连接打开或者生产新的Statement, 因为需要生产stack trace |</p>
+</li>
+<li><p>C3P0数据源</p>
+<p>一个开放源码的JDBC数据源项目, 实现了JDBC3和JDBC2扩展规范说明的Connection和Statement池. </p>
+<p>使用C3P0配置Oracle数据源</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"dataSource"</span> <span class="attr">class</span>=<span class="string">"com.mchange.v2.c3p0.ComboPooledDataSource"</span> <span class="attr">destroy-method</span>=<span class="string">"close"</span> <span class="attr">p:driverClass</span>=<span class="string">"oracle.jdbc.driver.OracleDriver"</span> <span class="attr">p:jdbcUrl</span>=<span class="string">"jdbc:oracle:thin:@location:1521:ora9i"</span> <span class="attr">p:use</span>=<span class="string">"admin"</span> <span class="attr">p:password</span>=<span class="string">"1234"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p>close()方法可以保证Spring容器关闭时数据源能被成功释放</p>
+<p><strong>C3P0配置属性</strong></p>
+<ul>
+<li>acquireIncrement: 当连接池中的连接用完时, C3P0一次性创建新连接的数目</li>
+<li>acquireRetryAttempts: 定义在从数据库获取新连接失败后重复尝试获取的次数, 默认为30</li>
+<li>qcquireRetryDelay: 尝试获取连接的间隔时间(毫秒), 默认为1000</li>
+<li>autoCommitOnclose: 连接关闭时默认将所有未提交的操作回滚. 默认为false</li>
+<li>automaticTestTable: C3P0将创建一个名为Test的空表, 并使用其自带的查询语句进行测试. 如果定义了这个参数, 那么preferredTestQuery属性将被忽略. 用户不能在Test表上进行任何操作, 仅为C3P0测试所用. 默认为null</li>
+<li>breakAfterAcquireFailure: 获取连接失败将会引起所有等待获取连接的线程抛出异常. 但是数据源仍有效保留, 并在下次调用getConnection()方法时继续尝试获取连接. 如果为true, 那么在尝试获取连接失败后, 该数据源将声明已断开并永久关闭. 默认为false</li>
+<li>checkoutTimeout: 当连接池用完时, 调研getConnection()方法后等待获取新连接的时间, 超过后抛出SQLException. 设为0则无限期等待. 默认为0</li>
+<li>connectionTesterClassName: 通过实现ConnectionTester或QueryConnectionTester的类来测试连接, 类名需要设置为全限定名. 默认为: com.mchange.v2.c3p0.impl.DefaultConnectionTester</li>
+<li>idleConnectionTestPeriod: 间隔多少秒检测所有连接池中的空闲连接. 默认为0, 表示不检查</li>
+<li>initialPoolSize: 初始化时创建的连接数, 应在minPoolSize与maxPoolSize之间取值. 默认为3</li>
+<li>maxIdleTime: 最大空闲时间, 超过空闲时间的连接将被丢弃. 为0或负数表示永不丢弃. 默认为0</li>
+<li>maxPoolSize: 连接池中保留的最大连接数. 默认为15</li>
+<li>maxStatements: JDBC的标准参数, 用以控制数据源内加载的PreparedStatement数量. 但由于预缓存的Statement属于单个Connection而不是整个连接池, 所以设置这个参数需要考虑多方面的因素, 如果maxStatements与maxStatementsPerConnect均为0, 则缓存被关闭. 默认为0</li>
+<li>maxStatementsPerConnection: 连接池内单个连接所拥有的最大缓存Statement数. 默认为0</li>
+<li>numHelperThreads: C3P0是异步操作的, 缓慢的JDBC操作通过帮助进程完成. 扩展这些操作可以有效的提升性能, 通过多线程实现多个操作同时执行. 默认为3</li>
+<li>preferredTestQuery: 定义所有连接测试都执行的测试语句. 在使用连接测试情况下, 这个参数能显著提高测试速度. 测试的表必须在出事数据源的时候就存在. 默认为null</li>
+<li>propertyCycle: 用户修改系统配置参数执行前最多等待的秒数. 默认为300</li>
+<li>testConnectionOnCheckout: 因性能消耗大, 请只在需要的时候使用它. 如为true, 那么在每个connection提交的时候都将校验器有效性. 建议使用idleConnectTestPeriod或automaticTestTable等方法提升连接测试的性能, 默认为false</li>
+<li>testConnectOnCheckin: 如为true, 那么在取得连接的同时将校验连接的有效性. 默认为false</li>
+</ul>
+<h4 id="获取JNDI数据源"><a href="#获取JNDI数据源" class="headerlink" title="获取JNDI数据源"></a>获取JNDI数据源</h4><p>Spring专门提供了引用JNDI数据源的JndiObjectFactoryBean类, 下面是一个简单的配置</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"dataSource"</span> <span class="attr">class</span>=<span class="string">"org.springframework.jndi.JndiObjectFactoryBean"</span> <span class="attr">p:jndiName</span>=<span class="string">"java:comp/env/jdbc/bbt"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>通过jndiName指定引用的JNDI数据源名称</p>
+<p>jee命名空间可以有效的简化Java EE资源的引用</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">jee:jndi-lookup</span> <span class="attr">id</span>=<span class="string">"dataSource"</span> <span class="attr">jndi-name</span>=<span class="string">"java:comp/env/jdbc/bbt"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="Spring的数据源实现类"><a href="#Spring的数据源实现类" class="headerlink" title="Spring的数据源实现类"></a>Spring的数据源实现类</h4><p>Spring提供了一个简单的数据源实现类DriverManagerDataSource. 实现了javax.sql.DataSource接口, 没有提供池化连接的机制, 每次调用getConnection()方法获取新连接时, 只是简单的创建一个新的连接.</p>
+<p>适合用于单元测试或简单独立的应用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">DriverManagerDataSource ds = <span class="keyword">new</span> DriverManagerDataSource();</span><br><span class="line">ds.setDriverClassName(<span class="string">"com.mysql.jdbc.Driver"</span>);</span><br><span class="line">ds.setUrl(<span class="string">"jdbc:mysql://localhost:3306/sampledb"</span>);</span><br><span class="line">ds.setUserName(<span class="string">"root"</span>);</span><br><span class="line">ds.setPassword(<span class="string">"1234"</span>);</span><br><span class="line"></span><br><span class="line">Connection actualCon = ds.getConnection();</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        </p><p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

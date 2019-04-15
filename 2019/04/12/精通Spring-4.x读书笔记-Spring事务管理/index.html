@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Blue">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="精通Spring 4.x读书笔记-Spring事务管理">
+  <meta property="og:description" content="">
+  <meta property="og:site_name" content="Blue的博客">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://singthi4079.github.ioundefined">
+  
+    <link rel="alternate" href="/atom.xml" title="Blue的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <!-- Site Title -->
+  <title>Blue的博客</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/default-banner-dark.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">精通Spring 4.x读书笔记-Spring事务管理</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/<your-github-username>">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:<your-email-address>">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By Blue</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2019-04-12</span>
+            <span class="time">00:26:36</span>
+          </span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Spring/">#Spring</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <h2 id="Spring的事务管理"><a href="#Spring的事务管理" class="headerlink" title="Spring的事务管理"></a>Spring的事务管理</h2><p>Spring不但提供了和底层事务源无关的事务抽象, 还提供了声明性事务的功能.</p>
+<h3 id="数据库事务基础知识"><a href="#数据库事务基础知识" class="headerlink" title="数据库事务基础知识"></a>数据库事务基础知识</h3><p>数据库事务: 多条SQL语句, 要么所有执行成功, 要么所有执行失败</p>
+<p>数据库事务必须同时满足4个特性: 原子性(Atomic), 一致性(Consistency), 隔离性(Isolation), 持久性(Durabiliy), 简称ACID</p>
+<ul>
+<li>原子性: 表示组成一个事务的多个数据库操作时一个不可分割的原子单元, 只有所有操作执行成功, 整个事务才提交.</li>
+<li>一致性: 事务操作成功后, 数据库所处的状态和它的业务规则是一致的, 即数据不会被破坏.</li>
+<li>隔离性: 在并发数据库操作时, 不同的事务拥有各自的数据空间, 它们的操作不会对对方产生干扰. 准确地说, 并非要求做到完全无干扰. 数据库规定了多种事务隔离级别, 不同的隔离级别对应不同的干扰程度, 隔离级别越高, 数据库一致性越好, 并发性越弱</li>
+<li>持久性: 事务一旦提交成功, 事务中所有的数据操作都必须被持久化到数据库中. 即使在提交事务后, 数据库马上崩溃, 在数据库重启时, 也必须保证能够通过某种机制恢复数据.</li>
+</ul>
+<p>数据库管理系统一般采用重执行日志来保证原子性, 一致性和持久性. </p>
+<p>重执行日志记录了数据库变化的每一个动作, 数据库在一个事务中执行一部分操作后发生错误退出, 数据库即可根据重执行日志撤销已经执行的操作.</p>
+<p>对于已经提交的事务, 即使数据库崩溃, 在重启数据库时也能够根据日志对尚未持久化的数据进行相应的重执行操作</p>
+<p>数据库管理系统采用锁机制保证事务的隔离性.</p>
+<p>Oracle数据库还使用数据版本的机制, 在回滚段为数据的每个变化都保存一个版本, 使数据的更改不影响数据的读取.</p>
+<p>数据库中相同的数据可能同时被多个事务访问, 会导致各种并发问题, 破坏数据的完整性. 共有5类问题:</p>
+<ol>
+<li><p>脏读(dirty read)</p>
+<p>A事务读取B事务尚未提交的更改数据, 并在这个数据的基础上进行操作. 如果恰巧B事务回滚, 那么A事务读到的数据根本不被承认.</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">时间</th>
+<th style="text-align:center">转账事务A</th>
+<th style="text-align:center">取款事务B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">T1</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">开始事务</td>
+</tr>
+<tr>
+<td style="text-align:center">T2</td>
+<td style="text-align:center">开始事务</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">T3</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">查询账户余额1000元</td>
+</tr>
+<tr>
+<td style="text-align:center">T4</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">取出500元, 吧余额改完500元</td>
+</tr>
+<tr>
+<td style="text-align:center">T5</td>
+<td style="text-align:center">查询账户余额为500元(脏读)</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">T6</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">撤销事务, 余额恢复为1000元</td>
+</tr>
+<tr>
+<td style="text-align:center">T7</td>
+<td style="text-align:center">汇入100元, 把余额改为600元</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">T8</td>
+<td style="text-align:center">提交事务</td>
+</tr>
+</tbody>
+</table>
+<p>​    因为A事务读取了B事务尚未提交的数据, 因而造成账户白白丢失500元.</p>
+<p>​    在Oracle数据库中, 不会发生脏读的情况?</p>
+<ol start="2">
+<li><p>不可重复读(unrepeatable read)</p>
+<p>A事务读取了B事务提交的更改数据. 假设A在取款事务的过程中, B往该账户转账100元, A两次读取账户的余额发生不一致</p>
+<p>| 时间 |               取款事务A               |         转账事务B          |<br>| :–: | :———————————–: | :————————: |<br>|  T1  |                                       |          开始事务          |<br>|  T2  |               开始事务                |                            |<br>|  T3  |                                       |    查询账户余额为1000元    |<br>|  T4  |         查询账户余额为1000元          |                            |<br>|  T5  |                                       | 取出100元, 把余额改为900元 |<br>|  T6  |                                       |          提交事务          |<br>|  T7  | 查询账户余额为900元(和T4读取的不一致) |                            |</p>
+<p>在统一事务中, T4时间点和T7时间点读取的账户余额不一致</p>
+</li>
+<li><p>幻象读(phantom read)</p>
+<p>A事务读取B事务提交的新增数据, 这是A事务将出现幻象读的问题. 幻象读一般发生在计算统计数据的事务中. </p>
+<p>| 时间 |           统计金额事务A           | 统计金额事务B                 |<br>| :–: | :——————————-: | —————————– |<br>|  T1  |                                   | 开始事务                      |<br>|  T2  |             开始事务              |                               |<br>|  T3  |       统计总存款数为10000元       |                               |<br>|  T4  |                                   | 新增一个存款账户, 存款为100元 |<br>|  T5  |                                   | 提交事务                      |<br>|  T6  | 再次统计总存款数为10100元(幻象读) |                               |</p>
+<p>如果新增数据刚好满足事务的查询条件, 产生了两次统计结果不一致的情况.</p>
+<p>幻象读指读到了其他已经提交事务的新增数据</p>
+<p>不可重复读指读到了已经提交事务的更改数据(修改或删除)</p>
+<p>防止读到更改数据, 只需对操作的数据添加行级锁, 阻止操作中的数据发生变化; 防止读到新增数据, 需要添加表级锁—将整张表锁定, 防止新增数据(Oracle使用多版本数据的方式实现)</p>
+</li>
+<li><p>第一类丢失更新</p>
+<p>A事务撤销时, 把已经提交的B事务的更新数据覆盖了.</p>
+<p>| 时间 |         取款业务A          |         转账业务B         |<br>| :–: | :————————: | :———————–: |<br>|  T1  |          开始事务          |                           |<br>|  T2  |                            |         开始事务          |<br>|  T3  |    查询账户余额为1000元    |                           |<br>|  T4  |                            |   产销账户余额为1000元    |<br>|  T5  |                            | 汇入100元, 余额改为1100元 |<br>|  T6  |                            |         提交事务          |<br>|  T7  |  取出100元, 余额改为900元  |                           |<br>|  T8  |          撤销事务          |                           |<br>|  T9  | 余额恢复为1000元(丢失更新) |                           |</p>
+</li>
+<li><p>第二类丢失更新</p>
+<p>A事务覆盖B事务已经提交的数据, 造成B事务所做操作丢失</p>
+<p>| 时间 |        转账事务A         |         取款事务B          |<br>| :–: | :———————-: | :————————: |<br>|  T1  |                          |          开始事务          |<br>|  T2  |         开始事务         |                            |<br>|  T3  |                          |    查询账户余额为1000元    |<br>|  T4  |   查询账户余额为1000元   |                            |<br>|  T5  |                          | 取出100元, 把余额改为900元 |<br>|  T6  |                          |          提交事务          |<br>|  T7  |        汇入100元         |                            |<br>|  T8  |         提交事务         |                            |<br>|  T9  | 余额改为1100元(丢失更新) |                            |</p>
+<p>由于支票转账事务覆盖了取款事务对存款余额所做的更新, 导致银行最后损失100元. 相反, 转账事务先提交, 那么用户将损失100元</p>
+</li>
+</ol>
+<h4 id="数据库锁机制"><a href="#数据库锁机制" class="headerlink" title="数据库锁机制"></a>数据库锁机制</h4><p>按锁定的对象的不同, 一般分为表锁定和行锁定.</p>
+<p>表锁定: 对整张表进行锁定</p>
+<p>行锁定: 对表中的特定行进行锁定</p>
+<p>从并发事务锁定的关系看, 可以分为共享锁定和独占锁定.</p>
+<p>共享锁定会防止独占锁定, 但运行其他共享锁定.</p>
+<p>独占锁定即防止其他独占锁定, 也防止其他的共享锁定</p>
+<p>更改数据时使用行独占锁定, insert, update, delete, select for update语句都会隐式采用行锁定</p>
+<p>Oracle数据库常用的5种锁定:</p>
+<ul>
+<li>行共享锁定: 一般通过select for update语句隐式获得行共享锁定, 可以通过lock table in row share mode语句显示获得行共享锁定. 行共享锁定不防止对数据进行更改操作, 但防止其他会话获取独占性数据表锁定. 允许进行多个并发的行共享和行独占锁定, 还允许进行数据表的共享或采用共享行独占锁定</li>
+<li>行独占锁定: 通过insert, update, delete语句隐式获取, 或通过lock table in row exclusive mode 语句显示获取. 防止其他会话获取一个共享锁定, 共享行独占锁定, 独占锁定</li>
+<li>表共享锁定: 通过lock table in share mode显示获得. 防止其他会话获取行独占锁定(insert, update, delete), 或防止其他表共享独占锁定或表独占锁定, 但允许表中拥有多个行共享和表共享锁定. 让会话具有对表事务级一致性访问, 其他会话在用户提交或回滚该事务并释放对该表的锁定之前不能更改这张被锁定的表</li>
+<li>表共享行独占锁定: 通过lock table in share row exclusive mode显示获得. 防止其他会话获取一个表共享, 行独占, 表独占锁定, 允许其他行共享锁定. 类似于表共享锁定, 只是一次只能对一张表放置一个表共享行独占锁定. 如果A会话拥有该锁定, B会话可以执行select for update操作, 如果B会话试图更新选择的行, 需要等待</li>
+<li>表独占锁定: 通过lock table in exclusive mode获得. 防止其他会话对该表的任何其他锁定</li>
+</ul>
+<h4 id="事务隔离级别"><a href="#事务隔离级别" class="headerlink" title="事务隔离级别"></a>事务隔离级别</h4><p>只要用户指定会话的事务隔离级别, 数据库就会分析事务中的SQL语句, 自动为事务操作的数据资源添加合适的锁.</p>
+<p>当一个资源上的锁数目太多时, 自动进行锁升级以提高系统的运行性能.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">隔离级别</th>
+<th style="text-align:center">脏读</th>
+<th style="text-align:center">不可重复读</th>
+<th style="text-align:center">幻象读</th>
+<th style="text-align:center">第一类丢失更新</th>
+<th style="text-align:center">第二类丢失更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">READ UNCOMMITED</td>
+<td style="text-align:center">允许</td>
+<td style="text-align:center">允许</td>
+<td style="text-align:center">允许</td>
+<td style="text-align:center">不允许</td>
+<td style="text-align:center">允许</td>
+</tr>
+<tr>
+<td style="text-align:center">READ COMMITED</td>
+<td style="text-align:center">不允许</td>
+<td style="text-align:center">允许</td>
+<td style="text-align:center">允许</td>
+<td style="text-align:center">不允许</td>
+<td style="text-align:center">允许</td>
+</tr>
+<tr>
+<td style="text-align:center">REPEATABLE READ</td>
+<td style="text-align:center">不允许</td>
+<td style="text-align:center">不允许</td>
+<td style="text-align:center">允许</td>
+<td style="text-align:center">不允许</td>
+<td style="text-align:center">不允许</td>
+</tr>
+<tr>
+<td style="text-align:center">SERIALIZABLE</td>
+<td style="text-align:center">不允许</td>
+<td style="text-align:center">不允许</td>
+<td style="text-align:center">不允许</td>
+<td style="text-align:center">不允许</td>
+<td style="text-align:center">不允许</td>
+</tr>
+</tbody>
+</table>
+<p>READ UNCOMMITED 主要为了提供非阻塞读的能力. Oracle支持READ UNCOMMITED, 但不支持脏读. 因为Oracle使用多版本机制彻底解决了在非阻塞读时读到脏数据的问题并保证读的一致性.</p>
+<p>REPEATABLE READ保证数据的读一致性.</p>
+<h4 id="JDBC对事务的支持"><a href="#JDBC对事务的支持" class="headerlink" title="JDBC对事务的支持"></a>JDBC对事务的支持</h4><p>可以通过Connection#getMetaData()方法获取DatabaseMetaData对象, 并通过该对象的supportsTransactions(), supportsTransactionIsolationLevel(int level)方法查看底层数据库的事务支持情况.</p>
+<p>Connection默认是自动提交的, 即每条执行的SQL语句都对应一个事务.</p>
+<p>JDBC事务数据操作代码:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">Connection conn;</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  <span class="comment">// 获取数据库连接</span></span><br><span class="line">  conn = DriverManager.getConnection();</span><br><span class="line">  <span class="comment">// 关闭自动提交机制</span></span><br><span class="line">  conn.setAutoCommit(<span class="keyword">false</span>);</span><br><span class="line">  <span class="comment">//设置事务隔离级别</span></span><br><span class="line"> conn.setTransactionIsolaction(Connection.TRANSACTION_SERIALIZABLE);</span><br><span class="line">  Statement stmt = conn.createStatement();</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">int</span> rows = stmt.executeUpdate(<span class="string">"insert into t_topic values (1, 'tom')"</span>);</span><br><span class="line">  ...</span><br><span class="line">  <span class="comment">// 提交事务</span></span><br><span class="line">  conn.commit();</span><br><span class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">  ...</span><br><span class="line">  <span class="comment">// 回滚事务</span></span><br><span class="line">  conn.roolback();</span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>JDBC 3.0引入保存点特性(Savepoint), Savepoint接口允许用户将事务分割为多个阶段, 用户可以指定回滚到事务的特定保存点.</p>
+<p><img src="/2019/04/12/精通Spring-4.x读书笔记-Spring事务管理/带Savepoint事务.png" alt="带Savepoint事务"></p>
+<p>使用保存点功能, 在发生特定问题时, 回滚到指定的保存点, 而非回滚整个事务.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Statement stmt = conn.createStatement();</span><br><span class="line"><span class="keyword">int</span> rows = stmt.executeUpdate(<span class="string">"insert into t_topic values (1, 'tom')"</span>);</span><br><span class="line"><span class="comment">// 1. 设置一个保存点</span></span><br><span class="line">Savepoint svpt = conn.setSavepoint(<span class="string">"savePoint1"</span>);</span><br><span class="line">rows = stmt.executeUpdate(<span class="string">"update t_user set topic_nums=topic_nums+1 where user_id=1"</span>);</span><br><span class="line">...</span><br><span class="line"><span class="comment">// 2. 回滚到savePoint1, savePoint1之前的SQL操作, 在整个事务提交后依然提交, 但是1到2之间的SQL操作会被撤销</span></span><br><span class="line">conn.rollback(svpt);</span><br><span class="line">...</span><br><span class="line"><span class="comment">// 提交事务</span></span><br><span class="line">conn.commit();</span><br></pre></td></tr></table></figure>
+<h3 id="ThreadLocal基础知识"><a href="#ThreadLocal基础知识" class="headerlink" title="ThreadLocal基础知识"></a>ThreadLocal基础知识</h3><p>ThreadLocal是保存线程本地化对象的容器. </p>
+<p>在多线程环境的某个使用ThreadLocal维护变量时, ThreadLocal为每个使用该变量的线程分配一个独立的变量副本. 每个线程都可以独立地改变自己的副本, 而不会影响其他线程所对应的副本.</p>
+<p>InheritableThreadlocal继承于ThreadLocal, 自动为子线程复制一份从父线程哪里继承而来的本地变量: 在创建子线程时, 子线程会接收所有可继承的线程本地变量的初始值.</p>
+<h4 id="ThreadLocal的接口方法"><a href="#ThreadLocal的接口方法" class="headerlink" title="ThreadLocal的接口方法"></a>ThreadLocal的接口方法</h4><p>ThreadLocal接口有4个方法:</p>
+<ul>
+<li>void set(Object value): 设置当前线程的线程局部变量的值</li>
+<li>public Object get(): 返回当前线程所对应的线程局部变量</li>
+<li>public void remove(): 将当前线程局部变量的值删除, 目的是减少内存占用. 当线程结束后, 线程局部变量将自动被垃圾回收. 不必须, 但可以加快内存回收速度</li>
+<li>protected Object initialValue(): 返回该线程局部变量的初始值. 为了让子类覆盖而设计. 在线程第一次调用get()或set(Object)时才回执行, 并只执行一次. more实现直接返回null.</li>
+</ul>
+<p><strong>ThreadLocal实现思路</strong>: 在ThreadLocal类中有一个Map, 用于存储每个线程的变量副本, Map元素的键为线程对象, 值为对应线程的变量副本.</p>
+<h4 id="与Thread同步机制的比较"><a href="#与Thread同步机制的比较" class="headerlink" title="与Thread同步机制的比较"></a>与Thread同步机制的比较</h4><p>同步机制中, 通过对象的锁机制保证同一时间只有一个线程访问变量. 变量可以多个线程共享, 要求程序缜密地分析什么时候对变量进行读/写, 什么时候需要锁定某个对象, 什么时候释放对象锁等繁杂问题.</p>
+<p>ThreadLocal从另一个角度来解决多线程的并发访问. ThreadLocal为每个线程提供一个独立的变量副本, 从而隔离了多个线程对访问数据的冲突. ThrealLocal提供了线程安全的对象封装, 在编写多线程代码时, 可以把不安全的变量封装进ThreadLocal.</p>
+<p>同步机制采用”以时间换空间”的方式: 访问串行化, 对象共享化</p>
+<p>ThreadLocal采用”以空间换时间”的方式: 访问并行化, 对象独享化</p>
+<h4 id="Spring使用ThreadLocal解决线程安全问题"><a href="#Spring使用ThreadLocal解决线程安全问题" class="headerlink" title="Spring使用ThreadLocal解决线程安全问题"></a>Spring使用ThreadLocal解决线程安全问题</h4><p>Spring对一些Bean(如RequestContextHolder, TransactionSynchronizationManager, LocaleContextHolder等)中非线程安全的”状态性对象”采用ThreadLocal进行封装, 因此有状态的Bean就能够以singleton的方式在多线程中正常工作.</p>
+<h3 id="Spring对事务管理的支持"><a href="#Spring对事务管理的支持" class="headerlink" title="Spring对事务管理的支持"></a>Spring对事务管理的支持</h3><p>事务模板类TransactionTemplate, 通过TransactionTemplate并配合使用事务回调TransactionCallback指定具体的持久化操作, 就可以通过编程方式实现事务管理, 而无须关注资源 获取, 复用, 释放, 事务通过和异常处理等操作.</p>
+<p>Spring允许通过声明方式, 在IoC配置中指定事务的边界和事务属性, Spring自动在指定的事务边界上应用事务属性. </p>
+<h4 id="事务管理关键抽象"><a href="#事务管理关键抽象" class="headerlink" title="事务管理关键抽象"></a>事务管理关键抽象</h4><p>在Spring事务管理SPI(Service Provider Interface)的抽象层主要包括三个接口, 分别是: PlatformTransactionManager, TransactionDefinition, TransactionStatus</p>
+<p><img src="/2019/04/12/精通Spring-4.x读书笔记-Spring事务管理/Spring事务管理SPI抽象.png" alt="Spring事务管理SPI抽象"></p>
+<p>TransactionDefinition用于描述事务的隔离级别, 超时时间, 释放为只读事务和事务传播规则等控制事务具体行为的事务属性. 可以通过XML配置, 注解描述, 手工编程的方式设置</p>
+<p>PlatformTransactionManager根据TransactionDefinition提供的事务属性配置信息创建事务, 并用TransactionStatus描述这个激活事务的状态</p>
+<ol>
+<li><p>TransactionDefinition</p>
+<p>TransactionDefinition定义了Spring兼容的事务属性, 对事务管理控制若干方面进行配置</p>
+<ul>
+<li>事务隔离: 当前事务和其他事务的隔离程度. 默认隔离级别ISOLOATION_DEFAULT表示使用底层数据库的默认隔离级别</li>
+<li>事务传播: 通常在一个事务中执行的所有代码都会运行于同一事务上下文中. Spring提供了几种可选的传播类型.</li>
+<li>事务超时: 事务在超市前能运行多久, 超过时间后, 事务被回滚. 有些事务处理器不支持事务过期的功能, 这时, 如果设置TIMEOUT_DEFAULT之外的其他值, 会抛出异常</li>
+<li>只读状态: 只读事务不修改任何数据, 资源事务管理者可以针对只读事务应用一些优化措施, 提高运行性能.</li>
+</ul>
+</li>
+<li><p>TransactionStatus</p>
+<p>代表一个事务的具体运行状态. 事务管理器可以通过该接口获取事务运行期的状态信息, 也可以通过该接口间接地回滚事务.</p>
+<p>继承于SavepointManager接口, SavepointManager接口基于JDBC 3.0 保存点的分段事务控制能力提供了嵌套事务的机制</p>
+<p>SavepointManager接口有以下几个方法:</p>
+<ul>
+<li>Object createSavepoint(): 创建一个保存点对象</li>
+<li>rollbackToSavepoint(Object savepoint): 将事务回滚到特定的保存点上, 被回滚的保存点将自动释放</li>
+<li>void releaseSavepoint(Object savepoint): 释放一个保存点. 事务提交, 所有的保存点会被自动释放</li>
+</ul>
+<p>TransactionStatus扩展了SavepointManager接口, 提供以下几个方法:</p>
+<ul>
+<li>boolean hasSavepoint(): 判断当前事务是否在内部创建了一个保存点, 为了支持Spring的嵌套事务而创建的</li>
+<li>boolean isNewTransaction(): 判断当前事务是否是一个新的事务</li>
+<li>boolean isCompleted(): 判断当前事务是否已经结束(提交或回滚)</li>
+<li>boolean isRollbackOnly(): 判断当前事务是否已经被标记为rollback-only</li>
+<li>void setRollbackOnly(): 将当前事务设置为rollback-only. 通过该标识通知事务管理器只能将事务回滚.</li>
+</ul>
+</li>
+<li><p>PlatformTransactionManager</p>
+<p>接口只定义了3个方法, 它们是SPI(Service Provider Interface)高层次的接口方法.</p>
+<ul>
+<li>TransactionStatus getTransaction(TransactionDefinition definition): 根据事务定义信息从事务环境中返回一个已存在的事务, 或创建一个新的事务, 并用TransactionStatus描述这个事务的状态</li>
+<li>commit(TransactionStatus status): 根据事务的状态提交事务</li>
+<li>rollback(TransactionStatus status): 将事务回滚. 当commit()方法抛出异常时, rollback()方法被隐式调用</li>
+</ul>
+</li>
+</ol>
+<h4 id="事务管理器实现类"><a href="#事务管理器实现类" class="headerlink" title="事务管理器实现类"></a>事务管理器实现类</h4><table>
+<thead>
+<tr>
+<th style="text-align:center">事务</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">JpaTransactionManager</td>
+<td style="text-align:center">使用JPA进行持久化时, 使用该事务管理器</td>
+</tr>
+<tr>
+<td style="text-align:center">HibernateTransactionManager</td>
+<td style="text-align:center">使用Hibernate进行持久化时, 使用该事务管理器</td>
+</tr>
+<tr>
+<td style="text-align:center">DataSourceTransactionManager</td>
+<td style="text-align:center">使用Spring JDBC或MyBatis等基于数据源的持久化技术时, 使用该事务管理器</td>
+</tr>
+<tr>
+<td style="text-align:center">JdoTransactionManager</td>
+<td style="text-align:center">使用JDO进行持久化时, 使用该事务管理器</td>
+</tr>
+<tr>
+<td style="text-align:center">JtaTransactionManager</td>
+<td style="text-align:center">具有多个数据源的全局事务, 使用该事务管理器(不管采用何种持久化技术)</td>
+</tr>
+</tbody>
+</table>
+<p>要实现事务管理, 首先要在Spring中配置好相应的事务管理器, 为事务管理器指定数据源及一些其他事务管理控制属性, 以下是几种常见的事务管理器配置:</p>
+<ol>
+<li><p>Spring JDBC和MyBatis</p>
+<p>都是基于数据源的Connection访问数据库, 可以使用DataSourceTransactionManager</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 配置数据源 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"dataSource"</span> <span class="attr">class</span>=<span class="string">"org.apache.commons.dbcp.BasicDataSource"</span> <span class="attr">destroy-method</span>=<span class="string">"close"</span> <span class="attr">p:driverClassName</span>=<span class="string">"$&#123;jdbc.driverClassName&#125;"</span> <span class="attr">p:url</span>=<span class="string">"$&#123;jdbc.url&#125;"</span> <span class="attr">p:username</span>=<span class="string">"$&#123;jdbc.username&#125;"</span> <span class="attr">p:password</span>=<span class="string">"$&#123;jdbc.password&#125;"</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 基于数据源的事务管理器 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"transactionManager"</span> <span class="attr">class</span>=<span class="string">"org.springframework.jdbc.datasource.DataSourceTransactionManager"</span> <span class="attr">p:dataSource-ref</span>=<span class="string">"dataSource"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p>DataSourceTransactionManager使用DataSource的Connection的commit(), rollback()等方法管理事务</p>
+</li>
+<li><p>JPA</p>
+<p>通过javax.persistence.EntityTransaction管理事务, EntityTransaction对象可以通过EntityManager#getTransaction()方法获得.</p>
+<p>EntityManager通过一个工厂类方法EntityManagerFactory#createEntityManager()获得</p>
+<p>在底层, JPA依然通过JDBC的Connection事务方法完成控制.</p>
+<p>配置JPA事务管理器, 必须先配置DataSoure, 然后是EntityManagerFactory, 最后才配置JpaTransactionManager</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 配置数据源 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"dataSource"</span> <span class="attr">class</span>=<span class="string">"org.apache.commons.dbcp.BasicDataSource"</span> <span class="attr">destroy-method</span>=<span class="string">"close"</span> <span class="attr">p:driverClassName</span>=<span class="string">"$&#123;jdbc.driverClassName&#125;"</span> <span class="attr">p:url</span>=<span class="string">"$&#123;jdbc.url&#125;"</span> <span class="attr">p:username</span>=<span class="string">"$&#123;jdbc.username&#125;"</span> <span class="attr">p:password</span>=<span class="string">"$&#123;jdbc.password&#125;"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 指定一个数据源 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"entityManagerFactory"</span> <span class="attr">class</span>=<span class="string">"org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"</span> <span class="attr">p:dataSource-ref</span>=<span class="string">"dataSource"</span>&gt;</span></span><br><span class="line">  ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 指定实体管理器 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"transactionManager"</span> <span class="attr">class</span>=<span class="string">"org.springframework.orm.jpa.JpaTransactionManager"</span> <span class="attr">p:entityManagerFactory-ref</span>=<span class="string">"entityManagerFactory"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Hibernate</p>
+<p>Spring 4.0只支持Hibernate 3.6之后的版本</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 配置数据源 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"dataSource"</span> <span class="attr">class</span>=<span class="string">"org.apache.commons.dbcp.BasicDataSource"</span> <span class="attr">destroy-method</span>=<span class="string">"close"</span> <span class="attr">p:driverClassName</span>=<span class="string">"$&#123;jdbc.driverClassName&#125;"</span> <span class="attr">p:url</span>=<span class="string">"$&#123;jdbc.url&#125;"</span> <span class="attr">p:username</span>=<span class="string">"$&#123;jdbc.username&#125;"</span> <span class="attr">p:password</span>=<span class="string">"$&#123;jdbc.password&#125;"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 指定数据源和Hibernate配置文件 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"sessionFactory"</span> <span class="attr">class</span>=<span class="string">"org.springframework.orm.hiberante4.LocalSessionFactoryBean"</span> <span class="attr">p:dataSource-ref</span>=<span class="string">"dataSource"</span> <span class="attr">p:mappingResources</span>=<span class="string">"classpath: bbtForum.hbm.xml"</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- Hibernate的其他配置属性 --&gt;</span></span><br><span class="line">  ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 注入会话工厂 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"transactionManager"</span> <span class="attr">class</span>=<span class="string">"org.springframework.orm.hibernate4.HibernateTransactionManager"</span> <span class="attr">p:sessionFactory-ref</span>=<span class="string">"sessionFactory"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>Hibernate使用org.hibernate.Session封装Connection, 需要一个能够创建Session的SessionFactory</p>
+</li>
+<li><p>JTA</p>
+<p>想在Java EE容器中使用JTA, 将通过JNDI和Spring的JtaTransactionManager获取一个容器管理的DataSource. </p>
+<p>JtaTransactionManager不需要知道DataSource和其他特定的资源, 它引用容器提供的全局事务管理</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 通过jee命名空间获取Java EE容器中的数据源 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">jee:jndi-lookup</span> <span class="attr">id</span>=<span class="string">"accountDs"</span> <span class="attr">jndi-name</span>=<span class="string">"java:comp/jdbc/account"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">jee:jndi-lookup</span> <span class="attr">id</span>=<span class="string">"orderDs"</span> <span class="attr">jndi-name</span>=<span class="string">"java:comp/jdbc/order"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 指定JTA事务管理器 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"transactionManager"</span> <span class="attr">class</span>=<span class="string">"org.springframework.transaction.jta.JtaTransactionManager"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="事务同步管理器"><a href="#事务同步管理器" class="headerlink" title="事务同步管理器"></a>事务同步管理器</h4><p>TransactionSynchronizationManager使用ThreadLocal为不同事务线程提供了独立的资源副本, 同时维护事务配置的属性和运行状态信息.</p>
+<p>从TransactionSynchronizationManager中获取对应线程绑定资源的工具类</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">持久化技术</th>
+<th style="text-align:center">线程绑定资源获取工具</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Spring JDBC, MyBatis</td>
+<td style="text-align:center">DataSourceUtils</td>
+</tr>
+<tr>
+<td style="text-align:center">Hibernate</td>
+<td style="text-align:center">SessionFactoryUtils</td>
+</tr>
+<tr>
+<td style="text-align:center">JPA</td>
+<td style="text-align:center">EntityManagerFactoryUtils</td>
+</tr>
+<tr>
+<td style="text-align:center">JDO</td>
+<td style="text-align:center">PersistenceManagerFactoryUtils</td>
+</tr>
+</tbody>
+</table>
+<p>当需要脱离模板类, 手工操作底层持久化技术原生API时, 需要通过这些工具类获取线程绑定的资源, 不应该直接从DataSource或SessionFactory中获取. 后者不能获取于本线程相关的资源.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">TransactionSynchronizationManager</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 1. 用于保存每个事务线程对应的Connection或Session等类型资源</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> ThreadLocal resource = <span class="keyword">new</span> ThreadLocal();</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 2. 用于保存每个事务线程对应事务的名称</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> ThreadLocal currentTransactionName = <span class="keyword">new</span> ThreadLocal();</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 3. 用于保存每个事务线程对应事务的read-only状态</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> ThreadLocal currentTransactionReadOnly = <span class="keyword">new</span> ThreadLocal();</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 4. 用于保存每个事务线程对应事务的隔离级别</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> ThreadLocal currentTransactionIsolationLevel = <span class="keyword">new</span> ThreadLocal();</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 5. 用于保存每个事务线程对应事务的激活状态</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> ThreadLocal actualTransactionActive = <span class="keyword">new</span> ThreadLoca();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="事务传播行为"><a href="#事务传播行为" class="headerlink" title="事务传播行为"></a>事务传播行为</h4><p>Service接口方法可能会在内部调用其他的Service接口方法以共同外出一个完整的业务操作, 这样就会产生服务接口方法嵌套调用的情况.</p>
+<p>Spring通过事务传播行为控制当前事务如何传播到被嵌套调用的目标服务接口方法中.</p>
+<p>在TransactionDifinition接口中规定了7种类型的事务传播行为</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">事务传播行为类型</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">PROPAGATION_REQUIRED</td>
+<td style="text-align:center">如果当前没有事务, 则新建一个事务; 如果已存在一个事务, 则加入到这个事务中</td>
+</tr>
+<tr>
+<td style="text-align:center">PROPAGATION_SUPPORTS</td>
+<td style="text-align:center">支持当前事务. 如果当前没有事务, 则以非事务方式执行</td>
+</tr>
+<tr>
+<td style="text-align:center">PROPAGATION_MANDATORY</td>
+<td style="text-align:center">支持当前事务, 如果当前没有事务, 抛出异常</td>
+</tr>
+<tr>
+<td style="text-align:center">PROPAGATION_REQUIRES_NEW</td>
+<td style="text-align:center">新建事务. 如果当前存在事务, 把当前事务挂起</td>
+</tr>
+<tr>
+<td style="text-align:center">PROPAGATION_NOT_SUPPORTED</td>
+<td style="text-align:center">以非事务方式执行操作. 如果当前存在事务, 把当前事务挂起</td>
+</tr>
+<tr>
+<td style="text-align:center">PROPAGATION_NEVER</td>
+<td style="text-align:center">以非事务方式执行. 如果当前存在事务, 抛出异常</td>
+</tr>
+<tr>
+<td style="text-align:center">PROPAGATION_NESTED</td>
+<td style="text-align:center">如果当前存在事务, 则在嵌套事务哪执行; 如果当前没有事务, 则执行于PROPAGATION_REQUIRED类似的操作</td>
+</tr>
+</tbody>
+</table>
+<p>PROPAGATION_NESTED时, 底层数据源必须基于JDBC3.0, 实现者需要支持保存点事务机制</p>
+<h3 id="编程式事务管理"><a href="#编程式事务管理" class="headerlink" title="编程式事务管理"></a>编程式事务管理</h3><p>Spring为编程式事务管理提供了模板类TransactionTemplate, 是线程安全的, 可以在多个业务类中共享TransactionTemplate实例进行事务管理.</p>
+<p>TransactionTemplate有两个主要方法:</p>
+<ul>
+<li>void setTransactionManager(PlatformTransactionManager transactionManager): 设置事务管理器</li>
+<li>Object execute(TransactionCallback action): 在TransactionCallback回调接口中定义需要以事务方式组织的数据访问逻辑</li>
+</ul>
+<p>TransactionCallback接口只有一个方法: Object doInTransaction(TransactionStatus status). </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> vlass ForumService &#123;</span><br><span class="line">  <span class="keyword">public</span> ForumDao forumDao;</span><br><span class="line">  <span class="keyword">private</span> TransactionTemplate template;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 通过AOP主动注入</span></span><br><span class="line">  <span class="meta">@Autowired</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTemplate</span><span class="params">(TransactionTemplate template)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.template = template;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addForum</span><span class="params">(<span class="keyword">final</span> Forum forum)</span> </span>&#123;</span><br><span class="line">    template.execute(<span class="keyword">new</span> TransactionCallbackWithoutResult() &#123;</span><br><span class="line">      <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doOInTransactionWithoutResult</span><span class="params">(TransactionStatus status)</span> </span>&#123;</span><br><span class="line">        forumDao.addForum(forum);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由于Spring事务管理基于TransactionSynchronizationManager进行工作, 如果在回调接口方法中显示访问底层数据连接, 必须通过资源获取工具类得到线程绑定的数据连接.</p>
+<h3 id="使用XML配置声明式事务"><a href="#使用XML配置声明式事务" class="headerlink" title="使用XML配置声明式事务"></a>使用XML配置声明式事务</h3><p>这种方式对代码侵入性最小, 可以让事务管理代码完成从业务代码中移除.</p>
+<p>声明式事务通过AOP实现, 通过事务的声明性信息, Spring负责将事务管理增强逻辑动态织入业务方法的相应连接点中. 这些逻辑包括获取线程绑定资源, 开始事务, 提交/回滚事务, 进行异常转换和处理等工作</p>
+<h4 id="使用原始的TransactionProxyFactoryBean"><a href="#使用原始的TransactionProxyFactoryBean" class="headerlink" title="使用原始的TransactionProxyFactoryBean"></a>使用原始的TransactionProxyFactoryBean</h4><p>Spring早期版本中, 必须通过TransactionProxyFactoryBean代理类对需要事务管理的业务类进行代理, 以便实施事务功能的增强.</p>
+<ol>
+<li><p>声明式事务配置</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- DAO配置, DataSource配置 --&gt;</span></span><br><span class="line">...</span><br><span class="line"><span class="comment">&lt;!-- 声明事务管理器 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"txManager"</span> <span class="attr">class</span>=<span class="string">"org.springframework.jdbc.datasource.DataSourceTransactionManager"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"dataSource"</span> <span class="attr">ref</span>=<span class="string">"dataSource"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 需要实施事务增强的目标业务Bean --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"xxxTarget"</span> <span class="attr">class</span>=<span class="string">"package com.smart.service.xxxForum"</span> <span class="attr">p:forumDao-ref</span>=<span class="string">"forumDao"</span> <span class="attr">p:topicDao-ref</span>=<span class="string">"topicDao"</span> <span class="attr">p:postDao-ref</span>=<span class="string">"postDao"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 使用事务代理工厂类为目标业务Bean提供事务增强 --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- transactionManager指定事务管理器 --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- target指定目标业务Bean --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"xxxForum"</span> <span class="attr">class</span>=<span class="string">"org.springframework.transaction.interceptor.TransactionProxyFactoryBean"</span> <span class="attr">p:transactionManager-ref</span>=<span class="string">"txManager"</span> <span class="attr">p:target-ref</span>=<span class="string">"xxxTarget"</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 事务属性配置 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"transactionAttributes"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">props</span>&gt;</span></span><br><span class="line">      <span class="comment">&lt;!-- 只读事务 --&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"get*"</span>&gt;</span>PROPAGATION_REQUIRED,readOnly<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">      <span class="comment">&lt;!-- 可写事务 --&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"*"</span>&gt;</span>PROPAGATION_REQUIRED<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">props</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>移除回滚/提交规则</p>
+<p><code>&lt;prop&gt;</code>内的值为事务属性信息, 其配置格式如图:</p>
+<p><img src="/2019/04/12/精通Spring-4.x读书笔记-Spring事务管理/事务属性设置格式.png" alt="事务属性设置格式"></p>
+<p>传播行为是必须设置的.</p>
+<p>默认情况下, 当发生运行期异常时, 事务将被回滚; 当发生检查型异常时, 既不回滚也不提交, 控制权交给外出调用. </p>
+<p>用户可以通过配置显式指定回滚规则: 指定带正号(+)或负号(-)的异常类名. 当抛出负号型异常时, 将触发事务回滚; 抛出正号型异常时, 即使这个异常时检查型异常, 事务也会提交. 抛出的异常或该异常的祖先类的类名匹配规则中指定了异常类名(或异常名片段), 规则就生效</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>"<span class="attr">add</span>*"&gt;</span>PROPAGATION_REQUIRED, -EXception<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>只要业务方法抛出的异常或其父类异常的类名包括”Exception”, 事务都会回滚</p>
+<p>Spring默认的事务规则为”运行期异常回滚, 检查型异常不回滚”, 所以带符号的异常设置仅对检查型异常有意义</p>
+</li>
+</ol>
+<h4 id="基于aop-tx命名空间的配置"><a href="#基于aop-tx命名空间的配置" class="headerlink" title="基于aop/tx命名空间的配置"></a>基于aop/tx命名空间的配置</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 1. 事务管理器 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"txManager"</span> <span class="attr">class</span>=<span class="string">"org.springframework.jdbc.datasource.DataSourceTransactionManager"</span> <span class="attr">p:dataSource-ref</span>=<span class="string">"dataSource"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 2. 使用强大的切点表达式语言轻松定义目标方法 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">aop:config</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 2.1 通过aop定义事务增强切面 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">aop:pointcut</span> <span class="attr">id</span>=<span class="string">"serviceMethod"</span> <span class="attr">expression</span>=<span class="string">"execution(* com.smart.service.*Forum.*(..))"</span> /&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 2.2 引用事务增强 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">aop:advisor</span> <span class="attr">pointcut-ref</span>=<span class="string">"serviceMethod"</span> <span class="attr">advice-ref</span>=<span class="string">"txAdvice"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">aop:config</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 3. 事务增强 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">tx:advice</span> <span class="attr">id</span>=<span class="string">"txAdvice"</span> <span class="attr">transaction-manager</span>=<span class="string">"txManager"</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 3.1 事务属性定义 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">tx:attributes</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tx:method</span> <span class="attr">name</span>=<span class="string">"get*"</span> <span class="attr">read-only</span>=<span class="string">"false"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tx:method</span> <span class="attr">name</span>=<span class="string">"add*"</span> <span class="attr">rollback-for</span>=<span class="string">"Exception"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tx:method</span> <span class="attr">name</span>=<span class="string">"update*"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">tx:attributes</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">tx:advice</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>业务Bean的名称不需要做任何”配合性”的调整, aop直接通过切点表达式语言就可以对业务Bean进行定位</p>
+<p><code>&lt;tx:method&gt;</code>元素拥有的属性表:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">属性</th>
+<th style="text-align:center">是否必需</th>
+<th style="text-align:center">默认值</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">name</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center">与事务属性关联的方法名, 可使用通配符(*)</td>
+<td style="text-align:center">如”get*”, “handle”等</td>
+</tr>
+<tr>
+<td style="text-align:center">propagation</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">REQUIRED</td>
+<td style="text-align:center">事务传播行为, 可选值: REQUIRED, SUPPORTS, MANDATORY, REQUIRES_NEW, NOT_SUPPORTED, NEVER, NESTED</td>
+</tr>
+<tr>
+<td style="text-align:center">isolation</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">DEFAULT</td>
+<td style="text-align:center">事务隔离级别, 可选值: DEFAULT, READ_UNCOMMITED, READ_COMMINT, REPEATABLE_READ, SERIALIZABLE</td>
+</tr>
+<tr>
+<td style="text-align:center">timeout</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">-1</td>
+<td style="text-align:center">事务超时时间(秒), -1表示事务超时时间有底层的事务系统决定</td>
+</tr>
+<tr>
+<td style="text-align:center">read-only</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">false</td>
+<td style="text-align:center">事务是否只读</td>
+</tr>
+<tr>
+<td style="text-align:center">rollback-for</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">所有运行期异常回滚</td>
+<td style="text-align:center">触发事务回滚的Exception, 可以设置多个, 以逗号隔开</td>
+</tr>
+<tr>
+<td style="text-align:center">no-rollback-for</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">所有检查型异常不回滚</td>
+<td style="text-align:center">不触发事务回滚的Exception, 可以设置多个, 以逗号隔开</td>
+</tr>
+</tbody>
+</table>
+<h3 id="使用注解配置声明式事务"><a href="#使用注解配置声明式事务" class="headerlink" title="使用注解配置声明式事务"></a>使用注解配置声明式事务</h3><p>通过<code>@Transactional</code>对需要事务正确的Bean接口, 实现类或方法进行标注; 在容器中配置基于注解的事务增强驱动, 即可启用基于注解的声明式事务.</p>
+<p>####使用<code>@Transactional</code>注解</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="meta">@Transactional</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">XxxForumService</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addXxx</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> Xxx <span class="title">getXxx</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注解只提供元数据, 它本身并不能完成事务切面注入的功能. 还需要在Spring配置文件中通过一行配置, “通知”Spring容器对标注<code>@Transactional</code>注解的Bean进行加工</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"txManager"</span> <span class="attr">class</span>=<span class="string">"org.springframework.jdbc.datasource.DataSourceTransactionManager"</span> <span class="attr">p:dataSource-ref</span>=<span class="string">"dataSource"</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 对标注@Transactional注解的Bean进行加工处理, 以织入事务管理切面 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">tx:annotation-driver</span> <span class="attr">transaction-</span>,<span class="attr">anager</span>=<span class="string">"txManager"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p><code>&lt;tx:annotation-driver&gt;</code>默认会自动使用名为”transactionManager”的事务管理器.</p>
+<p><code>&lt;tx:annotation-driver&gt;</code>还有另外两个属性:</p>
+<ul>
+<li>proxy-target-class: 如为true, Spring通过创建子类来代理业务类, 为false, 使用基于接口的代理</li>
+<li>order: 如果业务类除了事务切面, 还需要织入其他切面, 通过该属性可以控制事务切面在目标连接点的织入顺序</li>
+</ul>
+<ol>
+<li><p>关于<code>@Transactional</code>的属性</p>
+<p>|         属性名         |                             说明                             |<br>| :——————–: | :———————————————————-: |<br>|      propagation       | 事务传播行为, 例如: <code>@Transactional(propagation=Propagation.REQUIRES_NEW)</code> |<br>|       isolation        | 事务隔离级别, 例如:<code>@Transactional(isolation=Isolation.READ_COMMITTED)</code> |<br>|        readOnly        |                      事务读写性, 布尔型                      |<br>|        timeout         |                 超时时间, int型, 以秒为单位                  |<br>|      rollbackFor       | 一组异常类, 遇到时进行回滚, 类型为: Class&lt;? extends Throwable&gt;[], 默认值为{}. 例如: <code>@Transactional(rollbackFor={SQLException.class})</code> |<br>|  rollbackForClassName  | 一组异常类名, 遇到时进行回滚, 类型为String[], 默认值为{}. 例如: <code>@Transactional(rollbackFor={&quot;Exception&quot;})</code> |<br>|     noRollbackFor      | 一组异常类, 遇到时不回滚, 类型为Class&lt;? extends Throwable&gt;[], 默认值为{} |<br>| noRollbackForClassName |     一组异常类, 遇到时不回滚, 类型为String[], 默认值为{}     |</p>
+</li>
+<li><p>在何处标注<code>@Transactional</code>注解</p>
+<p><code>@Transactional</code>注解可以应用于接口定义和接口方法, 类定义和类的public方法上.</p>
+<p>Spring建议在业务实现类上使用<code>@Transactional</code>注解</p>
+<p>因为注解不能被继承, 所有在业务接口中标注的<code>@Transactional</code>注解不会被业务实现类继承. 如果通过以下配置启用子类代理:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">tx:annotation-driver</span> <span class="attr">transaction-manager</span>=<span class="string">"txManager"</span> <span class="attr">proxy-target-class</span>=<span class="string">"true"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p>那么业务类不会添加事务增强, 照样工作在非事务环境下.</p>
+</li>
+<li><p>在方法处使用注解</p>
+<p>方法处的注解会覆盖类定义处的注解.</p>
+</li>
+<li><p>使用不同的事务管理器</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用名为topic的事务管理器</span></span><br><span class="line"><span class="meta">@Transactional</span>(<span class="string">"topic"</span>)</span><br><span class="line"><span class="comment">// 使用名为forum的事务管理器</span></span><br><span class="line"><span class="meta">@Transactional</span>(<span class="string">"forum"</span>)</span><br></pre></td></tr></table></figure>
+<p>topic和forum的事务管理器可以在xml中分别定义</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"forumTxManager"</span> <span class="attr">class</span>=<span class="string">"org.springframework.jdbc.datasource.DataSourceTransactionManager"</span> <span class="attr">p:dataSource-ref</span>=<span class="string">"forumDataSource"</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 为事务管理器指定一个名字 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">qualifier</span> <span class="attr">value</span>=<span class="string">"forum"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"topicTxManager"</span> <span class="attr">class</span>=<span class="string">"org.springframework.jdbc.datasource.DataSourceTransactionManager"</span> <span class="attr">p:dataSource-ref</span>=<span class="string">"topicDataSource"</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 为事务管理器指定一个名字 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">qualifier</span> <span class="attr">value</span>=<span class="string">"topic"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        </p><p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

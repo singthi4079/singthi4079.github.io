@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Blue">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="精通Spring 4.x读书笔记-使用Spring JDBC访问数据库">
+  <meta property="og:description" content="">
+  <meta property="og:site_name" content="Blue的博客">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://singthi4079.github.ioundefined">
+  
+    <link rel="alternate" href="/atom.xml" title="Blue的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <!-- Site Title -->
+  <title>Blue的博客</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/default-banner-dark.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">精通Spring 4.x读书笔记-使用Spring JDBC访问数据库</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/<your-github-username>">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:<your-email-address>">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By Blue</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2019-04-14</span>
+            <span class="time">00:26:36</span>
+          </span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Spring/">#Spring</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <h2 id="精通Spring-4-x读书笔记-使用Spring-JDBC访问数据库"><a href="#精通Spring-4-x读书笔记-使用Spring-JDBC访问数据库" class="headerlink" title="精通Spring 4.x读书笔记-使用Spring JDBC访问数据库"></a>精通Spring 4.x读书笔记-使用Spring JDBC访问数据库</h2><h3 id="使用Spring-JDBC"><a href="#使用Spring-JDBC" class="headerlink" title="使用Spring JDBC"></a>使用Spring JDBC</h3><p>Spring JDBC通过模板和回调机制降低了使用JDBC的复杂度, 借助JdbcTemplate的帮助, 仅需编写那些”必不可少”的代码就可以进行数据库操作</p>
+<h4 id="JdbcTemplate小试牛刀"><a href="#JdbcTemplate小试牛刀" class="headerlink" title="JdbcTemplate小试牛刀"></a>JdbcTemplate小试牛刀</h4><p>通过Jdbc床创建一张表</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 创建一个数据源</span></span><br><span class="line">DriverManagerDataSource ds = <span class="keyword">new</span> DriverManagerDataSource();</span><br><span class="line">ds.setDriverClassName(<span class="string">"com.mysql.jdbc.Driver"</span>);</span><br><span class="line">ds.setUrl(<span class="string">"jdbc:mysql://localhost:3306/sampledb"</span>);</span><br><span class="line">ds.setUsername(<span class="string">"root"</span>);</span><br><span class="line">ds.setPassword(<span class="string">"1234"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 生成一个JdbcTemplate实例</span></span><br><span class="line">JdbcTemplate jdbcTemplate = <span class="keyword">new</span> JdbcTemplate();</span><br><span class="line">jdbcTemplate.setDataSource(ds);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建一张表</span></span><br><span class="line">String sql = <span class="string">"create table t_user(user_id int primary key, user_name varchar(60))"</span>;</span><br><span class="line">jdbcTemplate.execute(sql);</span><br></pre></td></tr></table></figure>
+<p>由于JdbcTemplate时线程安全的, 因而所有的DAO都可以共享同一个JdbcTemplate实例.</p>
+<h4 id="在DAO中使用JdbcTemplate"><a href="#在DAO中使用JdbcTemplate" class="headerlink" title="在DAO中使用JdbcTemplate"></a>在DAO中使用JdbcTemplate</h4><p>一般情况下都是在DAO中使用JdbcTemplate, JdbcTemplate在XML配置, 直接在DAO中注入即可</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 声明一个DAO</span></span><br><span class="line"><span class="meta">@Repository</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ForumDao</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> JdbcTemplate jdbcTemplate;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 2. 注入JdbcTemplate实例</span></span><br><span class="line">  <span class="meta">@Autowired</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setJdbcTemplate</span><span class="params">(JdbcTemplate jdbcTemplate)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.jdbcTemplate = jdbcTemplate;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在Spring配置文件中定义JdbcTemplate并注入到DAO中</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 1. 扫描包以注册注解声明的Bean --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"com.smart"</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 2. 配置数据源 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">context:property-placeholder</span> <span class="attr">location</span>=<span class="string">"classpath:jdbc.properties"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"dataSource"</span> <span class="attr">class</span>=<span class="string">"org.apache.commons.dbcp.BasicDataSource"</span> <span class="attr">destroy-method</span>=<span class="string">"close"</span> <span class="attr">p:driverClassName</span>=<span class="string">"$&#123;jdbc.driverClassName&#125;"</span> <span class="attr">p:url</span>=<span class="string">"$&#123;jdbc.url&#125;"</span> <span class="attr">p:username</span>=<span class="string">"$&#123;jdbc.username&#125;"</span> <span class="attr">p:password</span>=<span class="string">"$&#123;jdbc.password&#125;"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 3. 声明JdbcTemplate Bean --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"jdbcTemplate"</span> <span class="attr">class</span>=<span class="string">"org.springframework.jdbc.core.JdbcTemplate"</span> <span class="attr">p:dataSource-ref</span>=<span class="string">"dataSource"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p>JdbcTemplate有几个可以控制底层JDBC API的属性:</p>
+<ul>
+<li>queryTimeout: 设置JdbcTemplate所创建的Statement查询数据时的最大超时时间. 默认为0, 表示使用底层JDBC驱动程序的默认设置</li>
+<li>fetchSize: 设置底层ResultSet每次从数据库返回的行数. 对程序的性能影响很大, 如果设置过大, 因一次性载入的数据都放在内存中, 所以内存消耗很大; 反之, 设置过小, 从数据库读取的次数将增大, 也会影响性能. 默认值为0, 表示使用JDBC驱动程序默认设置. Oracle驱动程序的fetchSize的默认值为10</li>
+<li>maxRows: 设置底层的ResultSet从数据库返回的最大行数. 默认为0, 表示使用底层JDBC驱动程序的默认设置</li>
+<li>ignoreWarnings: 是否忽略SQL的警告信息. 默认为true, 即所有的警告信息都被记录在日志中; 如果为false, JdbcTemplate将抛出SQLWarningException</li>
+</ul>
+<h3 id="基本的数据操作"><a href="#基本的数据操作" class="headerlink" title="基本的数据操作"></a>基本的数据操作</h3><p>通过JdbcTemplate可以用简单的方法完成数据的增删改查以及存储过程调用等操作</p>
+<h4 id="更改数据"><a href="#更改数据" class="headerlink" title="更改数据"></a>更改数据</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String sql = <span class="string">"insert into t_forum(forum_name, forum_desc) values (?,?)"</span>;</span><br><span class="line">Object[] params = <span class="keyword">new</span> Object[] &#123;forum.getForumName(), forum.getForumDesc()&#125;;</span><br><span class="line">jdbcTemplate.update(sql, params);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>尽量使用可绑定参数的SQL语句, 以便数据库可以复用SQL的执行计划, 提高数据库的执行效率.</p>
+<p>尽量使用类级别的静态常量(final static)定义SQL字符串, 提高JVM的内存使用率</p>
+</blockquote>
+<p>可以使用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">update</span><span class="params">(String sql, Object[] args, <span class="keyword">int</span>[], argTypes)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>显式指定每个占位符所对应的字段数据类型. 这样可以保证类型安全, 当参数为null时, 这种形式支持更好.</p>
+<p>JdbcTemplate还有几个重载的update方法:</p>
+<ul>
+<li><p>int update(String sql): 不带占位符的SQL</p>
+</li>
+<li><p>int update(String sql, Object… args): 使用不定参数的方法</p>
+</li>
+<li><p>int update(String sql, PreparedStatementSetter pss): PreparedStatementSetter是一个回调接口， 它定义了一个void setValues(PreparedStatement ps)接口方法. JdbcTemplate使用SQL语句创建处PreparedStatement实例后, 将调用该回调接口绑定执行参数的操作</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 为了forum可以在内部类中使用, 必须声明为final</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addForum</span><span class="params">(<span class="keyword">final</span> Forum forum)</span> </span>&#123;</span><br><span class="line">  ...</span><br><span class="line">  <span class="comment">// 2. 通过匿名内部类定义回调实例</span></span><br><span class="line">  jdbcTemplate.update(sql, <span class="keyword">new</span> PreparedStatementSetter() &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setValues</span><span class="params">(PreparedStatement ps)</span> <span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">      ps.setString(<span class="number">1</span>, forum.getForuumName());</span><br><span class="line">      ps.setString(<span class="number">2</span>, forum.getForumDesc());</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>PreparedStatement绑定参数时, 参数索引从1开始而非从0开始.</p>
+</blockquote>
+</li>
+<li><p>int update(PreparedStatementCreator psc): PreparedStatementCreator噎死回调接口, 负责创建一个PreparedStatement实例. 该回调接口定义了一个PreparedStatement createPreparedStatement(Connection con)方法. </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">jdbcTemplate.update(<span class="keyword">new</span> PreparedStatementCreator() &#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> PreparedStatement <span class="title">createPreparedStatement</span><span class="params">(Connection conn)</span> <span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">    PreparedStatement ps = conn.preparedStatement(sql);</span><br><span class="line">    ps.setString(<span class="number">1</span>, forum.getForumName());</span><br><span class="line">    ps.setString(<span class="number">2</span>, forum.getForumDesc());</span><br><span class="line">    <span class="keyword">return</span> ps;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>protected int update(PreparedStatementCreator psc, PreparedStatementSetter pss): 联合使用PreparedStatementCreator和PreparedStatementSetter回调</p>
+</li>
+</ul>
+<h4 id="返回数据库表自增主键值"><a href="#返回数据库表自增主键值" class="headerlink" title="返回数据库表自增主键值"></a>返回数据库表自增主键值</h4><p>JDBC3.0规范中, 新增记录时, 允许将数据库自动产生的主键值绑定到Statement或PreparedStatement中. </p>
+<p>使用Statement时, 通过以下方法绑定主键值</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">executeUpdate</span><span class="params">(String sql, <span class="keyword">int</span> autoGeneratedKeys)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>也可以通过Connection创建绑定自增主键值的PreparedStatement</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">PreparedStatement <span class="title">preparedStatement</span><span class="params">(String sql, <span class="keyword">int</span> autoGeneratedKyes)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>当autoGeneratedKeys设置为Statement.RETURN_GENERATED_KEYS时, 即可绑定数据库产生的主键值.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Statement stmt = conn.createStatement();</span><br><span class="line">String sql = <span class="string">"insert into t_topic(topic_title, user_id) values ('测试主题', '123')"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 1. 指定绑定表自增主键值</span></span><br><span class="line">stmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);</span><br><span class="line">ResultSet rs = stmt.getGeneratedKeys();</span><br><span class="line"><span class="keyword">if</span> (rs.next()) &#123;</span><br><span class="line">  <span class="comment">// 2. 获取对应的表自增主键值</span></span><br><span class="line">  <span class="keyword">int</span> key = rs.getInt();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Spring提供了一个可以返回新增记录对应主键值的方法:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">update</span><span class="params">(PreparedStatementCreator psc, KeyHolder generatedKeyHolder)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>KeyHolder是一个回调接口, Spring使用它保存新增记录对应的主键, 接口方法描述如下:</p>
+<ul>
+<li>Number getKey() throws InvalidDataAccessApiUsageException: 当仅插入一行数据, 主键不是复合键而是数字类型时. 如果是复合主键, 或有多个主键返回时, 会抛出InvalidDataAccessApiUsageException.</li>
+<li>Map&lt;String, Object&gt; getKeys() throws InvalidDataAccessApiUsageException: 如果是复合主键, 则列名和列值构成Map中的一个Entry. 如果返回的是多个主键, 抛出InvalidDataAccessApiUsageException</li>
+<li>List&lt;Map&lt;String, Object&gt;&gt; getKeyList(): 如果返回多个组件, 即新增多条记录, 每个主键对应一个Map, 多个Map构成一个List</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addForum</span><span class="params">(<span class="keyword">final</span> Forum forum)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">final</span> String sql = <span class="string">"insert into t_forum(forum_name, forum_desc) values (?, ?)"</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 1. 创建一个主键持有者</span></span><br><span class="line">  KeyHolder keyHolder = <span class="keyword">new</span> GeneratedKeyHolder();</span><br><span class="line">  jdbcTemplate.update(<span class="keyword">new</span> PreparedStatementCreator() &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> PreparedStatement <span class="title">createPreparedStatement</span><span class="params">(Connection conn)</span> <span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">      PreparedStatement ps = conn.preparedStatement(sql);</span><br><span class="line">      ps.setString(<span class="number">1</span>, forum.getForumName());</span><br><span class="line">      ps.setString(<span class="number">2</span>, forum.getForumDesc());</span><br><span class="line">      <span class="keyword">return</span> ps;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, keyHolder);</span><br><span class="line">  <span class="comment">// 2. 从主键持有者中获取主键</span></span><br><span class="line">  forum.setForumId(keyHolder.getKey().intValue());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="批量更改数据"><a href="#批量更改数据" class="headerlink" title="批量更改数据"></a>批量更改数据</h4><p>使用JdbcTemplate批量数据更改的方法, 减少了对数据库的访问次数, 有两个批量数据操作方法:</p>
+<ul>
+<li><p>public int[] batchUpdate(String[] sql): 多条SQL语句组成的数组(这些SQL语句不带参数), Spring内部使用JDBC提供的批量更新API完成操作</p>
+</li>
+<li><p>int[] batchUpdate(String sql, BatchPreparedStatementSetter pss): 使用该方法对于同一结构的带参SQL语句多次进行数据更新操作. 通过BatchPreparedStatementSetter回调接口进行批量参数绑定工作. BatchPreparedStatementSetter定义了两个方法:</p>
+<ul>
+<li>int getBatchSize(): 指定本批次的大小</li>
+<li>void setValues(PreparedStatement ps, int i): 为更定的PreparedStatement设置参数</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">jdbcTemplate.batchUpdate(sql, <span class="keyword">new</span> BatchPreparedStatementSetter() &#123;</span><br><span class="line">  <span class="comment">// 1. 指定该批的记录数</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getBatchSize</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> forums.size();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 2. 绑定参入参数</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setValues</span><span class="params">(PreparedStatement ps, <span class="keyword">int</span> index)</span> <span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">    Forum forum = forums.get(index);</span><br><span class="line">    ps.setString(<span class="number">1</span>, forum.getForumName());</span><br><span class="line">    ps.setString(<span class="number">2</span>, forum.getForumDesc());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>BatchPreparedStatementSetter是一次型批量提交数据的, 不会分批提交. getBatchSize()是整批的大小.</p>
+</li>
+</ul>
+<h4 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h4><p>Spring JDBC中, 仅需要指定SQL查询语句并定义好如何从结果集中返回数据即可</p>
+<ol>
+<li><p>使用RowCallbackHandler处理结果集</p>
+<p>RowCallbackHandler接口可以定义如何从结果集中获取数据. 只有一个方法: void processRow(ResultSet rs) throws SQLException. Spring会遍历结果集, 对结果集的每一行调用RowCallbackHandler回调接口处理数据. 无须调用ResultSet的next()方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 将结果集数据行中的数据抽取到forum对象中</span></span><br><span class="line">jdbcTemplate.query(sql, <span class="keyword">new</span> Object[]&#123;forumId&#125;, <span class="keyword">new</span> RowCallbackHandler() &#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">processRow</span><span class="params">(ResultSet rs)</span> <span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">    forum.setForumId(forumId);</span><br><span class="line">    forum.setForumName(rs.getString(<span class="string">"forum_name"</span>));</span><br><span class="line">    forum.setForumDesc(rs.getString(<span class="string">"forum_desc"</span>));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>查询多条记录:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将结果集的数据映射到List中</span></span><br><span class="line">jdbcTemplate.query(sql, <span class="keyword">new</span> Object[]&#123;forumId， toId&#125;, <span class="keyword">new</span> RowCallbackHandler() &#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">processRow</span><span class="params">(ResultSet rs)</span> <span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">    Forum forum = <span class="keyword">new</span> Forum();</span><br><span class="line">    forum.setForumId(rs.getInt(<span class="string">"forum_id"</span>));</span><br><span class="line">    forum.setForumName(rs.getString(<span class="string">"forum_name"</span>));</span><br><span class="line">    forum.setForumDesc(rs.getString(<span class="string">"forum_desc"</span>));</span><br><span class="line">    </span><br><span class="line">    forums.add(forum);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>以下是几个重载版本:</p>
+<ul>
+<li>void query(String sql, Object[] args, int[] argtypes, RowCallbackHandler rch)</li>
+<li>void query(PreparedStatementCreator psc, RowCallhackHandler rch)</li>
+<li>void query(String sql, PreparedStatementSetter pss, RowCallbackHandler rch)</li>
+<li>void query(String sql, RowCallbackHandler rch)</li>
+</ul>
+</li>
+<li><p>使用<code>RowMapper&lt;T&gt;</code>处理结果集</p>
+<p>在结果集返回多行记录时, RowMapper接口更容易使用, RowMapper接口只有一个方法: T mapRow(ResultSet rs, int rowNum)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">jdbcTemplate.query(sql, <span class="keyword">new</span> Object[] &#123;forumId, toId&#125;, <span class="keyword">new</span> RowMapper&lt;Forum&gt;() &#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> Forum <span class="title">mapRow</span><span class="params">(ResultSet rs, <span class="keyword">int</span> index)</span> <span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">    Forum forum = <span class="keyword">new</span> Forum();</span><br><span class="line">    forum.setForumId(rs.getInt(<span class="string">"forum_id"</span>));</span><br><span class="line">    forum.setForumName(rs.getString(<span class="string">"forum_name"</span>));</span><br><span class="line">    forum.setForumDesc(rs.getString(<span class="string">"forum_desc"</span>));</span><br><span class="line">    <span class="keyword">return</span> forum;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>JdbcTemplate使用<code>RowMapper&lt;T&gt;</code>的其他几个接口:</p>
+<ul>
+<li><code>&lt;T&gt; List&lt;T&gt; query(String sql, Object[] args, int[] angTypes, RowMapper&lt;T&gt; rowMapper)</code></li>
+<li><code>&lt;T&gt; List&lt;T&gt; query(String sql, RowMapper&lt;T&gt; rowMapper)</code></li>
+<li><code>&lt;T&gt; List&lt;T&gt; query(String sql, PreparedStatementSetter pss, RowMapper&lt;T&gt; rowMapper)</code></li>
+<li><code>&lt;T&gt; List&lt;T&gt; query(PreparedStatementCreator psc, RowMapper&lt;T&gt; rowMapper)</code></li>
+</ul>
+</li>
+<li><p>查询单值数据</p>
+<ul>
+<li>int queryForInt(String sql)</li>
+<li>int queryForInt(String sql, Object… args)</li>
+<li>int queryForInt(String sql, Object[] args, int[] argTypes)</li>
+</ul>
+<p>如果返回空结果集, 抛出EmptyResultDataAccessException异常; 返回的结果集多余一行, 抛出IncorrectResultSizeDataAccessException异常</p>
+<ul>
+<li>long queryForLong(String sql)</li>
+<li>long queryForLong(String sql, Object… args)</li>
+<li>long queryForLong(String sql, Object[] args, int[] argTypes)</li>
+<li><code>&lt;T&gt; T queryForObject(String sql, Class&lt;T&gt; requiredType)</code></li>
+<li><code>&lt;T&gt; T queryForObject(String sql, Object[] args, ClasS&lt;T&gt; requiredType)</code></li>
+<li><code>&lt;T&gt; T queryForObject(String sql, Object[] args, int[] argTypes, Class&lt;T&gt; requiredType)</code></li>
+<li><code>&lt;T&gt; T queryForObject(String sql, Object[] args, int[] argTypes, RowMapper&lt;T&gt; rowMapper)</code></li>
+<li><code>&lt;T&gt; T queryForObject(String sql, Object[] args, RowMapper&lt;T&gt; rowMapper)</code></li>
+<li><code>&lt;T&gt; T queryForObject(String sql, RowMapper&lt;T&gt; rowMapper)</code></li>
+</ul>
+<p>带<code>Class&lt;T&gt; requiredType</code>参数的方法, 结果集必须仅拥有一行一列, 且结果集科研被构造成T类型的对象</p>
+</li>
+<li><p>调用存储过程</p>
+<p>JdbcTemplate提供了两个调用存储过程的接口方法:</p>
+<ul>
+<li><code>&lt;T&gt; T execute(String callString, CallableStatementCallback&lt;T&gt; action)</code>: 用户通过callString参数指定调用存储过程的SQL语句; CallableStatementCallback是一个回调接口, 只有一个方法T doInCallableStatement(CallableStatement cs), 用户可以在该方法中进行输入参数绑定, 输出参数注册及返回数据处理等操作</li>
+<li><code>&lt;T&gt; T execute(CallableStatementCreator csc, CallableStatementCallback&lt;T&gt; action)</code>: 使用CallableStatementCreator创建CallableStatement, 定义了一个方法CallableStatement createCallableStatement(Connection con), 使用Connection实例创建CallableStatement对象, 负责创建CallableStatement实例, 绑定参数, 注册输出参数, CallableStatementCallback负责处理存储过程的返回结果. 通过CallableStatementCreatorFactory可以简化CallableStatementCreator的实例创建工作</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 调用存储过程的SQL语句</span></span><br><span class="line">String sql = <span class="string">"&#123;call P_GET_TOPIC_NUM(?,?)&#125;"</span>;</span><br><span class="line">Integer num = jdbcTemplate.execute(sql, <span class="keyword">new</span> CallableStatementCallback&lt;Integer&gt;() &#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> Integer <span class="title">doInCallableStatement</span><span class="params">(CallableStatement cs)</span> <span class="keyword">throws</span> SQLException, DataAccessException </span>&#123;</span><br><span class="line">    <span class="comment">// 绑定参数</span></span><br><span class="line">    cs.setInt(<span class="number">1</span>, userId);</span><br><span class="line">    <span class="comment">// 注册输出参数</span></span><br><span class="line">    cs.registerOutParameter(<span class="number">2</span>, Types.INTEGER);</span><br><span class="line">    cs.execute();</span><br><span class="line">    <span class="comment">// 获取输出参数的值</span></span><br><span class="line">    <span class="keyword">return</span> cs.getInt(<span class="number">2</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>通过占位符(?)的索引号绑定入参和注册出参</p>
+<p>存储过程执行后CallableStatement提供的一套getXxx()方法获取出参的值, 输出参数位置索引必须和占位符(?)一致. </p>
+<p>如果存储过程返回结果集, 通过CallableStatement#getResultSet()方法获取结果集对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">String sql = <span class="string">"&#123;call P_GET_TOPIC_NUM(?, ?)&#125;"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 1. 通过CallableStatementCreatorFactory创建CallableStatementCreator</span></span><br><span class="line">CallableStatementCreatorFactory fac = <span class="keyword">new</span> CallableStatementCreatorFactory(sql);</span><br><span class="line"><span class="comment">// 设置入参, userId是逻辑名, 方便稍后赋值</span></span><br><span class="line">fac.addParameter(<span class="keyword">new</span> SqlParameter(<span class="string">"userId"</span>, Types.INTEGER));</span><br><span class="line"><span class="comment">// 定义一个出参</span></span><br><span class="line">fac.addParameter(<span class="keyword">new</span> SqlOutParameter(<span class="string">"topicNum"</span>, Types.INTEGER));</span><br><span class="line">Map&lt;String, Integer&gt; paramsMap = <span class="keyword">new</span> Hash&lt;String, Integer&gt;();</span><br><span class="line"><span class="comment">// 指定入参的值</span></span><br><span class="line">paramsMap.put(<span class="string">"userId"</span>, userId);</span><br><span class="line">CallableStatementCreator csc = fac.newCallableStatementCreator(paramsMap);</span><br><span class="line"></span><br><span class="line">Integer num = jdbcTemplate.execute(csc, <span class="keyword">new</span> CallableStatementCallback&lt;Integer&gt;() &#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> Integer <span class="title">doInCallableStatement</span><span class="params">(CallableStatement cs)</span> <span class="keyword">throws</span> SQLException, DataAccessException </span>&#123;</span><br><span class="line">    cs.execute();</span><br><span class="line">    <span class="keyword">return</span> cs.getInt(<span class="number">2</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="BLOB-CLOB类型数据操作"><a href="#BLOB-CLOB类型数据操作" class="headerlink" title="BLOB/CLOB类型数据操作"></a>BLOB/CLOB类型数据操作</h3><h4 id="获取本地数据库连接"><a href="#获取本地数据库连接" class="headerlink" title="获取本地数据库连接"></a>获取本地数据库连接</h4><p>从数据源返回的数据库连接对象是本地JDBC对象(如:OracleConnection, SQLServerConnection)的代理类.</p>
+<p>Spring在org.springframework.jdbc.supportnativejdbc包下定义了NativeJdbcExtractor接口并提供了实现类.</p>
+<p>NativeJdbcExtractor接口定义了从数据源的JDBC对象抽取本地JDBC对象的方法</p>
+<ul>
+<li>Connection getNativeConnection(Connection con): 获取本地Connection对象</li>
+<li>Connection getNativeConnectionFromStatement(Statement stmt): 获取本地Statement对象</li>
+<li>PreparedStatement getNativePreparedStatement(PreparedStatement ps): 获取本地PreparedStatement对象</li>
+<li>ResultSet getNativeResultSet(ResultSet rs): 获取本地ResultSet对象</li>
+<li>CallableStatement getNativeCallableStatement(CallableStatement cs): 获取本地CallableStatement对象</li>
+</ul>
+<p>不同数据源的本地JDBC对象抽取器类</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">数据源类型</th>
+<th style="text-align:center">本地JDBC对象抽取类</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">C3P0</td>
+<td style="text-align:center">C3P0NativeJdbcExtractor</td>
+</tr>
+<tr>
+<td style="text-align:center">DBCP</td>
+<td style="text-align:center">CommonsDbcpNativeJdbcExtractor</td>
+</tr>
+<tr>
+<td style="text-align:center">JBoss 3.2.4+</td>
+<td style="text-align:center">JBossNativeJdbcExtractor</td>
+</tr>
+<tr>
+<td style="text-align:center">WebLogic 8.1+</td>
+<td style="text-align:center">WeblogicNativeJdbcExtractor</td>
+</tr>
+<tr>
+<td style="text-align:center">WebSphere 5.1+</td>
+<td style="text-align:center">WebSphereNativeJdbcExtractor</td>
+</tr>
+<tr>
+<td style="text-align:center">ObjectWeb的XAPoll</td>
+<td style="text-align:center">XAPollNativeJdbcExtractor</td>
+</tr>
+</tbody>
+</table>
+<p>从DBCP数据源获取Oracle的本地数据连接对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用DataSourceUtils从模板类中获取连接</span></span><br><span class="line">Connection conn = DataSourceUtils.getConnection(jdbcTemplate.getDataSource());</span><br><span class="line"><span class="comment">// 使用模板类的本地JDBC抽取器获取本地连接</span></span><br><span class="line">conn = jdbcTemplate.getNativeJdbcExtractor().getNativeConnection(conn);</span><br><span class="line"><span class="comment">// 强制类型转换</span></span><br><span class="line">OracleConnection oconn = (OracleConnection) conn;</span><br></pre></td></tr></table></figure>
+<h4 id="相关的操作接口"><a href="#相关的操作接口" class="headerlink" title="相关的操作接口"></a>相关的操作接口</h4><p>LOB代表大对象数据, 包括BLOB和CLOB两种类型, 前者用于存储大块的二进制数据, 如图片数据, 视频数据等; 后者用于存储长文本数据, 如论坛的帖子内容, 产品的详细描述等.</p>
+<p>LOB类型数据的访问不是线程安全的, 需要分配相应的数据库资源, 并在操作完成后释放.</p>
+<p>Spring在org.springframework.jdbc.support.lob包中提供了帮助类:</p>
+<ol>
+<li><p>LobCreator</p>
+<p>有些厂商的JDBC驱动程序并不支持java.sql.Blob, java.sql.Clob接口. Spring定义了以统一方式操作各种数据库LOB类型数据的LobCreator接口.</p>
+<p>一个LobCreator只能操作一个LOB数据</p>
+<p>可以使用JdbcTemplate#execute(String sql, AbstractLobCreatingPreparedStatementCallback lcpse)方法在PreparedStatement中使用LobCreator</p>
+<p>LobCreator接口方法:</p>
+<ul>
+<li>void close(): 关闭会话, 并释放LOB资源</li>
+<li>void setBlobAsBinaryStream(PreparedStatement ps, int paramIndex, InputStream contentStream, int contentLength): 通过流填充BLOB数据</li>
+<li>void setBlobAsBytes(PreparedStatement ps, int paramIndex, byte[] content): 通过二进制数据填充BLOB数据</li>
+<li>void setClobAsAsciiStream(PreparedStatement ps, int paramIndex, InputStream asciiStream, int contentLength): 通过ASCII字符流填充CLOB数据</li>
+<li>void setClobAsCharacterStream(PreparedStatement ps, int paramIndex, Reader characterStream, int contentLength): 通过Unicode字符流填充CLOB数据</li>
+<li>void setClobAsString(PreparedStatement ps, int paramIndex, String content): 通过字符串填充CLOB数据</li>
+</ul>
+</li>
+<li><p>LobHandler</p>
+<p>操作大二进制字段和大文本字段提供了统一访问接口, 不管底层数据库究竟是以大对象的方式还是以一般数据类型的方式进行操作.</p>
+<p>还可以充当LobCreator的工厂类</p>
+<p>Oracle 9g必须使用OracleLobHandler实现类, 其他数据库使用DefaultLobHandler就可以</p>
+<p>Oracle 10g也可以使用DefaultHandler</p>
+<p>几个重要方法:</p>
+<ul>
+<li>InputStream getBlobAsBinaryStream(ResultSet rs, int columnIndex): 从结果集中返回InputStream, 通过InputStream读取BLOB数据</li>
+<li>byte[] getBlobAsBytes(ResultSet rs, int columnIndex): 以二进制数据的方式获取结果集中的BLOB数据</li>
+<li>InputStream getClobAsAsciiStream(ResultSet rs, int columnIndex): 从结果集中返回InputStream, 通过InputStream以ASCII字符流的方式读取CLOB数据</li>
+<li>Reader getClobAsCharactorStream(ResultSet rs, int columnIndex): 从结果集中获取Unicode字符流Reader, 并通过Reader以Unicode字符流的方式读取CLOB数据</li>
+<li>String getClobAsString(ResultSet rs, int columnIndex): 从结果集中以字符串方式获取CLOB数据</li>
+<li>LobCreator getLobCreator(): 生产一个会话相关的LobCreator对象</li>
+</ul>
+</li>
+</ol>
+<h4 id="插入LOB类型数据"><a href="#插入LOB类型数据" class="headerlink" title="插入LOB类型数据"></a>插入LOB类型数据</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 定义LobHandler属性</span></span><br><span class="line"><span class="keyword">private</span> LobHandler lobHandler;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setLobHandler</span><span class="params">(LobHandler lobHandler)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.lobHandler = lobHandler;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">jdbcTemplate.execute(sql, <span class="keyword">new</span> AbstractLobCreatingPreparedStatementCallback(<span class="keyword">this</span>.lobHandler) &#123;</span><br><span class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">setValues</span><span class="params">(PreparedStatement ps, LobCreator lobCreator)</span> <span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">    ps.setInt(<span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">    ps.setInt(<span class="number">2</span>, post.getUserId());</span><br><span class="line">    <span class="comment">// 设置CLOB字段</span></span><br><span class="line">    lobCreator.setClobAsString(ps, <span class="number">3</span>, post.getPostText());</span><br><span class="line">    <span class="comment">// 设置BLOB字段</span></span><br><span class="line">    lobCreator.setBlobAsBytes(ps, <span class="number">4</span>, post.getPostAttach());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>底层数据库是Oracle时采用以下配置:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"nativeJdbcExtractor"</span> <span class="attr">class</span>=<span class="string">"org.springframework.jdbc.support.nativejdbc.CommonsDbcpNativeJdbcExtractor"</span> <span class="attr">lazy-init</span>=<span class="string">"trye"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 设置本地JDBC对象抽取 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"lobHandler"</span> <span class="attr">class</span>=<span class="string">"org.springframework.jdbc.support.lob.OracleLobHandler"</span> <span class="attr">lazy-init</span>=<span class="string">"true"</span> <span class="attr">p:nativeJdbcExtractor-ref</span>=<span class="string">"nativeJdbcExtractor"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p><code>lazy-init=&quot;trye&quot;</code>是因为NativeJdbcExtractor需要通过运行期的反射机制获取底层的JDBC对象, 需要避免让Spring容器启动时就实例化这两个Bean.</p>
+<h4 id="以块数据方式读取LOB数据"><a href="#以块数据方式读取LOB数据" class="headerlink" title="以块数据方式读取LOB数据"></a>以块数据方式读取LOB数据</h4><p>可以以String读取CLOB字段的数据, 以byte[]读取BLOB字段的数据</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">jdbcTemplate.query(sql, <span class="keyword">new</span> Object[] &#123;userUId&#125;, <span class="keyword">new</span> RowMapper&lt;Post&gt;() &#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> Post <span class="title">mapRow</span><span class="params">(ResultSet rs, <span class="keyword">int</span> rowNum)</span> <span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> postId = rs.getInt(<span class="number">1</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 以二进制数组方式获取BLOB数据</span></span><br><span class="line">    <span class="keyword">byte</span>[] attach = lobHandler.getBlobAsBytes(rs, <span class="number">2</span>);</span><br><span class="line">    Post post = <span class="keyword">new</span> Post();</span><br><span class="line">    <span class="comment">// set properties</span></span><br><span class="line">    <span class="keyword">return</span> post;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="以流数据方式读取LOB数据"><a href="#以流数据方式读取LOB数据" class="headerlink" title="以流数据方式读取LOB数据"></a>以流数据方式读取LOB数据</h4><p>如果LOB数据体积很大, 以块方式操作LOB数据, 需要消耗大量内存. 可以使用流的方式进行访问, 减少内存的占用.</p>
+<p>ResultSetExtractor接口拥有一个处理流数据的抽象类: AbstractLobStreamingResultSetExtractor, 扩展此类用流的方式操作LOB字段的数据</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 用于接受LOB数据的输出流</span></span><br><span class="line">OutputStream os = <span class="keyword">new</span> ByteOutStream();</span><br><span class="line">jdbcTemplate.query(sql, <span class="keyword">new</span> Object[] &#123;postId&#125;, <span class="keyword">new</span> AbstractLobStreamingResultSetExtractor() &#123;</span><br><span class="line">  <span class="comment">// 处理为找到数据行的情况</span></span><br><span class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">handleNoRowFound</span><span class="params">()</span> <span class="keyword">throws</span> LobRetrievalFailureException </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"Not Fount result!"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 以流的方式处理LOB字段</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">streamData</span><span class="params">(ResultSet rs)</span> <span class="keyword">throws</span> SQLException, IOException </span>&#123;</span><br><span class="line">    InputStream is = lobHandler.getBlobAsBinaryStream(rs, <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span> (is != <span class="keyword">null</span>) &#123;</span><br><span class="line">      FileCopyUtils.copy(is, os);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="自增健和行集"><a href="#自增健和行集" class="headerlink" title="自增健和行集"></a>自增健和行集</h3><p> 自增键让用户不需要依赖数据库的自增键, 在应用层为新纪录提供主键.</p>
+<p>RowSet允许在连接断开的情况下操作数据.</p>
+<h4 id="自增键的使用"><a href="#自增键的使用" class="headerlink" title="自增键的使用"></a>自增键的使用</h4><p>DataFieldMaxValueIncrementer接口提供两种产生主键的方案: </p>
+<ol>
+<li>通过序列产生主键</li>
+<li>通过表产生主键</li>
+</ol>
+<p>根据主键产生方式和数据库类型的不同, Spring提供了若干实现类</p>
+<p><img src="/2019/04/14/精通Spring-4.x读书笔记-使用Spring-JDBC访问数据库/DateFieldMaxValueIncrementer继承类图.png" alt="DateFieldMaxValueIncrementer继承类图"></p>
+<p>DataFieldMaxValueIncrementer接口定义了3个获取下一个主键值的方法</p>
+<ul>
+<li>int nextIntValue(): 获取下一个主键值, 主键数据类型为int</li>
+<li>long nextLongValue(): 获取下一个主键值, 主键数据类型为long</li>
+<li>String nextStringValue(): 获取下一个主键值, 主键数据类型为String</li>
+</ul>
+<p>在抽象实现类AbstractDataFieldMaxValueIncrementer中有几个重要属性:</p>
+<ul>
+<li>incrementerName属性定义序列或模拟序列表的名称</li>
+<li>如果返回的主键值是String类型, paddingLength 允许用户指定返回主键值的长度, 不足的部分前面补0</li>
+</ul>
+<p>AbstractColumnMaxValueIncrementer类使用模拟序列表产生主键值, 可以通过cacheSize属性指定缓存主键个数, 当内存中主键值用完了, 递增器一次性获取cacheSize个主键, 减少数据访问次数</p>
+<p>使用DataFiledMaxValueIncrementer产生主键</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 主键值产生器</span></span><br><span class="line"><span class="keyword">private</span> DataFieldMaxValueIncrementer incre;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setIncre</span><span class="params">(DataFieldMaxValueIncrementer incre)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.incre = incre;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addPost</span><span class="params">(<span class="keyword">final</span> Post post)</span> </span>&#123;</span><br><span class="line">  jdbcTemplate.execute(sql, <span class="keyword">new</span> AbstractLobCreatingPreparedStatementCallback(<span class="keyword">this</span>.lobHandler) &#123;</span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">setValues</span><span class="params">(PreparedStatement ps, LobCreator lobCreator)</span> <span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">      <span class="comment">// 获取下一个主键值</span></span><br><span class="line">      ps.setInt(<span class="number">1</span>, incre.nextIntValue());</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>以序列方式产生主键值</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 指定序列名为: seq_post_id --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"incre"</span> <span class="attr">class</span>=<span class="string">"org.springframework.jdbc.support.incrementer.OracleSequenceMaxValueIncrementer"</span> <span class="attr">p:incrementerName</span>=<span class="string">"seq_post_id"</span> <span class="attr">p:dataSource-ref</span>=<span class="string">"dataSource"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>以表方式产生主键值</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 设置维护主键的表名为: t_post_id --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 用于生成主键值的列名: sequence_id --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 缓存大小为: 10 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"incre"</span> <span class="attr">class</span>=<span class="string">"org.springframework.jdbc.support.incrementer.MySQLMaxValueIncrementer"</span> <span class="attr">p:incrementerName</span>=<span class="string">"t_post_id"</span> <span class="attr">p:columnName</span>=<span class="string">"sequence_id"</span> <span class="attr">p:cacheSize</span>=<span class="string">"10"</span> <span class="attr">p:dataSource-ref</span>=<span class="string">"dataSource"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="以行集返回数据"><a href="#以行集返回数据" class="headerlink" title="以行集返回数据"></a>以行集返回数据</h4><p>行集对象可以绑定一个连接并在期整个证明周期中维持该连接, 称为”连接的行集”</p>
+<p>行集对象还可以先绑定一个连接, 获取数据后就关闭它, 称为”非连接行集”</p>
+<p>非连接行集可以在断开连接时更改数据, 重新绑定数据连接, 并将更改同步到数据库中</p>
+<p>JdbcTemplate获取基于行集的结果集, 提供以下方法:</p>
+<ul>
+<li>SqlRowSet queryForRowSet(String sql);</li>
+<li>SqlRowSet queryForRowSet(String sql, Object… args)</li>
+<li>SqlRowSet queryForRowSet(String sql, Object[] args, int[] argTypes)</li>
+</ul>
+<h3 id="NamedParameterJdbcTemplate模板类"><a href="#NamedParameterJdbcTemplate模板类" class="headerlink" title="NamedParameterJdbcTemplate模板类"></a>NamedParameterJdbcTemplate模板类</h3><p>NamedParameterJdbcTemplate提供命名参数绑定功能</p>
+<p>SimpleJdbcTemplate封装了JdbcTemplate, 将常用的API开发出来</p>
+<p>SqlParameterSource接口拥有承载命名参数, 有两个实现类</p>
+<ul>
+<li>BeanPropertySqlParameterSource: 将一个JavaBean对象封装成一个参数源, 以便通过JavaBean属性名和SQL语句中命名参数匹配的方式绑定参数</li>
+<li>MapSqlParameterSource: 内部有一个Map存储参数, 通过addValue(String paramName, Object value)或addValues(Map values)方法添加参数, 通过参数键名和SQL语句中命名参数匹配的方式绑定参数</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义参数源</span></span><br><span class="line"><span class="keyword">final</span> String sql = <span class="string">"insert into t_forum(forum_name, forum_desc) values (:forumName, :forumDesc)"</span>;</span><br><span class="line"><span class="comment">// 定义命名参数</span></span><br><span class="line">SqlParameterSource sps = <span class="keyword">new</span> BeanPropertySqlParameterSource(forum);</span><br><span class="line"><span class="comment">// 使用模板类方法</span></span><br><span class="line">namedParameterJdbcTemplate.update(sql, sps);</span><br></pre></td></tr></table></figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        </p><p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

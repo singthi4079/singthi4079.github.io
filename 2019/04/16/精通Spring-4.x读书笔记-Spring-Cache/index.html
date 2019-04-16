@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Blue">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="精通Spring 4.x读书笔记-Spring Cache">
+  <meta property="og:description" content="">
+  <meta property="og:site_name" content="Blue的博客">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://singthi4079.github.ioundefined">
+  
+    <link rel="alternate" href="/atom.xml" title="Blue的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <!-- Site Title -->
+  <title>Blue的博客</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/default-banner-dark.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">精通Spring 4.x读书笔记-Spring Cache</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/<your-github-username>">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:<your-email-address>">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By Blue</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2019-04-16</span>
+            <span class="time">22:46:44</span>
+          </span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Spring/">#Spring</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <h2 id="Spring-Cache"><a href="#Spring-Cache" class="headerlink" title="Spring Cache"></a>Spring Cache</h2><p>可将缓存定义为一种存储机制, 将数据保存在某个地方, 并以一种更快的地方提供服务. </p>
+<p>缓存的策略有很多种, 在应用系统中可以根据实际情况选择, 通常会把一些静态数据或者变化频率不高的数据放到缓存中, 如配置参数, 字典表等.</p>
+<p><img src="/2019/04/16/精通Spring-4.x读书笔记-Spring-Cache/系统层级对应的缓存层级技术.png" alt="系统层级对应的缓存层级技术"></p>
+<p>缓存中比较重要的概念</p>
+<ol>
+<li><p>缓存命中率</p>
+<p>即从缓存中读取数据的次数与总读取次数的比率. 命中率越高越好.</p>
+<blockquote>
+<p>命中率 = 从缓存中读取的次数/(总读取次数[从缓存中读取的次数 + 从慢速设备上读取的次数])</p>
+<p>Miss率 = 没有重缓存中读取的次数 / (总读取次数[从缓存中读取的次数 + 从慢速设备上读取的次数])</p>
+</blockquote>
+</li>
+<li><p>过期策略</p>
+<p>即如果缓存满了, 从缓存中移除数据的策略</p>
+<ul>
+<li>FIFO(First In First Out): 先进先出策略, 先放入缓存的数据先被移除</li>
+<li>LRU(Lest Recently Used): 最久未使用策略, 即使用时间距离现在最久的那个数据被移除</li>
+<li>LFU(Least Frequently Used): 最近最少使用策略, 即一定时间段内使用次数(频率)最少的那个数据被移除</li>
+<li>TTL(Time To Live): 存活期, 即从缓存中创建时间点开始直至到期的一个时间段(不管在这个时间段内有没有访问都将过期)</li>
+<li>TTI(Time To Idle): 空闲期, 即一个数据多久没被访问久从缓存中移除的时间</li>
+</ul>
+</li>
+</ol>
+<p>Spring提供可以在方法级别进行缓存的缓存抽象, 通过使用AOP对方法进行织入, 如果已经为特定方法入参执行过该方法, 那么不必执行实际方法久可以返回被缓存的结果.</p>
+<p>为了启用AOP缓存功能, 需要使用缓存注解对类中的相关方法进行标记, 以便Spring为其生产举办代理功能的代理类.</p>
+<p>Spring Cache带来的好处</p>
+<ul>
+<li>支持开箱即用(Out-Of-The-Box), 并提供基本的Cache抽象, 方便切换各种底层Cache</li>
+<li>类似于Spring提供的数据库事务管理, 通过Cache注解即可实现缓存逻辑透明化, 让开发者关注业务逻辑</li>
+<li>当事务回滚时, 缓存会自动回滚</li>
+<li>支持比较复杂的缓存逻辑</li>
+<li>提供缓存编程的一致性抽象, 方便代码维护</li>
+</ul>
+<p>Spring Cache并不针对多进程的应用环境进行专门的处理, 当应用程序处于分布式或者集群环境下时, 需要针对具体的缓存进行相应的配置.</p>
+<h3 id="使用Spring-Cache"><a href="#使用Spring-Cache" class="headerlink" title="使用Spring Cache"></a>使用Spring Cache</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="keyword">implements</span> <span class="title">Serialiazble</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> String userId;</span><br><span class="line">  <span class="keyword">private</span> String userName;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// getter/setter</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>需要被缓存的实体类需要实现Serializabel, 这样JVM才可以对其对象进行序列化.</p>
+<p>缓存管理器负责实现缓存逻辑, 支持对象的增加, 修改, 删除, 并支持值对象的泛型</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CacheManager</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> Map&lt;String, T&gt; cache = <span class="keyword">new</span> ConcurrentHashMap&lt;String, T&gt;();</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> T <span class="title">getValue</span><span class="params">(Object key)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> cache.get(key);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addOrUpdateCache</span><span class="params">(String key, T value)</span> </span>&#123;</span><br><span class="line">    cache.put(key, value);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 根据key删除缓存中的一条记录</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">evictCache</span><span class="params">(String key)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (cache.containsKey(key)) &#123;</span><br><span class="line">      cache.remove(key);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 清空缓存中的记录</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">evictCache</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    cache.clear();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>提供一个使用缓存管理器的服务类支持用户查询</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserService</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> CacheManager&lt;User&gt; chacheManager;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">UserService</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 构建缓存管理器</span></span><br><span class="line">    cacheManager = <span class="keyword">new</span> CacheManager&lt;User&gt;();</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> User <span class="title">getUserById</span><span class="params">(String userId)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 先查询缓存</span></span><br><span class="line">    User result = cacheManager.getValue(userId);</span><br><span class="line">    <span class="keyword">if</span> (result != <span class="keyword">null</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    result = getFromDB(userId);</span><br><span class="line">    <span class="keyword">if</span> (result != <span class="keyword">null</span>) &#123;</span><br><span class="line">      cacheManager.addOrUpdateCache(userId, result);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">reload</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    cacheManager.evictCache();</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">private</span> User <span class="title">getFromDB</span><span class="params">(String userId)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> User(userId);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用Spring提供的默认缓存管理器</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserService</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 使用一个名为users的缓存</span></span><br><span class="line">  <span class="meta">@Cacheable</span>(cacheNames = <span class="string">"users"</span>)</span><br><span class="line">  <span class="function"><span class="keyword">public</span> User <span class="title">getUserById</span><span class="params">(String userId)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 方法内部不需要考虑缓存逻辑, 直接实现业务</span></span><br><span class="line">    <span class="keyword">return</span> getFromDB(userId);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">private</span> User <span class="title">getFromDB</span><span class="params">(String userId)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> User(userId);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当调用getUserById()方法时, 会先从users缓存中查询匹配的缓存对象, 存在则直接返回, 不存在则执行方法体内的逻辑, 并将返回值放入缓存. key为userId的值, value就是userId所对应的User对象, 缓存名称需要在Spring容器中定义.</p>
+<p>配置支持基于注解的缓存</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 开启支持基于注解的缓存 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">cache:annotation-driven</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"accountServiceBean"</span> <span class="attr">class</span>=<span class="string">"com.smart.cache.simplecache.UserService"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"cacheManager"</span> <span class="attr">class</span>=<span class="string">"org.springframework.cache.support.SimpleCacheManager"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"chaces"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">set</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.cache.concurrent.CurrentMapCacheFactoryBean"</span> <span class="attr">p:name</span>=<span class="string">"default"</span> /&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.cache.concurrent.CurrentMapCacheFactoryBean"</span> <span class="attr">p:name</span>=<span class="string">"users"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="掌握Spring-Cache抽象"><a href="#掌握Spring-Cache抽象" class="headerlink" title="掌握Spring Cache抽象"></a>掌握Spring Cache抽象</h3><p>Spring Cache提供了5中可在方法级别或类级别上使用的缓存注解. 只有使用public定义的方法才可以被缓存. </p>
+<p>在一个类上使用注解时, 该类中每个公共方法的返回值都将被缓存到指定的缓存项中或从中移除.</p>
+<ol>
+<li><p>@Cacheable</p>
+<p>指定被注解的方法的返回值时可以被缓存的. 原理是Spring首先在缓存中查找数据, 如果没有则执行方法并缓存结果, 然后返回数据. 缓存名必须提供.</p>
+<p>可以以列表的形式提供多个缓存.</p>
+<p>可以提供自定义键, 以便后期存储在某一缓存中的数据</p>
+<p>1) 键生成器</p>
+<p>缓存的本质就是键/值对集合. 缓存抽象使用方法签名及参数值作为一个键值, 并将方法调用的结果组成键/值对.</p>
+<p>如果在Cache注解上没有指定key, Spring会使用KeyGenerator来生成一个key</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">KeyGenerator</span> </span>&#123;</span><br><span class="line">  <span class="function">Object <span class="title">generate</span><span class="params">(Object target, Method method, Object... params)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>SimpleKeyGenerator使用复合键SimpleKey解决key冲突的问题</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Object <span class="title">generateKey</span><span class="params">(Object... params)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (params.length == <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> SimpleKey.EMPTY;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">if</span> (params.length == <span class="number">1</span>) &#123;</span><br><span class="line">    Object param = params[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">if</span> (param != <span class="keyword">null</span> &amp;&amp; !param.getClass().isArray()) &#123;</span><br><span class="line">      <span class="keyword">return</span> param;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> SimpleKey(params);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以在声明中指定键值</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Cacheable</span>(cacheNames = <span class="string">"users"</span>, key=<span class="string">"#user.userCode"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> User <span class="title">getUser</span><span class="params">(User user, <span class="keyword">boolean</span> checkLogout)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>可以通过实现org.springframework.cache.interceptor.KeyGenerator接口来定义个性化的key生成器</p>
+<p>指定自定义key生成器</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Cacheable</span>(cacheNames = <span class="string">"users"</span>, keyGenerator = <span class="string">"myKeyGenerator"</span>)</span><br></pre></td></tr></table></figure>
+<p>2) 带条件的缓存</p>
+<p>@Cacheable注解的condition属性可以按条件进行缓存. condition属性使用SpEL表达式动态评估方法入参释放满足缓存条件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 仅对年龄小于35周岁的用户启用缓存</span></span><br><span class="line"><span class="meta">@Cacheable</span>(cacheNames = <span class="string">"users"</span>, condition = <span class="string">"#user.age &lt; 35"</span>)</span><br></pre></td></tr></table></figure>
+<p><code>#user</code>引用方法的同名入参变量, 通过<code>.age</code>访问user入参对象的age属性值</p>
+<p>unless属性排除某些不希望缓存的对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Cacheable</span>(value = <span class="string">"users"</span>, unless = <span class="string">"#user.age &gt;= 35"</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>@CachePut</p>
+<p>与@Cacheable注解效果几乎一样. 它首先执行方法, 然后将返回值放入缓存. 当希望使用方法返回值更新缓存是, 可以选择这种方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@CachePut</span>(value=<span class="string">"usres"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> User <span class="title">getUser</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> users.get(id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个注解也提供key, condition, unless属性</p>
+<p>在同一个方法内不能同时使用@CachePut和@Cacheable注解.</p>
+<p>@Cacheable注解跳过方法直接获取缓存时, @CachePut注解会强制执行方法以更新缓存</p>
+</li>
+<li><p>@CacheEvict</p>
+<p>负责从给定的缓存中移除一个值. 显式地从缓存中删除失效的缓存数据.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@CacheEvict</span>(<span class="string">"users"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">removeUser</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</span><br><span class="line">  users.remove(id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>@CacheEvict注解也提供key和condition属性, 通过SpEL表达式指定自定义的键和条件</p>
+<p>allEntries属性定义释放移除缓存的所有条目, 默认行为是不移除这些条目的.</p>
+<p>beforeInvocation属性定义了在调用方法之前还是调用方法之后完成移除操作, 默认情况下在方法调用后运行</p>
+</li>
+<li><p>@Caching</p>
+<p>@Caching是一个组注解, 可以为一个方法定义提供基于@Cacheable, @CacheEvict或者@CachePut注解的数组</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Caching</span>(cacheable = &#123;</span><br><span class="line">  <span class="meta">@Cacheable</span>(value=<span class="string">"members"</span>, condition=<span class="string">"#obj instanceof T(com.smart.cache.cachegroup.Member)"</span>),</span><br><span class="line">  <span class="meta">@Cacheable</span>(value=<span class="string">"visitors"</span>, condition=<span class="string">"#obj instanceof T(com.smart.cache.cachegroup.Visitor)"</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="function"><span class="keyword">public</span> User <span class="title">getUser</span><span class="params">(User obj)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> users.get(Integer.valueOf(obj.getUserId()));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>@CacheConfig</p>
+<p>类级别全局缓存注解</p>
+<p>同一个类中需要缓存的方法注解属性都相似, 需要一个个的重复增加, @CacheConfig用来解决这个问题</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@CacheConfig</span>(cacheName = <span class="string">"users"</span>, keyGenerator=<span class="string">"MyKeyGenerator"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserService</span> </span>&#123;</span><br><span class="line">  <span class="meta">@Cacheable</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> User <span class="title">findA</span><span class="params">(User user)</span> </span>&#123;&#125;</span><br><span class="line">  </span><br><span class="line">  <span class="meta">@Cacheabel</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> User <span class="title">findB</span><span class="params">(User user)</span> </span>&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="缓存管理器"><a href="#缓存管理器" class="headerlink" title="缓存管理器"></a>缓存管理器</h4><p>CacheManager是SPI(Service Provider Interface, 服务提供程序接口), 提供了访问缓存名称和缓存对象的方法, 同时也提供了管理缓存, 操作缓存, 移除缓存的方法</p>
+<ol>
+<li><p>SimpleCacheManager</p>
+<p>使用SimpleCacheManager可以配置缓存列表, 利用这些缓存进行相关操作.</p>
+<p>配置示例:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"cacheManager"</span> <span class="attr">class</span>=<span class="string">"org.springframework.cahce.support.SimpleCacheManager"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"caches"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">set</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"users"</span> <span class="attr">class</span>=<span class="string">"org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>NoOpCacheManager</p>
+<p>主要用于测试目的, 实际上它并不缓存任何数据</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"cacheManager"</span> <span class="attr">class</span>=<span class="string">"org.springframework.cache.support.NoOPCacheManager"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>ConcurrentMapCacheManager</p>
+<p>使用JDK的ConcurrentMap, 提供了和SimpleCacheManager类似的功能</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"cacheManager"</span> <span class="attr">class</span>=<span class="string">"org.springframework.cache.concurrent.ConcurrentMapCacheManager"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>CompositeCacheManager</p>
+<p>能够定义多个缓存管理器, 当应用程序上下文中声明<code>&lt;cache:annotation-driven&gt;</code>标记时, 它只提供一个缓存管理器.</p>
+<p>CompositeCacheManager将多个缓存管理器组合在一起, 从而扩展了该功能.</p>
+<p>通过使用fallbackToNoOpCache属性回到NoOpCacheManager</p>
+<p>示例展示了可在不同的缓存中存储不同类型的对象, 而不同的缓存则由不同的缓存管理器进行管理</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"cacheManager"</span> <span class="attr">class</span>=<span class="string">"org.springframework.cache.support.CompositeCacheManager"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"cacheManagers"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">list</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.cache.support.SimpleCacheManager"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"caches"</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">set</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"members"</span> <span class="attr">class</span>=<span class="string">"org.springframework.cache.concurrent.CurrentMapCacheFactoryBean"</span>/&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"com.hazelcast.spring.cache.HazelcastCacheManager"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">ref</span>=<span class="string">"hazelcast"</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">list</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="基于XML的Cache声明"><a href="#基于XML的Cache声明" class="headerlink" title="基于XML的Cache声明"></a>基于XML的Cache声明</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 定义需要使用缓存的类 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"userService"</span> <span class="attr">class</span>=<span class="string">"com.smart.service.UserService"</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 缓存定义 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">cache:advice</span> <span class="attr">id</span>=<span class="string">"cacheAdvice"</span> <span class="attr">cache-manager</span>=<span class="string">"cacheManager"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">cache:caching</span> <span class="attr">cache</span>=<span class="string">"users"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">cache:cacheable</span> <span class="attr">method</span>=<span class="string">"findUser"</span> <span class="attr">key</span>=<span class="string">"#userId"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">cahce:cache-evict</span> <span class="attr">method</span>=<span class="string">"loadUsers"</span> <span class="attr">all-entries</span>=<span class="string">"true"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">cache:caching</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">cache:advice</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">aop:config</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">aop:advisor</span> <span class="attr">advice-ref</span>=<span class="string">"cacheAdvice"</span> <span class="attr">pointcut</span>=<span class="string">"execution(* com.smart.service.UserService.*(..))"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">aop:config</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="以编程方式初始化缓存"><a href="#以编程方式初始化缓存" class="headerlink" title="以编程方式初始化缓存"></a>以编程方式初始化缓存</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@PostConstruct</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setup</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  Cache userCache = cacheManager.getCache(<span class="string">"users"</span>);</span><br><span class="line">  <span class="keyword">for</span> (Integer key : users.keySet()) &#123;</span><br><span class="line">    userCache.put(key, users.get(key));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>基于Java类的配置方式准备好Spring容器配置信息</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@ComponentScan</span>(basePackages = &#123;<span class="string">"com.smart.cache"</span>&#125;)</span><br><span class="line"><span class="meta">@EnableCaching</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ApplicationConfig</span> </span>&#123;</span><br><span class="line">  <span class="meta">@Bean</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> CacheManager <span class="title">cacheManager</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    SimpleCacheManager cacheManager = <span class="keyword">new</span> SimpleCacheManager();</span><br><span class="line">    cacheManager.setCaches(Arrays.asList(<span class="keyword">new</span> ConcurrentMapCahce(<span class="string">"users"</span>)));</span><br><span class="line">    <span class="keyword">return</span> cacheManager;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        </p><p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+
